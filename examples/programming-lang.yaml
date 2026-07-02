@@ -1,0 +1,151 @@
+# Programming Languages — derived from programming_lang guide-config + lectures
+schema_version: "1.0"
+
+subject:
+  id: programming-lang
+  name_ar: "لغات البرمجة"
+  name_en: "Programming Languages — Practical Labs"
+  tagline: "مفسرات + تحليل + تنفيذ + اختبار"
+  section_label: "القسم العملي"
+
+locale:
+  language: ar
+  direction: rtl
+  terms_in_backticks: true
+  inline_code_comments: english
+  extra_explanation_tag: "(شرح زيادة للفهم)"
+  not_in_lecture_tag: "(غير مشروحة في المحاضرة)"
+
+domain: programming
+
+domain_profile:
+  content_types: [theory, code, tables]
+  forbid_adding: []
+  prerequisites: ["أساسيات برمجة"]
+
+lecture:
+  unit_label: "المحاضرة"
+  split_regex: "^# (?:المحاضرة |محاضرة عملية — )"
+  title_pattern: "# المحاضرة {num} — {title_en} ({title_ar})"
+  intro_blockquote: true
+
+parts:
+  integration_map:
+    enabled: false
+  detail:
+    enabled: true
+    heading: "الجزء الأول: المقدمة والنقاط الأساسية"
+    numbered_sections: true
+    require_per_section: [original_quote, simplified_explanation]
+  summary:
+    enabled: true
+    heading: "الجزء الثاني: ملخص منظم"
+  mcq:
+    enabled: true
+    heading: "الجزء الثالث: أسئلة اختيار من متعدد (MCQ)"
+    count: 20
+    min_count: 20
+    difficulty: [easy, medium, hard]
+  debug:
+    enabled: true
+    heading: "الجزء الرابع: أسئلة تصحيح الكود"
+    count: 5
+    cover: [syntax, logic, return_check, dead_code, misconception]
+  exercise:
+    enabled: false
+  analysis_exercise:
+    enabled: false
+  interpreter_exercise:
+    enabled: true
+    heading: "الجزء السابع: تمارين كتابة مفسر كامل (مهم للامتحان ⚠️)"
+    count_min: 2
+  theory:
+    enabled: true
+    heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"
+    count_min: 5
+  cheat_sheet:
+    enabled: true
+    heading: "الجزء السادس: ورقة المراجعة السريعة (Cheat Sheet)"
+  qa_cards:
+    enabled: false
+  reference_code:
+    enabled: false
+  checklist:
+    enabled: false
+
+blocks:
+  original_quote:
+    enabled: true
+  simplified_explanation:
+    enabled: true
+  code:
+    enabled: true
+    languages: [python, c, java]
+    require_line_explain: true
+  line_explain:
+    enabled: true
+    format: numbered_list
+  imports:
+    enabled: false
+  expected_output:
+    enabled: true
+  troubleshooting:
+    enabled: false
+  diagrams:
+    enabled: false
+  uml:
+    enabled: false
+  screen_description:
+    enabled: false
+  structured_english:
+    enabled: false
+  compare:
+    enabled: true
+  callouts:
+    enabled: true
+  think_prompt:
+    enabled: false
+  tables:
+    enabled: true
+  fill_gaps:
+    enabled: true
+  code_fix:
+    enabled: true
+  images_note:
+    enabled: true
+  qa_inline:
+    enabled: false
+
+pedagogy:
+  cover_every_line: true
+  complete_gaps: true
+  beginner_friendly: true
+  explain_why: true
+  daily_analogy_plus_example: true
+  follow_lecture_order: true
+  adapt_to_lecture_type: true
+  lecture_types:
+    - id: lexer_parser
+      match: "Lexer"
+      tools: ["tokenization", "grammar", "AST"]
+    - id: interpreter
+      match: "Interpreter"
+      tools: ["eval", "environment", "recursive descent"]
+    - id: excel_formula
+      match: "Excel"
+      tools: ["formula parsing", "cell references"]
+
+assessment:
+  mcq_option_letters: arabic
+
+output:
+  validation_footer: true
+  schema_reference: "SCHEMA.md v1.0"
+  closing_line: "ابدأ الآن. سأرسل المحاضرة في الرسالة التالية."
+  checklist:
+    cover_all_lecture_content: true
+    hierarchical_section_numbers: true
+    tables_for_comparisons: true
+    english_terms_in_backticks: true
+    code_marked_with_emoji: true
+    mcq_with_explanation: true

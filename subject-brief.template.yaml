@@ -1,0 +1,286 @@
+# Subject Brief Template — Lecture Site Engine v1.0
+# Fill this file for your subject, then send it to meta-prompt with SCHEMA.md.
+# Fields the AI reads: enabled, heading, count, difficulty, types, languages, format, flags.
+# Fields marked [HUMAN ONLY] are for your reference — the AI ignores them.
+
+schema_version: "1.0"
+
+# ─── Subject identity ─────────────────────────────────────────────────────────
+subject:
+  id: my-subject                    # [HUMAN ONLY] slug for filenames
+  name_ar: "اسم المادة بالعربي"
+  name_en: "Subject Name in English"
+  tagline: "كلمة + كلمة + كلمة + كلمة"  # 4-word summary shown in prompt header
+  section_label: "القسم العملي"           # shown in intro blockquote — or "نظري"
+
+# ─── Locale & terminology ─────────────────────────────────────────────────────
+locale:
+  language: ar
+  direction: rtl
+  terms_in_backticks: true          # true → wrap every English term: `Composable`
+  inline_code_comments: english     # english | none — comment language inside code
+  extra_explanation_tag: "(شرح زيادة للفهم)"
+  not_in_lecture_tag: "(غير مشروحة في المحاضرة)"
+
+# ─── Domain ───────────────────────────────────────────────────────────────────
+# Controls what kind of content appears and whether lecture-type branching fires.
+domain: programming                 # programming | analysis | theory | mixed
+
+domain_profile:
+  content_types:                    # list only types that actually appear
+    - theory                        # definitions, principles
+    - code                          # real programming languages
+    - diagrams                      # BPMN, UML, flowcharts
+    - commands                      # CLI tools (git, dotnet, bash)
+    - tables                        # comparisons, data dictionaries
+    - pseudocode                    # Structured English, analysis notation
+  forbid_adding: []                 # language/tool names the AI must NOT invent
+                                    # e.g. ["Java", "Python"] for analysis subjects
+  prerequisites: []                 # assumed prior knowledge, shown in prompt header
+
+# ─── Lecture heading — must match guide-config.js ────────────────────────────
+lecture:
+  unit_label: "المحاضرة"            # "المحاضرة" or "المختبر"
+  split_regex: "^# المحاضرة "      # [HUMAN ONLY] used in guide-config.js
+  title_pattern: "# {unit_label} {num} — {title_en} ({title_ar})"
+  intro_blockquote: true            # true → > **المادة:** ... | **الموضوع:** ...
+
+# ─── Parts ────────────────────────────────────────────────────────────────────
+# Set enabled: true for the parts your subject needs.
+# heading: must contain the keyword the parser regex matches (MCQ, تصحيح, تمارين, etc.)
+
+parts:
+
+  integration_map:
+    enabled: false
+    heading: "📌 خريطة التكامل (أين تقع هذه المحاضرة في الدورة؟)"
+
+  detail:
+    enabled: true
+    heading: "الجزء الأول: الشرح التفصيلي (سطر بسطر / فقرة بفقرة)"
+    numbered_sections: true         # require ### 1., ### 1.1. numbering
+
+  summary:
+    enabled: true
+    heading: "الجزء الثاني: ملخص منظم"
+    # The summary must cover ALL main ideas from the lecture regardless of format.
+    # patterns and main_ideas are always included when summary is enabled.
+    subsections:
+      - definitions_table
+      - components_table
+      - comparisons_table
+      - glossary
+      - golden_points
+      - common_mistakes_table
+      - patterns             # خطوات + أكواد + تعامل — see templates/part-summary.md
+      - main_ideas           # catch-all: any key idea not captured above
+
+  mcq:
+    enabled: true
+    heading: "الجزء الثالث: أسئلة اختيار من متعدد (MCQ)"
+    count: 14
+    difficulty: [medium, hard]      # easy | medium | hard (list the allowed levels)
+    forbid_easy_literal: false      # true → no trivial recall questions
+    distribution:                   # optional — approximate percentages
+      comparisons: 40
+      code_scenario: 35
+      application: 25
+
+  debug:
+    enabled: false
+    heading: "الجزء الرابع: أسئلة تصحيح الكود"
+    count: 5
+    cover: [syntax, logic, return_check, dead_code, misconception]
+
+  exercise:
+    enabled: false
+    heading: "الجزء الرابع: تمارين إضافية (من إعداد الدليل للتدريب)"
+    count_min: 4
+    count_max: 6
+    authored_by_guide: true         # true → AI must write: «هذه تمارين إضافية»
+    types:
+      - fill_gaps                   # كود ناقص
+      - code_fix                    # تصحيح كود
+      - scenario                    # write code from description
+
+  analysis_exercise:
+    enabled: false
+    heading: "الجزء الرابع: تمارين تحليل وتطبيق (إضافية — من إعداد الدليل)"
+    count_min: 3
+    count_max: 6
+    types:
+      - case_study
+      - diagram_completion
+      - table_fill
+      - written_analysis
+
+  interpreter_exercise:
+    enabled: false
+    heading: "الجزء السابع: تمارين كتابة مفسر كامل"
+    count_min: 2
+    note: "full interpreter lab — programming languages course only"
+
+  trace_exercise:
+    enabled: false
+    heading: "الجزء الرابع: تمارين تتبع التنفيذ"
+    count_min: 2                    # each exercise: input + incomplete table for student + model solution
+
+  design_question:
+    enabled: false
+    heading: "الجزء الرابع: أسئلة تصميم"
+    count_min: 1
+    types:
+      - er_diagram                  # entity-relationship design
+      - uml_design                  # class / sequence / activity diagram
+      - architecture                # system / layer / component design
+      - schema_design               # database schema or data model
+
+  theory:
+    enabled: true
+    heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"
+    count_min: 5
+
+  cheat_sheet:
+    enabled: true
+    heading: "الجزء السادس: ورقة المراجعة السريعة (Cheat Sheet)"
+    subsections:
+      - integration_map_table
+      - golden_rules_table
+      - quick_reference_tables
+
+  qa_cards:
+    enabled: false
+    heading: "الجزء الرابع: بطاقات سؤال وجواب (Q&A Cards) — للمراجعة العميقة"
+    count_min: 10
+
+  reference_code:
+    enabled: false
+    heading: "الجزء الخامس: الكود النهائي الكامل (مرجع شامل)"
+
+  checklist:
+    enabled: false
+    heading: "الجزء السادس: قائمة فحص ذاتي قبل الامتحان ✅"
+
+# ─── Blocks ───────────────────────────────────────────────────────────────────
+# Inline content types used inside parts.
+# Marker strings are in SCHEMA.md — do not override them here.
+
+blocks:
+
+  original_quote:
+    enabled: true                   # #### النص الأصلي يقول: — required per section
+
+  simplified_explanation:
+    enabled: true                   # #### الشرح المبسّط: — required per section
+
+  code:
+    enabled: false
+    languages: []                   # e.g. [kotlin, xml, bash, csharp, c, python]
+    require_line_explain: true      # must include شرح كل سطر after every code block
+
+  line_explain:
+    enabled: false
+    format: numbered_list           # numbered_list | table
+
+  imports:
+    enabled: false                  # المكتبات المطلوبة — blockquote after each code
+
+  expected_output:
+    enabled: false                  # الناتج المتوقع — blockquote after each code
+
+  troubleshooting:
+    enabled: false                  # 🛠️ table: error | cause | fix
+
+  diagrams:
+    enabled: false
+    types: [flowchart, bpmn, decision-tree, dfd]
+    require_node_table: true
+    require_edge_table: true
+
+  uml:
+    enabled: false
+    types: [usecase, class, activity, flowchart]
+
+  screen_description:
+    enabled: false                  # 🖼️ text description for GIS/IDE screenshots
+
+  algorithm:
+    enabled: false                  # ⚙️ ordered procedures — one line per step in ```algorithm fence
+
+  structured_english:
+    enabled: false                  # IF/DO/UNTIL pseudocode — not real code
+
+  compare:
+    enabled: true                   # الفهم الخاطئ ❌ / الفهم الصحيح ✅
+
+  callouts:
+    enabled: true                   # مهم للامتحان | نقطة مهمة | ملاحظة | الدرس المستفاد
+
+  think_prompt:
+    enabled: false
+    min_per_lecture: 2              # 🤔 تفعيل الفهم — minimum uses per lecture
+
+  tables:
+    enabled: true                   # mandatory for comparisons and definitions
+
+  fill_gaps:
+    enabled: false                  # _______ or // (N) markers in code
+
+  code_fix:
+    enabled: false                  # show buggy code, then fixed code
+
+  images_note:
+    enabled: false                  # note slide/page number for lecture images
+
+  qa_inline:
+    enabled: false                  # **Q{N}:** / A: pairs inside detail
+
+  analogy:
+    enabled: true                   # 💡 التشبيه — daily-life analogy as a named highlighted block (use after every abstract concept)
+
+  trade_off:
+    enabled: false                  # ⚖️ المقايضة — both options valid, context decides (≠ compare block)
+
+  before_after:
+    enabled: false                  # 🔄 قبل / بعد — code or state before + after an operation
+
+  trace:
+    enabled: false                  # 🔍 تتبع التنفيذ — inline walk-through of execution step by step
+
+# ─── Pedagogy flags ───────────────────────────────────────────────────────────
+# Each true flag produces one Arabic rule bullet in the custom prompt.
+pedagogy:
+  cover_every_line: true
+  complete_gaps: true
+  beginner_friendly: true
+  explain_why: true
+  daily_analogy_plus_example: true
+  follow_lecture_order: true
+  adapt_to_lecture_type: true       # fires lecture_types branching if list is non-empty
+
+  lecture_types: []
+  # Uncomment and fill entries when adapt_to_lecture_type: true
+  # Each entry produces one "إذا كانت عن X → استخدم Y" bullet.
+  # Example:
+  # - match: "Kotlin Basics"
+  #   tools: ["val/var", "main()", "fun", "String Template"]
+  # - match: "State"
+  #   tools: ["remember", "mutableStateOf", "State Hoisting"]
+
+# ─── Assessment ───────────────────────────────────────────────────────────────
+assessment:
+  mcq_option_letters: arabic        # arabic (أ ب ج د) | latin (a b c d)
+
+# ─── Output ───────────────────────────────────────────────────────────────────
+output:
+  validation_footer: true           # add <!-- VALIDATION ... --> at end of lecture file
+  closing_line: "ابدأ الآن. سأرسل المحاضرة في الرسالة التالية."
+
+  # These checklist items appear verbatim in the custom_prompt تحقق قبل الإنهاء section.
+  # Add or remove items to match your subject.
+  checklist_items:
+    - "غطّيت كل معلومة وردت في المحاضرة"
+    - "كل قسم يبدأ بـ «النص الأصلي يقول» + «الشرح المبسّط»"
+    - "الأقسام مرقّمة هرمياً (1، 1.1، 2 …)"
+    - "استخدمت جداول لكل مقارنة وقائمة تعريفات"
+    - "كل مصطلح إنجليزي بين backticks"
