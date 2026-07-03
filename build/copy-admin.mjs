@@ -16,9 +16,9 @@ async function main() {
     console.log('Skipping admin copy — admin/index.html not found');
     return;
   }
-  await mkdir(path.join(ENGINE_ROOT, 'dist'), { recursive: true });
-  await cp(ADMIN_SRC, ADMIN_DEST, { recursive: true });
-  console.log('✓ dist/admin/ (Decap CMS)');
+  await mkdir(ADMIN_DEST, { recursive: true });
+  await cp(path.join(ADMIN_SRC, 'index.html'), path.join(ADMIN_DEST, 'index.html'));
+  console.log('✓ dist/admin/index.html (Decap CMS — config.yml generated separately)');
 }
 
 main().catch(err => {

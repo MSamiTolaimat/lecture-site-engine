@@ -26,7 +26,7 @@ export function renderPart(part, ctx) {
   };
 
   const specialized = registry.render(part.type, part, { ...blockCtx, partId: ctx.partId });
-  if (specialized) return specialized;
+  if (specialized !== null) return specialized;
 
   const codeCounterRef = ctx.codeCounterRef || { n: 0 };
   if (part.type === 'cheat') {

@@ -20,6 +20,7 @@ const {
 const appState = { manifest: null, items: [] };
 let currentLectureIndex = -1;
 let siteTitle = GUIDE_CONFIG.defaultTitle || 'Study Guide';
+let scrollAnimObserver = null;
 
 function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -90,11 +91,37 @@ function renderSidebarToc(item) {
   nav.innerHTML = item.toc.parts.map(part => `
     <div class="toc-part mb-md">
       <a href="#${esc(part.id)}" class="toc-part__title block px-lg py-sm font-label-md text-primary hover:bg-surface-variant">${esc(part.title)}</a>
-      ${(part.sections || []).map(s => `
+      ${(part.subsections || []).map(s => `
         <a href="#${esc(s.id)}" class="toc-section block px-xl py-xs font-label-sm text-on-surface-variant hover:text-primary">${esc(s.text)}</a>
       `).join('')}
     </div>
   `).join('');
+}
+
+function initScrollAnimations(root = document) {
+  if (scrollAnimObserver) scrollAnimObserver.disconnect();
+
+  scrollAnimObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        scrollAnimObserver?.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -5% 0px', threshold: 0.05 });
+
+  root.querySelectorAll('.box-animate').forEach((el, i) => {
+    el.classList.remove('is-visible');
+    el.classList.remove('stagger-1', 'stagger-2', 'stagger-3', 'stagger-4', 'stagger-5', 'stagger-6');
+    el.classList.add(`stagger-${(i % 6) + 1}`);
+
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 1.1) {
+      el.classList.add('is-visible');
+    } else {
+      scrollAnimObserver.observe(el);
+    }
+  });
 }
 
 function loadLectureView(idx, hashPart) {
@@ -116,6 +143,7 @@ function loadLectureView(idx, hashPart) {
   showView('lecture');
   initInteractivity(document.getElementById('content'));
   initDiagrams(document.getElementById('content'));
+  initScrollAnimations(document.getElementById('content'));
   if (window.hljs) document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
 
   const hash = hashPart || item.lec.id;

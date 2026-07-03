@@ -68,10 +68,20 @@ async function main() {
     }
   }
 
+  const admin = spawnSync('node', ['build/copy-admin.mjs'], {
+    cwd: ENGINE_ROOT,
+    stdio: 'inherit',
+  });
+  if (admin.status !== 0) process.exit(1);
+
   const cms = spawnSync('node', ['build/generate-cms-config.mjs'], {
     cwd: ENGINE_ROOT,
     stdio: 'inherit',
-    env: { ...process.env },
+    env: {
+      ...process.env,
+      LOCAL_BACKEND: 'false',
+      CMS_CONFIG_OUT: 'dist/admin/config.yml',
+    },
   });
   if (cms.status !== 0) process.exit(1);
 
@@ -80,12 +90,6 @@ async function main() {
     stdio: 'inherit',
   });
   if (idx.status !== 0) process.exit(1);
-
-  const admin = spawnSync('node', ['build/copy-admin.mjs'], {
-    cwd: ENGINE_ROOT,
-    stdio: 'inherit',
-  });
-  if (admin.status !== 0) process.exit(1);
 
   const contrib = spawnSync('node', ['build/generate-contrib-page.mjs'], {
     cwd: ENGINE_ROOT,

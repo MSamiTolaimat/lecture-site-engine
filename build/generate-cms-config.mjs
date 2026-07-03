@@ -151,10 +151,13 @@ collections:
 ${collectionBlocks.join('\n')}
 `;
 
-  const adminDir = path.join(ENGINE_ROOT, 'admin');
-  await mkdir(adminDir, { recursive: true });
-  await writeFile(path.join(adminDir, 'config.yml'), yaml);
-  console.log(`✓ admin/config.yml (${subjects.length} subject(s))`);
+  const outPath = process.env.CMS_CONFIG_OUT
+    ? path.resolve(ENGINE_ROOT, process.env.CMS_CONFIG_OUT)
+    : path.join(ENGINE_ROOT, 'admin', 'config.yml');
+
+  await mkdir(path.dirname(outPath), { recursive: true });
+  await writeFile(outPath, yaml);
+  console.log(`✓ ${path.relative(ENGINE_ROOT, outPath)} (${subjects.length} subject(s))`);
 }
 
 main().catch(err => {
