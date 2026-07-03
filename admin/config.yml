@@ -3,8 +3,7 @@ backend:
   name: github
   repo: "Shahd-Abbara/lecture-site-engine"
   branch: "main"
-
-local_backend: true
+# Production: set DECAP_OAUTH_BASE_URL secret for GitHub login (see admin/README.md)
 
 site_url: "https://shahd-abbara.github.io/lecture-site-engine"
 display_url: "https://shahd-abbara.github.io/lecture-site-engine"

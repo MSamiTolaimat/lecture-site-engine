@@ -11,8 +11,9 @@ import { ENGINE_ROOT } from './lib/subject-paths.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || 'Shahd-Abbara/lecture-site-engine';
 const BRANCH = process.env.GITHUB_BRANCH || 'main';
-const SITE_URL = process.env.SITE_URL || 'https://shahd-abbara.github.io/lecture-site-engine';
+const SITE_URL = (process.env.SITE_URL || 'https://shahd-abbara.github.io/lecture-site-engine').toLowerCase();
 const OAUTH_BASE = process.env.DECAP_OAUTH_BASE_URL || '';
+const LOCAL_BACKEND = process.env.LOCAL_BACKEND === 'true';
 
 function q(s) {
   return JSON.stringify(String(s));
@@ -130,15 +131,15 @@ async function main() {
     ? `  base_url: ${q(OAUTH_BASE)}\n  auth_endpoint: auth\n`
     : '';
 
+  const localBackendLine = LOCAL_BACKEND ? 'local_backend: true\n\n' : '';
+
   const yaml = `# Auto-generated — node build/generate-cms-config.mjs
 backend:
   name: github
   repo: ${q(REPO)}
   branch: ${q(BRANCH)}
-${oauthLines}
-local_backend: true
-
-site_url: ${q(SITE_URL)}
+${oauthLines}${oauthLines ? '' : '# Production: set DECAP_OAUTH_BASE_URL secret for GitHub login (see admin/README.md)\n'}
+${localBackendLine}site_url: ${q(SITE_URL)}
 display_url: ${q(SITE_URL)}
 
 media_folder: subjects/media/uploads

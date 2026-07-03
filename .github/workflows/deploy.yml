@@ -44,6 +44,7 @@ jobs:
           GITHUB_BRANCH: main
           SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
           DECAP_OAUTH_BASE_URL: ${{ secrets.DECAP_OAUTH_BASE_URL }}
+          LOCAL_BACKEND: 'false'
         run: |
           BEFORE="${{ github.event.before }}"
           SHA="${{ github.sha }}"

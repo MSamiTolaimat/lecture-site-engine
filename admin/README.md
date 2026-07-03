@@ -57,16 +57,18 @@ DECAP_OAUTH_BASE_URL=https://your-oauth-proxy.example.com npm run cms:config
 ## التطوير المحلي (بدون OAuth)
 
 ```bash
-# Terminal 1 — git backend proxy
+# Terminal 1 — git backend proxy (مطلوب مع local_backend)
 npx decap-server
 
-# Terminal 2 — توليد الإعداد + بناء
-npm run cms:config
+# Terminal 2
+npm run cms:local          # يفعّل local_backend في config.yml
 npm run build -- --subject year-4/os-2-theory
 cd dist && python3 -m http.server 8080
 ```
 
-افتح `http://localhost:8080/admin/` — `local_backend: true` في `config.yml` يتصل بـ `decap-server` على المنفذ 8081.
+افتح `http://localhost:8080/admin/` — `local_backend` **للتطوير المحلي فقط**.
+
+> ⚠️ لا تستخدم `local_backend: true` على GitHub Pages — يحاول الاتصال بـ `localhost:8081` ويفشل.
 
 ## توليد config.yml
 
