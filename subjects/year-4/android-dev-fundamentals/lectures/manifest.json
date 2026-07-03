@@ -9,7 +9,14 @@
   },
   "title": "أساسيات تطوير تطبيقات أندرويد (النظري الكامل) — Android Development Fundamentals (Full Theory)",
   "subtitle": "منصة أندرويد كوتلن Compose",
-  "files": [],
+  "files": [
+    {
+      "path": "par5.md",
+      "num": 5,
+      "icon": "📌",
+      "matIcon": "school"
+    }
+  ],
   "lectureIcons": [
     "📌",
     "📖",

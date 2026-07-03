@@ -19,7 +19,7 @@ Do **not** modify `parser/`, `renderer/`, `site-shell/`, or `build/` unless you 
 3. Use AI to produce `lectures/parN.md` following `SCHEMA.md`.
 4. Open a Pull Request to `main` — **Validate lectures** auto-syncs `manifest.json` from your new files.
 
-Or use **Decap CMS** at `/admin/` to upload lectures via the browser (see [admin/README.md](admin/README.md)).
+**الطريقة الأسهل:** افتح [/contrib/](https://shahd-abbara.github.io/lecture-site-engine/contrib/) → اختر المادة → ارفع `parN.md` مباشرة على GitHub (بدون Decap CMS).
 
 ## CI on Pull Request
 

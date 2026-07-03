@@ -184,7 +184,19 @@ Set in your brief:
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Decap CMS (رفع المحاضرات)
+## رفع محاضرة (طريقة سهلة — موصى بها)
+
+**بدون Decap CMS ولا OAuth.**
+
+1. افتح: **https://shahd-abbara.github.io/lecture-site-engine/contrib/**
+2. اختر المادة → **محاضرة جديدة** أو **رفع ملف**
+3. سمِّ الملف `parN.md` → الصق المحتوى → احفظ على GitHub
+4. افتح Pull Request → Merge بعد ✅ validate
+
+أو مباشرة على GitHub:
+`https://github.com/Shahd-Abbara/lecture-site-engine/new/main/subjects/year-4/YOUR-SUBJECT/lectures?filename=parN.md`
+
+## Decap CMS (متقدّم — يحتاج OAuth)
 
 واجهة ويب لرفع `parN.md` على GitHub بدون تعديل يدوي لـ `manifest.json`.
 

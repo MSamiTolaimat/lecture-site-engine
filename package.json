@@ -7,6 +7,7 @@
     "test": "node renderer/smoke-test.mjs && node build/lib/scaffold-subject.test.mjs && node build/lib/normalize-lecture-md.test.mjs",
     "cms:config": "node build/generate-cms-config.mjs",
     "cms:local": "LOCAL_BACKEND=true node build/generate-cms-config.mjs",
+    "contrib:page": "node build/generate-contrib-page.mjs",
     "validate": "node build/validate.mjs",
     "build": "node build/cli.mjs",
     "build:index": "node build/generate-dist-index.mjs",

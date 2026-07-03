@@ -87,6 +87,13 @@ async function main() {
   });
   if (admin.status !== 0) process.exit(1);
 
+  const contrib = spawnSync('node', ['build/generate-contrib-page.mjs'], {
+    cwd: ENGINE_ROOT,
+    stdio: 'inherit',
+    env: { ...process.env },
+  });
+  if (contrib.status !== 0) process.exit(1);
+
   console.log('\n✓ Deploy build complete.');
 }
 
