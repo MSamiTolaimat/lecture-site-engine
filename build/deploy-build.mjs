@@ -32,7 +32,8 @@ function runBuild(subject) {
 
 function needsBuild(subject) {
   const out = distDir(subject);
-  return !existsSync(path.join(out, 'index.html'));
+  // Stub pages from generate-dist-index only have index.html — not a real build.
+  return !existsSync(path.join(out, 'lectures', 'manifest.json'));
 }
 
 async function main() {

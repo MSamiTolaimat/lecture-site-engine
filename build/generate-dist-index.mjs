@@ -27,6 +27,17 @@ function lectureCountLabel(n) {
 
 /** @param {string} rel */
 async function countLecturesForSubject(rel) {
+  const lecturesDir = path.join(ENGINE_ROOT, 'subjects', rel, 'lectures');
+  if (existsSync(lecturesDir)) {
+    const files = await readdir(lecturesDir);
+    const nums = new Set();
+    for (const f of files) {
+      const parsed = parseParFilename(f);
+      if (parsed) nums.add(parsed.num);
+    }
+    if (nums.size) return nums.size;
+  }
+
   const distManifest = path.join(DIST, rel, 'lectures/manifest.json');
   if (existsSync(distManifest)) {
     try {
@@ -35,18 +46,10 @@ async function countLecturesForSubject(rel) {
         (m.files || []).map(f => f.num).filter(n => typeof n === 'number' && !Number.isNaN(n)),
       );
       if (nums.size) return nums.size;
-    } catch { /* fall through */ }
+    } catch { /* ignore */ }
   }
 
-  const lecturesDir = path.join(ENGINE_ROOT, 'subjects', rel, 'lectures');
-  if (!existsSync(lecturesDir)) return 0;
-  const files = await readdir(lecturesDir);
-  const nums = new Set();
-  for (const f of files) {
-    const parsed = parseParFilename(f);
-    if (parsed) nums.add(parsed.num);
-  }
-  return nums.size;
+  return 0;
 }
 
 /** @returns {Promise<{ rel: string, title: string, subtitle: string, year: string, academicYear: number, hasLectures: boolean, lectureCount: number }[]>} */
@@ -140,7 +143,8 @@ async function ensureSubjectStubs(subjects) {
   let created = 0;
   for (const s of subjects) {
     const outIndex = path.join(DIST, s.rel, 'index.html');
-    if (existsSync(outIndex)) continue;
+    const builtManifest = path.join(DIST, s.rel, 'lectures/manifest.json');
+    if (existsSync(builtManifest) || existsSync(outIndex)) continue;
     await mkdir(path.dirname(outIndex), { recursive: true });
     await writeFile(outIndex, renderStubHtml(s));
     created++;
