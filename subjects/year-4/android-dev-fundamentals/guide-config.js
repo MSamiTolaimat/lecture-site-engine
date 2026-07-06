@@ -2,8 +2,8 @@
  * Auto-scaffolded from subject-brief.yaml — edit as needed.
  */
 export const GUIDE_CONFIG = {
-  storagePrefix: 'android-dev-fundamentals',
-  defaultTitle: 'android-dev-fundamentals',
+  storagePrefix: '1-android-dev-fundamentals',
+  defaultTitle: '1-android-dev-fundamentals',
   homeHeaderBrand: 'فريق TTM الأكاديمي',
   defaultSubtitle: 'دليل دراسي تفاعلي',
 

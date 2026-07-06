@@ -2,8 +2,8 @@
  * Auto-scaffolded from subject-brief.yaml — edit as needed.
  */
 export const GUIDE_CONFIG = {
-  storagePrefix: '1-os-2-theory',
-  defaultTitle: '1-os-2-theory',
+  storagePrefix: 'os-2-theory',
+  defaultTitle: 'نظم تشغيل 2',
   homeHeaderBrand: 'فريق TTM الأكاديمي',
   defaultSubtitle: 'دليل دراسي تفاعلي',
 

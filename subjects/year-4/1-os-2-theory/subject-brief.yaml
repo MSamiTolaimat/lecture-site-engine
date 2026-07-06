@@ -1,0 +1,445 @@
+# Subject Brief Template — Lecture Site Engine v1.0
+# هذا الملف يغطي جميع محاضرات مادة نظم التشغيل 2 (النظري الكامل) التي تشمل: التزامن، الاستعصاءات، إدارة الذاكرة، وأنظمة الملفات.
+
+schema_version: "1.0"
+
+# ─── Subject identity ─────────────────────────────────────────────────────────
+subject:
+  id: os-2-theory
+  name_ar: "نظم التشغيل 2 (النظري الكامل)"
+  name_en: "Operating Systems 2 (Full Theory)"
+  tagline: "تزامن استعصاء ذاكرة ملفات"  # 4-word summary
+  section_label: "نظري"
+
+# ─── Locale & terminology ─────────────────────────────────────────────────────
+locale:
+  language: ar
+  direction: rtl
+  terms_in_backticks: true
+  inline_code_comments: english
+  extra_explanation_tag: "(شرح زيادة للفهم)"
+  not_in_lecture_tag: "(غير مشروحة في المحاضرة)"
+
+# ─── Domain ───────────────────────────────────────────────────────────────────
+domain: theory  # نظري بحت، مع خوارزميات ومخططات (غير موجه لتطبيق بلغة معينة)
+
+domain_profile:
+  content_types:
+    - theory
+    - pseudocode
+    - diagrams
+    - tables
+    - commands
+  forbid_adding:
+    - "Java"
+    - "Kotlin"
+    - "Python"
+    - "Android"
+    - "Spring"
+  prerequisites:
+    - "أساسيات نظم التشغيل (العمليات، الجدولة، إدارة الذاكرة الأولية)"
+
+# ─── Lecture heading ──────────────────────────────────────────────────────────
+lecture:
+  unit_label: "المحاضرة"
+  split_regex: "^# المحاضرة "
+  title_pattern: "# {unit_label} {num} — {title_en} ({title_ar})"
+  intro_blockquote: true
+
+# ─── Parts ────────────────────────────────────────────────────────────────────
+parts:
+
+  integration_map:
+    enabled: true
+    heading: "📌 خريطة التكامل (أين تقع هذه المادة في مسار نظم التشغيل؟)"
+
+  detail:
+    enabled: true
+    heading: "الجزء الأول: الشرح التفصيلي (سطر بسطر / فقرة بفقرة)"
+    numbered_sections: true
+
+  summary:
+    enabled: true
+    heading: "الجزء الثاني: ملخص منظم شامل"
+    subsections:
+      - definitions_table
+      - components_table
+      - comparisons_table
+      - glossary
+      - golden_points
+      - common_mistakes_table
+      - patterns
+      - main_ideas
+
+  mcq:
+    enabled: true
+    heading: "الجزء الثالث: أسئلة اختيار من متعدد (MCQ)"
+    count: 18
+    min_count: 16
+    difficulty: [medium, hard]
+    forbid_easy_literal: false
+    distribution:
+      comparisons: 25
+      algorithm_trace: 40   # تطبيق الخوارزميات وحساب القيم (استبدال صفحات، جدولة قرص، مصرفي)
+      application: 35
+
+  debug:
+    enabled: true
+    heading: "الجزء الرابع: أسئلة تصحيح الكود (خوارزميات)"
+    count: 6
+    cover: [logic, misconception, race_condition, deadlock_misuse, wrong_formula]
+
+  exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين إضافية (من إعداد الدليل للتدريب)"
+    count_min: 6
+    count_max: 9
+    authored_by_guide: true
+    types:
+      - fill_gaps
+      - code_fix
+      - scenario
+      - address_translation_calc     # حساب العنوان الفعلي من المنطقي (Paging/Segmentation)
+      - semaphore_trace              # تتبع قيمة semaphore عبر تسلسل عمليات wait/signal
+
+  analysis_exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تحليل وتطبيق (إضافية — من إعداد الدليل)"
+    count_min: 5
+    count_max: 8
+    types:
+      - case_study                   # سيناريو استعصاء كامل: حدد الشروط الأربعة + حل مقترح
+      - bankers_algorithm_apply      # تطبيق خوارزمية المصرفي على جدول موارد معطى
+      - diagram_completion
+      - table_fill
+      - written_analysis
+
+  trace_exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تتبع التنفيذ وحساب العناوين والخوارزميات"
+    count_min: 5   # مناسب جدا لـ: تحويل العناوين، خوارزمية المصرفي، استبدال الصفحات، جدولة القرص
+    note: "كل تمرين: مدخل (سلسلة مراجع صفحات / طلبات قرص / جدول موارد) + جدول تتبع ناقص + نموذج الحل الكامل مع النتيجة النهائية"
+
+  design_question:
+    enabled: true
+    heading: "الجزء الرابع: أسئلة تصميم (هيكلية)"
+    count_min: 2
+    types:
+      - uml_design
+      - architecture
+
+  theory:
+    enabled: true
+    heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"
+    count_min: 10
+
+  cheat_sheet:
+    enabled: true
+    heading: "الجزء السادس: ورقة المراجعة السريعة (Cheat Sheet)"
+    subsections:
+      - integration_map_table
+      - golden_rules_table
+      - quick_reference_tables
+
+  qa_cards:
+    enabled: true
+    heading: "الجزء الرابع: بطاقات سؤال وجواب (Q&A Cards)"
+    count_min: 16
+
+  reference_code:
+    enabled: false   # لا يوجد كود نهائي متكامل، فقط خوارزميات وإجراءات
+
+  checklist:
+    enabled: true
+    heading: "الجزء السادس: قائمة فحص ذاتي قبل الامتحان ✅"
+
+# ─── Blocks ───────────────────────────────────────────────────────────────────
+blocks:
+
+  original_quote:
+    enabled: true
+
+  simplified_explanation:
+    enabled: true
+
+  code:
+    enabled: true
+    languages: [c, bash]   # C للـ Pseudocode والـ Semaphores، و Bash لأمثلة الـ Pipe
+    require_line_explain: true
+
+  line_explain:
+    enabled: true
+    format: numbered_list
+
+  imports:
+    enabled: false
+
+  expected_output:
+    enabled: true
+
+  troubleshooting:
+    enabled: true
+
+  diagrams:
+    enabled: true
+    types: [flowchart, decision-tree]
+    require_node_table: true
+    require_edge_table: true
+
+  uml:
+    enabled: true
+    types: [class, activity, flowchart]
+
+  screen_description:
+    enabled: false
+
+  algorithm:
+    enabled: true   # مهم جدا لخوارزميات الإقصاء، المصرفي، جدولة القرص، استبدال الصفحات
+
+  structured_english:
+    enabled: false
+
+  compare:
+    enabled: true   # مهم لمقارنة: مسيرات vs مراقبات، تجزئة vs ترقيم، HDD vs SSD
+
+  callouts:
+    enabled: true
+
+  think_prompt:
+    enabled: true
+    min_per_lecture: 3
+
+  tables:
+    enabled: true
+
+  fill_gaps:
+    enabled: true
+
+  code_fix:
+    enabled: true
+
+  images_note:
+    enabled: true
+
+  qa_inline:
+    enabled: true
+
+  analogy:
+    enabled: true   # فعال جدا لشرح: عشاء الفلاسفة، الحلاق النائم، مشكلة المنتج-المستهلك
+
+  trade_off:
+    enabled: true   # المقايضة بين: Best-fit vs Worst-fit، FIFO vs LRU
+
+  before_after:
+    enabled: true
+
+  trace:
+    enabled: true   # لتتبع تنفيذ العمليات في حالة السباق وتطبيق خوارزميات الاستبدال
+
+  equations:
+    enabled: true    # لحساب العنوان الفعلي (Effective Address)، معدل الفشل بالصفحة، زمن البحث بالقرص
+    display_mode: block
+    require_explanation: true
+    common_symbols:
+      - "P"
+      - "d"
+      - "n"
+      - "m"
+
+# ─── Pedagogy flags ───────────────────────────────────────────────────────────
+pedagogy:
+  cover_every_line: true
+  complete_gaps: true
+  beginner_friendly: true
+  explain_why: true
+  daily_analogy_plus_example: true
+  follow_lecture_order: true
+  adapt_to_lecture_type: true
+
+  lecture_types:
+    - match: "التزامن (Synchronization)"
+      tools:
+        - "Race Condition"
+        - "Critical Section"
+        - "Peterson Solution"
+        - "Semaphore"
+        - "Monitor"
+        - "Mutex"
+        - "Producer-Consumer"
+        - "Readers-Writers"
+        - "Dining Philosophers"
+    - match: "الاستعصاءات (Deadlocks)"
+      tools:
+        - "Mutual Exclusion"
+        - "Hold and Wait"
+        - "Circular Wait"
+        - "Resource Allocation Graph"
+        - "Banker's Algorithm"
+        - "Safe/Unsafe State"
+        - "Deadlock Recovery"
+    - match: "إدارة الذاكرة (Memory Management)"
+      tools:
+        - "Paging"
+        - "Segmentation"
+        - "MMU"
+        - "Logical/Physical Address"
+        - "Page Table"
+        - "Virtual Memory"
+        - "Page Fault"
+        - "FIFO/LRU/Optimal"
+    - match: "الملفات والقرص (File Systems)"
+      tools:
+        - "File Attributes (inode)"
+        - "Contiguous/Linked/Indexed Allocation"
+        - "FCFS/SSTF/SCAN/C-SCAN"
+        - "SSD (FTL, TRIM)"
+        - "Hard/Soft Links"
+
+# ─── Assessment ───────────────────────────────────────────────────────────────
+assessment:
+  mcq_option_letters: arabic
+
+# ─── أنواع أسئلة الأتمتة (الفحص كله أتمتة) ────────────────────────────────────
+automation_question_types:
+
+  flash_qa:
+    enabled: true
+    label_ar: "مراجعة سريعة (سؤال / جواب)"
+    difficulty: easy
+    count_min: 16
+    parts: [qa_cards, qa_inline, theory]
+    blocks: [qa_inline, callouts]
+    format: |
+      **Q{N}:** سؤال مراجعة مباشر (تعريف، فرق، شرط، متى نستخدم)
+      **A:** إجابة مختصرة قابلة للمقارنة الآلية (جملة أو جملتان)
+    examples:
+      - "ما شروط حدوث الاستعصاء الأربعة؟"
+      - "ما الفرق بين `Paging` و `Segmentation`؟"
+
+  scenario_cluster:
+    enabled: true
+    label_ar: "تحدي مركّب (سيناريو + أسئلة متعددة)"
+    difficulty: hard
+    count_min: 4
+    questions_per_scenario: 4
+    parts: [mcq, debug, theory]
+    blocks: [code, trace, diagrams, tables, compare]
+    format: |
+      ### السيناريو {N}: {عنوان}
+      > [وصف حالة كاملة: جدول موارد/عمليات، سلسلة مراجع صفحات، أو كود مزامنة — 5–10 أسطر]
+      ثم 3–5 أسئلة MCQ **كلها مبنية على نفس السيناريو**:
+      ### السؤال {N}.1 (hard) … أ) ب) ج) د) + تعليل
+    scenario_sources:
+      - resource_allocation_table    # لخوارزمية المصرفي وكشف الاستعصاء
+      - page_reference_string        # لاستبدال الصفحات
+      - synchronization_code         # كود semaphore/monitor فيه سباق محتمل
+      - disk_request_queue           # لجدولة القرص
+    examples:
+      - "جدول موارد لثلاث عمليات — هل النظام في حالة آمنة؟ طبّق خوارزمية المصرفي"
+      - "سلسلة مراجع صفحات معطاة — كم page fault بخوارزمية LRU مقابل FIFO؟"
+
+  hands_on:
+    enabled: true
+    label_ar: "تطبيق عملي (أكمل / صحّح / احسب)"
+    difficulty: medium
+    count_min: 6
+    parts: [exercise, analysis_exercise, debug]
+    blocks: [fill_gaps, code_fix, algorithm, expected_output, tables, equations]
+    types:
+      - address_translation_calc
+      - bankers_algorithm_apply
+      - fill_gaps
+      - code_fix
+      - table_fill
+    format: |
+      كل تمرين: **المعطيات** + **المطلوب** (مرقّم) + **نموذج الحل الكامل**
+      الطالب يجيب بقيمة/جدول/كود — الإجابة قابلة للمقارنة حرفياً أو رقمياً.
+
+  step_trace:
+    enabled: true
+    label_ar: "تتبع خطوة بخطوة (جدول ناقص)"
+    difficulty: medium
+    count_min: 5
+    parts: [trace_exercise, mcq]
+    blocks: [trace, algorithm, tables, diagrams]
+    format: |
+      **المدخل:** {سلسلة مراجع صفحات / طلبات قرص / حالة أولية}
+      **أكمل الجدول:**
+      | الخطوة | العملية | الحالة |
+      | 1 | ... | ؟ |
+      **نموذج الحل:** جدول مكتمل + **النتيجة النهائية** (عدد page faults، ترتيب الخدمة، إلخ)
+    trace_targets:
+      - memory_page_replacement    # FIFO / LRU / Optimal / Second Chance
+      - disk_scheduling            # FCFS / SSTF / SCAN / C-SCAN / LOOK
+      - bankers_algorithm_steps    # Safety algorithm خطوة بخطوة
+      - semaphore_state            # قيمة semaphore عبر تسلسل wait/signal
+
+  compare_analyze:
+    enabled: true
+    label_ar: "مقارنة وتحليل (أيهما أفضل؟ لماذا؟)"
+    difficulty: medium
+    count_min: 5
+    parts: [mcq, theory, analysis_exercise]
+    blocks: [compare, trade_off, tables, analogy]
+    format: |
+      سؤال مقارنة بخيارات (أ، ب، ج، د) + تعليل لماذا الباقي خاطئ
+      أو جدول: | المعيار | FIFO | LRU | Optimal |
+    examples:
+      - "قارن بين Contiguous وLinked وIndexed Allocation من حيث السرعة والتجزئة"
+      - "متى نفضّل SSTF على FCFS في جدولة القرص؟"
+
+  find_the_bug:
+    enabled: true
+    label_ar: "اكتشف الخطأ (كود / منطق)"
+    difficulty: hard
+    count_min: 5
+    parts: [debug, exercise]
+    blocks: [code_fix, compare, troubleshooting]
+    bug_types: [logic, misconception, race_condition, deadlock_misuse, off_by_one]
+    format: |
+      **الكود/الإجراء (يحتوي خطأ):** …
+      **اكتشف الخطأ:** [وصف موجز]
+      **التصحيح:** … + **شرح الحل** (3 نقاط)
+    examples:
+      - "كود semaphore فيه ترتيب wait/signal خاطئ يسبب استعصاء — أوجد الخطأ وصححه"
+
+  structured_theory:
+    enabled: true
+    label_ar: "نظري منظم (تعريف + مكونات + مثال)"
+    difficulty: medium
+    count_min: 10
+    parts: [theory, mcq]
+    blocks: [compare, tables, callouts]
+    format: |
+      ### السؤال {N}: {السؤال}
+      **نموذج الإجابة:**
+      1. التعريف: …
+      2. المكونات/الشروط: …
+      3. مثال: …
+      4. متى نستخدم: …
+
+# ─── Output ───────────────────────────────────────────────────────────────────
+output:
+  validation_footer: true
+  closing_line: "ابدأ الآن. سأرسل المحاضرة في الرسالة التالية."
+
+  checklist_items:
+    - "غطّيت كل خوارزميات المزامنة (Peterson, Semaphore, Monitor)"
+    - "شرحت شروط الاستعصاء الأربعة وحلها (منع، تجنب، كشف)"
+    - "غطّيت تحويل العناوين المنطقية إلى حقيقية (Paging/Segmentation)"
+    - "شرحت خوارزميات استبدال الصفحات (FIFO, LRU, Optimal, Second Chance)"
+    - "غطّيت خوارزميات جدولة القرص (FCFS, SSTF, SCAN, C-SCAN, LOOK)"
+    - "قارنت بين HDD و SSD من حيث الأداء والإدارة"
+    - "استخدمت جداول لمقارنة الاستراتيجيات (مثل التخزين المتتالي مقابل المفهرس)"
+    - "كل مصطلح إنجليزي بين backticks"
+    - "≥18 سؤال MCQ مع تعليل كامل لكل خيار، ٤٠٪ منها تطبيق خوارزميات"
+    - "≥10 أسئلة نظرية مع نموذج إجابة منظم"
+    - "≥5 تمارين تحليل (استعصاء/بانكر) بنموذج حل كامل"
+    - "≥5 تمارين تتبع (استبدال صفحات/جدولة قرص/بانكر) بجدول ناقص + نموذج حل"
+    - "مراجعة سريعة: ≥16 بطاقة Q/A (flash_qa)"
+    - "تحدي مركّب: ≥4 سيناريوهات × 3–5 أسئلة MCQ لكل سيناريو (scenario_cluster)"
+    - "تطبيق عملي: ≥6 تمارين حساب عناوين/بانكر مع نموذج حل (hands_on)"
+    - "تتبع خطوة بخطوة: ≥5 جداول ناقصة + نموذج حل (step_trace)"
+    - "مقارنة وتحليل: ≥5 أسئلة مقارنة استراتيجيات (compare_analyze)"
+    - "اكتشف الخطأ: ≥5 أسئلة تصحيح كود مزامنة/استعصاء (find_the_bug)"
+    - "نظري منظم: ≥10 أسئلة بهيكل ثابت (structured_theory)"

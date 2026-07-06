@@ -1,16 +1,79 @@
 {
   "settings": {
-    "subjectName": "نظم تشغيل 2",
-    "subjectNameEn": "1-os-2-theory",
+    "subjectName": "نظم التشغيل 2 (النظري الكامل)",
+    "subjectNameEn": "Operating Systems 2 (Full Theory)",
     "year": "2025-2026",
     "academicYear": 4,
     "theme": "parallel-teal",
-    "department": "القسم",
-    "enabledLectures": true
+    "department": "نظري"
   },
-  "title": "1-os-2-theory — 1-os-2-theory",
-  "subtitle": "دليل دراسي تفاعلي",
-  "files": [],
+  "title": "نظم التشغيل 2 (النظري الكامل) — Operating Systems 2 (Full Theory)",
+  "subtitle": "تزامن استعصاء ذاكرة ملفات",
+  "files": [
+    {
+      "path": "par1-sec1.md",
+      "num": 1,
+      "icon": "📌",
+      "matIcon": "school",
+      "badge": "المحاضرة ١ — جزء ١"
+    },
+    {
+      "path": "par1-sec2.md",
+      "num": 1,
+      "icon": "📖",
+      "matIcon": "menu_book",
+      "badge": "المحاضرة ١ — جزء ٢"
+    },
+    {
+      "path": "par1-sec3.md",
+      "num": 1,
+      "icon": "💻",
+      "matIcon": "code",
+      "badge": "المحاضرة ١ — جزء ٣"
+    },
+    {
+      "path": "par1-sec4.md",
+      "num": 1,
+      "icon": "🎯",
+      "matIcon": "quiz",
+      "badge": "المحاضرة ١ — جزء ٤"
+    },
+    {
+      "path": "par2.md",
+      "num": 2,
+      "icon": "📝",
+      "matIcon": "description",
+      "badge": "المحاضرة ٢"
+    },
+    {
+      "path": "par3-sec1.md",
+      "num": 3,
+      "icon": "📌",
+      "matIcon": "school",
+      "badge": "المحاضرة ٣ — جزء ١"
+    },
+    {
+      "path": "par3-sec2.md",
+      "num": 3,
+      "icon": "📖",
+      "matIcon": "menu_book",
+      "badge": "المحاضرة ٣ — جزء ٢"
+    },
+    {
+      "path": "par3-sec3.md",
+      "num": 3,
+      "icon": "💻",
+      "matIcon": "code",
+      "badge": "المحاضرة ٣ — جزء ٣"
+    },
+    {
+      "path": "par4.md",
+      "num": 4,
+      "icon": "🎯",
+      "matIcon": "quiz",
+      "badge": "المحاضرة ٤"
+    }
+  ],
   "lectureIcons": [
     "📌",
     "📖",

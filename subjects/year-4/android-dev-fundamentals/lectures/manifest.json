@@ -1,15 +1,23 @@
 {
   "settings": {
-    "subjectName": "android-dev-fundamentals",
-    "subjectNameEn": "android-dev-fundamentals",
+    "subjectName": "2 - اللغة الانجليزية التخصصية",
+    "subjectNameEn": "Android Development Fundamentals (Full Theory)",
     "year": "2025-2026",
     "academicYear": 4,
     "theme": "kotlin-pink-blue",
-    "department": "القسم"
+    "department": "نظري"
   },
-  "title": "android-dev-fundamentals — android-dev-fundamentals",
-  "subtitle": "دليل دراسي تفاعلي",
-  "files": [],
+  "title": "2 - اللغة الانجليزية التخصصية — Android Development Fundamentals (Full Theory)",
+  "subtitle": "منصة أندرويد كوتلن Compose",
+  "files": [
+    {
+      "path": "par5.md",
+      "num": 5,
+      "icon": "📌",
+      "matIcon": "school",
+      "badge": "المحاضرة ٥"
+    }
+  ],
   "lectureIcons": [
     "📌",
     "📖",
