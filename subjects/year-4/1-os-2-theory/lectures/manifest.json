@@ -5,6 +5,7 @@
     "year": "2025-2026",
     "academicYear": 4,
     "theme": "parallel-teal",
+    "enabledLectures": true,
     "department": "نظري"
   },
   "title": "نظم التشغيل 2 (النظري الكامل) — Operating Systems 2 (Full Theory)",

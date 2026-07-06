@@ -607,18 +607,17 @@ edges:
 | اعتقاد أن `ASID` يحل مشكلة `Synonyms` | `ASID` يحل `Homonyms` فقط |
 | اعتقاد أن `Tag` وحده يحدد مكان البيانات | `Index` هو من يحدد المكان؛ `Tag` يؤكد فقط |
 
-### خطوات وإجراءات المحاضرة
+### ⚙️ الخطوات / الخوارزمية: حساب بتات العنوان (Tag/Index/Offset)
 
 ```algorithm
-#title: حساب بتات العنوان (Tag/Index/Offset)
 1 | تحديد حجم السطر (Block Size) | حاسبة/معطيات | offset bits = log2(Block Size)
 2 | تحديد عدد الأسطر أو المجموعات | حاسبة/معطيات | index bits = log2(Number of Sets)
 3 | تحديد إجمالي بتات العنوان | معطيات النظام | من حجم الذاكرة الكلي
 4 | حساب بتات الـ Tag | طرح | tag bits = total - index - offset
 ```
-
+### ⚙️ الخطوات / الخوارزمية:  التحقق من مشكلة Aliasing (VP = PP؟)
 ```algorithm
-#title: التحقق من مشكلة Aliasing (VP = PP؟)
+
 1 | حساب حجم كل way (way size) | Cache Size / Associativity | القيمة يجب مقارنتها بحجم الصفحة
 2 | حساب عدد بتات الـ index | log2(Number of Sets) | تحديد أي بتات العنوان تُستخدم للفهرسة
 3 | مقارنة index bits مع page offset bits | مقارنة منطقية | إذا كانت index bits ⊂ offset bits → لا توجد مشكلة
