@@ -254,9 +254,13 @@ function loadLectureView(idx, hashPart) {
     if (hashPart && hashPart !== item.lec.id) scrollToAnchor(hashPart);
   }
 
-  const hash = hashPart || item.lec.id;
+  const hash = hashPart && hashPart !== item.lec.id && hashPart !== lectureIndexHash(idx)
+    ? hashPart
+    : lectureIndexHash(idx);
   if (location.hash !== `#${hash}`) location.hash = hash;
-  else if (!needsRender && hashPart && hashPart !== item.lec.id) scrollToAnchor(hashPart);
+  else if (!needsRender && hashPart && hashPart !== item.lec.id && hashPart !== lectureIndexHash(idx)) {
+    scrollToAnchor(hashPart);
+  }
 }
 
 function initJumpQuiz() {
@@ -280,10 +284,31 @@ function initScrollFab() {
   fab.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
+function lectureIndexHash(idx) {
+  return `l${idx}`;
+}
+
 function getLectureIndexFromHash(hash) {
   if (!hash || hash === 'home') return -1;
   const id = anchorIdFromHash(hash);
-  return appState.items.findIndex(it => it.lec.id === id || id.startsWith(`${it.lec.id}-`));
+  const indexMatch = id.match(/^l(\d+)$/);
+  if (indexMatch) {
+    const idx = Number(indexMatch[1]);
+    return idx >= 0 && idx < appState.items.length ? idx : -1;
+  }
+  const exact = appState.items.findIndex(it => it.lec.id === id);
+  if (exact >= 0) return exact;
+  // Longest lecture id prefix wins (par1-sec2 before par1).
+  let best = -1;
+  let bestLen = 0;
+  for (let i = 0; i < appState.items.length; i++) {
+    const lid = appState.items[i].lec.id;
+    if (id.startsWith(`${lid}-`) && lid.length > bestLen) {
+      best = i;
+      bestLen = lid.length;
+    }
+  }
+  return best;
 }
 
 function resolveRoute() {

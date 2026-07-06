@@ -18,6 +18,7 @@ import {
 } from './lib/subject-paths.mjs';
 import { readSubjectsFromStdin } from './lib/read-subjects-stdin.mjs';
 import { scaffoldSubjects } from './lib/scaffold-subject.mjs';
+import { syncSiteShellToAllDist } from './lib/sync-site-shell.mjs';
 
 const ENGINE_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -88,6 +89,8 @@ async function main() {
     env: { ...process.env },
   });
   if (contrib.status !== 0) process.exit(1);
+
+  await syncSiteShellToAllDist();
 
   console.log('\n✓ Deploy build complete.');
 }
