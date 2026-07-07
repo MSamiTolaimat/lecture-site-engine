@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'project-management',
   defaultTitle: 'إدارة المشاريع',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'تخطيط · تنفيذ · تسليم · إدارة',
 
   showRoadmapCard: false,

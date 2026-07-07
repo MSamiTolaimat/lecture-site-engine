@@ -5,7 +5,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'my-subject',
   defaultTitle: 'اسم المادة',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'دليل دراسي تفاعلي',
 
   showRoadmapCard: false,

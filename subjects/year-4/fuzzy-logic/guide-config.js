@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'fuzzy-logic',
   defaultTitle: 'المنطق العائم',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'منطق ضبابي تحليل نظم',
 
   showRoadmapCard: false,

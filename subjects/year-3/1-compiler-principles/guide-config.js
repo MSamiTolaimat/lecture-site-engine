@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'compiler-principles',
   defaultTitle: 'مبادئ المترجمات',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'تحليل · توليد · تحسين · تشغيل',
 
   showRoadmapCard: false,

@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'audio-processing-theory',
   defaultTitle: 'معالجة الصوت (ذكاء اصطناعي)',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'إشارة + تحويل + ميزات + تعلم',
 
   showRoadmapCard: false,

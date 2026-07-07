@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'digital-communications',
   defaultTitle: 'الاتصالات الرقمية',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'تمثيل + تعديل + تضمين + تحليل',
 
   showRoadmapCard: false,

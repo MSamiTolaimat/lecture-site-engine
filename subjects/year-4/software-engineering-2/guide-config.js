@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'software-engineering-2',
   defaultTitle: 'software-engineering-2',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'دليل دراسي تفاعلي',
 
   showRoadmapCard: false,

@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'ai-theory',
   defaultTitle: 'الذكاء الاصطناعي',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'منطق + خوارزميات + بحث + تعلم',
 
   showRoadmapCard: false,

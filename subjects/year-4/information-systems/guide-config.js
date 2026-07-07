@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'information-systems',
   defaultTitle: 'نظم المعلومات',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'مفاهيم + تحليل + تصميم + تطوير',
 
   showRoadmapCard: false,

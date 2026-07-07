@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'algorithms-data-structures',
   defaultTitle: 'خوارزميات وبنى المعطيات',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'تقسيم + بيان + شرهة + ديناميكية',
 
   showRoadmapCard: false,

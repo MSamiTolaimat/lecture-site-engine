@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'applied-stats-data-science',
   defaultTitle: 'برمجة منطقية (ذكاء اصطناعي)',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'دليل دراسي تفاعلي',
 
   showRoadmapCard: false,

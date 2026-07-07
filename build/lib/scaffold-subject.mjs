@@ -156,7 +156,7 @@ function buildGuideConfig(brief, subjectId) {
 export const GUIDE_CONFIG = {
   storagePrefix: '${subjectId.replace(/'/g, "\\'")}',
   defaultTitle: '${title.replace(/'/g, "\\'")}',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: '${(brief.tagline || 'دليل دراسي تفاعلي').replace(/'/g, "\\'")}',
 
   showRoadmapCard: false,

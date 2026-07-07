@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: '1-android-dev-fundamentals',
   defaultTitle: '1-android-dev-fundamentals',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'دليل دراسي تفاعلي',
 
   showRoadmapCard: false,

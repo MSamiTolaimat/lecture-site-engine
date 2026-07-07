@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'statistics-probability',
   defaultTitle: 'الإحصاء والاحتمالات',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'تحليل بيانات، توزيعات، احتمالات، استدلال إحصائي',
 
   showRoadmapCard: false,

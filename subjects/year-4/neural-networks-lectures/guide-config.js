@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'neural-networks-lectures',
   defaultTitle: 'الشبكات العصبية والتعلم العميق',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'عصبونات + تعلم + خوارزميات + عمق',
 
   showRoadmapCard: false,

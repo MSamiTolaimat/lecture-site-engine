@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'kdd',
   defaultTitle: 'قواعد معرفية',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'تنقيب + تصنيف + تجميع + تنبؤ',
 
   showRoadmapCard: false,

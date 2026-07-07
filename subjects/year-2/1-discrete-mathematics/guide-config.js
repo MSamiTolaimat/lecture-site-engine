@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'discrete-mathematics',
   defaultTitle: 'مقرر المتقطعة',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'مجموعات + منطق + علاقات + دوال',
 
   showRoadmapCard: false,

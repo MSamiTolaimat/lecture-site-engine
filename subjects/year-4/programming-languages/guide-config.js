@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'programming-languages',
   defaultTitle: 'لغات البرمجة',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'مفاهيم + تصميم + تنفيذ',
 
   showRoadmapCard: false,

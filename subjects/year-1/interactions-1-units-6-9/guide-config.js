@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'interactions-1-units-6-9',
   defaultTitle: 'إنتراكتشنز 1: القراءة والكتابة (الوحدات 6–9)',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'ثقافة + صحة + إعلام + حياة اجتماعية',
 
   showRoadmapCard: false,

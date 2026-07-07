@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'web-applications',
   defaultTitle: 'تطوير تطبيقات الويب',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'بروتوكول + خادم + واجهات + تفاعل',
 
   showRoadmapCard: false,

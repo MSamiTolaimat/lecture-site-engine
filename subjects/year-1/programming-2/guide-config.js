@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'programming-2',
   defaultTitle: 'programming-2',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'دليل دراسي تفاعلي',
 
   showRoadmapCard: false,

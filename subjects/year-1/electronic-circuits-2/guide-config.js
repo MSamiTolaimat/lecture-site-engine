@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'electronic-circuits-2',
   defaultTitle: 'الدارات الإلكترونية 2',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'BJT MOSFET Solar Power Batteries',
 
   showRoadmapCard: false,

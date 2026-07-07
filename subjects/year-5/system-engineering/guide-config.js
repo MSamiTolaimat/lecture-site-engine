@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'system-engineering',
   defaultTitle: 'هندسة نظم المعلومات',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'أنظمة معلومات تخطيط موارد نمذجة عمليات',
 
   showRoadmapCard: false,

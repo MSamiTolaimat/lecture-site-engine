@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'network-management',
   defaultTitle: 'إدارة الشبكات الحاسوبية (شبكات)',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'إدارة + شبكات + مراقبة + SNMP',
 
   showRoadmapCard: false,

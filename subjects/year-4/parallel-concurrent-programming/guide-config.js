@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'parallel-concurrent-programming',
   defaultTitle: 'البرمجة التفرعية (المتوازية والمتزامنة)',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'توازي تزامن خيوط مسيرات',
 
   showRoadmapCard: false,

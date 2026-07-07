@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'operations-research-2',
   defaultTitle: 'بحوث العمليات 2',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'نقل + إسناد + أرتال + ديناميكية',
 
   showRoadmapCard: false,

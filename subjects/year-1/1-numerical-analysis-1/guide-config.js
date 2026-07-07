@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'numerical-analysis-1',
   defaultTitle: 'التحليل العددي 1',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'أخطاء + فروق + استيفاء + معادلات',
 
   showRoadmapCard: false,

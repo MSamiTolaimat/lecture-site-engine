@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'computer-networks',
   defaultTitle: 'الشبكات وأمن البيانات',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'شبكات + ترميز + تكامل + أمن',
 
   showRoadmapCard: false,

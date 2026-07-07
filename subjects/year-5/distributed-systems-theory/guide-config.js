@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'distributed-systems-theory',
   defaultTitle: 'نظم موزعة',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'مفاهيم وتصميم الأنظمة الموزعة',
 
   showRoadmapCard: false,

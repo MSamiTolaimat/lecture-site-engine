@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'english-ict',
   defaultTitle: 'اللغة الإنجليزية لتكنولوجيا المعلومات والاتصالات',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'مفردات + قواعد + وظائف لغوية',
 
   showRoadmapCard: false,

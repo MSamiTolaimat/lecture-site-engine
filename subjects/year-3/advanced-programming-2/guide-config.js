@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'advanced-programming-2',
   defaultTitle: 'البرمجة المتقدمة 2',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'Python Data Science Machine Learning Games',
 
   showRoadmapCard: false,

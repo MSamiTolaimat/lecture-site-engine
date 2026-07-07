@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'network-analysis-design',
   defaultTitle: 'تحليل وتصميم النظم (شبكات)',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'تبديل توجيه توفر تصميم',
 
   showRoadmapCard: false,

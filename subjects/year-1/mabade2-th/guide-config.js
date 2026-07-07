@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'mabade2-th',
   defaultTitle: 'مبادئ عمل الحواسيب 2',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'معمارية + خوارزميات + شبكات + أمن',
 
   showRoadmapCard: false,

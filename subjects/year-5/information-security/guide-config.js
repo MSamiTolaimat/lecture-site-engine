@@ -4,7 +4,7 @@
 export const GUIDE_CONFIG = {
   storagePrefix: 'information-security',
   defaultTitle: 'أمن المعلومات',
-  homeHeaderBrand: 'فريق TTM الأكاديمي',
+  homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'تشفير + تحكم + برمجيات + سلسلة كتل',
 
   showRoadmapCard: false,
