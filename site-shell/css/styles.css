@@ -1500,9 +1500,46 @@ details[open] summary .acc-chevron { transform: rotate(180deg); }
 }
 
 .lecture-body {
-  max-width: var(--lecture-body-width, 50%);
+  max-width: var(--lecture-body-width, 100%);
   margin-inline: auto;
   transition: max-width 0.2s ease;
+}
+
+#lectureView {
+  --lecture-body-width: 100%;
+  --lecture-main-pad-inline: var(--lecture-pad-md);
+  --lecture-main-pad-block: var(--lecture-pad-default);
+  --lecture-main-max-width: min(100%, 75rem);
+}
+
+#lectureView[data-width="50"] {
+  --lecture-body-width: 50%;
+  --lecture-main-pad-inline: var(--lecture-pad-default);
+  --lecture-main-max-width: var(--lecture-main-max-default);
+}
+
+#lectureView[data-width="70"] {
+  --lecture-body-width: 70%;
+  --lecture-main-pad-inline: var(--lecture-pad-default);
+  --lecture-main-max-width: var(--lecture-main-max-default);
+}
+
+#lectureView[data-width="100"] {
+  --lecture-body-width: 100%;
+  --lecture-main-pad-inline: var(--lecture-pad-default);
+  --lecture-main-max-width: var(--lecture-main-max-default);
+}
+
+#lectureView[data-width="150"] {
+  --lecture-body-width: 100%;
+  --lecture-main-pad-inline: var(--lecture-pad-sm);
+  --lecture-main-max-width: none;
+}
+
+#lectureView[data-width="fill"] {
+  --lecture-main-pad-inline: var(--lecture-pad-xs);
+  --lecture-main-pad-block: var(--lecture-pad-sm);
+  --lecture-main-max-width: none;
 }
 
 .lecture-main {

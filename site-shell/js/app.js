@@ -29,6 +29,9 @@ const LECTURE_WIDTH_OPTIONS = [
   { value: 'fill', label: 'ملء', expand: true },
 ];
 const DEFAULT_LECTURE_WIDTH = '120';
+const LECTURE_WIDTH_REV = 'default-120';
+const LECTURE_WIDTH_REV_KEY = `${STORAGE_LECTURE_WIDTH}-rev`;
+const LEGACY_DEFAULT_WIDTHS = new Set(['30', '50', '70', '100']);
 
 const {
   renderLecture,
@@ -615,10 +618,21 @@ function normalizeLectureWidth(value) {
   return DEFAULT_LECTURE_WIDTH;
 }
 
+function migrateLectureWidthStorage() {
+  if (localStorage.getItem(LECTURE_WIDTH_REV_KEY) === LECTURE_WIDTH_REV) return;
+  const saved = localStorage.getItem(STORAGE_LECTURE_WIDTH);
+  if (!saved || LEGACY_DEFAULT_WIDTHS.has(saved)) {
+    localStorage.removeItem(STORAGE_LECTURE_WIDTH);
+  }
+  const wideKey = `${GUIDE_CONFIG.storagePrefix || 'study-guide'}-lecture-wide`;
+  if (localStorage.getItem(wideKey) === '1') localStorage.removeItem(wideKey);
+  localStorage.setItem(LECTURE_WIDTH_REV_KEY, LECTURE_WIDTH_REV);
+}
+
 function readStoredLectureWidth() {
+  migrateLectureWidthStorage();
   const saved = localStorage.getItem(STORAGE_LECTURE_WIDTH);
   if (saved) return normalizeLectureWidth(saved);
-  if (localStorage.getItem(`${GUIDE_CONFIG.storagePrefix || 'study-guide'}-lecture-wide`) === '1') return 'fill';
   return DEFAULT_LECTURE_WIDTH;
 }
 
