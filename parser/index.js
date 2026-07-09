@@ -2,6 +2,7 @@ import { DEFAULT_CONFIG } from './config/default-config.js';
 import { createBlockRegistry, parseBlocks as runParseBlocks } from './blocks/index.js';
 import { createPartRegistry, parsePart as runParsePart } from './parts/index.js';
 import { parseDocument as runParseDocument, parseLecture as runParseLecture, buildSectionIndex as buildSectionIndexFn } from './document/index.js';
+import { parseReviewGuide as runParseReviewGuide } from './review/index.js';
 
 /**
  * Create a fully wired parser instance.
@@ -41,6 +42,9 @@ export function createParser(options = {}) {
     parsePart: parsePartFn,
     parseLecture: (text, index) => runParseLecture(text, index, config, parsePartFn),
     parseDocument: (md) => runParseDocument(md, config, parsePartFn),
+    parseReviewGuide: (md) => runParseReviewGuide(md, {
+      parseBlocksFn: (text) => runParseBlocks(text, config, blockRegistry),
+    }),
     buildSectionIndex: buildSectionIndexFn,
   };
 }
@@ -52,6 +56,7 @@ export const parseDocument = defaultParser.parseDocument;
 export const parseLecture = defaultParser.parseLecture;
 export const parseBlocks = defaultParser.parseBlocks;
 export const parsePart = defaultParser.parsePart;
+export const parseReviewGuide = defaultParser.parseReviewGuide;
 export const buildSectionIndex = defaultParser.buildSectionIndex;
 
 export { DEFAULT_CONFIG } from './config/default-config.js';
