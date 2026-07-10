@@ -306,14 +306,6 @@ function renderSubjectCard(s, year, staggerIdx) {
           </span>
           ${pending ? '<span class="hub-card__chip hub-card__chip--pending">قيد الإعداد</span>' : ''}
         </div>
-        <div class="hub-card__progress" aria-label="تقدم المادة">
-          <div class="hub-card__progress-track">
-            <span class="hub-card__progress-fill" data-progress-fill style="width:0%"></span>
-          </div>
-          <p class="hub-card__progress-text">
-            <span data-progress-done>٠</span>/<span data-progress-total>${toArabicDigits(s.lectureCount)}</span> مكتملة
-          </p>
-        </div>
         <span class="hub-card__cta">
           ${pending ? 'عرض المادة' : 'فتح الدليل'}
           <span class="material-symbols-outlined">arrow_back</span>
@@ -346,14 +338,7 @@ function renderHtml(subjects) {
         <div class="year-panel__intro">
           <h2>السنة ${accent.label}</h2>
           <p class="year-panel__tagline">${toArabicDigits(stats.subjects)} مواد · ${toArabicDigits(stats.lectures)} محاضرة · ${toArabicDigits(stats.ready)} جاهزة</p>
-          <div class="year-panel__progress" aria-label="تقدم السنة">
-            <div class="year-panel__progress-track">
-              <span class="year-panel__progress-fill" data-year-progress-fill style="width:0%"></span>
-            </div>
-            <p class="year-panel__progress-text">
-              <span data-year-progress-done>٠</span>/<span data-year-progress-total>${toArabicDigits(stats.lectures)}</span> مكتملة
-            </p>
-          </div>
+          
         </div>
         <div class="year-panel__chips">
           <span class="year-panel__chip">
@@ -691,31 +676,7 @@ function renderHtml(subjects) {
       color: #475569;
     }
     .dark .year-panel__tagline { color: #cbd5e1; }
-    .year-panel__progress {
-      margin-top: 0.65rem;
-      max-width: 22rem;
-    }
-    .year-panel__progress-track {
-      width: 100%;
-      height: 0.48rem;
-      border-radius: 999px;
-      background: color-mix(in srgb, var(--year-primary) 16%, #e2e8f0);
-      overflow: hidden;
-    }
-    .year-panel__progress-fill {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--year-primary), var(--year-secondary));
-      transition: width 0.25s ease;
-    }
-    .year-panel__progress-text {
-      margin: 0.35rem 0 0;
-      font-size: 0.76rem;
-      color: #64748b;
-      font-weight: 600;
-    }
-    .dark .year-panel__progress-text { color: #94a3b8; }
+    
     .year-panel__chips {
       display: flex;
       flex-wrap: wrap;
@@ -920,40 +881,7 @@ function renderHtml(subjects) {
       background: rgba(37,99,235,.18);
       color: #bfdbfe;
     }
-    .hub-card__progress {
-      margin-bottom: 0.95rem;
-    }
-    .hub-card__progress-track {
-      width: 100%;
-      height: 0.46rem;
-      border-radius: 999px;
-      overflow: hidden;
-      background: color-mix(in srgb, var(--card-primary) 16%, #e2e8f0);
-    }
-    .hub-card__progress-fill {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--card-primary), var(--card-secondary));
-      transition: width 0.25s ease;
-    }
-    .hub-card__progress-text {
-      margin: 0.35rem 0 0;
-      font-size: 0.76rem;
-      color: #64748b;
-      font-weight: 600;
-    }
-    .dark .hub-card__progress-text { color: #94a3b8; }
-    .hub-card__cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      margin-top: auto;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--card-primary);
-      transition: gap 0.2s ease;
-    }
+    
     .dark .hub-card__cta {
       color: #bfdbfe;
     }
