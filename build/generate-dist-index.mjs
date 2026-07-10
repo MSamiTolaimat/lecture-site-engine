@@ -284,6 +284,7 @@ function renderSubjectCard(s, year, staggerIdx) {
 
   return `
       <a class="hub-card${pending ? ' hub-card--pending' : ''}" href="./${s.rel}/"
+       data-progress-subject="${escapeHtml(s.rel)}" data-progress-total="${s.lectureCount}" data-progress-year="${year}"
          style="--card-primary:${palette.primary};--card-secondary:${palette.secondary};--card-tertiary:${palette.tertiary};--card-fixed:${palette.fixed};--card-on-fixed:${palette.onFixed};--stagger:${stagger}s"
          aria-label="${escapeHtml(s.title)}">
         <div class="hub-card__head">
@@ -304,6 +305,14 @@ function renderSubjectCard(s, year, staggerIdx) {
             ${escapeHtml(countLabel)}
           </span>
           ${pending ? '<span class="hub-card__chip hub-card__chip--pending">قيد الإعداد</span>' : ''}
+        </div>
+        <div class="hub-card__progress" aria-label="تقدم المادة">
+          <div class="hub-card__progress-track">
+            <span class="hub-card__progress-fill" data-progress-fill style="width:0%"></span>
+          </div>
+          <p class="hub-card__progress-text">
+            <span data-progress-done>٠</span>/<span data-progress-total>${toArabicDigits(s.lectureCount)}</span> مكتملة
+          </p>
         </div>
         <span class="hub-card__cta">
           ${pending ? 'عرض المادة' : 'فتح الدليل'}
@@ -331,12 +340,20 @@ function renderHtml(subjects) {
     const stats = yearBlockStats(subjects, yearNum);
     const cards = byYear[y].map(s => renderSubjectCard(s, yearNum, cardIndex++)).join('\n');
     return `
-    <details id="year-${yearNum}" class="year-panel" style="--year-primary:${accent.primary};--year-secondary:${accent.secondary};--year-fixed:${accent.fixed}">
+    <details id="year-${yearNum}" class="year-panel" data-year-progress="${yearNum}" style="--year-primary:${accent.primary};--year-secondary:${accent.secondary};--year-fixed:${accent.fixed}">
       <summary class="year-panel__header">
         <div class="year-panel__badge" aria-hidden="true">${toArabicDigits(y)}</div>
         <div class="year-panel__intro">
           <h2>السنة ${accent.label}</h2>
           <p class="year-panel__tagline">${toArabicDigits(stats.subjects)} مواد · ${toArabicDigits(stats.lectures)} محاضرة · ${toArabicDigits(stats.ready)} جاهزة</p>
+          <div class="year-panel__progress" aria-label="تقدم السنة">
+            <div class="year-panel__progress-track">
+              <span class="year-panel__progress-fill" data-year-progress-fill style="width:0%"></span>
+            </div>
+            <p class="year-panel__progress-text">
+              <span data-year-progress-done>٠</span>/<span data-year-progress-total>${toArabicDigits(stats.lectures)}</span> مكتملة
+            </p>
+          </div>
         </div>
         <div class="year-panel__chips">
           <span class="year-panel__chip">
@@ -674,6 +691,31 @@ function renderHtml(subjects) {
       color: #475569;
     }
     .dark .year-panel__tagline { color: #cbd5e1; }
+    .year-panel__progress {
+      margin-top: 0.65rem;
+      max-width: 22rem;
+    }
+    .year-panel__progress-track {
+      width: 100%;
+      height: 0.48rem;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--year-primary) 16%, #e2e8f0);
+      overflow: hidden;
+    }
+    .year-panel__progress-fill {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--year-primary), var(--year-secondary));
+      transition: width 0.25s ease;
+    }
+    .year-panel__progress-text {
+      margin: 0.35rem 0 0;
+      font-size: 0.76rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .dark .year-panel__progress-text { color: #94a3b8; }
     .year-panel__chips {
       display: flex;
       flex-wrap: wrap;
@@ -878,6 +920,30 @@ function renderHtml(subjects) {
       background: rgba(37,99,235,.18);
       color: #bfdbfe;
     }
+    .hub-card__progress {
+      margin-bottom: 0.95rem;
+    }
+    .hub-card__progress-track {
+      width: 100%;
+      height: 0.46rem;
+      border-radius: 999px;
+      overflow: hidden;
+      background: color-mix(in srgb, var(--card-primary) 16%, #e2e8f0);
+    }
+    .hub-card__progress-fill {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--card-primary), var(--card-secondary));
+      transition: width 0.25s ease;
+    }
+    .hub-card__progress-text {
+      margin: 0.35rem 0 0;
+      font-size: 0.76rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .dark .hub-card__progress-text { color: #94a3b8; }
     .hub-card__cta {
       display: inline-flex;
       align-items: center;
@@ -1011,8 +1077,10 @@ function renderHtml(subjects) {
   <script>
     (function () {
       const key = 'study-guide-theme';
+      const progressKey = 'study-guide-progress-v1';
       const toggle = document.getElementById('hubThemeToggle');
       const icon = document.getElementById('hubThemeIcon');
+      const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
       function syncTheme(theme) {
         const dark = theme === 'dark';
@@ -1043,8 +1111,82 @@ function renderHtml(subjects) {
         });
       }
 
+      function toArabicDigitsLocal(value) {
+        return String(value).replace(/\d/g, (digit) => arabicDigits[Number(digit)] || digit);
+      }
+
+      function readProgressStore() {
+        try {
+          const raw = localStorage.getItem(progressKey);
+          if (!raw) return { subjects: {} };
+          const parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== 'object') return { subjects: {} };
+          if (!parsed.subjects || typeof parsed.subjects !== 'object') return { subjects: {} };
+          return parsed;
+        } catch {
+          return { subjects: {} };
+        }
+      }
+
+      function subjectDoneCount(store, subjectKey, total) {
+        const rawState = store.subjects?.[subjectKey];
+        if (!rawState || typeof rawState !== 'object') return 0;
+
+        const completedMap = rawState.completed && typeof rawState.completed === 'object'
+          ? rawState.completed
+          : rawState;
+
+        const done = Object.keys(completedMap || {}).length;
+        return Math.max(0, Math.min(Number(total) || 0, done));
+      }
+
+      function applyProgressUi() {
+        const store = readProgressStore();
+
+        document.querySelectorAll('[data-progress-subject]').forEach((card) => {
+          const subjectKey = card.getAttribute('data-progress-subject') || '';
+          const total = Number(card.getAttribute('data-progress-total') || '0');
+          const done = subjectDoneCount(store, subjectKey, total);
+          const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+
+          const fill = card.querySelector('[data-progress-fill]');
+          const doneText = card.querySelector('[data-progress-done]');
+          const totalText = card.querySelector('[data-progress-total]');
+
+          if (fill) fill.style.width = percent + '%';
+          if (doneText) doneText.textContent = toArabicDigitsLocal(done);
+          if (totalText) totalText.textContent = toArabicDigitsLocal(total);
+        });
+
+        document.querySelectorAll('[data-year-progress]').forEach((panel) => {
+          const year = panel.getAttribute('data-year-progress');
+          const cards = panel.querySelectorAll('[data-progress-year="' + year + '"]');
+
+          let done = 0;
+          let total = 0;
+          cards.forEach((card) => {
+            const lectureTotal = Number(card.getAttribute('data-progress-total') || '0');
+            const subjectKey = card.getAttribute('data-progress-subject') || '';
+            total += lectureTotal;
+            done += subjectDoneCount(store, subjectKey, lectureTotal);
+          });
+
+          const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+          const fill = panel.querySelector('[data-year-progress-fill]');
+          const doneText = panel.querySelector('[data-year-progress-done]');
+          const totalText = panel.querySelector('[data-year-progress-total]');
+
+          if (fill) fill.style.width = percent + '%';
+          if (doneText) doneText.textContent = toArabicDigitsLocal(done);
+          if (totalText) totalText.textContent = toArabicDigitsLocal(total);
+        });
+      }
+
+      applyProgressUi();
+
       window.addEventListener('storage', (event) => {
         if (event.key === key && typeof event.newValue === 'string') syncTheme(event.newValue);
+        if (event.key === progressKey) applyProgressUi();
       });
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -17,6 +17,7 @@ import {
   updateAnalyticsContext,
 } from './analytics.js';
 import { initLaserPointer } from './laser-pointer.js';
+import { createProgressTracker, lectureIdFromPath, resolveSubjectKeyFromPath } from './progress_tracker.js';
 
 /** Set true when lecture notes localStorage behaviour is ready. */
 const LECTURE_NOTES_ENABLED = false;
@@ -57,6 +58,9 @@ let appState = {
   items: [],
   reviewManifest: null,
   reviewItems: [],
+  progressTracker: null,
+  subjectKey: '',
+  progressUnsubscribe: null,
 };
 let siteTitle = "";
 let currentLectureIndex = -1;
@@ -277,6 +281,106 @@ function itemStats(item) {
   return lectureStats(item.lec);
 }
 
+function lectureStableId(item, idx) {
+  const fromFile = lectureIdFromPath(item?.fileMeta?.path);
+  if (fromFile) return fromFile;
+  if (item?.lec?.id) return item.lec.id;
+  return `lec${idx + 1}`;
+}
+
+function subjectLectureIds() {
+  return appState.items.map((item, idx) => lectureStableId(item, idx));
+}
+
+function renderSubjectProgressTracker() {
+  const host = document.getElementById('subjectProgressTracker');
+  if (!host || !appState.progressTracker) return;
+
+  const progress = appState.progressTracker.getSubjectProgress(subjectLectureIds());
+  const done = progress.completed;
+  const total = progress.total;
+  const percent = progress.percent;
+
+  host.classList.remove('hidden');
+  host.innerHTML = `
+    <div class="subject-progress-card">
+      <div class="subject-progress-card__head">
+        <div>
+          <p class="subject-progress-card__label">تقدم المادة</p>
+          <h3 class="subject-progress-card__title">${esc(String(done))} / ${esc(String(total))} محاضرة مكتملة</h3>
+        </div>
+        <span class="subject-progress-card__percent">${esc(String(percent))}%</span>
+      </div>
+      <div class="subject-progress-card__track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${esc(String(percent))}" aria-label="تقدم المادة">
+        <span class="subject-progress-card__fill" style="width:${esc(String(percent))}%"></span>
+      </div>
+    </div>`;
+}
+
+function setLectureCompletedByIndex(idx, completed) {
+  const item = appState.items[idx];
+  if (!item || !appState.progressTracker) return;
+  const lectureId = lectureStableId(item, idx);
+  appState.progressTracker.setLectureCompleted(lectureId, completed);
+  renderSubjectProgressTracker();
+  renderHomeGrid();
+  syncLectureCompletionButtons(currentLectureIndex);
+}
+
+function toggleLectureCompletedByIndex(idx) {
+  const item = appState.items[idx];
+  if (!item || !appState.progressTracker) return;
+  const lectureId = lectureStableId(item, idx);
+  appState.progressTracker.toggleLectureCompleted(lectureId);
+  renderSubjectProgressTracker();
+  renderHomeGrid();
+  syncLectureCompletionButtons(currentLectureIndex);
+}
+
+function syncLectureCompletionButtons(idx) {
+  const item = appState.items[idx];
+  const sidebarBtn = document.getElementById('sidebarCompleteBtn');
+  const mobileBtn = document.getElementById('mobileCompleteBtn');
+
+  if (!item || !appState.progressTracker) {
+    [sidebarBtn, mobileBtn].forEach((btn) => {
+      if (!btn) return;
+      btn.dataset.lectureIndex = '';
+      btn.setAttribute('aria-pressed', 'false');
+      btn.classList.add('hidden');
+    });
+    return;
+  }
+
+  const lectureId = lectureStableId(item, idx);
+  const isDone = appState.progressTracker.isLectureCompleted(lectureId);
+  const label = isDone ? 'مكتملة' : 'وضع كمكتملة';
+
+  [sidebarBtn, mobileBtn].forEach((btn) => {
+    if (!btn) return;
+    btn.classList.remove('hidden');
+    btn.dataset.lectureIndex = String(idx);
+    btn.dataset.completed = isDone ? '1' : '0';
+    btn.setAttribute('aria-pressed', isDone ? 'true' : 'false');
+    btn.classList.toggle('is-complete', isDone);
+    const text = btn.querySelector('[data-complete-label]');
+    if (text) text.textContent = label;
+  });
+}
+
+function initLectureCompletionButtons() {
+  ['sidebarCompleteBtn', 'mobileCompleteBtn'].forEach((id) => {
+    const btn = document.getElementById(id);
+    if (!btn || btn.dataset.bound === '1') return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', () => {
+      const idx = Number(btn.dataset.lectureIndex);
+      if (!Number.isInteger(idx) || idx < 0) return;
+      toggleLectureCompletedByIndex(idx);
+    });
+  });
+}
+
 function applyDarkMode(dark) {
   document.documentElement.classList.toggle("dark", dark);
   document.body?.classList.toggle("dark", dark);
@@ -430,17 +534,23 @@ function renderHomeGrid() {
     const num = item.fileMeta?.num ?? item.lec.title.match(/المحاضرة\s+(\d+)/)?.[1] ?? String(i + 1);
     const badge = item.fileMeta?.badge;
     const tag = item.lec.tag || '';
+    const lectureId = lectureStableId(item, i);
+    const isDone = appState.progressTracker?.isLectureCompleted(lectureId) || false;
+    const doneLabel = isDone ? 'مكتملة' : 'غير مكتملة';
     return `
-      <button type="button"
-              class="lecture-picker-card group text-right bg-surface-container-lowest border border-outline-variant rounded-xl p-lg custom-shadow box-hover w-full cursor-pointer"
-              data-lecture-index="${i}" aria-label="فتح ${esc(title)}">
+      <article class="lecture-picker-card group text-right bg-surface-container-lowest border border-outline-variant rounded-xl p-lg custom-shadow box-hover w-full"
+               data-lecture-card="${i}" aria-label="${esc(title)}">
         <div class="flex items-start justify-between mb-md">
           <div class="picker-icon-wrap w-14 h-14 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container shrink-0">
             ${ms(item.matIcon, true, 'text-3xl')}
           </div>
-          <div class="flex flex-col items-end gap-xs">
+          <div class="flex flex-col items-end gap-xs lecture-card-head-actions">
             <span class="px-sm py-xs bg-secondary-container text-on-secondary-container rounded-lg font-code-sm text-code-sm">#${esc(num)}</span>
             ${badge ? `<span class="px-sm py-xs bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-lg font-label-md text-label-md">${esc(badge)}</span>` : ''}
+            <button type="button" class="lecture-complete-btn ${isDone ? 'is-complete' : ''}" data-toggle-complete-index="${i}" aria-pressed="${isDone ? 'true' : 'false'}" aria-label="${isDone ? 'إلغاء إكمال' : 'تحديد كمكتملة'} ${escAttr(title)}">
+              ${ms(isDone ? 'task_alt' : 'radio_button_unchecked', false, 'text-base')}
+              <span>${doneLabel}</span>
+            </button>
           </div>
         </div>
         <h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs group-hover:text-primary transition-colors">${esc(title)}</h3>
@@ -456,17 +566,32 @@ function renderHomeGrid() {
             ${ms('format_list_bulleted', false, 'text-sm text-tertiary')} ${stats.sections} أقسام
           </span>` : ''}
         </div>
-        <span class="inline-flex items-center gap-sm text-primary font-label-md font-bold group-hover:gap-md transition-all">
-          ابدأ الدراسة ${ms('arrow_back', false, 'text-lg')}
-        </span>
-      </button>`;
+        <div class="lecture-card-footer">
+          <span class="lecture-card-status ${isDone ? 'is-complete' : ''}">
+            ${ms(isDone ? 'check_circle' : 'pending', false, 'text-base')} ${doneLabel}
+          </span>
+          <button type="button" class="lecture-open-btn inline-flex items-center gap-sm text-primary font-label-md font-bold group-hover:gap-md transition-all" data-open-lecture-index="${i}" aria-label="فتح ${escAttr(title)}">
+            ابدأ الدراسة ${ms('arrow_back', false, 'text-lg')}
+          </button>
+        </div>
+      </article>`;
   }).join('');
 
-  grid.querySelectorAll('[data-lecture-index]').forEach(btn => {
+  grid.querySelectorAll('[data-open-lecture-index]').forEach(btn => {
     btn.addEventListener('click', () => {
-      const idx = Number(btn.dataset.lectureIndex);
+      const idx = Number(btn.dataset.openLectureIndex);
       const id = appState.items[idx]?.lec.id;
       if (id) location.hash = id;
+    });
+  });
+
+  grid.querySelectorAll('[data-toggle-complete-index]').forEach(btn => {
+    btn.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const idx = Number(btn.dataset.toggleCompleteIndex);
+      if (!Number.isInteger(idx) || idx < 0) return;
+      toggleLectureCompletedByIndex(idx);
     });
   });
 }
@@ -728,6 +853,7 @@ async function loadLectureView(idx, hashPart) {
     document.getElementById('mobileTocCourseTitle').textContent = shortLectureTitle(item.lec.title);
     document.getElementById('mobileTocCourseSub').textContent = item.lec.tag || '';
     document.getElementById('mobileTocMatIcon').textContent = item.matIcon || 'school';
+    syncLectureCompletionButtons(idx);
 
     const cacheKey = htmlCacheKey(item);
     let html = lectureHtmlCache.get(cacheKey);
@@ -741,6 +867,7 @@ async function loadLectureView(idx, hashPart) {
   } else {
     buildSidebar(item.toc);
     showView('lecture');
+    syncLectureCompletionButtons(idx);
   }
 
   const hash = resolveLectureHash(idx, hashPart, item);
@@ -1023,6 +1150,7 @@ async function init() {
   initJumpSummary();
   bindJumpSummaryClicks();
   initLectureWidthToggle();
+  initLectureCompletionButtons();
   if (LECTURE_NOTES_ENABLED) initLectureNotes();
   initMobileStudyUi();
   document.getElementById('backToHomeBtn')?.addEventListener('click', goToSubjectHome);
@@ -1050,6 +1178,15 @@ async function init() {
       appState.items.push(createItemStub(files[i], i, manifest));
     }
 
+    appState.subjectKey = resolveSubjectKeyFromPath(location.pathname);
+    appState.progressTracker = createProgressTracker({ subjectKey: appState.subjectKey });
+    if (appState.progressUnsubscribe) appState.progressUnsubscribe();
+    appState.progressUnsubscribe = appState.progressTracker.onChange(() => {
+      renderSubjectProgressTracker();
+      renderHomeGrid();
+      syncLectureCompletionButtons(currentLectureIndex);
+    });
+
     initServiceWorker();
 
     if (!appState.items.length) {
@@ -1058,6 +1195,7 @@ async function init() {
     } else {
       renderHomeGrid();
     }
+    renderSubjectProgressTracker();
 
     try {
       await loadReviews();
