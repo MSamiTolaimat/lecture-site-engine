@@ -22,7 +22,7 @@
 ### 1. تعريف Android
 
 #### النص الأصلي يقول (English):
-> "Android is an open source and Linux-based Operating System designed primarily for touchscreen mobile devices such as smartphones and tablets."
+> "Android is an open source and Linux-based Operating System designed primarily for touchscreen mobile devices such as smartphones tablets."
 
 #### الشرح المبسّط:
 أندرويد هو نظام تشغيل، أي البرنامج الذي يدير جهاز الموبايل بالكامل (الشاشة، الذاكرة، التطبيقات، الاتصال...). كلمة `open source` تعني أن الكود المصدري متاح للجميع، وكلمة `Linux-based` تعني أنه مبني فوق نواة (kernel) لينكس المعروفة والمُختبرة أمنياً منذ عقود، بدل أن تبني جوجل نواة من الصفر.
