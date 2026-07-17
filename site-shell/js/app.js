@@ -133,6 +133,32 @@ function reviewStats(review) {
   return { sections: review.parts?.length || 0, codeBlocks };
 }
 
+function renderUpdatedPdfBanner() {
+  const section = document.getElementById('updatedPdfBanner');
+  if (!section) return;
+
+  const url = appState.manifest?.settings?.updatedPdfUrl;
+  if (!url) {
+    section.classList.add('hidden');
+    section.innerHTML = '';
+    return;
+  }
+
+  const note = appState.manifest?.settings?.updatedPdfNote
+    || 'تم تحديث محتوى المحاضرات — يمكنك تحميل نسخة PDF الشاملة (القديمة في حال كنت تدرس منها) من هنا.';
+
+  section.classList.remove('hidden');
+  section.innerHTML = `
+    <div class="flex flex-col md:flex-row md:items-center gap-md bg-secondary-container/40 border border-primary/30 rounded-2xl p-lg">
+      <span class="material-symbols-outlined text-primary shrink-0" aria-hidden="true">picture_as_pdf</span>
+      <p class="flex-1 font-body-md text-body-md text-on-surface">${esc(note)}</p>
+      <a href="${escAttr(url)}" target="_blank" rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-sm px-lg py-sm bg-primary text-on-primary rounded-full font-label-md font-bold hover:opacity-90 transition-all shrink-0">
+        ${ms('download', false, 'text-lg')} تحميل PDF
+      </a>
+    </div>`;
+}
+
 function renderReviewFeatured() {
   const section = document.getElementById('reviewFeatured');
   if (!section) return;
@@ -1351,6 +1377,7 @@ async function init() {
       renderHomeGrid();
     }
     renderSubjectProgressTracker();
+    renderUpdatedPdfBanner();
 
     try {
       await loadReviews();
