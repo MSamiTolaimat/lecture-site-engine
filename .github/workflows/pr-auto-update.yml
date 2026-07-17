@@ -1,4 +1,4 @@
-name: Auto-update PR branches behind main
+name: PR sync check (up to date with main)
 
 on:
   pull_request:
@@ -12,21 +12,28 @@ permissions:
   contents: write
   pull-requests: write
   workflows: write
+  statuses: write
 
 jobs:
-  update-behind-prs:
+  sync-check:
     runs-on: ubuntu-latest
     steps:
-      - name: Merge main into any PR branch that's behind
+      # Always reports a commit status on the PR's head SHA — required in
+      # branch protection so it shows up in every open PR's merge box (even
+      # before this job has run once, GitHub shows it as "Expected"), and
+      # blocks merging until it reports success.
+      - name: Check PR is up to date with main — auto-update or flag conflicts
         uses: actions/github-script@v7
         with:
           script: |
             const { owner, repo } = context.repo;
+            const STATUS_CONTEXT = 'pr-sync/up-to-date-with-main';
 
             let prs;
             if (context.eventName === 'pull_request') {
               prs = [context.payload.pull_request];
             } else {
+              // main just moved — every open PR may now be behind, re-check all of them.
               const res = await github.rest.pulls.list({ owner, repo, state: 'open', base: 'main', per_page: 100 });
               prs = res.data;
             }
@@ -35,23 +42,37 @@ jobs:
               if (pr.base.ref !== 'main' || pr.draft) continue;
 
               const { data: compare } = await github.rest.repos.compareCommits({
-                owner,
-                repo,
-                base: pr.head.sha,
-                head: 'main',
+                owner, repo, base: pr.head.sha, head: 'main',
               });
 
               if (compare.ahead_by === 0) {
-                console.log(`PR #${pr.number} is already up to date with main.`);
+                await github.rest.repos.createCommitStatus({
+                  owner, repo, sha: pr.head.sha, state: 'success',
+                  context: STATUS_CONTEXT,
+                  description: 'متزامن مع main ✅',
+                });
+                console.log(`PR #${pr.number}: up to date.`);
                 continue;
               }
 
-              console.log(`PR #${pr.number} is ${compare.ahead_by} commit(s) behind main — updating.`);
+              console.log(`PR #${pr.number} is ${compare.ahead_by} commit(s) behind main — attempting auto-update.`);
               try {
                 await github.rest.pulls.updateBranch({ owner, repo, pull_number: pr.number });
+                // updateBranch pushes a merge commit, which fires a fresh "synchronize"
+                // event on the new head SHA — that re-run reports success there.
+                console.log(`PR #${pr.number}: auto-updated from main.`);
               } catch (err) {
-                // Branch protection (required + strict status checks) already blocks merging
-                // this PR while it's behind — no need to nag the contributor here.
-                console.error(`Failed to update PR #${pr.number}: ${err.message}`);
+                // 422 from this endpoint means GitHub could not fast-forward/merge
+                // automatically — i.e. a real conflict that needs a human to resolve,
+                // as opposed to a permission issue (403) blocking the auto-update.
+                const isConflict = err.status === 422;
+                await github.rest.repos.createCommitStatus({
+                  owner, repo, sha: pr.head.sha, state: 'failure',
+                  context: STATUS_CONTEXT,
+                  description: isConflict
+                    ? `⚠️ تعارضات (conflicts) مع main — لازم تُحل يدوياً قبل الدمج`
+                    : `❌ متأخر ${compare.ahead_by} commit عن main — اضغط "Update branch"`,
+                });
+                console.error(`PR #${pr.number}: could not auto-update (${err.status}: ${err.message}).`);
               }
             }
