@@ -69,8 +69,6 @@ let currentReviewIndex = -1;
 let routeLock = false;
 let scrollAnimObserver = null;
 let sidebarObserver = null;
-/** Element marking where the sidebar progress rail should read 100% — start of the "ملخص" part, if any. */
-let progressEndEl = null;
 let htmlCacheBuildId = null;
 /** @type {Map<string, string>} */
 const lectureHtmlCache = new Map();
@@ -97,13 +95,6 @@ function htmlCacheKey(item) {
 
 function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-/** Converts markdown `code` spans in a TOC subsection label into a subtly styled <code>, and strips any stray unmatched backticks so raw ` never leaks into the sidebar. */
-function formatSubsectionLabel(rawText) {
-  return esc(rawText)
-    .replace(/`([^`]+)`/g, '<code class="toc-inline-code">$1</code>')
-    .replace(/`/g, '');
 }
 
 function escAttr(s) {
@@ -232,8 +223,6 @@ function mountReviewHtml(item, html) {
   initEquations(document.getElementById('content'));
   if (window.hljs) document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
   buildSidebar(item.toc);
-  updateSidebarProgressTarget();
-  updateSidebarProgressFill();
   initScrollAnimations(document.getElementById('content'));
   revealLectureDetailSections(document.getElementById('content'));
   requestAnimationFrame(() => {
@@ -264,8 +253,6 @@ function loadReviewView(index, anchorHash) {
     document.getElementById('mobileTocMatIcon').textContent = item.matIcon || 'menu_book';
   } else {
     buildSidebar(item.toc);
-    updateSidebarProgressTarget();
-    updateSidebarProgressFill();
     showView('lecture');
   }
 
@@ -725,7 +712,7 @@ function buildSidebar(toc) {
       const link = document.createElement('a');
       link.href = `#${part.id}`;
       link.className = 'toc-nav-link flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high p-md transition-all mx-md mb-xs font-label-md text-label-md rounded-l-lg border-r-4 border-transparent';
-      link.innerHTML = `<span class="line-clamp-2">${esc(partLabel)}</span>`;
+      link.innerHTML = `${ms(part.icon, false, 'text-lg shrink-0')}<span class="line-clamp-2">${esc(partLabel)}</span>`;
       link.dataset.partType = part.type;
       container.appendChild(link);
       if (container === containers[0]) allLinks.push({ el: link, target: null });
@@ -736,8 +723,7 @@ function buildSidebar(toc) {
         const indent = sub.level >= 5 ? 'mr-2xl' : sub.level >= 4 ? 'mr-xl' : 'mr-lg';
         subLink.href = `#${subId}`;
         subLink.className = `toc-nav-link flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high py-xs px-md transition-all ${indent} mb-xs font-label-md text-label-md rounded-l-lg border-r-4 border-transparent opacity-80`;
-        const subLabel = sub.text.replace(/^\d+(?:\.\d+)*\.?\s*/, '');
-        subLink.innerHTML = `${ms('chevron_left', false, 'text-sm shrink-0')}<span class="line-clamp-2 text-xs leading-snug">${formatSubsectionLabel(subLabel)}</span>`;
+        subLink.innerHTML = `${ms('chevron_left', false, 'text-sm shrink-0')}<span class="line-clamp-2 text-xs leading-snug">${esc(sub.text.replace(/^\d+(?:\.\d+)*\.?\s*/, ''))}</span>`;
         container.appendChild(subLink);
         if (container === containers[0]) allLinks.push({ el: subLink, target: null });
       });
@@ -794,74 +780,6 @@ function buildSidebar(toc) {
   });
 }
 
-/** Finds the "ملخص" (summary) part's DOM element for the item currently on screen — the point where the sidebar progress rail should read 100%. */
-function findSummaryPartEl() {
-  const toc = currentReviewIndex >= 0
-    ? appState.reviewItems[currentReviewIndex]?.toc
-    : appState.items[currentLectureIndex]?.toc;
-  if (!toc) return null;
-  const part = toc.parts?.find(p =>
-    p.type === 'summary' && !/checklist|قائمة فحص|قائمة المراجعة/i.test(p.title),
-  ) || toc.parts?.find(p => p.type === 'summary' && /ملخص/i.test(p.title));
-  if (!part) return null;
-  return document.getElementById(part.id);
-}
-
-function updateSidebarProgressTarget() {
-  progressEndEl = findSummaryPartEl();
-}
-
-/** Updates the thin edge rail in the sidebar to reflect how far the student has scrolled through the lecture body (stops at the start of the summary part, if present). */
-function updateSidebarProgressFill() {
-  const fill = document.getElementById('sidebarProgressFill');
-  const dot = document.getElementById('sidebarProgressDot');
-  const content = document.getElementById('content');
-  if (!fill || !dot || !content || currentView !== 'lecture') return;
-
-  const contentTop = content.getBoundingClientRect().top + window.scrollY;
-  const endTop = progressEndEl
-    ? progressEndEl.getBoundingClientRect().top + window.scrollY
-    : contentTop + content.offsetHeight;
-  const span = Math.max(1, endTop - contentTop);
-  const frac = Math.min(1, Math.max(0, (window.scrollY + SCROLL_OFFSET_PX - contentTop) / span));
-
-  fill.style.height = `${frac * 100}%`;
-  dot.style.top = `${(1 - frac) * 100}%`;
-}
-
-function initSidebarProgress() {
-  let ticking = false;
-  const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      updateSidebarProgressFill();
-      ticking = false;
-    });
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-}
-
-/** Collapses/expands the desktop lecture sidebar. Defaults to expanded on every page load. */
-function setSidebarCollapsed(collapsed) {
-  const aside = document.getElementById('lectureSidebar');
-  const toggleBtn = document.getElementById('sidebarToggleBtn');
-  const expandBtn = document.getElementById('sidebarExpandBtn');
-  const icon = document.getElementById('sidebarToggleIcon');
-  if (!aside) return;
-  aside.classList.toggle('is-collapsed', collapsed);
-  toggleBtn?.setAttribute('aria-expanded', String(!collapsed));
-  if (icon) icon.textContent = collapsed ? 'chevron_left' : 'chevron_right';
-  expandBtn?.classList.toggle('hidden', !collapsed);
-}
-
-function initSidebarToggle() {
-  document.getElementById('sidebarToggleBtn')?.addEventListener('click', () => setSidebarCollapsed(true));
-  document.getElementById('sidebarExpandBtn')?.addEventListener('click', () => setSidebarCollapsed(false));
-  setSidebarCollapsed(false);
-}
-
 function initScrollAnimations(root = document) {
   if (scrollAnimObserver) scrollAnimObserver.disconnect();
 
@@ -911,8 +829,6 @@ function mountLectureHtml(item, html) {
   initEquations(document.getElementById('content'));
   if (window.hljs) document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
   buildSidebar(item.toc);
-  updateSidebarProgressTarget();
-  updateSidebarProgressFill();
   initScrollAnimations(document.getElementById('content'));
   revealLectureDetailSections(document.getElementById('content'));
   requestAnimationFrame(() => {
@@ -977,8 +893,6 @@ async function loadLectureView(idx, hashPart) {
     mountLectureHtml(item, html);
   } else {
     buildSidebar(item.toc);
-    updateSidebarProgressTarget();
-    updateSidebarProgressFill();
     showView('lecture');
     syncLectureCompletionButtons(idx);
   }
@@ -1417,8 +1331,6 @@ async function init() {
   bindJumpSummaryClicks();
   initLectureWidthToggle();
   initLectureCompletionButtons();
-  initSidebarToggle();
-  initSidebarProgress();
   if (LECTURE_NOTES_ENABLED) initLectureNotes();
   initMobileStudyUi();
   initSearch();
