@@ -1,19 +1,17 @@
 ## المحاضرة 1: Android Platform (منصة أندرويد)
 
 **المصدر:** [نمط 2023-2024 — الفصل الأول]
-### السؤال 1 (متوسط)
-Which of the following is/are part of the native libraries?
-أ) Bionic libc
-ب) PostgreSQL
-ج) OpenGraphic
-د) All of the above
+### السؤال 1 (سهل)
+Which operating system kernel is Android built on top of?
+أ) Linux Kernel
+ب) Windows Kernel
+ج) macOS Kernel
+د) FreeBSD Kernel
 **الإجابة الصحيحة: أ**
 **التعليل:**
-`Bionic libc` مذكورة صراحة كمثال على المكتبات الأصلية (`Native C/C++ Libraries`) في المحاضرة، إلى جانب أمثلة أخرى حقيقية مثل `WebKit` و`OpenGL ES` و`Media Framework`.
+تنص المحاضرة صراحة أن أندرويد نظام مبني على نواة Linux Kernel، وهي الطبقة الأولى (الأسفل) في المكدّس البرمجي (Software Stack) الذي يوفّر الوظائف الأساسية كإدارة الذاكرة والعمليات وأمان النظام.
 
-أما `PostgreSQL` فليست مكتبة يستخدمها أندرويد أصلاً (النظام يعتمد على `SQLite`)، و"OpenGraphic" ليس الاسم الصحيح المستخدم في توثيق أندرويد (الاسم الصحيح `OpenGL ES`)، لذلك خيار "All of the above" غير صحيح.
-
-*(ملاحظة: مستوى ثقة أقل بسبب صياغة الخيارات غير الدقيقة في هذا السؤال).*
+باقي الخيارات أنظمة تشغيل/نوى غير مرتبطة ببنية أندرويد إطلاقاً.
 
 **المصدر:** [نمط 2023-2024 — الفصل الأول]
 ### السؤال 2 (متوسط)
