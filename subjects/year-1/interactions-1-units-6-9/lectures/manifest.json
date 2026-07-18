@@ -4,7 +4,8 @@
     "subjectNameEn": "Interactions 1: Reading and Writing (Units 6–9)",
     "year": "2025-2026",
     "academicYear": 1,
-    "theme": "amber-default",
+    "theme": "gis-earth",
+    "enabledLectures":true,
     "department": "القسم النظري والعملي"
   },
   "title": "إنتراكتشنز 1: القراءة والكتابة (الوحدات 6–9) — Interactions 1: Reading and Writing (Units 6–9)",
