@@ -154,7 +154,7 @@ println("You have $count unread messages.")
 ### 8. الجمل الشرطية if/else
 
 #### النص الأصلي يقول (English):
-> In Kotlin, when you want your program to perform different actions based on a condition, you can use an if/else statement.
+> In Kotlin, when you want your program to perform different actions based on a condition, you can use an if and else statement.
 
 #### الترجمة الحرفية:
 > في كوتلن، عندما تريد لبرنامجك أن ينفّذ أفعالاً مختلفة بناءً على شرط، يمكنك استخدام جملة if/else.
