@@ -169,7 +169,7 @@ parts:
     cover: [logic, misconception, return_check, dead_code]
 
   exercise:
-    enabled: true
+    enabled: false
     heading: "الجزء الرابع: تمارين إضافية (من إعداد الدليل للتدريب)"
     count_min: 4
     count_max: 7
@@ -180,7 +180,7 @@ parts:
       - scenario
 
   analysis_exercise:
-    enabled: true
+    enabled: false
     heading: "الجزء الرابع: تمارين تحليل وتطبيق (إضافية — من إعداد الدليل)"
     count_min: 3
     count_max: 6
@@ -191,7 +191,7 @@ parts:
       - written_analysis
 
   trace_exercise:
-    enabled: true
+    enabled: false
     heading: "الجزء الرابع: تمارين تتبع التنفيذ"
     count_min: 3
     note: "كل تمرين: مدخل + جدول/شجرة ناقصة للطالب + نموذج الحل الكامل"
@@ -207,13 +207,13 @@ parts:
       - schema_design
 
   theory:
-    enabled: true
+    enabled: false
     heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"
     count_min: 8
 
   cheat_sheet:
     enabled: true
-    heading: "الجزء السادس: ورقة المراجعة السريعة (Cheat Sheet)"
+    heading: "الجزء الرابع: ورقة المراجعة السريعة (Cheat Sheet)"
     subsections:
       - integration_map_table
       - golden_rules_table
@@ -221,7 +221,7 @@ parts:
 
   qa_cards:
     enabled: true
-    heading: "الجزء الرابع: بطاقات سؤال وجواب (Q&A Cards)"
+    heading: "الجزء الثالث: بطاقات سؤال وجواب (Q&A Cards)"
     count_min: 12
 
   reference_code:
@@ -233,7 +233,7 @@ parts:
     note: ""
 
   checklist:
-    enabled: true
+    enabled: false
     heading: "الجزء السادس: قائمة فحص ذاتي قبل الامتحان ✅"
 
 # ─── Blocks (updated for v2.0) ────────────────────────────────────────────────
