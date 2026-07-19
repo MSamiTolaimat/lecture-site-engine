@@ -415,84 +415,28 @@ assessment:
   mcq_option_letters: arabic
 
 # ─── Automation Question Types ────────────────────────────────────────────────
+# All disabled — focus on readable parts only: detail, summary, mcq, qa_cards, cheat_sheet
 automation_question_types:
   flash_qa:
-    enabled: true
-    label_ar: "مراجعة سريعة (سؤال / جواب)"
-    difficulty: easy
-    count_min: 12
-    parts: [qa_cards, qa_inline, theory]
-    blocks: [qa_inline, callouts]
-    format: |
-      **Q{N}:** سؤال مراجعة مباشر
-      **A:** إجابة مختصرة قابلة للمقارنة الآلية
+    enabled: false
 
   scenario_cluster:
-    enabled: true
-    label_ar: "تحدي مركّب (سيناريو + أسئلة متعددة)"
-    difficulty: hard
-    count_min: 3
-    questions_per_scenario: 4
-    parts: [mcq, debug, theory]
-    blocks: [code, trace, diagrams, tables, compare, equations]
-    scenario_sources:
-      - code_trace
-      - numerical_case
-      - algorithm_state
-      - logic_entailment
-      - system_design
+    enabled: false
 
   hands_on:
-    enabled: true
-    label_ar: "تطبيق عملي (أكمل / صحّح / نفّذ)"
-    difficulty: medium
-    count_min: 5
-    parts: [exercise, analysis_exercise, debug]
-    blocks: [fill_gaps, code_fix, algorithm, expected_output, tables]
-    types:
-      - fill_gaps
-      - code_fix
-      - table_fill
-      - numerical_solve
-      - diagram_completion
+    enabled: false
 
   step_trace:
-    enabled: true
-    label_ar: "تتبع خطوة بخطوة (جدول ناقص)"
-    difficulty: medium
-    count_min: 3
-    parts: [trace_exercise, mcq]
-    blocks: [trace, algorithm, tables, diagrams]
-    trace_targets:
-      - algorithm_iterations
-      - variable_state
-      - search_tree_expansion
-      - memory_page_replacement
+    enabled: false
 
   compare_analyze:
-    enabled: true
-    label_ar: "مقارنة وتحليل (أيهما أفضل؟ لماذا؟)"
-    difficulty: medium
-    count_min: 4
-    parts: [mcq, theory, analysis_exercise]
-    blocks: [compare, trade_off, tables, analogy]
+    enabled: false
 
   find_the_bug:
-    enabled: true
-    label_ar: "اكتشف الخطأ (كود / منطق / حساب)"
-    difficulty: hard
-    count_min: 4
-    parts: [debug, exercise]
-    blocks: [code_fix, compare, troubleshooting]
-    bug_types: [logic, misconception, off_by_one, wrong_formula, race_condition, infinite_loop]
+    enabled: false
 
   structured_theory:
-    enabled: true
-    label_ar: "نظري منظم (تعريف + مكونات + مثال)"
-    difficulty: medium
-    count_min: 8
-    parts: [theory, mcq]
-    blocks: [compare, tables, callouts]
+    enabled: false
 
 # ─── Output ───────────────────────────────────────────────────────────────────
 output:
@@ -508,6 +452,6 @@ output:
     - "كل مصطلح إنجليزي بين backticks"
     - "النص الأصلي موجود في <details> collapsible مع @coverage metadata"
     - "≥16 سؤال MCQ مع تعليل كامل"
-    - "≥8 أسئلة نظرية مع نموذج إجابة"
-    - "جداول تتبع: كل تمرين له جدول ناقص + نموذج حل"
-    - "تمارين تطبيقية مع نموذج حل"
+    - "≥12 بطاقة Q&A مع إجابات مختصرة"
+    - "ملخص منظم يغطي كل المفاهيم الرئيسية"
+    - "ورقة مراجعة سريعة (cheat sheet) قابلة للطباعة"
