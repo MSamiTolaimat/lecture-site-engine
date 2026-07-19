@@ -13,6 +13,8 @@ import {
   initAnalytics,
   trackHomeView,
   trackLectureView,
+  trackDawratView,
+  trackNoteView,
   trackLectureContentReady,
   updateAnalyticsContext,
 } from './analytics.js';
@@ -394,6 +396,9 @@ function loadExamView(index, anchorHash) {
 
   if (anchorHash && anchorHash !== item.exam.id) scrollToAnchor(anchorHash);
   else if (needsRender) window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  trackDawratView(item);
+  trackLectureContentReady();
 }
 
 async function loadNotesManifest() {
@@ -509,6 +514,9 @@ async function loadNoteView(index, anchorHash) {
 
   if (anchorHash && anchorHash !== item.lec.id) scrollToAnchor(anchorHash);
   else if (needsRender) window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  trackNoteView(item);
+  trackLectureContentReady();
 }
 
 /** Theme-accent class cycled per card — matches the subject's own primary/

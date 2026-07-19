@@ -801,6 +801,19 @@ body {
   background: var(--inverse-primary-a15);
 }
 
+.prose-content mark.term-highlight {
+  background: color-mix(in srgb, var(--color-tertiary) 20%, transparent);
+  color: var(--color-tertiary);
+  padding: 0.05em 0.3em;
+  border-radius: 0.2rem;
+  font-weight: 500;
+}
+
+.dark .prose-content mark.term-highlight {
+  background: color-mix(in srgb, var(--color-tertiary-fixed) 25%, transparent);
+  color: var(--color-tertiary-fixed);
+}
+
 details[open] summary .acc-chevron { transform: rotate(180deg); }
 
 .mcq-card.answered-correct {
