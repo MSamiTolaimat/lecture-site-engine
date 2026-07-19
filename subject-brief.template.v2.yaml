@@ -132,16 +132,14 @@ parts:
 
   summary:
     enabled: true
-    heading: "الجزء الأول: ملخص منظم (ابدأ من هنا!)"
+    heading: "الجزء الأول: ملخص منظم (اقرأ قبل المحاضرة!)"
     subsections:
-      - definitions_table
-      - components_table
-      - comparisons_table
-      - glossary
-      - golden_points
-      - common_mistakes_table
-      - patterns
-      - main_ideas
+      - lecture_overview
+      - learning_objectives
+      - prerequisites
+      - main_concepts
+      - connections
+      - common_mistakes
 
   detail:
     enabled: true
@@ -446,12 +444,12 @@ output:
 
   checklist_items:
     - "غطّيت كل معلومة وردت في المحاضرة"
-    - "كل قسم يبدأ بـ '⬅️ الربط مع السابق' + '💡 الفكرة الأساسية' + الشرح"
+    - "الملخص (Part 1): يشرح ماذا ستتعلم + لماذا مهم + المتطلبات السابقة"
+    - "الملخص بدون جداول مقارنات (تلك في Cheat Sheet)"
+    - "كل قسم detail يبدأ بـ '⬅️ الربط مع السابق' + '💡 الفكرة الأساسية' + الشرح"
     - "الأقسام مرقّمة هرمياً (1، 1.1، 2 …)"
-    - "استخدمت جداول لكل مقارنة وقائمة تعريفات"
     - "كل مصطلح إنجليزي بين backticks"
     - "النص الأصلي موجود في <details> collapsible مع @coverage metadata"
     - "≥16 سؤال MCQ مع تعليل كامل"
     - "≥12 بطاقة Q&A مع إجابات مختصرة"
-    - "ملخص منظم يغطي كل المفاهيم الرئيسية"
-    - "ورقة مراجعة سريعة (cheat sheet) قابلة للطباعة"
+    - "Cheat Sheet: جداول + مقارنات + قواموس + خطوات سريعة"
