@@ -74,6 +74,21 @@ function diagramSpecNoteHtml() {
   );
 }
 
+function renderMermaid(block) {
+  const title = esc(block.title || 'مخطط');
+  const code = esc(block.code || '');
+  return `<div class="mermaid-container box-animate box-hover">
+    <div class="mermaid-header">
+      <span class="material-symbols-outlined mermaid-header__icon" aria-hidden="true">account_tree</span>
+      <div class="mermaid-header__text">
+        <span class="mermaid-header__type">Mermaid</span>
+        <span class="mermaid-header__title">${title}</span>
+      </div>
+    </div>
+    <pre class="mermaid">${code}</pre>
+  </div>`;
+}
+
 function stripBackticks(text) {
   const t = String(text).trim();
   if (t.startsWith('`') && t.endsWith('`')) return t.slice(1, -1);
@@ -527,6 +542,7 @@ export function createDefaultBlockHandlers(extraHandlers = []) {
   { id: 'diagram-desc', match: b => b.type === 'diagram-desc', render: b =>
     `<blockquote class="border-r-4 border-secondary bg-secondary-fixed/30 dark:bg-secondary/10 p-md rounded-l-xl mb-md font-body-md">${inlineMd(b.content)}</blockquote>` },
   { id: 'diagram', match: b => b.type === 'diagram', render: b => diagramToHtml(b.data) },
+  { id: 'mermaid', match: b => b.type === 'mermaid', render: b => renderMermaid(b) },
   { id: 'line-explain', match: b => b.type === 'line-explain', render: b => renderLineExplain(b.items, b.title, b.groups) },
   { id: 'line-explain-table', match: b => b.type === 'line-explain-table', render: b => renderLineExplainTable(b.header, b.rows, b.title, b.items) },
   { id: 'ol', match: b => b.type === 'ol', render: b =>
