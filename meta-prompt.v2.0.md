@@ -32,7 +32,106 @@ You do **not** extract lecture content. You do **not** output JSON. You do **not
 
 ---
 
-## Output skeleton
+## Flexibility Rules — AI SHOULD Adapt by Subject
+
+The `custom_prompt.md` is a **guide template**, not a rigid cage. The AI should:
+
+- ✅ **Choose the right content types** for the subject domain
+  - Compiler theory? Use DERIVATION heavily
+  - Programming? Use CODE + COMMAND
+  - Engineering? Use PRINCIPLE + PRACTICE
+  - Math? Use DERIVATION + THEORY
+
+- ✅ **Reorganize sections** if better flow for the subject
+- ✅ **Add domain-specific guidance** (e.g., "For proofs in mathematics...")
+- ✅ **Adapt example structure** based on content complexity
+- ✅ **Change element order** if subject structure demands it
+
+**But:** Keep the **universal principles** intact:
+- ✅ Lean detail sections (prevent cognitive overload)
+- ✅ Complete alternative summary (same content, different style)
+- ✅ Two reading paths (formal + narrative)
+- ✅ Strategic examples (after 2-3 related topics)
+- ✅ Topic connectivity (show the thread)
+- ✅ Visualization via Mermaid
+
+---
+
+## 🎯 Universal Principles (Apply to ANY Subject)
+
+**These are not rules, but LEARNED BEST PRACTICES:**
+
+### 1. Use Appropriate Representation Tools
+- Use visualization tools when they clarify concepts (diagrams, flowcharts, tables, code blocks)
+- Don't force visualization where linear text is clearer
+- Choose the medium that fits the subject's nature
+
+### 2. Content Types (Expand Beyond Three)
+Different subjects have different knowledge types. Not all subjects need all types:
+
+**Core Types:**
+- **FACT:** Clear, one-answer definitions (مثل: "Syntax is the set of rules...")
+- **THEORY:** Explanations of why/how (مثل: "Why FM is better than AM...")
+- **DERIVATION:** Mathematical/logical transformations (مثل: Remove left recursion from grammar)
+- **ALGORITHM:** Step-by-step procedures (مثل: "Quicksort steps")
+- **CODE:** Implementation examples (مثل: Python class definition)
+- **COMMAND:** Tool usage, syntax, CLI (مثل: "$ git commit -m")
+
+**Extended Types:**
+- **PRACTICE:** Best practices with clear benefits (مثل: DRY principle)
+- **PRINCIPLE:** Multiple valid approaches based on context (مثل: choosing SDLC model)
+
+**Examples by Subject:**
+- **Digital Communications:** FACT (definitions) + THEORY (signal processing) + DERIVATION (equations)
+- **Compiler Principles:** FACT (definitions) + ALGORITHM (parsing) + DERIVATION (grammar transforms)
+- **Advanced Programming:** FACT (syntax) + CODE (examples) + COMMAND (CLI)
+- **Software Engineering 2:** FACT (definitions) + PRACTICE (best practices) + PRINCIPLE (design decisions)
+- **Database:** FACT + ALGORITHM + PRINCIPLE (when to use which index)
+- **Math/Physics:** FACT + THEORY + DERIVATION + EQUATION
+
+### 3. Prevent Cognitive Overload (The "Dizzy Student" Problem)
+**Keep detail sections LEAN:**
+- One main idea + explanation = enough
+- Put supporting details, anti-patterns, edge cases → Summary section
+- Both sections teach same content, different presentation styles
+
+**Result:** Students have two readable paths to the same knowledge
+
+### 4. Two Alternative Reading Paths (Not Hierarchical)
+- **Detail Path:** Structured, formal, organized with clear hierarchy
+- **Summary Path:** Narrative, casual, flowing as continuous prose
+
+**Key insight:** NOT "detail is core, summary is optional"
+**Actually:** "Both are complete, choose your reading style"
+
+This works for ANY subject across all domains
+
+### 5. Flexible Structure (AI Can Adapt)
+**The custom_prompt.md is a GUIDE, not a cage.**
+
+AI can:
+- ✅ Reorganize summary subheadings if it makes sense for the subject
+- ✅ Add intermediate sections (e.g., "Why this failed historically?" for history)
+- ✅ Change the order of elements if flow demands it
+- ✅ Add context-specific sections (e.g., "Real data" for statistics)
+
+**Rule:** Stay true to core principles, but adapt structure to subject nature
+
+### 6. Strategic Content Clustering
+- **Clustered examples:** After 2-3 related topics, add ONE example showing them together
+- Prevents: Too many examples (overwhelming), Too few (abstract)
+- Works for: Any subject with interconnected concepts
+
+### 7. Topic Connectivity (Show the Thread)
+Every section should show:
+- What came before (prerequisite)
+- What comes next (application)
+- Why we're learning this in this order
+
+This meta-understanding helps students see the subject as **system, not list**
+
+
+
 
 Fill every `[...]` from SUBJECT_BRIEF. Process enabled items only.
 
