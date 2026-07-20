@@ -334,11 +334,14 @@ function renderAnalogy(block) {
 }
 
 function renderCoreIdea(block) {
-  const label = String(block.title || 'الفكرة الأساسية').replace(/^💡\s*/, '').trim();
-  return `<aside class="core-idea mb-md" aria-label="${esc(label)}">
-    <div class="core-idea__tag">${esc(label)}</div>
-    <p class="core-idea__lead">${inlineMd(block.content)}</p>
-  </aside>`;
+  const label = String(block.title || '💡 الفكرة الأساسية').trim();
+  return `<div class="core-idea mb-md">
+    <div class="flex items-center gap-sm mb-xs mt-md">
+      ${ms('lightbulb', false, 'text-primary text-lg shrink-0')}
+      <h5 class="font-label-md text-label-md font-bold text-on-surface-variant">${inlineMd(label)}</h5>
+    </div>
+    <p class="core-idea__text">${inlineMd(block.content)}</p>
+  </div>`;
 }
 
 function renderEquation(block) {

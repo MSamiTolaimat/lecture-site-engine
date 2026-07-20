@@ -202,6 +202,50 @@ export function createDefaultBlockHandlers() {
     },
 
     {
+      id: 'h4-compare',
+      priority: 91,
+      test: (ctx) => {
+        if (!/^#### الفهم الخاطئ/.test(ctx.line)) return false;
+        let j = ctx.i + 1;
+        while (j < ctx.lines.length) {
+          const t = ctx.lines[j].trim();
+          if (/^#### الفهم الصحيح/.test(t)) return true;
+          if (/^### /.test(t) || /^## /.test(t)) return false;
+          j++;
+        }
+        return false;
+      },
+      parse: (ctx) => {
+        const wrongHeading = ctx.line.replace(/^#### /, '').trim();
+        const wrongInline = wrongHeading.match(/^الفهم الخاطئ[^:]*:\s*(.+)$/);
+        let wrong = '';
+        let i = ctx.i + 1;
+        if (wrongInline?.[1]) {
+          wrong = wrongInline[1].trim();
+        } else {
+          while (i < ctx.lines.length && !ctx.lines[i].trim()) i++;
+          const collected = collectUntilHeading(ctx.lines, i);
+          wrong = collected.text;
+          i = collected.nextIndex;
+        }
+        while (i < ctx.lines.length && !ctx.lines[i].trim()) i++;
+        const rightHeading = ctx.lines[i].replace(/^#### /, '').trim();
+        const rightInline = rightHeading.match(/^الفهم الصحيح[^:]*:\s*(.+)$/);
+        i++;
+        let right = '';
+        if (rightInline?.[1]) {
+          right = rightInline[1].trim();
+        } else {
+          while (i < ctx.lines.length && !ctx.lines[i].trim()) i++;
+          const collected = collectUntilHeading(ctx.lines, i);
+          right = collected.text;
+          i = collected.nextIndex;
+        }
+        return { block: { type: 'compare', wrong, right }, nextIndex: i };
+      },
+    },
+
+    {
       id: 'h4-schema-core-idea',
       priority: 90,
       test: (ctx) => /^#### 💡 الفكرة (?:الأساسية|الرئيسية)/.test(ctx.line),

@@ -11,8 +11,23 @@ html {
   scroll-padding-top: var(--site-scroll-offset);
 }
 
+/* ── Better scroll padding & focus visibility ── */
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 body {
   font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
   transition: background-color 0.3s ease, color 0.3s ease;
   background-color: var(--color-background);
   background-image:
@@ -448,10 +463,40 @@ body {
 .dark table thead tr { background-color: var(--dm-elevated-2) !important; }
 .dark table tbody tr:hover { background-color: var(--dm-elevated) !important; }
 
+/* TOC Improvements */
+.toc-nav-link {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.toc-nav-link:hover {
+  background: var(--color-primary-container);
+  color: var(--color-primary);
+  transform: translateX(-4px);
+}
+
+.toc-nav-link.active,
+.toc-nav-link.bg-primary-container {
+  background: var(--color-primary-container) !important;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 9px;
+  font-weight: 600;
+  color: var(--color-primary) !important;
+}
+
 /* TOC active link */
 .dark .toc-nav-link.bg-primary-container {
   background-color: var(--inverse-primary-a18) !important;
   color: var(--color-primary) !important;
+  border-left: 3px solid var(--color-primary);
+}
+
+.dark .toc-nav-link:hover {
+  background: var(--dm-elevated) !important;
 }
 
 .dark .text-on-error-container { color: var(--palette-error-dark-text) !important; }
@@ -776,17 +821,51 @@ body {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.prose-content p {
-  font-size: 16px; line-height: 1.75;
-  color: inherit; margin-bottom: 1rem;
+/* ── Prose Content — Ensure Readable Font Sizes ── */
+.prose-content {
+  font-size: 16px;
+  line-height: 1.85;
 }
+
+.prose-content p {
+  font-size: 16px !important;
+  line-height: 1.85 !important;
+  letter-spacing: 0.2px;
+  color: inherit;
+  margin-bottom: 1.5rem;
+}
+
+.prose-content h1 { font-size: 2rem !important; margin-bottom: 1.5rem; margin-top: 2rem; }
+.prose-content h2 { font-size: 1.6rem !important; margin-bottom: 1.25rem; margin-top: 1.75rem; }
+.prose-content h3 { font-size: 1.3rem !important; margin-bottom: 1rem; margin-top: 1.5rem; }
+.prose-content h4 { font-size: 1.1rem !important; margin-bottom: 0.75rem; margin-top: 1.25rem; }
+.prose-content h5 { font-size: 1rem !important; margin-bottom: 0.75rem; }
+.prose-content h6 { font-size: 0.95rem !important; margin-bottom: 0.75rem; }
 
 .prose-content ul, .prose-content ol {
-  margin: 0.5rem 1.5rem 1rem 0;
-  font-size: 16px; line-height: 1.75;
+  margin: 1.5rem 1.5rem 1.5rem 0;
+  font-size: 16px !important;
+  line-height: 1.85 !important;
+  padding-right: 1.5rem;
 }
 
-.prose-content li { margin-bottom: 0.35rem; }
+.prose-content li {
+  font-size: 16px !important;
+  margin-bottom: 0.6rem;
+  line-height: 1.85 !important;
+}
+
+.prose-content ul ul, .prose-content ol ul {
+  margin-right: 1rem;
+  font-size: 15px !important;
+}
+
+.prose-content strong, .prose-content b {
+  font-weight: 600;
+}
+
+.prose-content span { font-size: inherit !important; }
+.prose-content div { font-size: inherit !important; }
 
 .prose-content code {
   font-family: 'JetBrains Mono', monospace;
@@ -794,7 +873,27 @@ body {
   background: var(--primary-a10);
   padding: 0.15em 0.4em;
   border-radius: 0.25rem;
-  direction: ltr; unicode-bidi: embed;
+  direction: ltr;
+  unicode-bidi: embed;
+  font-weight: 500;
+}
+
+.prose-content pre {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 4px solid var(--color-primary);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.prose-content pre code {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  border-left: none;
 }
 
 .dark .prose-content code {
@@ -814,6 +913,120 @@ body {
   color: var(--color-tertiary-fixed);
 }
 
+/* ── Lecture Main Content Area ── */
+.lecture-main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+}
+
+@media (max-width: 1024px) {
+  .lecture-main {
+    padding: 1.5rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .lecture-main {
+    max-width: 100%;
+    padding: 1rem;
+  }
+}
+
+/* ── Section Block Improvements ── */
+.section-block {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-outline-variant);
+  scroll-margin-top: 5rem;
+}
+
+.section-block:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.section-block h3,
+.section-block > .flex ~ * h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-primary-container);
+  line-height: 1.6;
+  letter-spacing: 0.1px;
+}
+
+.section-block .flex {
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+/* ── Blockquotes ── */
+.prose-content blockquote {
+  border-left: 4px solid var(--color-primary);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  color: var(--color-on-surface-variant);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+.prose-content blockquote p {
+  margin: 0.5rem 0;
+}
+
+/* ── Tables ── */
+.prose-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.prose-content thead {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  font-weight: 600;
+}
+
+.prose-content th,
+.prose-content td {
+  padding: 12px 16px;
+  text-align: right;
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.prose-content tbody tr {
+  transition: background 0.2s ease;
+}
+
+.prose-content tbody tr:hover {
+  background: var(--color-surface-container-highest);
+}
+
+.dark .prose-content table {
+  box-shadow: none;
+  border: 1px solid var(--dm-border);
+}
+
+.dark .prose-content thead {
+  background: var(--dm-elevated-2);
+  color: var(--dm-text);
+}
+
+.dark .prose-content tbody tr:hover {
+  background: var(--dm-elevated);
+}
+
 details[open] summary .acc-chevron { transform: rotate(180deg); }
 
 .mcq-card.answered-correct {
@@ -824,6 +1037,38 @@ details[open] summary .acc-chevron { transform: rotate(180deg); }
   0% { transform: scale(1); }
   50% { transform: scale(1.015); }
   100% { transform: scale(1); }
+}
+
+/* ── Mobile Typography Optimizations ── */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .prose-content h2 { font-size: 1.4rem; }
+  .prose-content h3 { font-size: 1.1rem; }
+  .section-block h3 { font-size: 1.2rem; }
+
+  .prose-content p {
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+  }
+
+  .prose-content ul, .prose-content ol {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .prose-content code { font-size: 0.8em; }
+  .prose-content pre { padding: 0.75rem; margin: 1rem 0; }
+
+  .prose-content table { font-size: 0.9rem; }
+  .prose-content th, .prose-content td { padding: 10px 12px; }
+
+  /* Better touch targets */
+  a, button { min-height: 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2113,44 +2358,21 @@ body.laser-pointer-enabled button {
   border-color: var(--dm-border);
 }
 
-/* ── الفكرة الأساسية — minimal lead, not a callout box ── */
-.core-idea {
-  margin-bottom: 0.875rem;
-  padding-inline: 0 0.75rem;
-  border-inline-start: 2px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
-}
-
-.core-idea__tag {
-  display: block;
-  margin-bottom: 0.2rem;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--color-primary);
-  opacity: 0.9;
-}
-
-.core-idea__lead {
-  margin: 0;
-  font-size: 1.0625rem;
+/* ── الفكرة الأساسية — flows like other section blocks, no callout box ── */
+.core-idea__text {
+  margin: 0 0 0.25rem;
+  padding-inline-start: 1.85rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  line-height: 1.55;
+  line-height: 1.7;
   color: var(--color-on-surface);
 }
 
-.core-idea__lead strong {
+.core-idea__text strong {
   font-weight: inherit;
 }
 
-.dark .core-idea {
-  border-inline-start-color: color-mix(in srgb, var(--color-primary) 45%, var(--dm-border));
-}
-
-.dark .core-idea__tag {
-  color: color-mix(in srgb, var(--color-primary) 80%, var(--dm-text));
-}
-
-.dark .core-idea__lead {
+.dark .core-idea__text {
   color: var(--dm-text);
 }
 
