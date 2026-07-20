@@ -189,6 +189,51 @@ async function buildExamsJson(subjectDir, examsOut, parser) {
   await writeFile(manifestPath, JSON.stringify(manifest, null, 2));
 }
 
+/**
+ * "notes" — an alternate set of per-lecture study material (summary + a big
+ * MCQ bank), shaped exactly like a normal lectures/*.md file (same
+ * "# المحاضرة N — Title" + "##" parts structure), so it reuses parser.parseDocument
+ * and the client's existing renderLecture unchanged — only the source folder,
+ * output folder, and home-page UI entry point are different from lectures/.
+ */
+async function buildNotesJson(subjectDir, notesOut, parser) {
+  const notesLecturesDir = path.join(subjectDir, 'notes/lectures');
+  if (!existsSync(notesLecturesDir)) return;
+
+  const manifestSrc = path.join(notesLecturesDir, 'manifest.json');
+  if (!existsSync(manifestSrc)) return;
+  const manifest = JSON.parse(await readFile(manifestSrc, 'utf8'));
+
+  const mdFiles = await listLectureMarkdownFiles(notesLecturesDir);
+  const parsedByJson = new Map();
+
+  for (const name of mdFiles) {
+    const text = normalizeLectureMd(await readFile(path.join(notesLecturesDir, name), 'utf8'));
+    const doc = parser.parseDocument(text);
+    const lec = doc.lectures[0];
+    // Prefixed so a note's id never collides with the main lecture id for the
+    // same par*.md filename (both folders commonly reuse par1, par2, ...).
+    if (lec) lec.id = 'note-' + name.replace(/\.md$/i, '').replace(/[\\/]+/g, '-');
+    const sectionIndex = lec ? parser.buildSectionIndex(lec) : {};
+    const parsedAt = new Date().toISOString();
+    const jsonName = name.replace(/\.md$/i, '.json');
+    await mkdir(path.dirname(path.join(notesOut, jsonName)), { recursive: true });
+    await writeFile(
+      path.join(notesOut, jsonName),
+      JSON.stringify({ schemaVersion: '1.0', source: name, parsedAt, sectionIndex, ...doc }, null, 2),
+    );
+    parsedByJson.set(jsonName, { parsedAt, summary: lectureSummaryFromLec(lec), jsonName });
+    console.log(`  parsed → notes/lectures/${jsonName}`);
+  }
+
+  manifest.files = (manifest.files || []).map((f, i) => {
+    const jsonPath = String(f.path).replace(/\.md$/i, '.json');
+    const parsed = parsedByJson.get(jsonPath);
+    return { ...f, path: jsonPath, source: f.path, parsedAt: parsed?.parsedAt, summary: parsed?.summary, num: f.num ?? i + 1 };
+  });
+  await writeFile(path.join(notesOut, 'manifest.json'), JSON.stringify(manifest, null, 2));
+}
+
 async function main() {
   const args = parseArgs(process.argv);
   if (!args.subject) {
@@ -258,6 +303,13 @@ async function main() {
     const examsOut = path.join(outDir, 'DAWRAT');
     await cp(examsSrc, examsOut, { recursive: true });
     await buildExamsJson(subjectDir, examsOut, parser);
+  }
+
+  const notesSrc = path.join(subjectDir, 'notes');
+  if (existsSync(notesSrc)) {
+    const notesOut = path.join(outDir, 'notes/lectures');
+    await mkdir(notesOut, { recursive: true });
+    await buildNotesJson(subjectDir, notesOut, parser);
   }
 
   // Parse lectures → JSON

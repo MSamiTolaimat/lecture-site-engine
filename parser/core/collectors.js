@@ -81,6 +81,14 @@ export function collectParagraph(lines, start) {
     const t = lines[i].trim();
     if (!t) break;
     if (isStructural(lines[i])) break;
+    // A bullet/numbered line right after a plain text line (no blank line
+    // between, e.g. "**Title**\n- item\n- item") must NOT get swallowed into
+    // this paragraph — otherwise the whole list collapses into one run-on
+    // sentence joined by spaces instead of becoming its own <ul>/<ol> block.
+    // Only stop on this from the SECOND line onward — a paragraph is allowed
+    // to itself start with a list marker(that's what makes it a list, not a
+    // paragraph, and is handled by the ul/ol handlers before this one runs).
+    if (i > start && (/^[-*]\s+/.test(t) || /^\d+\.\s+/.test(t))) break;
     parts.push(t);
     i++;
   }

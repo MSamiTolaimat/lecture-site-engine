@@ -1,15 +1,45 @@
 {
   "settings": {
-    "subjectName": "إنتراكتشنز 1: القراءة والكتابة (الوحدات 6–9)",
+    "subjectName": "اللغة الانجليزية الثانية",
     "subjectNameEn": "Interactions 1: Reading and Writing (Units 6–9)",
     "year": "2025-2026",
     "academicYear": 1,
-    "theme": "amber-default",
+    "theme": "gis-earth",
+    "enabledLectures":true,
     "department": "القسم النظري والعملي"
   },
   "title": "إنتراكتشنز 1: القراءة والكتابة (الوحدات 6–9) — Interactions 1: Reading and Writing (Units 6–9)",
   "subtitle": "ثقافة + صحة + إعلام + حياة اجتماعية",
-  "files": [],
+  "files": [
+    {
+      "path": "par6.md",
+      "num": 6,
+      "icon": "📌",
+      "matIcon": "school",
+      "badge": "المحاضرة ٦"
+    },
+    {
+      "path": "par7.md",
+      "num": 7,
+      "icon": "📖",
+      "matIcon": "menu_book",
+      "badge": "المحاضرة ٧"
+    },
+    {
+      "path": "par8.md",
+      "num": 8,
+      "icon": "💻",
+      "matIcon": "code",
+      "badge": "المحاضرة ٨"
+    },
+    {
+      "path": "par9.md",
+      "num": 9,
+      "icon": "🎯",
+      "matIcon": "quiz",
+      "badge": "المحاضرة ٩"
+    }
+  ],
   "lectureIcons": [
     "📌",
     "📖",

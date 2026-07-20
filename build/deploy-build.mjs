@@ -15,6 +15,7 @@ import {
   distDir,
   listAllSubjectsWithLectures,
   subjectHasBuildableLectures,
+  subjectNeedsLectureBuild,
   subjectNeedsReviewBuild,
 } from './lib/subject-paths.mjs';
 import { readSubjectsFromStdin } from './lib/read-subjects-stdin.mjs';
@@ -35,7 +36,14 @@ function runBuild(subject) {
 async function needsBuild(subject) {
   const out = distDir(subject);
   // Stub pages from generate-dist-index only have index.html — not a real build.
-  if (!existsSync(path.join(out, 'lectures', 'manifest.json'))) return true;
+  if (!existsSync(path.join(out, 'lectures', 'manifest.json'))) {
+    console.log(`Rebuild ${subject} — cached subject output is missing.`);
+    return true;
+  }
+  if (await subjectNeedsLectureBuild(subject)) {
+    console.log(`Rebuild ${subject} — cached lecture list is stale or incomplete.`);
+    return true;
+  }
   return subjectNeedsReviewBuild(subject);
 }
 

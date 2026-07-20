@@ -67,6 +67,46 @@ export async function subjectHasBuildableLectures(subjectRel) {
   return (await listLectureMarkdownFiles(lecturesDir)).length > 0;
 }
 
+/**
+ * True when cached dist output does not exactly represent the subject's
+ * current lecture sources. This is deliberately independent of git change
+ * detection: a stale/partial restored cache must repair itself even when the
+ * subject was not touched in the current push.
+ */
+export async function subjectNeedsLectureBuild(subjectRel) {
+  const sourceLecturesDir = path.join(subjectDir(subjectRel), 'lectures');
+  const builtLecturesDir = path.join(distDir(subjectRel), 'lectures');
+  const builtManifestPath = path.join(builtLecturesDir, 'manifest.json');
+
+  if (!existsSync(builtManifestPath)) return true;
+
+  let manifest;
+  try {
+    manifest = JSON.parse(await readFile(builtManifestPath, 'utf8'));
+  } catch {
+    return true;
+  }
+
+  const sourceFiles = await listLectureMarkdownFiles(sourceLecturesDir);
+  const builtSources = (manifest.files || [])
+    .map(file => {
+      const entry = typeof file === 'string' ? { path: file } : file;
+      return String(entry.source || entry.path || '').replace(/\.json$/i, '.md');
+    })
+    .filter(Boolean)
+    .sort();
+
+  if (sourceFiles.length !== builtSources.length) return true;
+  if (sourceFiles.some((name, i) => name !== builtSources[i])) return true;
+
+  // A manifest entry without its parsed JSON is also an incomplete cache.
+  return (manifest.files || []).some(file => {
+    const entry = typeof file === 'string' ? { path: file } : file;
+    const jsonPath = String(entry.path || '').replace(/\.md$/i, '.json');
+    return !jsonPath || !existsSync(path.join(builtLecturesDir, jsonPath));
+  });
+}
+
 /** Dist missing parsed review JSON while source has review.md in manifest. */
 export async function subjectNeedsReviewBuild(subjectRel) {
   const reviewsDir = path.join(subjectDir(subjectRel), 'reviews');

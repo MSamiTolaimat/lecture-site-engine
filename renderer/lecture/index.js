@@ -3,6 +3,7 @@ import { ms, PART_MAT_ICONS } from '../core/icons.js';
 import { isChecklistPart } from '../core/part-filters.js';
 import { renderBlocks } from '../blocks/index.js';
 import { renderPart } from '../parts/index.js';
+import { mcqSectionAnchor } from '../core/slug.js';
 
 export function renderAiDisclaimer(config) {
   const site = config.defaultTitle || 'Study Guide';
@@ -215,6 +216,22 @@ function buildPartSubsections(part) {
   }
   if (part.questions?.length) {
     if (part.type === 'mcq') {
+      // Past-exam banks group questions under "## المحاضرة N: …" dividers
+      // (parser attaches `section` on each question). Prefer those as TOC
+      // entries so the sidebar navigates by lecture, not by question number.
+      const seen = new Set();
+      const byLecture = [];
+      for (const q of part.questions) {
+        if (!q.section || seen.has(q.section)) continue;
+        seen.add(q.section);
+        byLecture.push({
+          level: 3,
+          text: q.section,
+          id: mcqSectionAnchor(q.section),
+        });
+      }
+      if (byLecture.length) return byLecture;
+
       return part.questions.map(q => ({
         level: 3,
         text: `س${q.num} (${q.difficulty})`,

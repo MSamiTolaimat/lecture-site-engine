@@ -1,16 +1,15 @@
 /**
- * Microsoft Clarity — lecture study analytics
+ * Microsoft Clarity — study-content analytics
  *
  * Tracks per subject site (SPA):
- * - Virtual pages: /home, /lectures/{id} → time-on-page per lecture in Clarity
+ * - Virtual pages: /home, /lectures/{id}, /dawrat/{id}, /notes/{id}
  * - Focused minutes: visible tab + user activity (scroll/click/key), idle after 2 min
- * - Scroll milestones: 25 / 50 / 75 / 100 % of lecture scroll depth
+ * - Scroll milestones: 25 / 50 / 75 / 100 % of content scroll depth
  *
  * Clarity dashboard:
- * - Pages → filter paths containing /lectures/
- * - Filters → custom tags: subject, lecture, active_seconds
- * - Events → scroll_25 … scroll_100, lecture_session_end
- * - Heatmaps → session replays filtered by lecture tag (virtual pages)
+ * - Pages → filter paths containing /lectures/, /dawrat/, or /notes/
+ * - Filters → custom tags: subject, content_type, content_id, active_seconds
+ * - Events → scroll_25 … scroll_100, {content_type}_session_end
  */
 
 const IDLE_TIMEOUT_MS = 2 * 60 * 1000;
@@ -19,7 +18,7 @@ const SCROLL_MILESTONES = [25, 50, 75, 100];
 /** @type {{ subjectName: string, storagePrefix: string } | null} */
 let context = null;
 
-/** @type {LectureSession | null} */
+/** @type {StudySession | null} */
 let activeSession = null;
 
 function clarityAvailable() {
@@ -56,10 +55,15 @@ function trackVirtualPage(segment) {
   clarityCall('set', 'page', virtualPath(segment));
 }
 
-class LectureSession {
-  /** @param {string} lectureId */
-  constructor(lectureId) {
-    this.lectureId = lectureId;
+class StudySession {
+  /**
+   * @param {'lecture' | 'dawrat' | 'note'} contentType
+   * @param {string} contentId
+   * @param {string} pageSegment
+   */
+  constructor(contentType, contentId, pageSegment) {
+    this.contentType = contentType;
+    this.contentId = contentId;
     this.activeMs = 0;
     this.lastTickAt = null;
     this.isVisible = document.visibilityState === 'visible';
@@ -74,8 +78,18 @@ class LectureSession {
     this.onScroll = this.onScroll.bind(this);
     this.onPageHide = this.onPageHide.bind(this);
 
-    claritySet('lecture', lectureId);
-    trackVirtualPage(`lectures/${lectureId}`);
+    this.setContentTags();
+    trackVirtualPage(pageSegment);
+  }
+
+  setContentTags() {
+    claritySet('content_type', this.contentType);
+    claritySet('content_id', this.contentId);
+    // Keep the original lecture tag useful while preventing a previous
+    // lecture ID from leaking into DAWRAT or notes analytics.
+    claritySet('lecture', this.contentType === 'lecture' ? this.contentId : 'none');
+    claritySet('dawrat', this.contentType === 'dawrat' ? this.contentId : 'none');
+    claritySet('note', this.contentType === 'note' ? this.contentId : 'none');
   }
 
   begin() {
@@ -127,7 +141,7 @@ class LectureSession {
     this.idleTimer = setTimeout(() => {
       this.isIdle = true;
       this.pauseTicking();
-      clarityEvent('lecture_idle');
+      clarityEvent(`${this.contentType}_idle`);
     }, IDLE_TIMEOUT_MS);
   }
 
@@ -157,7 +171,7 @@ class LectureSession {
     for (const milestone of SCROLL_MILESTONES) {
       if (depth < milestone || this.milestonesHit.has(milestone)) continue;
       this.milestonesHit.add(milestone);
-      claritySet('lecture', this.lectureId);
+      this.setContentTags();
       clarityEvent(`scroll_${milestone}`);
     }
   }
@@ -196,14 +210,14 @@ class LectureSession {
       ? Math.max(...this.milestonesHit)
       : 0;
 
-    claritySet('lecture', this.lectureId);
+    this.setContentTags();
     claritySet('active_seconds', String(seconds));
     claritySet('max_scroll_pct', String(maxScroll));
-    clarityEvent('lecture_session_end');
+    clarityEvent(`${this.contentType}_session_end`);
 
-    if (seconds >= 60) clarityEvent('lecture_focus_1min');
-    if (seconds >= 300) clarityEvent('lecture_focus_5min');
-    if (seconds >= 900) clarityEvent('lecture_focus_15min');
+    if (seconds >= 60) clarityEvent(`${this.contentType}_focus_1min`);
+    if (seconds >= 300) clarityEvent(`${this.contentType}_focus_5min`);
+    if (seconds >= 900) clarityEvent(`${this.contentType}_focus_15min`);
   }
 }
 
@@ -226,7 +240,11 @@ export function initAnalytics(options = {}) {
 
 export function trackHomeView() {
   endActiveSession();
-  claritySet('lecture', '');
+  claritySet('content_type', 'home');
+  claritySet('content_id', 'home');
+  claritySet('lecture', 'none');
+  claritySet('dawrat', 'none');
+  claritySet('note', 'none');
   trackVirtualPage('home');
 }
 
@@ -236,7 +254,23 @@ export function trackHomeView() {
 export function trackLectureView(item) {
   if (!item?.lec?.id) return;
   endActiveSession();
-  activeSession = new LectureSession(item.lec.id);
+  activeSession = new StudySession('lecture', item.lec.id, `lectures/${item.lec.id}`);
+  activeSession.begin();
+}
+
+/** @param {{ exam: { id: string } }} item */
+export function trackDawratView(item) {
+  if (!item?.exam?.id) return;
+  endActiveSession();
+  activeSession = new StudySession('dawrat', item.exam.id, `dawrat/${item.exam.id}`);
+  activeSession.begin();
+}
+
+/** @param {{ lec: { id: string } }} item */
+export function trackNoteView(item) {
+  if (!item?.lec?.id) return;
+  endActiveSession();
+  activeSession = new StudySession('note', item.lec.id, `notes/${item.lec.id}`);
   activeSession.begin();
 }
 

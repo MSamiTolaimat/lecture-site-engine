@@ -32,9 +32,12 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: dist
-          key: dist-site-v3
+          # Caches are immutable. A permanent key kept restoring the original
+          # stale dist forever, so untouched subjects could lose newer
+          # lectures on the next incremental deploy.
+          key: dist-site-v4-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
-            dist-site-v3
+            dist-site-v4-
 
       - name: Smoke test
         run: npm test
@@ -70,7 +73,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: dist
-          key: dist-site-v3
+          key: dist-site-v4-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

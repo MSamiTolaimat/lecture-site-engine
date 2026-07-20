@@ -1,0 +1,64 @@
+{
+  "settings": {
+    "subjectName": "distributed-systems-questions",
+    "subjectNameEn": "distributed-systems-questions",
+    "year": "2025-2026",
+    "academicYear": 5,
+    "theme": "gis-earth",
+    "enabledLectures": true,
+    "department": "دراسة"
+  },
+  "title": "distributed-systems-questions — distributed-systems-questions",
+  "subtitle": "دليل دراسي تفاعلي",
+  "files": [
+    {
+      "path": "par1.md",
+      "num": 1,
+      "icon": "📌",
+      "matIcon": "school",
+      "badge": "المحاضرة ١"
+    },
+    {
+      "path": "par2.md",
+      "num": 2,
+      "icon": "📖",
+      "matIcon": "menu_book",
+      "badge": "المحاضرة ٢"
+    },
+    {
+      "path": "par3.md",
+      "num": 3,
+      "icon": "💻",
+      "matIcon": "code",
+      "badge": "المحاضرة ٣"
+    },
+    {
+      "path": "par4.md",
+      "num": 4,
+      "icon": "🎯",
+      "matIcon": "quiz",
+      "badge": "المحاضرة ٤"
+    },
+    {
+      "path": "par5.md",
+      "num": 5,
+      "icon": "📝",
+      "matIcon": "description",
+      "badge": "المحاضرة ٥"
+    }
+  ],
+  "lectureIcons": [
+    "📌",
+    "📖",
+    "💻",
+    "🎯",
+    "📝"
+  ],
+  "lectureMatIcons": [
+    "school",
+    "menu_book",
+    "code",
+    "quiz",
+    "description"
+  ]
+}

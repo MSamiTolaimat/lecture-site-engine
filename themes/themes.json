@@ -49,6 +49,22 @@
       "description": "Data Operations / GIS — مواءمة كاملة مع هوية الهيئة الرسمية",
       "file": "gis-earth.css",
       "usedBy": ["data-operations"]
+    },
+    {
+      "id": "emerald-coral",
+      "name_ar": "بنفسجي + وردي ناعم",
+      "name_en": "Burgundy & Dusty Rose",
+      "description": "Elegant deep purple with soft rose accents — أنيق وحديث",
+      "file": "emerald-coral.css",
+      "usedBy": ["generic"]
+    },
+    {
+      "id": "neon-cyberpunk",
+      "name_ar": "نيون سايبربانك ⚡",
+      "name_en": "Neon Cyberpunk",
+      "description": "SHOCKING electric magenta + laser cyan on pitch black — صادم وجريء",
+      "file": "neon-cyberpunk.css",
+      "usedBy": ["generic"]
     }
   ]
 }

@@ -13,6 +13,8 @@ import {
   initAnalytics,
   trackHomeView,
   trackLectureView,
+  trackDawratView,
+  trackNoteView,
   trackLectureContentReady,
   updateAnalyticsContext,
 } from './analytics.js';
@@ -65,6 +67,8 @@ let appState = {
   reviewItems: [],
   examManifest: null,
   examItems: [],
+  notesManifest: null,
+  notesItems: [],
   progressTracker: null,
   quizStats: null,
   examMode: null,
@@ -76,6 +80,7 @@ let siteTitle = "";
 let currentLectureIndex = -1;
 let currentReviewIndex = -1;
 let currentExamIndex = -1;
+let currentNoteIndex = -1;
 let routeLock = false;
 let scrollAnimObserver = null;
 let sidebarObserver = null;
@@ -109,6 +114,11 @@ function esc(s) {
 
 function escAttr(s) {
   return esc(s).replace(/"/g, '&quot;');
+}
+
+const ARABIC_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+function arabicDigits(s) {
+  return String(s).replace(/[0-9]/g, d => ARABIC_DIGITS[Number(d)]);
 }
 
 async function loadReviewManifest() {
@@ -386,6 +396,189 @@ function loadExamView(index, anchorHash) {
 
   if (anchorHash && anchorHash !== item.exam.id) scrollToAnchor(anchorHash);
   else if (needsRender) window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  trackDawratView(item);
+  trackLectureContentReady();
+}
+
+async function loadNotesManifest() {
+  const res = await fetch(versionedUrl('notes/lectures/manifest.json'), { cache: 'no-store' });
+  if (!res.ok) return null;
+  return res.json();
+}
+
+async function loadNoteJson(path) {
+  const res = await fetch(versionedUrl(`notes/lectures/${path}`), { cache: 'no-store' });
+  if (!res.ok) throw new Error(`تعذّر تحميل ${path}`);
+  return res.json();
+}
+
+/** Notes files hold a full 100-question MCQ bank each — keep the home page
+ * light by only fetching a note's full JSON when the student actually opens
+ * it, same lazy pattern as ensureLectureLoaded for the main lecture list. */
+function createNoteStub(file, i) {
+  const summary = file.summary || {};
+  const stubId = summary.id || `note-par${file.num || i + 1}`;
+  return {
+    lec: { id: stubId, title: summary.title || file.badge || `ملخص ${file.num || i + 1}`, tag: summary.tag || '', parts: [] },
+    fileMeta: file,
+    icon: file.icon || '📖',
+    matIcon: file.matIcon || 'menu_book',
+    sectionIndex: {},
+    toc: null,
+    summary: file.summary || null,
+    loaded: false,
+    loading: null,
+  };
+}
+
+async function ensureNoteLoaded(idx) {
+  const item = appState.notesItems[idx];
+  if (!item) throw new Error('الملخص غير موجود');
+  if (item.loaded) return item;
+  if (item.loading) return item.loading;
+
+  item.loading = (async () => {
+    const doc = await loadNoteJson(item.fileMeta.path);
+    const lec = doc.lectures?.[0];
+    if (!lec) throw new Error(`لا محتوى في ${item.fileMeta.path}`);
+    item.lec = lec;
+    item.sectionIndex = doc.sectionIndex || {};
+    item.toc = buildTocData([lec])[0];
+    item.loaded = true;
+    item.loading = null;
+    return item;
+  })();
+
+  try {
+    return await item.loading;
+  } catch (err) {
+    item.loading = null;
+    throw err;
+  }
+}
+
+function getNoteIndexFromHash(hash) {
+  if (!hash || hash === 'home') return -1;
+  let idx = appState.notesItems.findIndex(it => it.lec.id === hash);
+  if (idx >= 0) return idx;
+  return appState.notesItems.findIndex(it => hash.startsWith(`${it.lec.id}-`));
+}
+
+async function loadNoteView(index, anchorHash) {
+  const stub = appState.notesItems[index];
+  if (!stub) return;
+
+  currentLectureIndex = -1;
+  currentReviewIndex = -1;
+  currentExamIndex = -1;
+  showLectureLoading();
+
+  let item;
+  try {
+    item = await ensureNoteLoaded(index);
+  } catch (err) {
+    document.getElementById('content').innerHTML = `
+      <div class="py-2xl text-center text-error">
+        <p class="mb-md">⚠️ ${esc(err.message)}</p>
+        <button type="button" class="text-primary font-bold" onclick="location.hash='home'">العودة</button>
+      </div>`;
+    return;
+  }
+
+  const needsRender = currentNoteIndex !== index || !document.getElementById(item.lec.id);
+
+  if (needsRender) {
+    currentNoteIndex = index;
+    setRefContext({ lectureRef: item.lec.id, sectionMap: item.sectionIndex || {} });
+    const html = renderLecture(item.lec, 'primary', item.icon, item.sectionIndex);
+    clearRefContext();
+    mountReviewHtml(item, html);
+
+    document.getElementById('sidebarCourseTitle').textContent = shortLectureTitle(item.lec.title);
+    document.getElementById('sidebarCourseSub').textContent = item.lec.tag || '';
+    document.getElementById('sidebarMatIcon').textContent = item.matIcon || 'menu_book';
+    document.getElementById('mobileTocCourseTitle').textContent = shortLectureTitle(item.lec.title);
+    document.getElementById('mobileTocCourseSub').textContent = item.lec.tag || '';
+    document.getElementById('mobileTocMatIcon').textContent = item.matIcon || 'menu_book';
+    setJumpQuizVisible(!!item.lec.parts?.find(p => p.type === 'mcq'));
+  } else {
+    buildSidebar(item.toc);
+    showView('lecture');
+  }
+
+  const hash = anchorHash && anchorHash !== item.lec.id ? anchorHash : item.lec.id;
+  routeLock = true;
+  if (location.hash !== `#${hash}`) location.hash = hash;
+  routeLock = false;
+
+  if (anchorHash && anchorHash !== item.lec.id) scrollToAnchor(anchorHash);
+  else if (needsRender) window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  trackNoteView(item);
+  trackLectureContentReady();
+}
+
+/** Theme-accent class cycled per card — matches the subject's own primary/
+ * secondary/tertiary colors instead of arbitrary hues, so it stays on-brand
+ * while still reading as a distinct rail from the plain lecture grid. */
+const NOTE_ACCENTS = [
+  { bar: 'var(--md-sys-color-primary)', chip: 'bg-primary/15 text-primary', num: 'text-primary' },
+  { bar: 'var(--md-sys-color-secondary)', chip: 'bg-secondary-container/30 text-secondary', num: 'text-secondary' },
+  { bar: 'var(--md-sys-color-tertiary)', chip: 'bg-tertiary-fixed/60 text-on-tertiary-fixed-variant', num: '' },
+];
+
+function renderNotesSection() {
+  const section = document.getElementById('notesSection');
+  if (!section) return;
+
+  if (!appState.notesItems.length) {
+    section.classList.add('hidden');
+    section.innerHTML = '';
+    return;
+  }
+
+  section.classList.remove('hidden');
+
+  const cardsHtml = appState.notesItems.map((item, i) => {
+    const accent = NOTE_ACCENTS[i % NOTE_ACCENTS.length];
+    const mcqCount = item.summary?.mcqCount || 0;
+    const num = arabicDigits(String(item.fileMeta?.num ?? i + 1));
+    return `<button type="button" class="group text-right w-full bg-surface-container-lowest border border-outline-variant rounded-xl p-md custom-shadow box-hover flex items-center gap-md" style="border-inline-start:4px solid ${accent.bar};" data-note-index="${i}" aria-label="فتح ${escAttr(item.lec.title)}">
+      <span class="font-display-sm ${accent.num} shrink-0" style="font-size:28px; font-weight:600; opacity:.55; min-width:34px;">${num}</span>
+      <div class="flex-1 min-w-0">
+        <p class="font-label-md font-bold text-on-surface truncate">${esc(item.lec.title)}</p>
+        <div class="flex items-center gap-sm mt-xs flex-wrap">
+          <span class="font-label-md text-label-md px-sm py-xs rounded-full ${accent.chip}">${ms('menu_book', false, 'text-sm')} ملخص</span>
+          ${mcqCount ? `<span class="font-label-md text-label-md px-sm py-xs rounded-full bg-surface-container-high text-on-surface-variant">${ms('quiz', false, 'text-sm')} ${arabicDigits(String(mcqCount))} سؤال</span>` : ''}
+        </div>
+      </div>
+      ${ms('chevron_left', false, 'text-on-surface-variant shrink-0')}
+    </button>`;
+  }).join('');
+
+  section.innerHTML = `
+    <div class="text-center mb-lg">
+      ${ms('auto_stories', false, 'text-primary text-3xl mb-sm')}
+      <h2 class="font-headline-md text-headline-md text-on-surface">ملخصات وأسئلة سريعة</h2>
+      <p class="font-label-md text-on-surface-variant mt-xs">مراجعة مكثفة لكل محاضرة مع بنك أسئلة كبير</p>
+    </div>
+    <div class="grid grid-cols-1 gap-md">${cardsHtml}</div>`;
+
+  section.querySelectorAll('[data-note-index]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = Number(btn.dataset.noteIndex);
+      const id = appState.notesItems[idx]?.lec.id;
+      if (id) location.hash = id;
+    });
+  });
+}
+
+async function loadNotes() {
+  const notesManifest = await loadNotesManifest();
+  if (!notesManifest?.files?.length) return;
+  appState.notesManifest = notesManifest;
+  appState.notesItems = notesManifest.files.map((f, i) => createNoteStub(f, i));
 }
 
 async function loadReviews() {
@@ -1341,6 +1534,12 @@ function resolveRoute() {
     return;
   }
 
+  const noteIdx = getNoteIndexFromHash(hash);
+  if (noteIdx >= 0) {
+    loadNoteView(noteIdx, hash).catch(err => console.error(err));
+    return;
+  }
+
   const idx = getLectureIndexFromHash(hash, appState.items);
   if (idx >= 0) {
     loadLectureView(idx, hash).catch(err => console.error(err));
@@ -1348,6 +1547,7 @@ function resolveRoute() {
     currentLectureIndex = -1;
     currentReviewIndex = -1;
     currentExamIndex = -1;
+    currentNoteIndex = -1;
     // Mastery chips and the exam entry card depend on quiz stats that may
     // have changed since the grid was last rendered.
     renderHomeGrid();
@@ -1608,6 +1808,13 @@ async function init() {
       console.warn('دورات archive not loaded:', examErr);
     }
     renderExamArchiveSection();
+
+    try {
+      await loadNotes();
+    } catch (notesErr) {
+      console.warn('Notes not loaded:', notesErr);
+    }
+    renderNotesSection();
 
     resolveRoute();
   } catch (err) {

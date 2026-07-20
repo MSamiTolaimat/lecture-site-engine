@@ -2,11 +2,65 @@ import { esc } from '../core/escape.js';
 import { inlineMd } from '../core/inline-md.js';
 import { ms } from '../core/icons.js';
 import { renderBlocks } from '../blocks/index.js';
+import { calloutHtml } from '../blocks/handlers.js';
+import { mcqSectionAnchor } from '../core/slug.js';
 
 function diffBadgeClass(d) {
   if (d === 'سهل') return 'bg-primary/20 text-primary';
   if (d === 'صعب') return 'bg-error-container text-on-error-container';
   return 'bg-tertiary-fixed text-on-tertiary-fixed-variant';
+}
+
+/**
+ * Optional "تذكرة" reinforcement block inside an MCQ rationale — same visual
+ * family as `مهم للامتحان`. Accepts:
+ *   #### تذكرة:
+ *   > line…
+ * or:
+ *   **تذكرة:** …
+ * followed by optional `>` blockquote lines (or plain lines until a blank line).
+ */
+function extractTadhkira(explain) {
+  if (!explain) return { body: '', tadhkira: '' };
+  const m = explain.match(/\n*(?:#{2,4}\s*تذكرة\s*:?|\*\*تذكرة:\*\*)\s*\n*/);
+  if (!m) return { body: explain.trim(), tadhkira: '' };
+
+  const before = explain.slice(0, m.index).trim();
+  const afterLines = explain.slice(m.index + m[0].length).split('\n');
+  let i = 0;
+  while (i < afterLines.length && !afterLines[i].trim()) i++;
+
+  const tadhkiraLines = [];
+  if (i < afterLines.length && /^>\s?/.test(afterLines[i])) {
+    while (i < afterLines.length && (/^>\s?/.test(afterLines[i]) || !afterLines[i].trim())) {
+      if (afterLines[i].trim()) tadhkiraLines.push(afterLines[i].replace(/^>\s?/, ''));
+      i++;
+    }
+  } else {
+    while (i < afterLines.length && afterLines[i].trim()) {
+      tadhkiraLines.push(afterLines[i]);
+      i++;
+    }
+  }
+
+  const trailing = afterLines.slice(i).join('\n').trim();
+  const body = [before, trailing].filter(Boolean).join('\n\n');
+  return { body, tadhkira: tadhkiraLines.join('\n').trim() };
+}
+
+/** Renders MCQ rationale: paragraph breaks preserved, optional تذكرة callout. */
+function renderMcqExplain(explain) {
+  const { body, tadhkira } = extractTadhkira(explain || '');
+  const paras = body
+    .split(/\n{2,}/)
+    .map(p => p.trim())
+    .filter(Boolean)
+    .map(p => `<p class="mb-sm last:mb-0">${inlineMd(p).replace(/\n/g, '<br>')}</p>`)
+    .join('');
+  const tadhkiraHtml = tadhkira
+    ? `<div class="mt-md">${calloutHtml('callout-exam', 'تذكرة 💡', tadhkira)}</div>`
+    : '';
+  return `${paras}${tadhkiraHtml}`;
 }
 
 /** Renders an MCQ question stem — plain text via inlineMd, or (for a shared
@@ -60,7 +114,8 @@ function renderMcqCard(q, cardId, { showSource = true } = {}) {
   html += `</div>
     <div class="mcq-feedback mt-md font-label-md font-bold min-h-[1.4em]" aria-live="polite"></div>
     <div class="mcq-explain hidden mt-md p-md bg-primary/10 rounded-lg border-r-4 border-primary font-body-md">
-      <strong class="text-primary">التعليل:</strong> ${inlineMd(q.explain)}
+      <strong class="text-primary">التعليل:</strong>
+      <div class="mt-sm">${renderMcqExplain(q.explain)}</div>
     </div>
   </article>`;
   return html;
@@ -108,7 +163,8 @@ export function renderMCQ(questions, partId) {
     // changes so consecutive questions from the same section stay grouped
     // visually without repeating the label on every card.
     if (q.section && q.section !== lastSection) {
-      html += `<h3 class="font-headline-md text-headline-md text-primary dark:text-inverse-primary flex items-center gap-sm pt-md first:pt-0">
+      const secId = `${partId}-${mcqSectionAnchor(q.section)}`;
+      html += `<h3 id="${esc(secId)}" class="font-headline-md text-headline-md text-primary dark:text-inverse-primary flex items-center gap-sm pt-md first:pt-0 scroll-mt-16">
         ${ms('menu_book', false, 'text-lg')} ${esc(q.section)}
       </h3>`;
     }

@@ -86,6 +86,7 @@ export function inlineMd(text) {
   });
   s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  s = s.replace(/==([^=]+)==/g, '<mark class="term-highlight">$1</mark>');
 
   s = s.replace(SITE_HASH_FULL_RE, (match, hash, offset, full) => {
     const before = full.slice(Math.max(0, offset - 12), offset);

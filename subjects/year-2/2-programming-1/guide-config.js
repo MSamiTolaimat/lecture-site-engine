@@ -2,8 +2,8 @@
  * Auto-scaffolded from subject-brief.yaml — edit as needed.
  */
 export const GUIDE_CONFIG = {
-  storagePrefix: '2-programming-1',
-  defaultTitle: '2-programming-1',
+  storagePrefix: 'programming-1',
+  defaultTitle: '1-برمجة متقدمة',
   homeHeaderBrand: 'موقع تفاعلي - المكتب الأكاديمي',
   defaultSubtitle: 'دليل دراسي تفاعلي',
 

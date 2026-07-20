@@ -126,18 +126,24 @@ function splitOriginalText(content) {
   if ((text.startsWith('"') && text.endsWith('"')) || (text.startsWith('«') && text.endsWith('»'))) {
     text = text.slice(1, -1).trim();
   }
-  const paragraphs = text.split(/\n{2,}/).map(p => p.trim()).filter(Boolean);
+  // Each quoted source line is a deliberate readable unit. Rendering only
+  // blank-line splits caused wrapped English source text to collapse back
+  // into one dense browser paragraph.
+  const paragraphs = text.split(/\n+/).map(p => p.trim()).filter(Boolean);
   return paragraphs.length ? paragraphs : [text];
 }
 
 export function renderOriginalText(title, content) {
   const parts = splitOriginalText(content);
+  const isEnglish = /\bEnglish\b/i.test(String(title));
+  const directionAttrs = isEnglish ? ' dir="ltr" lang="en"' : '';
+  const directionClass = isEnglish ? ' text-left' : '';
   return `<div class="source-quote mb-lg">
     <div class="source-quote__head">
       ${ms('record_voice_over', false, 'source-quote__icon')}
       <span class="source-quote__label">${inlineMd(title)}</span>
     </div>
-    <div class="source-quote__body">
+    <div class="source-quote__body${directionClass}"${directionAttrs}>
       ${parts.map(part => `<p>${inlineMd(part)}</p>`).join('')}
     </div>
   </div>`;

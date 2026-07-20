@@ -21,13 +21,25 @@
 ### 1. تعريف Activity
 
 #### النص الأصلي يقول (English):
-> The activity serves as the entry point for an app's interaction with the user. You implement an activity as a subclass of the Activity class. The Android system initiates code in an Activity instance by invoking specific callback methods that correspond to specific stages of its lifecycle.
+> The activity serves as the entry point for an app's interaction with the user.
+> You implement an activity as a subclass of the Activity class.
+> The Android system initiates code in an Activity instance by invoking specific callback methods that correspond to specific stages of its lifecycle.
 
 #### الترجمة الحرفية:
-> الـ `Activity` تعمل كنقطة الدخول لتفاعل التطبيق مع المستخدم. تُنفَّذ الـ `Activity` كصنف فرعي (subclass) من صنف `Activity`. نظام أندرويد يُشغّل الكود داخل نسخة `Activity` عن طريق استدعاء دوال رد نداء (callback methods) محددة تتوافق مع مراحل محددة من دورة حياتها.
+> الـ `Activity` تعمل كنقطة الدخول لتفاعل التطبيق مع المستخدم.
+> تُنفَّذ الـ `Activity` كصنف فرعي (subclass) من صنف `Activity`.
+> نظام أندرويد يُشغّل الكود داخل نسخة `Activity` عن طريق استدعاء دوال رد نداء (callback methods) محددة تتوافق مع مراحل محددة من دورة حياتها.
 
 #### الشرح المبسّط:
-الفكرة هنا أن `Activity` هي الباب الذي يدخل منه المستخدم للتفاعل مع تطبيقك — بدونها لا يوجد شيء يُعرض على الشاشة أو يستقبل ضغطات المستخدم. هي موجودة لأن أندرويد يحتاج وحدة منظمة تمثل "شاشة واحدة" حتى يستطيع النظام إدارتها (فتحها، إيقافها، إغلاقها) بشكل منفصل عن باقي التطبيق. ترتبط هذه الفكرة بكل ما سيأتي لاحقاً لأن كل مفهوم في هذه المحاضرة (دورة الحياة، الـ Intent) يدور حول كيفية التعامل مع هذه الـ Activity. تشبيه يومي: تخيل `Activity` كغرفة في بيت — أنت (النظام) تدخل الغرفة (`onCreate`/`onStart`)، تتفاعل فيها (`onResume`)، ثم تخرج منها (`onPause`/`onStop`) وربما تهدمها لاحقاً (`onDestroy`)؛ مثال عملي: شاشة "كتابة إيميل جديد" في تطبيق بريد هي `Activity` واحدة.
+الفكرة هنا أن `Activity` هي الباب الذي يدخل منه المستخدم للتفاعل مع تطبيقك — بدونها لا يوجد شيء يُعرض على الشاشة أو يستقبل ضغطات المستخدم.
+
+هي موجودة لأن أندرويد يحتاج وحدة منظمة تمثل "شاشة واحدة" حتى يستطيع النظام إدارتها (فتحها، إيقافها، إغلاقها) بشكل منفصل عن باقي التطبيق.
+
+ترتبط هذه الفكرة بكل ما سيأتي لاحقاً لأن كل مفهوم في هذه المحاضرة (دورة الحياة، الـ Intent) يدور حول كيفية التعامل مع هذه الـ Activity.
+
+تشبيه يومي: تخيل `Activity` كغرفة في بيت — أنت (النظام) تدخل الغرفة (`onCreate`/`onStart`)، تتفاعل فيها (`onResume`)، ثم تخرج منها (`onPause`/`onStop`) وربما تهدمها لاحقاً (`onDestroy`)؛
+
+مثال عملي: شاشة "كتابة إيميل جديد" في تطبيق بريد هي `Activity` واحدة.
 
 **لماذا؟** لأن أندرويد نظام تشغيل متعدد المهام تدير فيه شاشات كثيرة من تطبيقات مختلفة، فيحتاج طريقة موحّدة (Activity + Lifecycle) لمعرفة متى يظهر تطبيقك ومتى يختفي حتى يوزّع الموارد بذكاء.
 
@@ -36,13 +48,27 @@
 ### 2. واجهة المستخدم والشاشة الواحدة
 
 #### النص الأصلي يقول (English):
-> An activity provides the window in which the app draws its UI. Generally, one activity implements one screen in an app. Most apps contain multiple screens, which means they comprise multiple activities. Typically, one activity in an app is specified as the main activity, which is the first screen to appear when the user launches the app.
+> An activity provides the window in which the app draws its UI.
+> Generally, one activity implements one screen in an app.
+> Most apps contain multiple screens, which means they comprise multiple activities.
+> Typically, one activity in an app is specified as the main activity, which is the first screen to appear when the user launches the app.
 
 #### الترجمة الحرفية:
-> الـ `Activity` توفّر النافذة التي يرسم فيها التطبيق واجهة المستخدم الخاصة به. عموماً، تُنفّذ `Activity` واحدة شاشة واحدة في التطبيق. معظم التطبيقات تحتوي على شاشات متعددة، مما يعني أنها تتكون من عدة `Activity`. عادةً، تُحدَّد `Activity` واحدة في التطبيق باعتبارها `main activity`، وهي أول شاشة تظهر عندما يُطلق المستخدم التطبيق.
+> الـ `Activity` توفّر النافذة التي يرسم فيها التطبيق واجهة المستخدم الخاصة به.
+> عموماً، تُنفّذ `Activity` واحدة شاشة واحدة في التطبيق.
+> معظم التطبيقات تحتوي على شاشات متعددة، مما يعني أنها تتكون من عدة `Activity`.
+> عادةً، تُحدَّد `Activity` واحدة في التطبيق باعتبارها `main activity`، وهي أول شاشة تظهر عندما يُطلق المستخدم التطبيق.
 
 #### الشرح المبسّط:
-كل `Activity` تمثّل "نافذة" رسم واحدة، وغالباً كل شاشة في التطبيق = `Activity` مستقلة، لذلك التطبيقات الحقيقية متعددة الشاشات تحتوي على عدة `Activity` تعمل معاً. هذا مهم لأنه يفصل مسؤوليات كل شاشة عن الأخرى، فمثلاً شاشة تسجيل الدخول منفصلة تماماً في الكود عن شاشة الإعدادات. يرتبط هذا بالفكرة السابقة لأنه يوضح أن التطبيق الواحد = مجموعة من "الغرف" (Activities) وليس غرفة واحدة فقط. تشبيه يومي: التطبيق كبيت متعدد الغرف، وكل غرفة (Activity) لها باب دخول رئيسي واحد (`main activity`) هو أول ما تراه عند الدخول للبيت؛ مثال عملي: تطبيق بريد إلكتروني فيه `Activity` لصندوق الوارد (main) و`Activity` أخرى لكتابة رسالة.
+كل `Activity` تمثّل "نافذة" رسم واحدة، وغالباً كل شاشة في التطبيق = `Activity` مستقلة، لذلك التطبيقات الحقيقية متعددة الشاشات تحتوي على عدة `Activity` تعمل معاً.
+
+هذا مهم لأنه يفصل مسؤوليات كل شاشة عن الأخرى، فمثلاً شاشة تسجيل الدخول منفصلة تماماً في الكود عن شاشة الإعدادات.
+
+يرتبط هذا بالفكرة السابقة لأنه يوضح أن التطبيق الواحد = مجموعة من "الغرف" (Activities) وليس غرفة واحدة فقط.
+
+تشبيه يومي: التطبيق كبيت متعدد الغرف، وكل غرفة (Activity) لها باب دخول رئيسي واحد (`main activity`) هو أول ما تراه عند الدخول للبيت؛
+
+مثال عملي: تطبيق بريد إلكتروني فيه `Activity` لصندوق الوارد (main) و`Activity` أخرى لكتابة رسالة.
 
 **لماذا؟** لأن تحديد "شاشة رئيسية" يعطي النظام نقطة انطلاق واضحة عند تشغيل التطبيق من قائمة التطبيقات (launcher).
 
@@ -51,13 +77,27 @@
 ### 3. الانتقال بين الأنشطة والتسجيل في Manifest
 
 #### النص الأصلي يقول (English):
-> Each activity can then start another activity in order to perform different actions. Example, the main activity in a simple e-mail app may provide the screen that shows an e-mail inbox. From there, the main activity might launch other activities that provide screens for tasks like writing e-mails and opening individual e-mails. To use activities in your app, you must register information about them in the app's manifest, and you must manage activity lifecycles appropriately.
+> Each activity can then start another activity in order to perform different actions.
+> Example, the main activity in a simple e-mail app may provide the screen that shows an e-mail inbox.
+> From there, the main activity might launch other activities that provide screens for tasks like writing e-mails and opening individual e-mails.
+> To use activities in your app, you must register information about them in the app's manifest, and you must manage activity lifecycles appropriately.
 
 #### الترجمة الحرفية:
-> يمكن لكل `Activity` أن تبدأ `Activity` أخرى لتنفيذ إجراءات مختلفة. مثال: قد توفّر `Activity` الرئيسية في تطبيق بريد بسيط الشاشة التي تعرض صندوق الوارد. من هناك، قد تُطلق `Activity` الرئيسية أنشطة أخرى توفّر شاشات لمهام مثل كتابة الرسائل وفتح رسائل منفردة. لاستخدام الأنشطة في تطبيقك، يجب تسجيل معلومات عنها في ملف manifest الخاص بالتطبيق، ويجب إدارة دورات حياة الأنشطة بشكل مناسب.
+> يمكن لكل `Activity` أن تبدأ `Activity` أخرى لتنفيذ إجراءات مختلفة.
+> مثال: قد توفّر `Activity` الرئيسية في تطبيق بريد بسيط الشاشة التي تعرض صندوق الوارد.
+> من هناك، قد تُطلق `Activity` الرئيسية أنشطة أخرى توفّر شاشات لمهام مثل كتابة الرسائل وفتح رسائل منفردة.
+> لاستخدام الأنشطة في تطبيقك، يجب تسجيل معلومات عنها في ملف manifest الخاص بالتطبيق، ويجب إدارة دورات حياة الأنشطة بشكل مناسب.
 
 #### الشرح المبسّط:
-هذه الفقرة تُظهر آلية عمل التطبيق فعلياً: نشاط يبدأ نشاطاً آخر ليكمل مهمة محددة، وهذا هو أساس التنقل في أندرويد. كل نشاط يجب تسجيله في `AndroidManifest.xml` وإلا فلن يستطيع النظام التعرف عليه أو تشغيله، تماماً كما يجب تسجيل غرفة جديدة في مخطط البيت قبل بنائها. يرتبط هذا مباشرة بما سبق لأنه يفسّر "كيف" تنتقل من الشاشة الرئيسية للشاشات الأخرى، وهو تمهيد مباشر لموضوع "Configuring The Manifest" و"Intents" اللاحقين. تشبيه يومي: كأنك في مطعم تطلب من النادل (Activity الحالية) أن يناديك نادلاً آخر (Activity جديدة) لتقديم طبق مختلف؛ مثال عملي: الضغط على "Compose" في تطبيق بريد يفتح `Activity` جديدة لكتابة رسالة.
+هذه الفقرة تُظهر آلية عمل التطبيق فعلياً: نشاط يبدأ نشاطاً آخر ليكمل مهمة محددة، وهذا هو أساس التنقل في أندرويد.
+
+كل نشاط يجب تسجيله في `AndroidManifest.xml` وإلا فلن يستطيع النظام التعرف عليه أو تشغيله، تماماً كما يجب تسجيل غرفة جديدة في مخطط البيت قبل بنائها.
+
+يرتبط هذا مباشرة بما سبق لأنه يفسّر "كيف" تنتقل من الشاشة الرئيسية للشاشات الأخرى، وهو تمهيد مباشر لموضوع "Configuring The Manifest" و"Intents" اللاحقين.
+
+تشبيه يومي: كأنك في مطعم تطلب من النادل (Activity الحالية) أن يناديك نادلاً آخر (Activity جديدة) لتقديم طبق مختلف؛
+
+مثال عملي: الضغط على "Compose" في تطبيق بريد يفتح `Activity` جديدة لكتابة رسالة.
 
 **لماذا؟** لأن النظام يحتاج معرفة مسبقة (عبر manifest) بكل الأنشطة الموجودة في التطبيق حتى يستطيع تشغيلها بأمان وبصلاحيات صحيحة.
 
@@ -66,13 +106,25 @@
 ### 4. إعلان الأنشطة في Manifest
 
 #### النص الأصلي يقول (English):
-> For your app to be able to use activities, you must declare the activities, and certain of their attributes, in the manifest. To declare your activity, open your manifest file and add an <activity> element as a child of the <application> element. The only required attribute for this element is android:name, which specifies the class name of the activity. You can also add attributes that define activity characteristics such as label, icon, or UI theme.
+> For your app to be able to use activities, you must declare the activities, and certain of their attributes, in the manifest.
+> To declare your activity, open your manifest file and add an <activity> element as a child of the <application> element.
+> The only required attribute for this element is android:name, which specifies the class name of the activity.
+> You can also add attributes that define activity characteristics such as label, icon, or UI theme.
 
 #### الترجمة الحرفية:
-> لكي يستطيع تطبيقك استخدام الأنشطة، يجب عليك إعلان الأنشطة، وبعض خصائصها، في ملف manifest. لإعلان نشاطك، افتح ملف manifest وأضف عنصر `<activity>` كعنصر ابن لعنصر `<application>`. الخاصية الوحيدة المطلوبة لهذا العنصر هي `android:name`، والتي تحدد اسم صنف النشاط. يمكنك أيضاً إضافة خصائص تحدد صفات النشاط مثل التسمية أو الأيقونة أو ثيم الواجهة.
+> لكي يستطيع تطبيقك استخدام الأنشطة، يجب عليك إعلان الأنشطة، وبعض خصائصها، في ملف manifest.
+> لإعلان نشاطك، افتح ملف manifest وأضف عنصر `<activity>` كعنصر ابن لعنصر `<application>`.
+> الخاصية الوحيدة المطلوبة لهذا العنصر هي `android:name`، والتي تحدد اسم صنف النشاط.
+> يمكنك أيضاً إضافة خصائص تحدد صفات النشاط مثل التسمية أو الأيقونة أو ثيم الواجهة.
 
 #### الشرح المبسّط:
-الإعلان في `Manifest` هو خطوة إلزامية وليست اختيارية — أي `Activity` غير مُعلنة سيرفض النظام تشغيلها وتحدث `ActivityNotFoundException`. الخاصية الإلزامية الوحيدة `android:name` لأنها تربط بين الإعلان في XML والكود الفعلي (الصنف Kotlin)، أما بقية الخصائص (label, icon, theme) اختيارية لتحسين الشكل والتجربة. يرتبط هذا بالفقرة السابقة كتطبيق عملي مباشر لعبارة "يجب تسجيل معلومات عنها في manifest". تشبيه يومي: كأنك تسجّل اسم موظف جديد في سجل الشركة (اسمه إلزامي) بينما صورته الشخصية أو لقبه الوظيفي اختياري؛ مثال عملي أدناه.
+الإعلان في `Manifest` هو خطوة إلزامية وليست اختيارية — أي `Activity` غير مُعلنة سيرفض النظام تشغيلها وتحدث `ActivityNotFoundException`.
+
+الخاصية الإلزامية الوحيدة `android:name` لأنها تربط بين الإعلان في XML والكود الفعلي (الصنف Kotlin)، أما بقية الخصائص (label, icon, theme) اختيارية لتحسين الشكل والتجربة.
+
+يرتبط هذا بالفقرة السابقة كتطبيق عملي مباشر لعبارة "يجب تسجيل معلومات عنها في manifest".
+
+تشبيه يومي: كأنك تسجّل اسم موظف جديد في سجل الشركة (اسمه إلزامي) بينما صورته الشخصية أو لقبه الوظيفي اختياري؛ مثال عملي أدناه.
 
 **لماذا؟** لأن أندرويد نظام أمني صارم — أي مكوّن غير مُعلن رسمياً يُعتبر غير موجود من منظور النظام، فلا يمكن استدعاؤه.
 
@@ -110,13 +162,27 @@
 ### 5. Intent Filters — الغاية منها
 
 #### النص الأصلي يقول (English):
-> Intent filters provide the ability to launch an activity based not only on an explicit request, but also an implicit one. An explicit request might tell the system to "Start the Send Email activity in the Gmail app". An implicit request tells the system to "Start a Send Email screen in any activity that can do the job." You can take advantage of this feature by declaring an <intent-filter> element in the <activity> element.
+> Intent filters provide the ability to launch an activity based not only on an explicit request, but also an implicit one.
+> An explicit request might tell the system to "Start the Send Email activity in the Gmail app".
+> An implicit request tells the system to "Start a Send Email screen in any activity that can do the job."
+> You can take advantage of this feature by declaring an <intent-filter> element in the <activity> element.
 
 #### الترجمة الحرفية:
-> توفّر `Intent Filters` القدرة على إطلاق نشاط ليس فقط بناءً على طلب صريح، بل أيضاً بناءً على طلب ضمني. قد يخبر الطلب الصريح النظام: "ابدأ نشاط إرسال البريد في تطبيق Gmail". يخبر الطلب الضمني النظام: "ابدأ شاشة إرسال بريد في أي نشاط قادر على القيام بهذه المهمة." يمكنك الاستفادة من هذه الميزة عن طريق إعلان عنصر `<intent-filter>` داخل عنصر `<activity>`.
+> توفّر `Intent Filters` القدرة على إطلاق نشاط ليس فقط بناءً على طلب صريح، بل أيضاً بناءً على طلب ضمني.
+> قد يخبر الطلب الصريح النظام: "ابدأ نشاط إرسال البريد في تطبيق Gmail".
+> يخبر الطلب الضمني النظام: "ابدأ شاشة إرسال بريد في أي نشاط قادر على القيام بهذه المهمة."
+> يمكنك الاستفادة من هذه الميزة عن طريق إعلان عنصر `<intent-filter>` داخل عنصر `<activity>`.
 
 #### الشرح المبسّط:
-`Intent Filter` هو إعلان يقوله النشاط للنظام: "أنا أستطيع تنفيذ هذا النوع من المهام"، وهذا يفتح الباب لأن يستدعيه أي تطبيق آخر دون معرفة اسمه بالضبط. هذه الفكرة مهمة جداً لأنها أساس التفاعل بين التطبيقات المختلفة في أندرويد (interoperability)، فبدلاً من أن يعرف تطبيقك اسم "تطبيق البريد" بالتحديد، يكفي أن يطلب "أرسل بريداً" ويترك للنظام اختيار التطبيق المناسب. ترتبط هذه الفقرة بموضوع لاحق بالكامل (Receiving an Implicit Intent) وهي تمهيد له. تشبيه يومي: كأنك تنشر إعلان توظيف عام "مطلوب سائق" (implicit) بدل الاتصال بشخص معيّن بالاسم (explicit)؛ مثال عملي: زر "مشاركة" في أي تطبيق يفتح قائمة بكل التطبيقات القادرة على استقبال محتوى للمشاركة.
+`Intent Filter` هو إعلان يقوله النشاط للنظام: "أنا أستطيع تنفيذ هذا النوع من المهام"، وهذا يفتح الباب لأن يستدعيه أي تطبيق آخر دون معرفة اسمه بالضبط.
+
+هذه الفكرة مهمة جداً لأنها أساس التفاعل بين التطبيقات المختلفة في أندرويد (interoperability)، فبدلاً من أن يعرف تطبيقك اسم "تطبيق البريد" بالتحديد، يكفي أن يطلب "أرسل بريداً" ويترك للنظام اختيار التطبيق المناسب.
+
+ترتبط هذه الفقرة بموضوع لاحق بالكامل (Receiving an Implicit Intent) وهي تمهيد له.
+
+تشبيه يومي: كأنك تنشر إعلان توظيف عام "مطلوب سائق" (implicit) بدل الاتصال بشخص معيّن بالاسم (explicit)؛
+
+مثال عملي: زر "مشاركة" في أي تطبيق يفتح قائمة بكل التطبيقات القادرة على استقبال محتوى للمشاركة.
 
 **لماذا؟** لأن أندرويد يشجّع إعادة استخدام المكوّنات بين التطبيقات بدل إعادة بناء نفس الوظيفة (مثل إرسال بريد) في كل تطبيق.
 
@@ -125,13 +191,23 @@
 ### 6. بنية Intent Filter الكاملة
 
 #### النص الأصلي يقول (English):
-> <intent-filter> element includes an <action> element and, optionally, a <category> element and/or a <data> element. These elements combine to specify the type of intent to which your activity can respond. Example, the following code snippet shows how to configure an activity that sends text data, and receives requests from other activities to do so.
+> <intent-filter> element includes an <action> element and, optionally, a <category> element and/or a <data> element.
+> These elements combine to specify the type of intent to which your activity can respond.
+> Example, the following code snippet shows how to configure an activity that sends text data, and receives requests from other activities to do so.
 
 #### الترجمة الحرفية:
-> عنصر `<intent-filter>` يتضمن عنصر `<action>`، واختيارياً، عنصر `<category>` و/أو عنصر `<data>`. تتجمع هذه العناصر معاً لتحديد نوع الـ `Intent` الذي يستطيع نشاطك الاستجابة له. مثال، يوضح مقتطف الكود التالي كيفية تهيئة نشاط يرسل بيانات نصية، ويستقبل طلبات من أنشطة أخرى للقيام بذلك.
+> عنصر `<intent-filter>` يتضمن عنصر `<action>`، واختيارياً، عنصر `<category>` و/أو عنصر `<data>`.
+> تتجمع هذه العناصر معاً لتحديد نوع الـ `Intent` الذي يستطيع نشاطك الاستجابة له.
+> مثال، يوضح مقتطف الكود التالي كيفية تهيئة نشاط يرسل بيانات نصية، ويستقبل طلبات من أنشطة أخرى للقيام بذلك.
 
 #### الشرح المبسّط:
-`Intent Filter` مبني من ثلاثة عناصر تعمل معاً كشروط تصفية: `action` (ماذا يريد فعله المُرسِل)، `category` (سياق إضافي)، و`data` (نوع البيانات المرسلة)، وكل هذه الشروط يجب أن تتحقق معاً حتى يقبل النشاط استقبال الطلب. هذا مهم لأنه يمنح دقة عالية في تحديد من يستطيع استدعاء النشاط، فلا يستقبل أي `Intent` عشوائي بل فقط ما يطابق شروطه بالضبط. يرتبط مباشرة بالفقرة السابقة كتفصيل عملي لكيفية كتابة الطلب الضمني. تشبيه يومي: مثل استمارة تقديم وظيفة تشترط تخصصاً معيناً (action) وخبرة معينة (category) ولغة برمجة معينة (data) معاً؛ مثال عملي في الكود التالي.
+`Intent Filter` مبني من ثلاثة عناصر تعمل معاً كشروط تصفية: `action` (ماذا يريد فعله المُرسِل)، `category` (سياق إضافي)، و`data` (نوع البيانات المرسلة)، وكل هذه الشروط يجب أن تتحقق معاً حتى يقبل النشاط استقبال الطلب.
+
+هذا مهم لأنه يمنح دقة عالية في تحديد من يستطيع استدعاء النشاط، فلا يستقبل أي `Intent` عشوائي بل فقط ما يطابق شروطه بالضبط.
+
+يرتبط مباشرة بالفقرة السابقة كتفصيل عملي لكيفية كتابة الطلب الضمني.
+
+تشبيه يومي: مثل استمارة تقديم وظيفة تشترط تخصصاً معيناً (action) وخبرة معينة (category) ولغة برمجة معينة (data) معاً؛ مثال عملي في الكود التالي.
 
 **لماذا؟** لأن ترك النشاط يستقبل أي `Intent` بدون شروط دقيقة قد يعرضه لطلبات غير مناسبة أو خطيرة أمنياً.
 
@@ -173,13 +249,23 @@
 ### 7. استدعاء النشاط من كود Kotlin
 
 #### النص الأصلي يقول (English):
-> The following code snippet shows how to call the previous activity: val sendIntent = Intent().apply { action = Intent.ACTION_SEND; type = "text/plain"; putExtra(Intent.EXTRA_TEXT, textMessage) }; startActivity(sendIntent). Activities that you don't want to make available to other applications should have no intent filters, and you can start them yourself using explicit intents.
+> The following code snippet shows how to call the previous activity: val sendIntent = Intent().apply { action = Intent.ACTION_SEND; type = "text/plain"; putExtra(Intent.EXTRA_TEXT, textMessage) }; startActivity(sendIntent).
+> Activities that you don't want to make available to other applications should have no intent filters, and you can start them yourself using explicit intents.
 
 #### الترجمة الحرفية:
-> يوضح مقتطف الكود التالي كيفية استدعاء النشاط السابق: ... الأنشطة التي لا تريد إتاحتها لتطبيقات أخرى يجب ألا يكون لها `Intent Filters`، ويمكنك تشغيلها بنفسك باستخدام `Intents` صريحة.
+> يوضح مقتطف الكود التالي كيفية استدعاء النشاط السابق: ...
+> الأنشطة التي لا تريد إتاحتها لتطبيقات أخرى يجب ألا يكون لها `Intent Filters`، ويمكنك تشغيلها بنفسك باستخدام `Intents` صريحة.
 
 #### الشرح المبسّط:
-هذا الكود يوضح الجانب المقابل — كيف "يستدعي" تطبيق آخر (أو تطبيقك نفسه) هذا النشاط عملياً عبر بناء كائن `Intent` وتمريره لدالة `startActivity()`. النقطة المهمة الثانية هي مبدأ أمني: أي نشاط لا يحتوي `intent-filter` يصبح خاصاً (private) بحيث لا يمكن الوصول إليه إلا من داخل تطبيقك عبر `Intent` صريحة (Explicit)، وهذا يحمي الأنشطة الحساسة من الاستدعاء الخارجي. يرتبط هذا مباشرة بالفكرتين السابقتين لأنه يُكمل الدورة: إعلان القدرة (manifest) ثم الاستدعاء الفعلي (الكود). تشبيه يومي: كأن `intent-filter` هو لافتة "مفتوح للجمهور" على باب متجر، وغيابها يعني أن الباب خاص ويحتاج مفتاحاً (Explicit Intent) لدخوله؛ مثال عملي: نشاط الدفع الداخلي في تطبيق بنكي غالباً بدون `intent-filter` حماية له.
+هذا الكود يوضح الجانب المقابل — كيف "يستدعي" تطبيق آخر (أو تطبيقك نفسه) هذا النشاط عملياً عبر بناء كائن `Intent` وتمريره لدالة `startActivity()`.
+
+النقطة المهمة الثانية هي مبدأ أمني: أي نشاط لا يحتوي `intent-filter` يصبح خاصاً (private) بحيث لا يمكن الوصول إليه إلا من داخل تطبيقك عبر `Intent` صريحة (Explicit)، وهذا يحمي الأنشطة الحساسة من الاستدعاء الخارجي.
+
+يرتبط هذا مباشرة بالفكرتين السابقتين لأنه يُكمل الدورة: إعلان القدرة (manifest) ثم الاستدعاء الفعلي (الكود).
+
+تشبيه يومي: كأن `intent-filter` هو لافتة "مفتوح للجمهور" على باب متجر، وغيابها يعني أن الباب خاص ويحتاج مفتاحاً (Explicit Intent) لدخوله؛
+
+مثال عملي: نشاط الدفع الداخلي في تطبيق بنكي غالباً بدون `intent-filter` حماية له.
 
 **لماذا؟** لأن ترك أنشطة حساسة (مثل شاشة الدفع) مفتوحة لأي تطبيق خارجي يشكّل ثغرة أمنية خطيرة.
 
@@ -220,13 +306,23 @@ startActivity(sendIntent)
 ### 8. الصلاحيات (Permissions) بين الأنشطة
 
 #### النص الأصلي يقول (English):
-> You can use the manifest's <activity> tag to control which apps can start a particular activity. An activity (or application) cannot launch a target activity unless both activities have the same permissions in their manifest. If you declare a <uses-permission> element for an activity, the target activity must require the same permission using the android:permission attribute.
+> You can use the manifest's <activity> tag to control which apps can start a particular activity.
+> An activity (or application) cannot launch a target activity unless both activities have the same permissions in their manifest.
+> If you declare a <uses-permission> element for an activity, the target activity must require the same permission using the android:permission attribute.
 
 #### الترجمة الحرفية:
-> يمكنك استخدام وسم `<activity>` في manifest للتحكم بأي التطبيقات يمكنها بدء نشاط معيّن. لا يمكن لنشاط (أو تطبيق) إطلاق نشاط هدف إلا إذا كان لكلا النشاطين نفس الصلاحيات في ملفي manifest الخاصين بهما. إذا أعلنت عنصر `<uses-permission>` لنشاط، فإن النشاط الهدف يجب أن يطلب نفس الصلاحية باستخدام خاصية `android:permission`.
+> يمكنك استخدام وسم `<activity>` في manifest للتحكم بأي التطبيقات يمكنها بدء نشاط معيّن.
+> لا يمكن لنشاط (أو تطبيق) إطلاق نشاط هدف إلا إذا كان لكلا النشاطين نفس الصلاحيات في ملفي manifest الخاصين بهما.
+> إذا أعلنت عنصر `<uses-permission>` لنشاط، فإن النشاط الهدف يجب أن يطلب نفس الصلاحية باستخدام خاصية `android:permission`.
 
 #### الشرح المبسّط:
-هذا نظام حماية إضافي فوق `intent-filter` — حتى لو كان النشاط يقبل `Intents` ضمنية، يمكن اشتراط أن المُستدعي يمتلك صلاحية محددة قبل السماح له بالتشغيل. هذا مهم لتطبيقات تتعامل مع بيانات حساسة (مثل مشاركة منشور اجتماعي) لأنها لا تريد السماح لأي تطبيق عشوائي بذلك دون إذن صريح من المستخدم أو المطور. يرتبط هذا بموضوع الأمان المذكور سابقاً في فقرة "activities that you don't want to make available" كطبقة حماية موازية للـ Intent Filters. تشبيه يومي: مثل مبنى يطلب بطاقة دخول (permission) بالإضافة إلى معرفة الغرفة (intent-filter)؛ مثال عملي أدناه.
+هذا نظام حماية إضافي فوق `intent-filter` — حتى لو كان النشاط يقبل `Intents` ضمنية، يمكن اشتراط أن المُستدعي يمتلك صلاحية محددة قبل السماح له بالتشغيل.
+
+هذا مهم لتطبيقات تتعامل مع بيانات حساسة (مثل مشاركة منشور اجتماعي) لأنها لا تريد السماح لأي تطبيق عشوائي بذلك دون إذن صريح من المستخدم أو المطور.
+
+يرتبط هذا بموضوع الأمان المذكور سابقاً في فقرة "activities that you don't want to make available" كطبقة حماية موازية للـ Intent Filters.
+
+تشبيه يومي: مثل مبنى يطلب بطاقة دخول (permission) بالإضافة إلى معرفة الغرفة (intent-filter)؛ مثال عملي أدناه.
 
 **لماذا؟** لأن بعض الوظائف (كالنشر نيابة عن المستخدم) تحتاج تصريحاً واضحاً وليس مجرد تطابق نوع بيانات.
 
@@ -264,13 +360,27 @@ startActivity(sendIntent)
 ### 9. مفهوم دورة حياة النشاط (Activity Lifecycle) وأهميتها
 
 #### النص الأصلي يقول (English):
-> As a user navigates through, out of, and back to your app, the Activity instances in your app transition through different states in their lifecycle. Within the lifecycle callback methods, you can declare how your activity behaves when the user leaves and re-enters the activity. Example: If you're building a streaming video player, you might pause the video and terminate the network connection when the user switches to another app. When the user returns, you can reconnect to the network and let the user resume the video from the same spot.
+> As a user navigates through, out of, and back to your app, the Activity instances in your app transition through different states in their lifecycle.
+> Within the lifecycle callback methods, you can declare how your activity behaves when the user leaves and re-enters the activity.
+> Example: If you're building a streaming video player, you might pause the video and terminate the network connection when the user switches to another app.
+> When the user returns, you can reconnect to the network and let the user resume the video from the same spot.
 
 #### الترجمة الحرفية:
-> بينما يتنقل المستخدم داخل تطبيقك وخارجه وعائداً إليه، تنتقل نسخ `Activity` في تطبيقك عبر حالات مختلفة في دورة حياتها. ضمن دوال رد النداء (callback) الخاصة بدورة الحياة، يمكنك تحديد كيف يتصرف نشاطك عندما يغادر المستخدم النشاط ويعود إليه مجدداً. مثال: إذا كنت تبني مشغّل فيديو بث، قد توقف الفيديو مؤقتاً وتنهي اتصال الشبكة عندما ينتقل المستخدم إلى تطبيق آخر. عندما يعود المستخدم، يمكنك إعادة الاتصال بالشبكة والسماح للمستخدم باستئناف الفيديو من نفس النقطة.
+> بينما يتنقل المستخدم داخل تطبيقك وخارجه وعائداً إليه، تنتقل نسخ `Activity` في تطبيقك عبر حالات مختلفة في دورة حياتها.
+> ضمن دوال رد النداء (callback) الخاصة بدورة الحياة، يمكنك تحديد كيف يتصرف نشاطك عندما يغادر المستخدم النشاط ويعود إليه مجدداً.
+> مثال: إذا كنت تبني مشغّل فيديو بث، قد توقف الفيديو مؤقتاً وتنهي اتصال الشبكة عندما ينتقل المستخدم إلى تطبيق آخر.
+> عندما يعود المستخدم، يمكنك إعادة الاتصال بالشبكة والسماح للمستخدم باستئناف الفيديو من نفس النقطة.
 
 #### الشرح المبسّط:
-دورة الحياة هي ببساطة سلسلة من "الحالات" التي يمر بها النشاط تلقائياً حسب تفاعل المستخدم (فتح، مغادرة، عودة، إغلاق)، والنظام يستدعي دوالاً محددة عند كل تغيّر حالة لتعطيك فرصة للتصرف المناسب. هذا مهم جداً لأن أندرويد بيئة متعددة المهام حيث قد يغادر المستخدم تطبيقك في أي لحظة (مكالمة، إشعار، تطبيق آخر)، فبدون هذه الآلية سيفقد التطبيق الموارد أو البيانات بشكل عشوائي. يرتبط هذا الموضوع مباشرة بكل ما سبق لأنه ينتقل من "كيف تُطلق نشاطاً" إلى "كيف تدير حياته بعد إطلاقه". تشبيه يومي: مثل موظف استقبال يوقف مهمة ويستأنفها لاحقاً حسب دخول وخروج الزوار، بدل أن يبدأ من الصفر كل مرة؛ مثال عملي: مشغّل فيديو يوقف التشغيل عند الخروج من التطبيق ويستكمل من نفس الثانية عند العودة.
+دورة الحياة هي ببساطة سلسلة من "الحالات" التي يمر بها النشاط تلقائياً حسب تفاعل المستخدم (فتح، مغادرة، عودة، إغلاق)، والنظام يستدعي دوالاً محددة عند كل تغيّر حالة لتعطيك فرصة للتصرف المناسب.
+
+هذا مهم جداً لأن أندرويد بيئة متعددة المهام حيث قد يغادر المستخدم تطبيقك في أي لحظة (مكالمة، إشعار، تطبيق آخر)، فبدون هذه الآلية سيفقد التطبيق الموارد أو البيانات بشكل عشوائي.
+
+يرتبط هذا الموضوع مباشرة بكل ما سبق لأنه ينتقل من "كيف تُطلق نشاطاً" إلى "كيف تدير حياته بعد إطلاقه".
+
+تشبيه يومي: مثل موظف استقبال يوقف مهمة ويستأنفها لاحقاً حسب دخول وخروج الزوار، بدل أن يبدأ من الصفر كل مرة؛
+
+مثال عملي: مشغّل فيديو يوقف التشغيل عند الخروج من التطبيق ويستكمل من نفس الثانية عند العودة.
 
 **لماذا؟** لأن إدارة الموارد بذكاء (شبكة، بطارية، ذاكرة) تحافظ على أداء الجهاز وتجربة مستخدم سلسة بدون فقدان تقدمه.
 
@@ -279,13 +389,31 @@ startActivity(sendIntent)
 ### 10. فوائد الإدارة الصحيحة لدورة الحياة
 
 #### النص الأصلي يقول (English):
-> Each callback lets you perform specific work that's appropriate to a given change of state. Doing the right work at the right time and handling transitions properly make your app more robust and performant. Example, good implementation of the lifecycle callbacks can help your app avoid the following: Crashing if the user receives a phone call or switches to another app while using your app. Consuming valuable system resources when the user is not actively using it. Losing the user's progress if they leave your app and return to it at a later time. Crashing or losing the user's progress when the screen rotates between landscape and portrait orientation.
+> Each callback lets you perform specific work that's appropriate to a given change of state.
+> Doing the right work at the right time and handling transitions properly make your app more robust and performant.
+> Example, good implementation of the lifecycle callbacks can help your app avoid the following: Crashing if the user receives a phone call or switches to another app while using your app.
+> Consuming valuable system resources when the user is not actively using it.
+> Losing the user's progress if they leave your app and return to it at a later time.
+> Crashing or losing the user's progress when the screen rotates between landscape and portrait orientation.
 
 #### الترجمة الحرفية:
-> كل دالة رد نداء تتيح لك تنفيذ عمل محدد مناسب لتغيّر حالة معيّن. القيام بالعمل الصحيح في الوقت الصحيح والتعامل مع الانتقالات بشكل مناسب يجعل تطبيقك أكثر متانة وأداءً. مثال، التنفيذ الجيد لدوال رد نداء دورة الحياة يمكن أن يساعد تطبيقك على تجنب ما يلي: الانهيار إذا استقبل المستخدم مكالمة هاتفية أو انتقل إلى تطبيق آخر أثناء استخدام تطبيقك. استهلاك موارد نظام قيّمة عندما لا يستخدم المستخدم التطبيق فعلياً. فقدان تقدم المستخدم إذا غادر تطبيقك وعاد إليه لاحقاً. الانهيار أو فقدان تقدم المستخدم عند دوران الشاشة بين الوضع الأفقي والعمودي.
+> كل دالة رد نداء تتيح لك تنفيذ عمل محدد مناسب لتغيّر حالة معيّن.
+> القيام بالعمل الصحيح في الوقت الصحيح والتعامل مع الانتقالات بشكل مناسب يجعل تطبيقك أكثر متانة وأداءً.
+> مثال، التنفيذ الجيد لدوال رد نداء دورة الحياة يمكن أن يساعد تطبيقك على تجنب ما يلي: الانهيار إذا استقبل المستخدم مكالمة هاتفية أو انتقل إلى تطبيق آخر أثناء استخدام تطبيقك.
+> استهلاك موارد نظام قيّمة عندما لا يستخدم المستخدم التطبيق فعلياً.
+> فقدان تقدم المستخدم إذا غادر تطبيقك وعاد إليه لاحقاً.
+> الانهيار أو فقدان تقدم المستخدم عند دوران الشاشة بين الوضع الأفقي والعمودي.
 
 #### الشرح المبسّط:
-هذه الفقرة تلخّص "الثمرة العملية" لفهم دورة الحياة: تجنّب أربع مشاكل شائعة جداً في تطبيقات المبتدئين وهي الانهيار عند المقاطعات، استنزاف البطارية والموارد، فقدان بيانات المستخدم، ومشاكل الدوران. هذه المشاكل مهمة لأنها من أكثر أسباب تقييم المستخدمين السلبي للتطبيقات. ترتبط مباشرة بالفقرة السابقة كأمثلة ملموسة تبرر أهمية "الفعل الصحيح في الوقت الصحيح". تشبيه يومي: مثل سائق يتوقف بأمان عند إشارة حمراء بدل الانهيار (crash) أو ترك المحرك يعمل بلا داعٍ (استنزاف موارد)؛ مثال عملي: تطبيق يحفظ نص مكتوب في حقل إدخال قبل أن يدور المستخدم الشاشة، فلا يفقد ما كتبه.
+هذه الفقرة تلخّص "الثمرة العملية" لفهم دورة الحياة: تجنّب أربع مشاكل شائعة جداً في تطبيقات المبتدئين وهي الانهيار عند المقاطعات، استنزاف البطارية والموارد، فقدان بيانات المستخدم، ومشاكل الدوران.
+
+هذه المشاكل مهمة لأنها من أكثر أسباب تقييم المستخدمين السلبي للتطبيقات.
+
+ترتبط مباشرة بالفقرة السابقة كأمثلة ملموسة تبرر أهمية "الفعل الصحيح في الوقت الصحيح".
+
+تشبيه يومي: مثل سائق يتوقف بأمان عند إشارة حمراء بدل الانهيار (crash) أو ترك المحرك يعمل بلا داعٍ (استنزاف موارد)؛
+
+مثال عملي: تطبيق يحفظ نص مكتوب في حقل إدخال قبل أن يدور المستخدم الشاشة، فلا يفقد ما كتبه.
 
 **لماذا؟** لأن تجربة المستخدم السيئة (فقدان بيانات، بطء، انهيار) تؤدي مباشرة لحذف التطبيق أو تقييمه سلبياً.
 
@@ -294,13 +422,25 @@ startActivity(sendIntent)
 ### 11. الدوال الستة الأساسية لدورة الحياة
 
 #### النص الأصلي يقول (English):
-> To navigate between stages of the activity lifecycle, the Activity class provides a core set of six callbacks: onCreate(), onStart(), onResume(), onPause(), onStop(), and onDestroy(). The system invokes each of these callbacks as the activity enters a new state. The system's likelihood of killing a given process, along with the activities in it, depends on the state of the activity at the time.
+> To navigate between stages of the activity lifecycle, the Activity class provides a core set of six callbacks: onCreate(), onStart(), onResume(), onPause(), onStop(), and onDestroy().
+> The system invokes each of these callbacks as the activity enters a new state.
+> The system's likelihood of killing a given process, along with the activities in it, depends on the state of the activity at the time.
 
 #### الترجمة الحرفية:
-> للتنقل بين مراحل دورة حياة النشاط، يوفّر صنف `Activity` مجموعة أساسية من ست دوال رد نداء: `onCreate()`, `onStart()`, `onResume()`, `onPause()`, `onStop()`, و `onDestroy()`. يستدعي النظام كل واحدة من هذه الدوال عندما يدخل النشاط حالة جديدة. احتمالية قيام النظام بإنهاء عملية معينة، مع الأنشطة الموجودة فيها، تعتمد على حالة النشاط في تلك اللحظة.
+> للتنقل بين مراحل دورة حياة النشاط، يوفّر صنف `Activity` مجموعة أساسية من ست دوال رد نداء: `onCreate()`, `onStart()`, `onResume()`, `onPause()`, `onStop()`, و `onDestroy()`.
+> يستدعي النظام كل واحدة من هذه الدوال عندما يدخل النشاط حالة جديدة.
+> احتمالية قيام النظام بإنهاء عملية معينة، مع الأنشطة الموجودة فيها، تعتمد على حالة النشاط في تلك اللحظة.
 
 #### الشرح المبسّط:
-هذه الفقرة تعطي "الخارطة الكاملة" لست دوال ستُشرح لاحقاً بالتفصيل، وترتيبها الافتراضي يمثّل رحلة النشاط من الولادة إلى الموت. النقطة الإضافية المهمة هنا أن أندرويد يقرر إنهاء عمليات (Processes) بناءً على حالة الأنشطة بداخلها — فكلما كان النشاط أقرب لـ`onDestroy` أو `onStop`، زادت احتمالية قتله من قبل النظام عند الحاجة للذاكرة. يرتبط هذا بالفقرتين السابقتين كتفصيل تقني لما سبق ذكره بشكل عام. تشبيه يومي: مثل درجات أولوية موظفين في شركة تقلّص عدد الموظفين، فمن هو "خارج المكتب" (Stopped) أول من يُستغنى عنه مقارنة بمن هو "يعمل الآن" (Resumed)؛ مثال عملي: نشاط في الخلفية منذ وقت طويل قد يُقتل تلقائياً بينما النشاط الحالي على الشاشة لا يُقتل أبداً.
+هذه الفقرة تعطي "الخارطة الكاملة" لست دوال ستُشرح لاحقاً بالتفصيل، وترتيبها الافتراضي يمثّل رحلة النشاط من الولادة إلى الموت.
+
+النقطة الإضافية المهمة هنا أن أندرويد يقرر إنهاء عمليات (Processes) بناءً على حالة الأنشطة بداخلها — فكلما كان النشاط أقرب لـ`onDestroy` أو `onStop`، زادت احتمالية قتله من قبل النظام عند الحاجة للذاكرة.
+
+يرتبط هذا بالفقرتين السابقتين كتفصيل تقني لما سبق ذكره بشكل عام.
+
+تشبيه يومي: مثل درجات أولوية موظفين في شركة تقلّص عدد الموظفين، فمن هو "خارج المكتب" (Stopped) أول من يُستغنى عنه مقارنة بمن هو "يعمل الآن" (Resumed)؛
+
+مثال عملي: نشاط في الخلفية منذ وقت طويل قد يُقتل تلقائياً بينما النشاط الحالي على الشاشة لا يُقتل أبداً.
 
 **لماذا؟** لأن الذاكرة محدودة على الأجهزة المحمولة، فيحتاج النظام آلية عادلة لتحديد أي العمليات أقل أهمية حالياً.
 
@@ -320,13 +460,33 @@ startActivity(sendIntent)
 ### 12. onCreate()
 
 #### النص الأصلي يقول (English):
-> You must implement this callback, which fires when the system first creates the activity. On activity creation, the activity enters the Created state. In the onCreate() method, perform basic application startup logic that happens only once for the entire life of the activity. This method receives the parameter savedInstanceState, which is a Bundle object containing the activity's previously saved state. If the activity has never existed before, the value of the Bundle object is null. Your activity does not remain in the Created state. After the onCreate() method finishes execution, the activity enters the Started state and the system calls the onStart() and onResume() methods in quick succession.
+> You must implement this callback, which fires when the system first creates the activity.
+> On activity creation, the activity enters the Created state.
+> In the onCreate() method, perform basic application startup logic that happens only once for the entire life of the activity.
+> This method receives the parameter savedInstanceState, which is a Bundle object containing the activity's previously saved state.
+> If the activity has never existed before, the value of the Bundle object is null.
+> Your activity does not remain in the Created state.
+> After the onCreate() method finishes execution, the activity enters the Started state and the system calls the onStart() and onResume() methods in quick succession.
 
 #### الترجمة الحرفية:
-> يجب عليك تنفيذ (implement) هذه الدالة، التي تُطلَق عندما ينشئ النظام النشاط لأول مرة. عند إنشاء النشاط، يدخل النشاط حالة `Created`. في دالة `onCreate()`، نفّذ منطق بدء التشغيل الأساسي للتطبيق الذي يحدث مرة واحدة فقط طوال حياة النشاط. تستقبل هذه الدالة معلمة `savedInstanceState`، وهي كائن `Bundle` يحتوي حالة النشاط المحفوظة سابقاً. إذا لم يكن النشاط موجوداً من قبل، تكون قيمة كائن `Bundle` هي `null`. لا يبقى نشاطك في حالة `Created`. بعد انتهاء تنفيذ دالة `onCreate()`، يدخل النشاط حالة `Started` ويستدعي النظام دالتي `onStart()` و`onResume()` بالتتابع السريع.
+> يجب عليك تنفيذ (implement) هذه الدالة، التي تُطلَق عندما ينشئ النظام النشاط لأول مرة.
+> عند إنشاء النشاط، يدخل النشاط حالة `Created`.
+> في دالة `onCreate()`، نفّذ منطق بدء التشغيل الأساسي للتطبيق الذي يحدث مرة واحدة فقط طوال حياة النشاط.
+> تستقبل هذه الدالة معلمة `savedInstanceState`، وهي كائن `Bundle` يحتوي حالة النشاط المحفوظة سابقاً.
+> إذا لم يكن النشاط موجوداً من قبل، تكون قيمة كائن `Bundle` هي `null`.
+> لا يبقى نشاطك في حالة `Created`.
+> بعد انتهاء تنفيذ دالة `onCreate()`، يدخل النشاط حالة `Started` ويستدعي النظام دالتي `onStart()` و`onResume()` بالتتابع السريع.
 
 #### الشرح المبسّط:
-`onCreate()` هي أول دالة تُستدعى إجبارياً في حياة أي نشاط، وهي مكان تهيئة كل ما يحدث "مرة واحدة فقط" مثل ربط الواجهة أو إنشاء `ViewModel`. أهميتها أنها تستقبل `savedInstanceState` الذي يسمح باسترجاع بيانات محفوظة من قبل (مثلاً بعد دوران الشاشة)، وهذا يحل مشكلة فقدان البيانات المذكورة سابقاً. ترتبط مباشرة بالدوال الست المذكورة في الفقرة السابقة كأول تفصيل عملي لها. تشبيه يومي: مثل بناء غرفة جديدة من الصفر (أثاث، كهرباء) قبل استقبال أي زائر فيها؛ مثال عملي: في `onCreate()` يتم استدعاء `setContentView()` لعرض تصميم الشاشة لأول مرة.
+`onCreate()` هي أول دالة تُستدعى إجبارياً في حياة أي نشاط، وهي مكان تهيئة كل ما يحدث "مرة واحدة فقط" مثل ربط الواجهة أو إنشاء `ViewModel`.
+
+أهميتها أنها تستقبل `savedInstanceState` الذي يسمح باسترجاع بيانات محفوظة من قبل (مثلاً بعد دوران الشاشة)، وهذا يحل مشكلة فقدان البيانات المذكورة سابقاً.
+
+ترتبط مباشرة بالدوال الست المذكورة في الفقرة السابقة كأول تفصيل عملي لها.
+
+تشبيه يومي: مثل بناء غرفة جديدة من الصفر (أثاث، كهرباء) قبل استقبال أي زائر فيها؛
+
+مثال عملي: في `onCreate()` يتم استدعاء `setContentView()` لعرض تصميم الشاشة لأول مرة.
 
 **لماذا؟** لأن فصل "منطق البدء لمرة واحدة" عن بقية الدورة يمنع تكرار عمليات مكلفة (مثل تحميل بيانات ضخمة) كل مرة يعود فيها المستخدم للنشاط.
 
@@ -362,13 +522,31 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ### 13. onStart()
 
 #### النص الأصلي يقول (English):
-> As onCreate() exits, the activity enters the Started state, and the activity becomes visible to the user. When the activity enters the Started state, the system invokes onStart(). This call makes the activity visible to the user as the app prepares for the activity to enter the foreground and become interactive. This method is where the code that maintains the UI is initialized. The onStart() method completes quickly and, as with the Created state, the activity does not remain in the Started state. Once this callback finishes, the activity enters the Resumed state and the system invokes the onResume() method.
+> As onCreate() exits, the activity enters the Started state, and the activity becomes visible to the user.
+> When the activity enters the Started state, the system invokes onStart().
+> This call makes the activity visible to the user as the app prepares for the activity to enter the foreground and become interactive.
+> This method is where the code that maintains the UI is initialized.
+> The onStart() method completes quickly and, as with the Created state, the activity does not remain in the Started state.
+> Once this callback finishes, the activity enters the Resumed state and the system invokes the onResume() method.
 
 #### الترجمة الحرفية:
-> عندما تنتهي `onCreate()`، يدخل النشاط حالة `Started`، ويصبح النشاط مرئياً للمستخدم. عندما يدخل النشاط حالة `Started`، يستدعي النظام `onStart()`. هذا الاستدعاء يجعل النشاط مرئياً للمستخدم بينما يستعد التطبيق لدخول النشاط إلى المقدمة وأن يصبح تفاعلياً. هذه هي الدالة التي يُهيّأ فيها الكود الذي يحافظ على الواجهة. تنتهي دالة `onStart()` بسرعة، وكما في حالة `Created`، لا يبقى النشاط في حالة `Started`. بمجرد انتهاء هذه الدالة، يدخل النشاط حالة `Resumed` ويستدعي النظام دالة `onResume()`.
+> عندما تنتهي `onCreate()`، يدخل النشاط حالة `Started`، ويصبح النشاط مرئياً للمستخدم.
+> عندما يدخل النشاط حالة `Started`، يستدعي النظام `onStart()`.
+> هذا الاستدعاء يجعل النشاط مرئياً للمستخدم بينما يستعد التطبيق لدخول النشاط إلى المقدمة وأن يصبح تفاعلياً.
+> هذه هي الدالة التي يُهيّأ فيها الكود الذي يحافظ على الواجهة.
+> تنتهي دالة `onStart()` بسرعة، وكما في حالة `Created`، لا يبقى النشاط في حالة `Started`.
+> بمجرد انتهاء هذه الدالة، يدخل النشاط حالة `Resumed` ويستدعي النظام دالة `onResume()`.
 
 #### الشرح المبسّط:
-`onStart()` هي نقطة انتقالية سريعة تجعل النشاط "مرئياً" على الشاشة لكن لم يبدأ التفاعل الفعلي بعد — أي المستخدم يرى الشاشة لكن لا يمكنه الضغط عليها بشكل كامل حتى `onResume`. أهميتها أنها فاصل بين "الإعداد الداخلي" في `onCreate` و"التفاعل الكامل" في `onResume`، وتُستخدم لتهيئة عناصر واجهة تحتاج أن تكون مرئية. ترتبط مباشرة بالفقرة السابقة كخطوة تالية طبيعية بعد `onCreate()`. تشبيه يومي: مثل فتح ستارة المسرح فيرى الجمهور الممثلين لكن العرض لم يبدأ فعلياً بعد؛ مثال عملي: بدء تحديث واجهة معينة (مثل عداد) بمجرد ظهور الشاشة، حتى قبل أن يتفاعل المستخدم معها.
+`onStart()` هي نقطة انتقالية سريعة تجعل النشاط "مرئياً" على الشاشة لكن لم يبدأ التفاعل الفعلي بعد — أي المستخدم يرى الشاشة لكن لا يمكنه الضغط عليها بشكل كامل حتى `onResume`.
+
+أهميتها أنها فاصل بين "الإعداد الداخلي" في `onCreate` و"التفاعل الكامل" في `onResume`، وتُستخدم لتهيئة عناصر واجهة تحتاج أن تكون مرئية.
+
+ترتبط مباشرة بالفقرة السابقة كخطوة تالية طبيعية بعد `onCreate()`.
+
+تشبيه يومي: مثل فتح ستارة المسرح فيرى الجمهور الممثلين لكن العرض لم يبدأ فعلياً بعد؛
+
+مثال عملي: بدء تحديث واجهة معينة (مثل عداد) بمجرد ظهور الشاشة، حتى قبل أن يتفاعل المستخدم معها.
 
 **لماذا؟** لأن الفصل بين "الظهور" و"التفاعل" يسمح للنظام بمعالجة أي إعدادات بصرية أخيرة قبل تسليم التحكم الكامل للمستخدم.
 
@@ -399,13 +577,33 @@ override fun onStart() {
 ### 14. onResume()
 
 #### النص الأصلي يقول (English):
-> The system invokes onResume() callback just before the activity starts interacting with the user. When the activity enters the Resumed state, it comes to the foreground, and the system invokes the onResume() callback. This is the state in which the app interacts with the user. The app stays in this state until something happens to take focus away from the app, such as the device receiving a phone call, the user navigating to another activity, or the device screen turning off. When an interruptive event occurs, the activity enters the Paused state and the system invokes the onPause() callback. If the activity returns to the Resumed state from the Paused state, the system once again calls the onResume() method. For this reason, implement onResume() to initialize components that you release during onPause() and to perform any other initializations that must occur each time the activity enters the Resumed state.
+> The system invokes onResume() callback just before the activity starts interacting with the user.
+> When the activity enters the Resumed state, it comes to the foreground, and the system invokes the onResume() callback.
+> This is the state in which the app interacts with the user.
+> The app stays in this state until something happens to take focus away from the app, such as the device receiving a phone call, the user navigating to another activity, or the device screen turning off.
+> When an interruptive event occurs, the activity enters the Paused state and the system invokes the onPause() callback.
+> If the activity returns to the Resumed state from the Paused state, the system once again calls the onResume() method.
+> For this reason, implement onResume() to initialize components that you release during onPause() and to perform any other initializations that must occur each time the activity enters the Resumed state.
 
 #### الترجمة الحرفية:
-> يستدعي النظام دالة `onResume()` مباشرة قبل أن يبدأ النشاط بالتفاعل مع المستخدم. عندما يدخل النشاط حالة `Resumed`، يصل إلى المقدمة، ويستدعي النظام دالة `onResume()`. هذه هي الحالة التي يتفاعل فيها التطبيق مع المستخدم. يبقى التطبيق في هذه الحالة حتى يحدث شيء يسحب التركيز بعيداً عن التطبيق، مثل استقبال الجهاز مكالمة هاتفية، أو انتقال المستخدم إلى نشاط آخر، أو إغلاق شاشة الجهاز. عند حدوث حدث مقاطعة، يدخل النشاط حالة `Paused` ويستدعي النظام دالة `onPause()`. إذا عاد النشاط إلى حالة `Resumed` من حالة `Paused`، يستدعي النظام دالة `onResume()` مرة أخرى. لهذا السبب، نفّذ `onResume()` لتهيئة المكوّنات التي تحررها أثناء `onPause()` ولتنفيذ أي تهيئات أخرى يجب أن تحدث في كل مرة يدخل فيها النشاط حالة `Resumed`.
+> يستدعي النظام دالة `onResume()` مباشرة قبل أن يبدأ النشاط بالتفاعل مع المستخدم.
+> عندما يدخل النشاط حالة `Resumed`، يصل إلى المقدمة، ويستدعي النظام دالة `onResume()`.
+> هذه هي الحالة التي يتفاعل فيها التطبيق مع المستخدم.
+> يبقى التطبيق في هذه الحالة حتى يحدث شيء يسحب التركيز بعيداً عن التطبيق، مثل استقبال الجهاز مكالمة هاتفية، أو انتقال المستخدم إلى نشاط آخر، أو إغلاق شاشة الجهاز.
+> عند حدوث حدث مقاطعة، يدخل النشاط حالة `Paused` ويستدعي النظام دالة `onPause()`.
+> إذا عاد النشاط إلى حالة `Resumed` من حالة `Paused`، يستدعي النظام دالة `onResume()` مرة أخرى.
+> لهذا السبب، نفّذ `onResume()` لتهيئة المكوّنات التي تحررها أثناء `onPause()` ولتنفيذ أي تهيئات أخرى يجب أن تحدث في كل مرة يدخل فيها النشاط حالة `Resumed`.
 
 #### الشرح المبسّط:
-`onResume()` هي اللحظة التي يصبح فيها النشاط بالكامل في المقدمة وقابلاً للتفاعل الحقيقي، وهي أهم حالة من ناحية تجربة المستخدم لأنها الوحيدة التي يستطيع فيها المستخدم الضغط والتفاعل فعلياً. النقطة المهمة هنا أن هذه الدالة قد تُستدعى أكثر من مرة (وليس مرة واحدة كـ onCreate)، لذلك يجب أن تكون قابلة للتكرار بأمان — كل مرة يعود فيها المستخدم من `Paused` يجب إعادة تهيئة نفس الموارد التي حُرّرت في `onPause`. يرتبط هذا مباشرة بالفقرة السابقة (`onStart`) كخطوة أخيرة في دورة "الظهور" وبداية دورة "المقاطعة" اللاحقة. تشبيه يومي: مثل بدء العرض المسرحي فعلياً بعد فتح الستارة، وإذا توقف العرض مؤقتاً بسبب انقطاع كهرباء ثم عاد، يُعاد تشغيله من نفس هذه النقطة لا من البداية؛ مثال عملي: إعادة تفعيل الكاميرا في تطبيق مسح QR كل مرة يعود فيها المستخدم للشاشة.
+`onResume()` هي اللحظة التي يصبح فيها النشاط بالكامل في المقدمة وقابلاً للتفاعل الحقيقي، وهي أهم حالة من ناحية تجربة المستخدم لأنها الوحيدة التي يستطيع فيها المستخدم الضغط والتفاعل فعلياً.
+
+النقطة المهمة هنا أن هذه الدالة قد تُستدعى أكثر من مرة (وليس مرة واحدة كـ onCreate)، لذلك يجب أن تكون قابلة للتكرار بأمان — كل مرة يعود فيها المستخدم من `Paused` يجب إعادة تهيئة نفس الموارد التي حُرّرت في `onPause`.
+
+يرتبط هذا مباشرة بالفقرة السابقة (`onStart`) كخطوة أخيرة في دورة "الظهور" وبداية دورة "المقاطعة" اللاحقة.
+
+تشبيه يومي: مثل بدء العرض المسرحي فعلياً بعد فتح الستارة، وإذا توقف العرض مؤقتاً بسبب انقطاع كهرباء ثم عاد، يُعاد تشغيله من نفس هذه النقطة لا من البداية؛
+
+مثال عملي: إعادة تفعيل الكاميرا في تطبيق مسح QR كل مرة يعود فيها المستخدم للشاشة.
 
 **لماذا؟** لأن الموارد الثقيلة (كاميرا، GPS، اتصال شبكة) يجب أن تُفعَّل فقط أثناء التفاعل الفعلي لتوفير البطارية، وتُعاد تفعيلها تلقائياً عند كل عودة.
 
@@ -440,13 +638,35 @@ override fun onResume() {
 ### 15. onPause()
 
 #### النص الأصلي يقول (English):
-> The system calls onPause() method as the first indication that the user is leaving your activity, though it does not always mean the activity is being destroyed. It indicates that the activity is no longer in the foreground, but it is still visible if the user is in multi-window mode. There are several reasons why an activity might enter this state: An event that interrupts app execution, pauses the current activity. This is the most common case. In multi-window mode, only one app has focus at any time, and the system pauses all the other apps. The opening of a dialog pauses the underlying activity because it takes focus. As long as the activity is partially visible but not in focus, it remains paused.
+> The system calls onPause() method as the first indication that the user is leaving your activity, though it does not always mean the activity is being destroyed.
+> It indicates that the activity is no longer in the foreground, but it is still visible if the user is in multi-window mode.
+> There are several reasons why an activity might enter this state: An event that interrupts app execution, pauses the current activity.
+> This is the most common case.
+> In multi-window mode, only one app has focus at any time, and the system pauses all the other apps.
+> The opening of a dialog pauses the underlying activity because it takes focus.
+> As long as the activity is partially visible but not in focus, it remains paused.
 
 #### الترجمة الحرفية:
-> يستدعي النظام دالة `onPause()` كأول إشارة على أن المستخدم يغادر نشاطك، رغم أن هذا لا يعني دائماً أن النشاط يتم تدميره. يشير هذا إلى أن النشاط لم يعد في المقدمة، لكنه يبقى مرئياً إذا كان المستخدم في وضع النوافذ المتعددة. هناك عدة أسباب لدخول النشاط هذه الحالة: حدث يقاطع تنفيذ التطبيق، فيوقف النشاط الحالي مؤقتاً. هذه هي الحالة الأكثر شيوعاً. في وضع النوافذ المتعددة، تطبيق واحد فقط يمتلك التركيز في أي وقت، ويوقف النظام كل التطبيقات الأخرى مؤقتاً. فتح مربع حوار (dialog) يوقف النشاط الأساسي مؤقتاً لأنه يأخذ التركيز. طالما أن النشاط مرئي جزئياً لكن غير مركّز عليه، يبقى في حالة `Paused`.
+> يستدعي النظام دالة `onPause()` كأول إشارة على أن المستخدم يغادر نشاطك، رغم أن هذا لا يعني دائماً أن النشاط يتم تدميره.
+> يشير هذا إلى أن النشاط لم يعد في المقدمة، لكنه يبقى مرئياً إذا كان المستخدم في وضع النوافذ المتعددة.
+> هناك عدة أسباب لدخول النشاط هذه الحالة: حدث يقاطع تنفيذ التطبيق، فيوقف النشاط الحالي مؤقتاً.
+> هذه هي الحالة الأكثر شيوعاً.
+> في وضع النوافذ المتعددة، تطبيق واحد فقط يمتلك التركيز في أي وقت، ويوقف النظام كل التطبيقات الأخرى مؤقتاً.
+> فتح مربع حوار (dialog) يوقف النشاط الأساسي مؤقتاً لأنه يأخذ التركيز.
+> طالما أن النشاط مرئي جزئياً لكن غير مركّز عليه، يبقى في حالة `Paused`.
 
 #### الشرح المبسّط:
-`onPause()` هي "أول جرس إنذار" بأن المستخدم بدأ بالمغادرة، لكنها ليست نهاية النشاط بالضرورة — فقد يعود المستخدم بسرعة (كفتح حوار بسيط) أو يغادر تماماً. من المهم فهم أن النشاط قد يبقى مرئياً جزئياً في هذه الحالة (مثل وضع النوافذ المتعددة)، وهذا يختلف عن `onStop()` حيث يختفي تماماً. ترتبط هذه الحالة مباشرة بنهاية `onResume()` المذكورة سابقاً كنقطة الخروج الطبيعية من التفاعل الكامل. تشبيه يومي: مثل توقف محادثة مؤقت عندما يرن هاتف أحد الطرفين، لكنهما ما زالا في نفس الغرفة ولم يغادرا؛ مثال عملي: فتح نافذة حوار "هل تريد الحفظ؟" فوق النشاط الحالي يوقفه مؤقتاً دون إغلاقه.
+`onPause()` هي "أول جرس إنذار" بأن المستخدم بدأ بالمغادرة، لكنها ليست نهاية النشاط بالضرورة — فقد يعود المستخدم بسرعة (كفتح حوار بسيط) أو يغادر تماماً.
+
+من المهم فهم أن النشاط قد يبقى مرئياً جزئياً في هذه الحالة (مثل وضع النوافذ المتعددة)، وهذا يختلف عن `onStop()` حيث يختفي تماماً.
+
+ترتبط هذه الحالة مباشرة بنهاية `onResume()` المذكورة سابقاً كنقطة الخروج الطبيعية من التفاعل الكامل.
+
+تشبيه يومي: مثل توقف محادثة مؤقت عندما يرن هاتف أحد الطرفين، لكنهما ما زالا في نفس الغرفة ولم يغادرا؛
+
+مثال عملي: فتح نافذة حوار "هل تريد الحفظ؟"
+
+فوق النشاط الحالي يوقفه مؤقتاً دون إغلاقه.
 
 **لماذا؟** لأن النظام يحتاج تمييز حالة "مقاطعة مؤقتة قد تنتهي بسرعة" عن حالة "اختفاء كامل"، لأن التصرف المناسب يختلف بينهما.
 
@@ -455,13 +675,37 @@ override fun onResume() {
 ### 16. الاستخدام الصحيح لـ onPause()
 
 #### النص الأصلي يقول (English):
-> Use the onPause() method to: Pause or adjust operations that can't continue, while the Activity is in the Paused state, and that you expect to resume shortly. Release system resources, handles to sensors (like GPS), or any resources that affect battery life while your activity is Paused and user does not need them. onPause() execution does not necessarily offer enough time to perform save operations. For this reason, don't use onPause() to save application or user data, make network calls, or execute database transactions. Instead, perform heavy-load shutdown operations during onStop(). Completion of the onPause() method does not mean that the activity leaves the Paused state. Rather, the activity remains in this state until either the activity resumes or it becomes completely invisible to the user. If the activity resumes, the system invokes the onResume() callback. If the activity becomes completely invisible, the system calls onStop().
+> Use the onPause() method to: Pause or adjust operations that can't continue, while the Activity is in the Paused state, and that you expect to resume shortly.
+> Release system resources, handles to sensors (like GPS), or any resources that affect battery life while your activity is Paused and user does not need them.
+> onPause() execution does not necessarily offer enough time to perform save operations.
+> For this reason, don't use onPause() to save application or user data, make network calls, or execute database transactions.
+> Instead, perform heavy-load shutdown operations during onStop().
+> Completion of the onPause() method does not mean that the activity leaves the Paused state.
+> Rather, the activity remains in this state until either the activity resumes or it becomes completely invisible to the user.
+> If the activity resumes, the system invokes the onResume() callback.
+> If the activity becomes completely invisible, the system calls onStop().
 
 #### الترجمة الحرفية:
-> استخدم دالة `onPause()` من أجل: إيقاف أو تعديل عمليات لا يمكن أن تستمر أثناء وجود النشاط في حالة `Paused`، وتتوقع استئنافها قريباً. تحرير موارد النظام، مقابض المستشعرات (مثل GPS)، أو أي موارد تؤثر على عمر البطارية بينما نشاطك في حالة `Paused` ولا يحتاجها المستخدم. تنفيذ `onPause()` لا يوفر بالضرورة وقتاً كافياً لتنفيذ عمليات حفظ. لهذا السبب، لا تستخدم `onPause()` لحفظ بيانات التطبيق أو المستخدم، أو إجراء استدعاءات شبكة، أو تنفيذ معاملات قاعدة بيانات. بدلاً من ذلك، نفّذ عمليات إغلاق ثقيلة الحمل أثناء `onStop()`. اكتمال دالة `onPause()` لا يعني أن النشاط يغادر حالة `Paused`. بل يبقى النشاط في هذه الحالة حتى يستأنف النشاط أو يصبح غير مرئي تماماً للمستخدم. إذا استأنف النشاط، يستدعي النظام دالة `onResume()`. إذا أصبح النشاط غير مرئي تماماً، يستدعي النظام دالة `onStop()`.
+> استخدم دالة `onPause()` من أجل: إيقاف أو تعديل عمليات لا يمكن أن تستمر أثناء وجود النشاط في حالة `Paused`، وتتوقع استئنافها قريباً.
+> تحرير موارد النظام، مقابض المستشعرات (مثل GPS)، أو أي موارد تؤثر على عمر البطارية بينما نشاطك في حالة `Paused` ولا يحتاجها المستخدم.
+> تنفيذ `onPause()` لا يوفر بالضرورة وقتاً كافياً لتنفيذ عمليات حفظ.
+> لهذا السبب، لا تستخدم `onPause()` لحفظ بيانات التطبيق أو المستخدم، أو إجراء استدعاءات شبكة، أو تنفيذ معاملات قاعدة بيانات.
+> بدلاً من ذلك، نفّذ عمليات إغلاق ثقيلة الحمل أثناء `onStop()`.
+> اكتمال دالة `onPause()` لا يعني أن النشاط يغادر حالة `Paused`.
+> بل يبقى النشاط في هذه الحالة حتى يستأنف النشاط أو يصبح غير مرئي تماماً للمستخدم.
+> إذا استأنف النشاط، يستدعي النظام دالة `onResume()`.
+> إذا أصبح النشاط غير مرئي تماماً، يستدعي النظام دالة `onStop()`.
 
 #### الشرح المبسّط:
-هذه الفقرة تحدد بدقة "ما يجب" وما "يُمنع" فعله داخل `onPause()`: يجب تحرير موارد خفيفة وسريعة (مثل GPS)، لكن يُمنع القيام بعمليات ثقيلة كحفظ قاعدة بيانات أو مكالمات شبكة لأن الوقت المتاح قصير جداً وقد يُقتل التطبيق قبل إتمامها. هذا مهم جداً لأنه خطأ شائع عند المبتدئين يظنون أن `onPause()` مكان آمن للحفظ، بينما الصحيح هو `onStop()`. يرتبط هذا مباشرة بالفقرة السابقة كتوضيح عملي لـ"متى تنتهي حالة Paused" ولماذا يوجد فرق زمني/وظيفي بينها وبين `onStop`. تشبيه يومي: مثل إيقاف السيارة مؤقتاً عند إشارة حمراء (onPause) — تطفئ الأضواء الكشافة غير الضرورية لكن لا تقم بصيانة كاملة للمحرك في هذه اللحظة القصيرة، بل انتظر حتى تصل لمرآب (onStop)؛ مثال عملي: إيقاف تحديثات GPS المستمرة في `onPause()` لتوفير البطارية.
+هذه الفقرة تحدد بدقة "ما يجب" وما "يُمنع" فعله داخل `onPause()`: يجب تحرير موارد خفيفة وسريعة (مثل GPS)، لكن يُمنع القيام بعمليات ثقيلة كحفظ قاعدة بيانات أو مكالمات شبكة لأن الوقت المتاح قصير جداً وقد يُقتل التطبيق قبل إتمامها.
+
+هذا مهم جداً لأنه خطأ شائع عند المبتدئين يظنون أن `onPause()` مكان آمن للحفظ، بينما الصحيح هو `onStop()`.
+
+يرتبط هذا مباشرة بالفقرة السابقة كتوضيح عملي لـ"متى تنتهي حالة Paused" ولماذا يوجد فرق زمني/وظيفي بينها وبين `onStop`.
+
+تشبيه يومي: مثل إيقاف السيارة مؤقتاً عند إشارة حمراء (onPause) — تطفئ الأضواء الكشافة غير الضرورية لكن لا تقم بصيانة كاملة للمحرك في هذه اللحظة القصيرة، بل انتظر حتى تصل لمرآب (onStop)؛
+
+مثال عملي: إيقاف تحديثات GPS المستمرة في `onPause()` لتوفير البطارية.
 
 **لماذا؟** لأن `onPause()` قد يكون قصيراً جداً زمنياً (أجزاء من الثانية)، فأي عملية ثقيلة فيه قد تسبب تجميد الواجهة أو فقدان البيانات إذا قُتل التطبيق فجأة.
 
@@ -495,13 +739,35 @@ override fun onPause() {
 ### 17. onStop()
 
 #### النص الأصلي يقول (English):
-> When your activity is no longer visible to the user, it enters the Stopped state, and the system invokes the onStop() callback. This can occur: When a newly launched activity covers the entire screen. When the activity finishes running and is about to be terminated. In the onStop() method: Release or adjust resources that are not needed while the app is not visible to the user. Example, your app might pause animations or switch from fine-grained to coarse-grained location updates. Perform relatively CPU-intensive shutdown operations. Example, to save information to a database.
+> When your activity is no longer visible to the user, it enters the Stopped state, and the system invokes the onStop() callback.
+> This can occur: When a newly launched activity covers the entire screen.
+> When the activity finishes running and is about to be terminated.
+> In the onStop() method: Release or adjust resources that are not needed while the app is not visible to the user.
+> Example, your app might pause animations or switch from fine-grained to coarse-grained location updates.
+> Perform relatively CPU-intensive shutdown operations.
+> Example, to save information to a database.
 
 #### الترجمة الحرفية:
-> عندما لم يعد نشاطك مرئياً للمستخدم، يدخل حالة `Stopped`، ويستدعي النظام دالة `onStop()`. يمكن أن يحدث هذا: عندما يغطي نشاط أُطلق حديثاً الشاشة بالكامل. عندما ينتهي النشاط من العمل ويكون على وشك الإنهاء. في دالة `onStop()`: حرّر أو عدّل الموارد غير المطلوبة أثناء عدم ظهور التطبيق للمستخدم. مثال، قد يوقف تطبيقك الرسوم المتحركة أو يبدّل من تحديثات موقع دقيقة إلى تحديثات خشنة. نفّذ عمليات إغلاق مكثفة نسبياً على المعالج. مثال، لحفظ معلومات في قاعدة بيانات.
+> عندما لم يعد نشاطك مرئياً للمستخدم، يدخل حالة `Stopped`، ويستدعي النظام دالة `onStop()`.
+> يمكن أن يحدث هذا: عندما يغطي نشاط أُطلق حديثاً الشاشة بالكامل.
+> عندما ينتهي النشاط من العمل ويكون على وشك الإنهاء.
+> في دالة `onStop()`: حرّر أو عدّل الموارد غير المطلوبة أثناء عدم ظهور التطبيق للمستخدم.
+> مثال، قد يوقف تطبيقك الرسوم المتحركة أو يبدّل من تحديثات موقع دقيقة إلى تحديثات خشنة.
+> نفّذ عمليات إغلاق مكثفة نسبياً على المعالج.
+> مثال، لحفظ معلومات في قاعدة بيانات.
 
 #### الشرح المبسّط:
-`onStop()` هي اللحظة التي يختفي فيها النشاط تماماً من الشاشة، وهي بعكس `onPause()` المكان المناسب لعمليات الحفظ الثقيلة نسبياً مثل تحديث قاعدة بيانات. هذا مهم لأنه يحل التناقض الذي ظهر في الفقرة السابقة: لماذا لا نحفظ في `onPause` رغم أنه "بداية المغادرة"؟ لأن `onStop` تحديداً هو المكان الأنسب زمنياً ووظيفياً لهذا النوع من العمل. يرتبط مباشرة بالفقرة السابقة كامتداد طبيعي لها (خصوصاً جملة "perform heavy-load shutdown operations during onStop()"). تشبيه يومي: مثل الوصول الفعلي إلى المرآب بعد الخروج من الطريق السريع (onStop)، حيث يمكنك أخيراً إجراء صيانة كاملة للسيارة (حفظ البيانات) لأن لديك وقتاً كافياً؛ مثال عملي: حفظ مسودة رسالة بريد إلكتروني في قاعدة البيانات المحلية عند مغادرة شاشة الكتابة بالكامل.
+`onStop()` هي اللحظة التي يختفي فيها النشاط تماماً من الشاشة، وهي بعكس `onPause()` المكان المناسب لعمليات الحفظ الثقيلة نسبياً مثل تحديث قاعدة بيانات.
+
+هذا مهم لأنه يحل التناقض الذي ظهر في الفقرة السابقة: لماذا لا نحفظ في `onPause` رغم أنه "بداية المغادرة"؟
+
+لأن `onStop` تحديداً هو المكان الأنسب زمنياً ووظيفياً لهذا النوع من العمل.
+
+يرتبط مباشرة بالفقرة السابقة كامتداد طبيعي لها (خصوصاً جملة "perform heavy-load shutdown operations during onStop()").
+
+تشبيه يومي: مثل الوصول الفعلي إلى المرآب بعد الخروج من الطريق السريع (onStop)، حيث يمكنك أخيراً إجراء صيانة كاملة للسيارة (حفظ البيانات) لأن لديك وقتاً كافياً؛
+
+مثال عملي: حفظ مسودة رسالة بريد إلكتروني في قاعدة البيانات المحلية عند مغادرة شاشة الكتابة بالكامل.
 
 **لماذا؟** لأن النشاط في هذه الحالة أصبح غير مرئي بالكامل، فلدى النظام وقتاً أطول نسبياً قبل قتل العملية، مما يسمح بعمليات أثقل مقارنة بـ `onPause`.
 
@@ -532,13 +798,31 @@ override fun onStop() {
 ### 18. حالة onStop() والانتقال منها
 
 #### النص الأصلي يقول (English):
-> When your activity enters the Stopped state, the Activity object is kept resident in memory: it maintains all state and member information, but is not attached to the window manager. When the activity resumes, it recalls this information. From the Stopped state, the activity either comes back to interact with the user, or the activity is finished running and goes away. If the activity comes back, the system invokes onRestart(). If the Activity is finished running, the system calls onDestroy().
+> When your activity enters the Stopped state, the Activity object is kept resident in memory: it maintains all state and member information, but is not attached to the window manager.
+> When the activity resumes, it recalls this information.
+> From the Stopped state, the activity either comes back to interact with the user, or the activity is finished running and goes away.
+> If the activity comes back, the system invokes onRestart().
+> If the Activity is finished running, the system calls onDestroy().
 
 #### الترجمة الحرفية:
-> عندما يدخل نشاطك حالة `Stopped`، يبقى كائن `Activity` مقيماً في الذاكرة: يحافظ على كل معلومات الحالة والأعضاء، لكنه غير مرتبط بمدير النوافذ. عندما يستأنف النشاط، يستعيد هذه المعلومات. من حالة `Stopped`، إما يعود النشاط للتفاعل مع المستخدم، أو ينتهي النشاط من العمل ويختفي. إذا عاد النشاط، يستدعي النظام `onRestart()`. إذا انتهى النشاط من العمل، يستدعي النظام `onDestroy()`.
+> عندما يدخل نشاطك حالة `Stopped`، يبقى كائن `Activity` مقيماً في الذاكرة: يحافظ على كل معلومات الحالة والأعضاء، لكنه غير مرتبط بمدير النوافذ.
+> عندما يستأنف النشاط، يستعيد هذه المعلومات.
+> من حالة `Stopped`، إما يعود النشاط للتفاعل مع المستخدم، أو ينتهي النشاط من العمل ويختفي.
+> إذا عاد النشاط، يستدعي النظام `onRestart()`.
+> إذا انتهى النشاط من العمل، يستدعي النظام `onDestroy()`.
 
 #### الشرح المبسّط:
-النقطة الجوهرية هنا أن النشاط "الموقوف" (Stopped) لا يُحذف من الذاكرة تلقائياً — يبقى محتفظاً بكل بياناته الداخلية لكنه فقط غير مرتبط بالشاشة، وهذا يفسّر لماذا يمكن للنشاط أن يعود بسرعة وبنفس حالته الدقيقة دون الحاجة لإعادة تحميل كل شيء. هذا مهم لأنه يوضح الفرق بين "متوقف مؤقتاً في الذاكرة" و"محذوف نهائياً"، وهما مسارين مختلفين تماماً (onRestart مقابل onDestroy). يرتبط هذا مباشرة بنهاية `onStop()` المذكورة سابقاً كنقطة تفرّع القرار. تشبيه يومي: مثل كتاب موضوع على الرف (Stopped) — لم يُمزَّق، فقط ينتظر أن يُفتح مجدداً من نفس الصفحة؛ مثال عملي: عودة المستخدم لتطبيق كان في الخلفية منذ دقائق فيجد كل شيء كما تركه دون إعادة تحميل.
+النقطة الجوهرية هنا أن النشاط "الموقوف" (Stopped) لا يُحذف من الذاكرة تلقائياً — يبقى محتفظاً بكل بياناته الداخلية لكنه فقط غير مرتبط بالشاشة،
+
+وهذا يفسّر لماذا يمكن للنشاط أن يعود بسرعة وبنفس حالته الدقيقة دون الحاجة لإعادة تحميل كل شيء.
+
+هذا مهم لأنه يوضح الفرق بين "متوقف مؤقتاً في الذاكرة" و"محذوف نهائياً"، وهما مسارين مختلفين تماماً (onRestart مقابل onDestroy).
+
+يرتبط هذا مباشرة بنهاية `onStop()` المذكورة سابقاً كنقطة تفرّع القرار.
+
+تشبيه يومي: مثل كتاب موضوع على الرف (Stopped) — لم يُمزَّق، فقط ينتظر أن يُفتح مجدداً من نفس الصفحة؛
+
+مثال عملي: عودة المستخدم لتطبيق كان في الخلفية منذ دقائق فيجد كل شيء كما تركه دون إعادة تحميل.
 
 **لماذا؟** لأن الاحتفاظ بالحالة في الذاكرة أسرع بكثير من إعادة إنشاء كل شيء من الصفر، مما يحسّن سرعة الاستجابة عند العودة للتطبيق.
 
@@ -547,13 +831,24 @@ override fun onStop() {
 ### 19. onRestart()
 
 #### النص الأصلي يقول (English):
-> The system invokes onRestart() callback when an activity in the Stopped state is about to restart. onRestart() restores the state of the activity from the time that it was stopped. This callback is always followed by onStart().
+> The system invokes onRestart() callback when an activity in the Stopped state is about to restart. onRestart() restores the state of the activity from the time that it was stopped.
+> This callback is always followed by onStart().
 
 #### الترجمة الحرفية:
-> يستدعي النظام دالة `onRestart()` عندما يكون نشاط في حالة `Stopped` على وشك إعادة التشغيل. تستعيد `onRestart()` حالة النشاط من الوقت الذي كان فيه متوقفاً. تُتبع هذه الدالة دائماً بـ `onStart()`.
+> يستدعي النظام دالة `onRestart()` عندما يكون نشاط في حالة `Stopped` على وشك إعادة التشغيل.
+> تستعيد `onRestart()` حالة النشاط من الوقت الذي كان فيه متوقفاً.
+> تُتبع هذه الدالة دائماً بـ `onStart()`.
 
 #### الشرح المبسّط:
-`onRestart()` دالة صغيرة ومتخصصة جداً — تُستدعى فقط في حالة واحدة محددة: عودة نشاط كان في حالة `Stopped` (وليس عند الإنشاء الأول). أهميتها أنها تعطي فرصة لتنفيذ كود خاص فقط بحالة "العودة بعد اختفاء كامل" يختلف عن كود `onStart()` العادي الذي يُنفَّذ في كل الحالات. ترتبط مباشرة بالفقرة السابقة كإجابة مباشرة على "إذا عاد النشاط، يستدعي النظام onRestart()". تشبيه يومي: مثل فتح كتاب كان على الرف مجدداً (onRestart) مقارنة بفتحه لأول مرة (onCreate)؛ مثال عملي: إعادة الاشتراك في تحديثات موقع (location updates) التي أُلغيت في `onStop()` السابق.
+`onRestart()` دالة صغيرة ومتخصصة جداً — تُستدعى فقط في حالة واحدة محددة: عودة نشاط كان في حالة `Stopped` (وليس عند الإنشاء الأول).
+
+أهميتها أنها تعطي فرصة لتنفيذ كود خاص فقط بحالة "العودة بعد اختفاء كامل" يختلف عن كود `onStart()` العادي الذي يُنفَّذ في كل الحالات.
+
+ترتبط مباشرة بالفقرة السابقة كإجابة مباشرة على "إذا عاد النشاط، يستدعي النظام onRestart()".
+
+تشبيه يومي: مثل فتح كتاب كان على الرف مجدداً (onRestart) مقارنة بفتحه لأول مرة (onCreate)؛
+
+مثال عملي: إعادة الاشتراك في تحديثات موقع (location updates) التي أُلغيت في `onStop()` السابق.
 
 **لماذا؟** لأن بعض الإعدادات تحتاج معالجة خاصة فقط عند "العودة" وليس عند "البداية الأولى"، فهذا يوفّر مكاناً منطقياً واضحاً لها.
 
@@ -584,13 +879,31 @@ override fun onRestart() {
 ### 20. onDestroy()
 
 #### النص الأصلي يقول (English):
-> onDestroy() is called before the activity is destroyed. The system invokes this callback for one of two reasons: The activity is finishing, due to the user completely dismissing the activity or due to finish() being called on the activity. The system is temporarily destroying the activity due to a configuration change, such as device rotation. If onDestroy() is called as the result of a configuration change, the system immediately creates a new activity instance and then calls onCreate() on that new instance in the new configuration. The onDestroy() callback releases all resources not released by earlier callbacks, such as onStop().
+> onDestroy() is called before the activity is destroyed.
+> The system invokes this callback for one of two reasons: The activity is finishing, due to the user completely dismissing the activity or due to finish() being called on the activity.
+> The system is temporarily destroying the activity due to a configuration change, such as device rotation.
+> If onDestroy() is called as the result of a configuration change, the system immediately creates a new activity instance and then calls onCreate() on that new instance in the new configuration.
+> The onDestroy() callback releases all resources not released by earlier callbacks, such as onStop().
 
 #### الترجمة الحرفية:
-> يُستدعى `onDestroy()` قبل تدمير النشاط. يستدعي النظام هذه الدالة لأحد سببين: النشاط ينتهي، بسبب رفض المستخدم للنشاط تماماً أو بسبب استدعاء `finish()` على النشاط. النظام يدمّر النشاط مؤقتاً بسبب تغيّر في التهيئة، مثل دوران الجهاز. إذا استُدعيت `onDestroy()` نتيجة تغيّر تهيئة، ينشئ النظام فوراً نسخة جديدة من النشاط ثم يستدعي `onCreate()` على تلك النسخة الجديدة بالتهيئة الجديدة. تحرّر دالة `onDestroy()` كل الموارد التي لم تُحرَّر بواسطة دوال سابقة، مثل `onStop()`.
+> يُستدعى `onDestroy()` قبل تدمير النشاط.
+> يستدعي النظام هذه الدالة لأحد سببين: النشاط ينتهي، بسبب رفض المستخدم للنشاط تماماً أو بسبب استدعاء `finish()` على النشاط.
+> النظام يدمّر النشاط مؤقتاً بسبب تغيّر في التهيئة، مثل دوران الجهاز.
+> إذا استُدعيت `onDestroy()` نتيجة تغيّر تهيئة، ينشئ النظام فوراً نسخة جديدة من النشاط ثم يستدعي `onCreate()` على تلك النسخة الجديدة بالتهيئة الجديدة.
+> تحرّر دالة `onDestroy()` كل الموارد التي لم تُحرَّر بواسطة دوال سابقة، مثل `onStop()`.
 
 #### الشرح المبسّط:
-`onDestroy()` هي النهاية الفعلية لحياة النشاط، لكنها تحدث لسببين مختلفين تماماً في أثرهما: إما نهاية حقيقية (المستخدم أغلق النشاط) أو نهاية مؤقتة بسبب تغيّر تهيئة (مثل دوران الشاشة) يليها فوراً إنشاء نسخة جديدة تماماً عبر `onCreate()`. هذه النقطة الأخيرة مهمة جداً وهي مصدر خطأ شائع: عند الدوران يُدمَّر النشاط بالكامل ويُنشأ من جديد، لذا أي بيانات غير محفوظة في `savedInstanceState` تُفقد. ترتبط هذه الفقرة بكل الدورة السابقة كنقطة نهاية طبيعية توضح لماذا كان الحديث عن `savedInstanceState` في `onCreate()` مهماً منذ البداية. تشبيه يومي: مثل هدم غرفة بالكامل عند تجديد المنزل (دوران الشاشة) وإعادة بنائها من جديد بنفس المخطط تقريباً، مقارنة بهدمها نهائياً عند بيع البيت (إغلاق حقيقي)؛ مثال عملي: فقدان نص مكتوب في حقل إدخال عند تدوير الشاشة إن لم يُحفظ في `onSaveInstanceState`.
+`onDestroy()` هي النهاية الفعلية لحياة النشاط،
+
+لكنها تحدث لسببين مختلفين تماماً في أثرهما: إما نهاية حقيقية (المستخدم أغلق النشاط) أو نهاية مؤقتة بسبب تغيّر تهيئة (مثل دوران الشاشة) يليها فوراً إنشاء نسخة جديدة تماماً عبر `onCreate()`.
+
+هذه النقطة الأخيرة مهمة جداً وهي مصدر خطأ شائع: عند الدوران يُدمَّر النشاط بالكامل ويُنشأ من جديد، لذا أي بيانات غير محفوظة في `savedInstanceState` تُفقد.
+
+ترتبط هذه الفقرة بكل الدورة السابقة كنقطة نهاية طبيعية توضح لماذا كان الحديث عن `savedInstanceState` في `onCreate()` مهماً منذ البداية.
+
+تشبيه يومي: مثل هدم غرفة بالكامل عند تجديد المنزل (دوران الشاشة) وإعادة بنائها من جديد بنفس المخطط تقريباً، مقارنة بهدمها نهائياً عند بيع البيت (إغلاق حقيقي)؛
+
+مثال عملي: فقدان نص مكتوب في حقل إدخال عند تدوير الشاشة إن لم يُحفظ في `onSaveInstanceState`.
 
 **لماذا؟** لأن أندرويد يعيد بناء الواجهة بالكامل عند تغيّر التهيئة (مثل الدوران) لضمان توافقها مع الموارد الجديدة (مثل تخطيط أفقي مختلف)، وهذا يتطلب تدميراً وإعادة إنشاء كاملين.
 
@@ -754,13 +1067,31 @@ edges:
 ### 22. مقدمة التفاعل بين التطبيقات (Interact with Other Apps)
 
 #### النص الأصلي يقول (English):
-> An Android app typically has several activities. Each activity displays a user interface that lets the user perform a specific task, such as viewing a map or taking a photo. To take the user from one activity to another, your app must use an Intent to define your app's "intent" to do something. When you pass an Intent to the system with a method such as startActivity(), the system uses the Intent to identify and start the appropriate app component. Using intents even lets your app start an activity that is contained in a separate app. An Intent is a messaging object you can use to request an action from another app component.
+> An Android app typically has several activities.
+> Each activity displays a user interface that lets the user perform a specific task, such as viewing a map or taking a photo.
+> To take the user from one activity to another, your app must use an Intent to define your app's "intent" to do something.
+> When you pass an Intent to the system with a method such as startActivity(), the system uses the Intent to identify and start the appropriate app component.
+> Using intents even lets your app start an activity that is contained in a separate app.
+> An Intent is a messaging object you can use to request an action from another app component.
 
 #### الترجمة الحرفية:
-> يحتوي تطبيق أندرويد عادةً على عدة أنشطة. يعرض كل نشاط واجهة مستخدم تتيح للمستخدم تنفيذ مهمة محددة، مثل عرض خريطة أو التقاط صورة. لنقل المستخدم من نشاط إلى آخر، يجب على تطبيقك استخدام `Intent` لتحديد "نية" تطبيقك للقيام بشيء ما. عندما تمرّر `Intent` إلى النظام باستخدام دالة مثل `startActivity()`، يستخدم النظام هذا الـ`Intent` لتحديد وتشغيل مكوّن التطبيق المناسب. استخدام الـ`Intent` يتيح لتطبيقك حتى بدء نشاط موجود في تطبيق منفصل تماماً. الـ`Intent` هو كائن رسائل يمكنك استخدامه لطلب إجراء من مكوّن تطبيق آخر.
+> يحتوي تطبيق أندرويد عادةً على عدة أنشطة.
+> يعرض كل نشاط واجهة مستخدم تتيح للمستخدم تنفيذ مهمة محددة، مثل عرض خريطة أو التقاط صورة.
+> لنقل المستخدم من نشاط إلى آخر، يجب على تطبيقك استخدام `Intent` لتحديد "نية" تطبيقك للقيام بشيء ما.
+> عندما تمرّر `Intent` إلى النظام باستخدام دالة مثل `startActivity()`، يستخدم النظام هذا الـ`Intent` لتحديد وتشغيل مكوّن التطبيق المناسب.
+> استخدام الـ`Intent` يتيح لتطبيقك حتى بدء نشاط موجود في تطبيق منفصل تماماً.
+> الـ`Intent` هو كائن رسائل يمكنك استخدامه لطلب إجراء من مكوّن تطبيق آخر.
 
 #### الشرح المبسّط:
-`Intent` هو الآلية الرسمية والوحيدة تقريباً للتنقل بين الأنشطة في أندرويد — فبدل استدعاء نشاط آخر مباشرة كما لو كان دالة عادية، تبني "رسالة نية" وتسلّمها للنظام ليقرر هو من يستقبلها وينفذها. هذا مهم لأنه يفصل تماماً بين "من يطلب" و"من ينفذ"، مما يسمح حتى بالتواصل بين تطبيقات مختلفة تماماً بدون معرفة تفاصيل بعضها البعض. يربط هذا الموضوع كل ما سبق (Manifest, Intent Filters) بموضوع جديد هو "كيف تُبنى وتُرسَل الـ Intent فعلياً". تشبيه يومي: مثل إرسال طلب توصيل عبر تطبيق (تكتب ماذا تريد) بدل الذهاب بنفسك لسائق معين، والنظام (شركة التوصيل) يختار السائق المناسب؛ مثال عملي: زر "التقاط صورة" في تطبيقك قد يفتح تطبيق الكاميرا الافتراضي على الجهاز عبر `Intent` بدل بناء كاميرا خاصة به.
+`Intent` هو الآلية الرسمية والوحيدة تقريباً للتنقل بين الأنشطة في أندرويد — فبدل استدعاء نشاط آخر مباشرة كما لو كان دالة عادية، تبني "رسالة نية" وتسلّمها للنظام ليقرر هو من يستقبلها وينفذها.
+
+هذا مهم لأنه يفصل تماماً بين "من يطلب" و"من ينفذ"، مما يسمح حتى بالتواصل بين تطبيقات مختلفة تماماً بدون معرفة تفاصيل بعضها البعض.
+
+يربط هذا الموضوع كل ما سبق (Manifest, Intent Filters) بموضوع جديد هو "كيف تُبنى وتُرسَل الـ Intent فعلياً".
+
+تشبيه يومي: مثل إرسال طلب توصيل عبر تطبيق (تكتب ماذا تريد) بدل الذهاب بنفسك لسائق معين، والنظام (شركة التوصيل) يختار السائق المناسب؛
+
+مثال عملي: زر "التقاط صورة" في تطبيقك قد يفتح تطبيق الكاميرا الافتراضي على الجهاز عبر `Intent` بدل بناء كاميرا خاصة به.
 
 **لماذا؟** لأن هذا التصميم يسمح بإعادة استخدام مكوّنات جاهزة (كاميرا، خرائط، بريد) بين كل التطبيقات بدل إعادة بنائها في كل تطبيق على حدة.
 
@@ -769,13 +1100,35 @@ edges:
 ### 23. أنواع الـ Intent: Explicit و Implicit
 
 #### النص الأصلي يقول (English):
-> There are two types of intents: Explicit intents specify which component of which application will satisfy the intent, by specifying a full ComponentName. Implicit intents do not name a specific component, but instead declare a general action to perform, which allows a component from another app to handle it. When you use an implicit intent, the Android system finds the appropriate component to start by comparing the contents of the intent to the intent filters declared in the manifest file of other apps on the device. If the intent matches an intent filter, the system starts that component and delivers it the Intent object. If multiple intent filters are compatible, the system displays a dialog so the user can pick which app to use. An intent filter is an expression in an app's manifest file that specifies the type of intents that the component would like to receive. If we do not declare any intent filters for an activity, then it can be started only with an explicit intent.
+> There are two types of intents: Explicit intents specify which component of which application will satisfy the intent, by specifying a full ComponentName.
+> Implicit intents do not name a specific component, but instead declare a general action to perform, which allows a component from another app to handle it.
+> When you use an implicit intent, the Android system finds the appropriate component to start by comparing the contents of the intent to the intent filters declared in the manifest file of other apps on the device.
+> If the intent matches an intent filter, the system starts that component and delivers it the Intent object.
+> If multiple intent filters are compatible, the system displays a dialog so the user can pick which app to use.
+> An intent filter is an expression in an app's manifest file that specifies the type of intents that the component would like to receive.
+> If we do not declare any intent filters for an activity, then it can be started only with an explicit intent.
 
 #### الترجمة الحرفية:
-> هناك نوعان من الـ`Intent`: `Intent` صريح (Explicit) يحدد أي مكوّن من أي تطبيق سيلبي الـ`Intent`، عن طريق تحديد `ComponentName` كامل. `Intent` ضمني (Implicit) لا يسمّي مكوّناً محدداً، بل يُعلن إجراءً عاماً لتنفيذه، مما يسمح لمكوّن من تطبيق آخر بمعالجته. عندما تستخدم `Intent` ضمنياً، يجد نظام أندرويد المكوّن المناسب لبدئه عن طريق مقارنة محتويات الـ`Intent` بفلاتر الـ`Intent` المُعلنة في ملف manifest لتطبيقات أخرى على الجهاز. إذا تطابق الـ`Intent` مع فلتر، يبدأ النظام ذلك المكوّن ويسلّمه كائن الـ`Intent`. إذا كانت هناك فلاتر متعددة متوافقة، يعرض النظام مربع حوار حتى يختار المستخدم أي تطبيق يستخدم. فلتر الـ`Intent` هو تعبير في ملف manifest للتطبيق يحدد نوع الـ`Intents` التي يرغب المكوّن باستقبالها. إذا لم نُعلن أي فلاتر Intent لنشاط، فيمكن بدؤه فقط باستخدام `Intent` صريح.
+> هناك نوعان من الـ`Intent`: `Intent` صريح (Explicit) يحدد أي مكوّن من أي تطبيق سيلبي الـ`Intent`، عن طريق تحديد `ComponentName` كامل.
+> `Intent` ضمني (Implicit) لا يسمّي مكوّناً محدداً، بل يُعلن إجراءً عاماً لتنفيذه، مما يسمح لمكوّن من تطبيق آخر بمعالجته.
+> عندما تستخدم `Intent` ضمنياً، يجد نظام أندرويد المكوّن المناسب لبدئه عن طريق مقارنة محتويات الـ`Intent` بفلاتر الـ`Intent` المُعلنة في ملف manifest لتطبيقات أخرى على الجهاز.
+> إذا تطابق الـ`Intent` مع فلتر، يبدأ النظام ذلك المكوّن ويسلّمه كائن الـ`Intent`.
+> إذا كانت هناك فلاتر متعددة متوافقة، يعرض النظام مربع حوار حتى يختار المستخدم أي تطبيق يستخدم.
+> فلتر الـ`Intent` هو تعبير في ملف manifest للتطبيق يحدد نوع الـ`Intents` التي يرغب المكوّن باستقبالها.
+> إذا لم نُعلن أي فلاتر Intent لنشاط، فيمكن بدؤه فقط باستخدام `Intent` صريح.
 
 #### الشرح المبسّط:
-هذا هو التمييز الجوهري في الفصل: الـ`Explicit Intent` يحدد بدقة "من" سيُستدعى (كأنك تكتب اسم شخص محدد)، بينما الـ`Implicit Intent` يحدد فقط "ماذا تريد فعله" ويترك للنظام مطابقة الطلب مع كل الأنشطة المُعلنة (عبر Intent Filters) في كل التطبيقات المثبتة على الجهاز. أهمية هذا الفرق أنه يحدد سلوك التطبيق: هل تتحكم أنت بدقة بمن يُفتح (Explicit، مناسب للتنقل داخل تطبيقك نفسه)، أم تترك الخيار مفتوحاً (Implicit، مناسب للتفاعل مع تطبيقات خارجية). يربط هذا مباشرة بموضوع Intent Filters المشروح سابقاً في قسم Manifest، فهو التطبيق العملي لكل تلك الفلاتر. تشبيه يومي: `Explicit` مثل الاتصال برقم هاتف محدد تعرفه، و`Implicit` مثل نشر إعلان عام "أحتاج سباكاً" وينتظر من يستجيب من المؤهلين؛ مثال عملي (موضح في الرسم التخطيطي في الشريحة 24): نشاط A يطلب `startActivity()` فيمرّ الطلب عبر نظام أندرويد ثم يصل لنشاط B عبر `onCreate()`.
+هذا هو التمييز الجوهري في الفصل: الـ`Explicit Intent` يحدد بدقة "من" سيُستدعى (كأنك تكتب اسم شخص محدد)،
+
+بينما الـ`Implicit Intent` يحدد فقط "ماذا تريد فعله" ويترك للنظام مطابقة الطلب مع كل الأنشطة المُعلنة (عبر Intent Filters) في كل التطبيقات المثبتة على الجهاز.
+
+أهمية هذا الفرق أنه يحدد سلوك التطبيق: هل تتحكم أنت بدقة بمن يُفتح (Explicit، مناسب للتنقل داخل تطبيقك نفسه)، أم تترك الخيار مفتوحاً (Implicit، مناسب للتفاعل مع تطبيقات خارجية).
+
+يربط هذا مباشرة بموضوع Intent Filters المشروح سابقاً في قسم Manifest، فهو التطبيق العملي لكل تلك الفلاتر.
+
+تشبيه يومي: `Explicit` مثل الاتصال برقم هاتف محدد تعرفه، و`Implicit` مثل نشر إعلان عام "أحتاج سباكاً" وينتظر من يستجيب من المؤهلين؛
+
+مثال عملي (موضح في الرسم التخطيطي في الشريحة 24): نشاط A يطلب `startActivity()` فيمرّ الطلب عبر نظام أندرويد ثم يصل لنشاط B عبر `onCreate()`.
 
 **لماذا؟** لأن بعض المهام يجب أن تبقى داخلية بدقة (مثل الانتقال بين شاشات تطبيقك)، بينما مهام أخرى (مثل مشاركة صورة) يجب أن تكون مفتوحة لأي تطبيق قادر على التنفيذ.
 
@@ -830,13 +1183,31 @@ edges:
 ### 24. مكوّنات بناء الـ Intent (نظرة عامة)
 
 #### النص الأصلي يقول (English):
-> The primary information contained in an Intent is the following: Component name, Action, Data, Category, Extras, Flags. The properties (component name, action, data, and category) represent the defining characteristics of an intent. By reading these properties, the Android system is able to resolve which app component it should start. However, an intent can carry additional information that does not affect how it is resolved to an app component: Extras and Flags.
+> The primary information contained in an Intent is the following: Component name, Action, Data, Category, Extras, Flags.
+> The properties (component name, action, data, and category) represent the defining characteristics of an intent.
+> By reading these properties, the Android system is able to resolve which app component it should start.
+> However, an intent can carry additional information that does not affect how it is resolved to an app component: Extras and Flags.
 
 #### الترجمة الحرفية:
-> المعلومات الأساسية التي يحتويها الـ`Intent` هي التالية: اسم المكوّن، الإجراء (Action)، البيانات (Data)، الفئة (Category)، الإضافات (Extras)، الأعلام (Flags). تمثّل الخصائص (اسم المكوّن، الإجراء، البيانات، والفئة) الصفات المحددة للـ`Intent`. بقراءة هذه الخصائص، يستطيع نظام أندرويد تحديد أي مكوّن تطبيق يجب أن يبدأه. مع ذلك، يمكن للـ`Intent` أن يحمل معلومات إضافية لا تؤثر على كيفية تحليله (resolution) لمكوّن تطبيق: الإضافات والأعلام.
+> المعلومات الأساسية التي يحتويها الـ`Intent` هي التالية: اسم المكوّن، الإجراء (Action)، البيانات (Data)، الفئة (Category)، الإضافات (Extras)، الأعلام (Flags).
+> تمثّل الخصائص (اسم المكوّن، الإجراء، البيانات، والفئة) الصفات المحددة للـ`Intent`.
+> بقراءة هذه الخصائص، يستطيع نظام أندرويد تحديد أي مكوّن تطبيق يجب أن يبدأه.
+> مع ذلك، يمكن للـ`Intent` أن يحمل معلومات إضافية لا تؤثر على كيفية تحليله (resolution) لمكوّن تطبيق: الإضافات والأعلام.
 
 #### الشرح المبسّط:
-هذه الفقرة تقسّم مكوّنات الـ`Intent` إلى مجموعتين واضحتين: أربعة عناصر "تحديد الهوية" (Component name, Action, Data, Category) تُستخدم فعلياً في عملية اختيار المكوّن المناسب، ومجموعتين "بيانات مصاحبة" (Extras, Flags) لا تؤثر على القرار لكنها تحمل معلومات إضافية أو تعليمات تشغيلية. الفائدة من هذا التقسيم أنه يمنحك خريطة ذهنية واضحة قبل الدخول في تفاصيل كل عنصر على حدة في الفقرات التالية. يرتبط هذا مباشرة بموضوع "Intent Resolution" اللاحق الذي سيشرح بالضبط كيف تُستخدم هذه العناصر الأربعة في المطابقة. تشبيه يومي: مثل استمارة طلب توظيف فيها حقول أساسية تحدد "هل أنت مؤهل" (الاسم، التخصص) وحقول إضافية (رقم الهاتف، ملاحظات) لا تؤثر على قرار القبول لكنها مفيدة لاحقاً؛ مثال عملي: `Action` و`Data` يحددان أي تطبيق يُفتح، بينما `Extras` قد تحمل فقط النص المراد إرساله.
+هذه الفقرة تقسّم مكوّنات الـ`Intent` إلى مجموعتين واضحتين:
+
+أربعة عناصر "تحديد الهوية" (Component name, Action, Data, Category) تُستخدم فعلياً في عملية اختيار المكوّن المناسب،
+
+ومجموعتين "بيانات مصاحبة" (Extras, Flags) لا تؤثر على القرار لكنها تحمل معلومات إضافية أو تعليمات تشغيلية.
+
+الفائدة من هذا التقسيم أنه يمنحك خريطة ذهنية واضحة قبل الدخول في تفاصيل كل عنصر على حدة في الفقرات التالية.
+
+يرتبط هذا مباشرة بموضوع "Intent Resolution" اللاحق الذي سيشرح بالضبط كيف تُستخدم هذه العناصر الأربعة في المطابقة.
+
+تشبيه يومي: مثل استمارة طلب توظيف فيها حقول أساسية تحدد "هل أنت مؤهل" (الاسم، التخصص) وحقول إضافية (رقم الهاتف، ملاحظات) لا تؤثر على قرار القبول لكنها مفيدة لاحقاً؛
+
+مثال عملي: `Action` و`Data` يحددان أي تطبيق يُفتح، بينما `Extras` قد تحمل فقط النص المراد إرساله.
 
 **لماذا؟** لأن فصل "معايير الاختيار" عن "البيانات المصاحبة" يجعل عملية اختيار المكوّن المناسب أسرع وأوضح للنظام.
 
@@ -845,13 +1216,29 @@ edges:
 ### 25. Component Name
 
 #### النص الأصلي يقول (English):
-> The component name specifies the exact application component (such as an Activity or Service) that should handle the intent. If a component name is specified → the intent is explicit, and the system directly starts the specified component. If no component name is specified → the intent is implicit, and the system determines the appropriate component based on other intent properties (such as action, data, and category). Use a component name when you want to start a specific component within your app. The component name is internally represented as a ComponentName object, which consists of the application package name and the fully qualified class name of the target component, for example, com.example.ExampleActivity.
+> The component name specifies the exact application component (such as an Activity or Service) that should handle the intent.
+> If a component name is specified → the intent is explicit, and the system directly starts the specified component.
+> If no component name is specified → the intent is implicit, and the system determines the appropriate component based on other intent properties (such as action, data, and category).
+> Use a component name when you want to start a specific component within your app.
+> The component name is internally represented as a ComponentName object, which consists of the application package name and the fully qualified class name of the target component, for example, com.example.ExampleActivity.
 
 #### الترجمة الحرفية:
-> يحدد اسم المكوّن (component name) مكوّن التطبيق الدقيق (مثل `Activity` أو `Service`) الذي يجب أن يعالج الـ`Intent`. إذا تم تحديد اسم مكوّن → يكون الـ`Intent` صريحاً، ويبدأ النظام مباشرة المكوّن المحدد. إذا لم يُحدَّد اسم مكوّن → يكون الـ`Intent` ضمنياً، ويحدد النظام المكوّن المناسب بناءً على خصائص أخرى للـ`Intent` (مثل الإجراء والبيانات والفئة). استخدم اسم مكوّن عندما تريد بدء مكوّن محدد داخل تطبيقك. يُمثَّل اسم المكوّن داخلياً ككائن `ComponentName`، والذي يتكوّن من اسم حزمة التطبيق (package name) واسم الصنف الكامل للمكوّن الهدف، على سبيل المثال، `com.example.ExampleActivity`.
+> يحدد اسم المكوّن (component name) مكوّن التطبيق الدقيق (مثل `Activity` أو `Service`) الذي يجب أن يعالج الـ`Intent`.
+> إذا تم تحديد اسم مكوّن → يكون الـ`Intent` صريحاً، ويبدأ النظام مباشرة المكوّن المحدد.
+> إذا لم يُحدَّد اسم مكوّن → يكون الـ`Intent` ضمنياً، ويحدد النظام المكوّن المناسب بناءً على خصائص أخرى للـ`Intent` (مثل الإجراء والبيانات والفئة).
+> استخدم اسم مكوّن عندما تريد بدء مكوّن محدد داخل تطبيقك.
+> يُمثَّل اسم المكوّن داخلياً ككائن `ComponentName`، والذي يتكوّن من اسم حزمة التطبيق (package name) واسم الصنف الكامل للمكوّن الهدف، على سبيل المثال، `com.example.ExampleActivity`.
 
 #### الشرح المبسّط:
-اسم المكوّن هو "المفتاح الحاسم" الذي يحدد نوع الـ`Intent`: وجوده يجعله صريحاً وغيابه يجعله ضمنياً — هذا يربط مباشرة بالمفهوم النظري المشروح في الفقرة السابقة (23) ويحوّله لقاعدة عملية بسيطة يمكن تطبيقها في الكود. أهميته العملية أنه الخيار الأنسب عند التنقل داخل تطبيقك نفسه لأنك تعرف بالضبط اسم الصنف الذي تريد فتحه، فلا داعي لترك الأمر للنظام يبحث ويقارن. يرتبط هذا بأول عنصر من العناصر الأربعة المذكورة في الفقرة 24. تشبيه يومي: مثل كتابة عنوان بريدي كامل ودقيق (شارع، رقم منزل، مدينة) بدل وصف عام "بيت أبيض في الحي"؛ مثال عملي: الانتقال من شاشة تسجيل الدخول إلى الشاشة الرئيسية داخل نفس التطبيق دائماً يستخدم `Component Name` صريح.
+اسم المكوّن هو "المفتاح الحاسم" الذي يحدد نوع الـ`Intent`: وجوده يجعله صريحاً وغيابه يجعله ضمنياً — هذا يربط مباشرة بالمفهوم النظري المشروح في الفقرة السابقة (23) ويحوّله لقاعدة عملية بسيطة يمكن تطبيقها في الكود.
+
+أهميته العملية أنه الخيار الأنسب عند التنقل داخل تطبيقك نفسه لأنك تعرف بالضبط اسم الصنف الذي تريد فتحه، فلا داعي لترك الأمر للنظام يبحث ويقارن.
+
+يرتبط هذا بأول عنصر من العناصر الأربعة المذكورة في الفقرة 24.
+
+تشبيه يومي: مثل كتابة عنوان بريدي كامل ودقيق (شارع، رقم منزل، مدينة) بدل وصف عام "بيت أبيض في الحي"؛
+
+مثال عملي: الانتقال من شاشة تسجيل الدخول إلى الشاشة الرئيسية داخل نفس التطبيق دائماً يستخدم `Component Name` صريح.
 
 **لماذا؟** لأن التنقل داخل نفس التطبيق لا يحتاج "بحثاً" من النظام؛ أنت تعرف الوجهة بالضبط فلماذا تترك القرار عشوائياً؟
 
@@ -890,13 +1277,32 @@ startActivity(intent)
 ### 26. Action
 
 #### النص الأصلي يقول (English):
-> An action is a string that specifies the general operation to be performed by an Intent. It defines the primary purpose of the Intent and largely determines how the rest of the intent is structured—particularly the information that is contained in the data and extras. Some common built-in actions for starting an activity: ACTION_MAIN, ACTION_VIEW, ACTION_SEND, ACTION_DIAL, ACTION_EDIT. An action can be defined using the Intent constructor or the setAction() method.
+> An action is a string that specifies the general operation to be performed by an Intent.
+> It defines the primary purpose of the Intent and largely determines how the rest of the intent is structured—particularly the information that is contained in the data and extras.
+> Some common built-in actions for starting an activity: ACTION_MAIN, ACTION_VIEW, ACTION_SEND, ACTION_DIAL, ACTION_EDIT.
+> An action can be defined using the Intent constructor or the setAction() method.
 
 #### الترجمة الحرفية:
-> الإجراء (Action) هو سلسلة نصية تحدد العملية العامة التي يجب تنفيذها بواسطة الـ`Intent`. يحدد الغرض الأساسي من الـ`Intent` ويحدد إلى حد كبير كيفية بناء بقية الـ`Intent` — خصوصاً المعلومات الموجودة في البيانات والإضافات. بعض الإجراءات المدمجة الشائعة لبدء نشاط: `ACTION_MAIN` (نقطة الدخول، لا يتوقع بيانات)، `ACTION_VIEW` (عرض معلومة للمستخدم كصورة أو موقع)، `ACTION_SEND` (مشاركة بيانات مع تطبيقات أخرى)، `ACTION_DIAL` (فتح الطلب الهاتفي برقم محدد يبدأه المستخدم يدوياً)، `ACTION_EDIT` (تعديل بيانات موجودة). يمكن تحديد الإجراء باستخدام الـ Constructor أو دالة `setAction()`.
+> الإجراء (Action) هو سلسلة نصية تحدد العملية العامة التي يجب تنفيذها بواسطة الـ`Intent`.
+> يحدد الغرض الأساسي من الـ`Intent` ويحدد إلى حد كبير كيفية بناء بقية الـ`Intent` — خصوصاً المعلومات الموجودة في البيانات والإضافات.
+> بعض الإجراءات المدمجة الشائعة لبدء نشاط:
+> `ACTION_MAIN` (نقطة الدخول، لا يتوقع بيانات)،
+> `ACTION_VIEW` (عرض معلومة للمستخدم كصورة أو موقع)،
+> `ACTION_SEND` (مشاركة بيانات مع تطبيقات أخرى)،
+> `ACTION_DIAL` (فتح الطلب الهاتفي برقم محدد يبدأه المستخدم يدوياً)،
+> `ACTION_EDIT` (تعديل بيانات موجودة).
+> يمكن تحديد الإجراء باستخدام الـ Constructor أو دالة `setAction()`.
 
 #### الشرح المبسّط:
-`Action` هو "الفعل" الذي يريد الـ`Intent` تنفيذه، وهو أهم عنصر من ناحية أنه يحدد شكل باقي الـ`Intent` — فمثلاً `ACTION_EDIT` يفترض وجود بيانات موجودة مسبقاً للتعديل عليها، بينما `ACTION_MAIN` لا يحتاج أي بيانات إطلاقاً. أهمية هذا المفهوم أنه العنصر الرئيسي المستخدم في الـ`Implicit Intent` للمطابقة مع `intent-filter`s الأنشطة الأخرى (كما رأينا سابقاً في `<action>` element). يرتبط هذا مباشرة بموضوع Intent Filters من بداية المحاضرة، فـ`Action` هو نفس القيمة التي تُقارَن بعنصر `<action>` في الفلتر. تشبيه يومي: مثل كلمة الفعل في جملة الطلب "أرسل" أو "اعرض" أو "عدّل"، تحدد نوع الخدمة المطلوبة قبل تفاصيلها؛ مثال عملي: `ACTION_DIAL` يفتح تطبيق الهاتف مع رقم مُعبّأ مسبقاً لكن يترك للمستخدم الضغط على "اتصال" يدوياً (بعكس إجراء آخر قد يتصل تلقائياً).
+`Action` هو "الفعل" الذي يريد الـ`Intent` تنفيذه، وهو أهم عنصر من ناحية أنه يحدد شكل باقي الـ`Intent` — فمثلاً `ACTION_EDIT` يفترض وجود بيانات موجودة مسبقاً للتعديل عليها، بينما `ACTION_MAIN` لا يحتاج أي بيانات إطلاقاً.
+
+أهمية هذا المفهوم أنه العنصر الرئيسي المستخدم في الـ`Implicit Intent` للمطابقة مع `intent-filter`s الأنشطة الأخرى (كما رأينا سابقاً في `<action>` element).
+
+يرتبط هذا مباشرة بموضوع Intent Filters من بداية المحاضرة، فـ`Action` هو نفس القيمة التي تُقارَن بعنصر `<action>` في الفلتر.
+
+تشبيه يومي: مثل كلمة الفعل في جملة الطلب "أرسل" أو "اعرض" أو "عدّل"، تحدد نوع الخدمة المطلوبة قبل تفاصيلها؛
+
+مثال عملي: `ACTION_DIAL` يفتح تطبيق الهاتف مع رقم مُعبّأ مسبقاً لكن يترك للمستخدم الضغط على "اتصال" يدوياً (بعكس إجراء آخر قد يتصل تلقائياً).
 
 **لماذا؟** لأن تحديد "الفعل" أولاً يسمح للنظام والمطوّر بمعرفة أي بيانات إضافية متوقعة قبل حتى النظر في تفاصيلها.
 
@@ -932,13 +1338,31 @@ val intent2 = Intent().apply {
 ### 27. Data
 
 #### النص الأصلي يقول (English):
-> The data field of an Intent specifies the URI (as a Uri object) that identifies the data to be acted on. It may also be associated with a MIME type that describes the type of that data. The type of data is generally determined by the Intent's action. When creating an Intent, it is often important to specify both URI and MIME type. The MIME type helps the Android system find the best component to receive your intent. The MIME type can sometimes be inferred from the URI.
+> The data field of an Intent specifies the URI (as a Uri object) that identifies the data to be acted on.
+> It may also be associated with a MIME type that describes the type of that data.
+> The type of data is generally determined by the Intent's action.
+> When creating an Intent, it is often important to specify both URI and MIME type.
+> The MIME type helps the Android system find the best component to receive your intent.
+> The MIME type can sometimes be inferred from the URI.
 
 #### الترجمة الحرفية:
-> يحدد حقل البيانات (data) في الـ`Intent` الـ URI (ككائن `Uri`) الذي يحدد البيانات المراد التصرف عليها. قد يكون مرتبطاً أيضاً بنوع MIME يصف نوع تلك البيانات. نوع البيانات يُحدَّد عموماً بواسطة إجراء الـ`Intent`. عند إنشاء Intent، من المهم غالباً تحديد كل من URI ونوع MIME معاً. نوع MIME يساعد نظام أندرويد على إيجاد أفضل مكوّن لاستقبال الـ`Intent`. يمكن أحياناً استنتاج نوع MIME من الـ URI.
+> يحدد حقل البيانات (data) في الـ`Intent` الـ URI (ككائن `Uri`) الذي يحدد البيانات المراد التصرف عليها.
+> قد يكون مرتبطاً أيضاً بنوع MIME يصف نوع تلك البيانات.
+> نوع البيانات يُحدَّد عموماً بواسطة إجراء الـ`Intent`.
+> عند إنشاء Intent، من المهم غالباً تحديد كل من URI ونوع MIME معاً.
+> نوع MIME يساعد نظام أندرويد على إيجاد أفضل مكوّن لاستقبال الـ`Intent`.
+> يمكن أحياناً استنتاج نوع MIME من الـ URI.
 
 #### الشرح المبسّط:
-`Data` هي "العنوان" الذي يشير إلى البيانات الفعلية المراد التعامل معها (مثل رقم هاتف، رابط ويب، أو ملف صورة)، ويُفضَّل غالباً إرفاقه مع نوع MIME حتى يعرف النظام بدقة نوع المحتوى وليس فقط مكانه. أهمية هذا الجمع بين URI ونوع MIME أنها تمنع أخطاءً مضحكة مثل فتح تطبيق تشغيل صوت لملف هو في الحقيقة صورة، رغم أن صيغة الـ URI قد تبدو متشابهة. يرتبط هذا مباشرة بمفهوم `Action` السابق لأن نوع البيانات يتحدد غالباً بناءً على الإجراء المختار (كما ذُكر: "generally determined by the Intent's action"). تشبيه يومي: مثل كتابة عنوان منزل (URI) مع ملاحظة "هذا مستودع وليس منزل سكني" (MIME type) حتى لا يخطئ من يقرأ العنوان في فهم طبيعة المكان؛ مثال عملي: URI بصيغة `tel:` يفتح تطبيق الاتصال بينما URI بصيغة `content://` قد يفتح معرض الصور.
+`Data` هي "العنوان" الذي يشير إلى البيانات الفعلية المراد التعامل معها (مثل رقم هاتف، رابط ويب، أو ملف صورة)، ويُفضَّل غالباً إرفاقه مع نوع MIME حتى يعرف النظام بدقة نوع المحتوى وليس فقط مكانه.
+
+أهمية هذا الجمع بين URI ونوع MIME أنها تمنع أخطاءً مضحكة مثل فتح تطبيق تشغيل صوت لملف هو في الحقيقة صورة، رغم أن صيغة الـ URI قد تبدو متشابهة.
+
+يرتبط هذا مباشرة بمفهوم `Action` السابق لأن نوع البيانات يتحدد غالباً بناءً على الإجراء المختار (كما ذُكر: "generally determined by the Intent's action").
+
+تشبيه يومي: مثل كتابة عنوان منزل (URI) مع ملاحظة "هذا مستودع وليس منزل سكني" (MIME type) حتى لا يخطئ من يقرأ العنوان في فهم طبيعة المكان؛
+
+مثال عملي: URI بصيغة `tel:` يفتح تطبيق الاتصال بينما URI بصيغة `content://` قد يفتح معرض الصور.
 
 **لماذا؟** لأن نفس شكل الـ URI قد يخدع النظام بدون نوع MIME، فتحديد النوع صراحة يضمن اختيار التطبيق الصحيح للمهمة الصحيحة.
 
@@ -992,13 +1416,33 @@ val viewImageIntent = Intent().apply {
 ### 28. Category
 
 #### النص الأصلي يقول (English):
-> A category is a string containing additional information about the kind of component that should handle the intent. Any number of category descriptions can be placed in an intent, but most intents do not require a category. Some common categories: CATEGORY_BROWSABLE, CATEGORY_LAUNCHER, CATEGORY_DEFAULT. You can specify a category with addCategory().
+> A category is a string containing additional information about the kind of component that should handle the intent.
+> Any number of category descriptions can be placed in an intent, but most intents do not require a category.
+> Some common categories: CATEGORY_BROWSABLE, CATEGORY_LAUNCHER, CATEGORY_DEFAULT.
+> You can specify a category with addCategory().
 
 #### الترجمة الحرفية:
-> الفئة (category) هي سلسلة نصية تحتوي معلومات إضافية عن نوع المكوّن الذي يجب أن يعالج الـ`Intent`. يمكن وضع أي عدد من أوصاف الفئة في Intent واحد، لكن معظم الـ`Intents` لا تتطلب فئة. بعض الفئات الشائعة: `CATEGORY_BROWSABLE` (يمكن فتح النشاط الهدف من متصفح ويب)، `CATEGORY_LAUNCHER` (يحدد نقطة الدخول الرئيسية للتطبيق ويستخدمها مشغّل النظام)، `CATEGORY_DEFAULT` (تُضاف تلقائياً للـ Intents الممرَّرة لـ `startActivity()` إن لم تُحدَّد فئة أخرى؛ يجب على الأنشطة إعلان هذه الفئة في فلاترها لاستقبال Intents ضمنية). يمكنك تحديد فئة باستخدام `addCategory()`.
+> الفئة (category) هي سلسلة نصية تحتوي معلومات إضافية عن نوع المكوّن الذي يجب أن يعالج الـ`Intent`.
+> يمكن وضع أي عدد من أوصاف الفئة في Intent واحد، لكن معظم الـ`Intents` لا تتطلب فئة.
+> بعض الفئات الشائعة:
+> `CATEGORY_BROWSABLE` (يمكن فتح النشاط الهدف من متصفح ويب)،
+> `CATEGORY_LAUNCHER` (يحدد نقطة الدخول الرئيسية للتطبيق ويستخدمها مشغّل النظام)،
+> `CATEGORY_DEFAULT` (تُضاف تلقائياً للـ Intents الممرَّرة لـ `startActivity()` إن لم تُحدَّد فئة أخرى؛
+> يجب على الأنشطة إعلان هذه الفئة في فلاترها لاستقبال Intents ضمنية).
+> يمكنك تحديد فئة باستخدام `addCategory()`.
 
 #### الشرح المبسّط:
-`Category` تضيف "سياقاً" إضافياً حول طبيعة المكوّن المطلوب، وهي غالباً غير ضرورية لأن `CATEGORY_DEFAULT` تُضاف تلقائياً في معظم الحالات، لكنها ضرورية جداً في حالات محددة مثل تحديد النشاط الرئيسي للتطبيق (`CATEGORY_LAUNCHER`) أو السماح بفتحه من متصفح (`CATEGORY_BROWSABLE`). أهمية هذا المفهوم أنه يفسّر لماذا رأينا `<category android:name="android.intent.category.DEFAULT" />` مذكورة مسبقاً في مثال Intent Filter بقسم Manifest — هي الشرط الافتراضي الذي يجب أن يطابقه أي نشاط يريد استقبال Intents ضمنية عادية. يرتبط هذا مباشرة بموضوع Intent Filters المشروح سابقاً كتفصيل إضافي لأحد عناصره الثلاثة. تشبيه يومي: مثل وسم إضافي على طرد بريدي "هش" أو "عاجل" يوضح كيف يجب التعامل معه دون أن يغيّر وجهته الأساسية؛ مثال عملي: نشاط `MainActivity` يحتاج `CATEGORY_LAUNCHER` مع `ACTION_MAIN` معاً ليظهر أيقونته في قائمة التطبيقات.
+`Category` تضيف "سياقاً" إضافياً حول طبيعة المكوّن المطلوب، وهي غالباً غير ضرورية لأن `CATEGORY_DEFAULT` تُضاف تلقائياً في معظم الحالات،
+
+لكنها ضرورية جداً في حالات محددة مثل تحديد النشاط الرئيسي للتطبيق (`CATEGORY_LAUNCHER`) أو السماح بفتحه من متصفح (`CATEGORY_BROWSABLE`).
+
+أهمية هذا المفهوم أنه يفسّر لماذا رأينا `<category android:name="android.intent.category.DEFAULT" />` مذكورة مسبقاً في مثال Intent Filter بقسم Manifest — هي الشرط الافتراضي الذي يجب أن يطابقه أي نشاط يريد استقبال Intents ضمنية عادية.
+
+يرتبط هذا مباشرة بموضوع Intent Filters المشروح سابقاً كتفصيل إضافي لأحد عناصره الثلاثة.
+
+تشبيه يومي: مثل وسم إضافي على طرد بريدي "هش" أو "عاجل" يوضح كيف يجب التعامل معه دون أن يغيّر وجهته الأساسية؛
+
+مثال عملي: نشاط `MainActivity` يحتاج `CATEGORY_LAUNCHER` مع `ACTION_MAIN` معاً ليظهر أيقونته في قائمة التطبيقات.
 
 **لماذا؟** لأن بعض السلوكيات الخاصة (كالظهور كأيقونة رئيسية أو القبول من متصفح) تحتاج إشارة صريحة إضافية غير كافية بمجرد `Action` وحده.
 
@@ -1033,13 +1477,29 @@ val intent = Intent(Intent.ACTION_VIEW).apply {
 ### 29. Extras
 
 #### النص الأصلي يقول (English):
-> Extras are Key-value pairs that carry additional information required to accomplish the requested action. Just as some actions use particular kinds of data URIs, some actions also use particular extras. You can add extra data with various putExtra() methods, each accepting two parameters: the key name and the value. You can also create a Bundle object with all the extra data, then insert the Bundle in the Intent with putExtras(). Extras support a variety of data types, including primitives, arrays, strings, and objects such as Parcelable.
+> Extras are Key-value pairs that carry additional information required to accomplish the requested action.
+> Just as some actions use particular kinds of data URIs, some actions also use particular extras.
+> You can add extra data with various putExtra() methods, each accepting two parameters: the key name and the value.
+> You can also create a Bundle object with all the extra data, then insert the Bundle in the Intent with putExtras().
+> Extras support a variety of data types, including primitives, arrays, strings, and objects such as Parcelable.
 
 #### الترجمة الحرفية:
-> الإضافات (Extras) هي أزواج مفتاح-قيمة تحمل معلومات إضافية مطلوبة لإنجاز الإجراء المطلوب. تماماً كما تستخدم بعض الإجراءات أنواعاً معينة من URIs للبيانات، تستخدم بعض الإجراءات أيضاً إضافات معينة. يمكنك إضافة بيانات إضافية باستخدام دوال `putExtra()` المختلفة، وكل واحدة تقبل معلمتين: اسم المفتاح والقيمة. يمكنك أيضاً إنشاء كائن `Bundle` يحتوي كل البيانات الإضافية، ثم إدراج الـ`Bundle` في الـ`Intent` باستخدام `putExtras()`. تدعم الإضافات أنواعاً متعددة من البيانات، تشمل الأنواع الأولية، المصفوفات، السلاسل النصية، وكائنات مثل `Parcelable`.
+> الإضافات (Extras) هي أزواج مفتاح-قيمة تحمل معلومات إضافية مطلوبة لإنجاز الإجراء المطلوب.
+> تماماً كما تستخدم بعض الإجراءات أنواعاً معينة من URIs للبيانات، تستخدم بعض الإجراءات أيضاً إضافات معينة.
+> يمكنك إضافة بيانات إضافية باستخدام دوال `putExtra()` المختلفة، وكل واحدة تقبل معلمتين: اسم المفتاح والقيمة.
+> يمكنك أيضاً إنشاء كائن `Bundle` يحتوي كل البيانات الإضافية، ثم إدراج الـ`Bundle` في الـ`Intent` باستخدام `putExtras()`.
+> تدعم الإضافات أنواعاً متعددة من البيانات، تشمل الأنواع الأولية، المصفوفات، السلاسل النصية، وكائنات مثل `Parcelable`.
 
 #### الشرح المبسّط:
-`Extras` هي الطريقة العملية لإرفاق "محتوى فعلي" مع الـ`Intent` بعد أن تحدّد شكله عبر Action/Data/Category — فمثلاً إجراء إرسال بريد يحدد أن العملية "إرسال"، لكن نص الرسالة نفسه ينتقل عبر `Extras`. أهميتها أنها تُذكّرنا أن Action/Data/Category هي "معايير التوجيه" بينما Extras هي "المحتوى الفعلي" غير المستخدم في المطابقة كما ذُكر سابقاً في الفقرة 24. يرتبط هذا مباشرة بمثال `putExtra(Intent.EXTRA_TEXT, textMessage)` الذي رأيناه مسبقاً في بداية المحاضرة عند شرح Intent Filters، وهذه الفقرة توضّحه بالتفصيل. تشبيه يومي: مثل ظرف بريدي (Extras) يحمل الرسالة الفعلية، بينما العنوان على الظرف (Action/Data) يحدد فقط إلى أين يذهب؛ مثال عملي: إرسال بريد إلكتروني يحتاج موضوعاً ونصاً كإضافات منفصلة.
+`Extras` هي الطريقة العملية لإرفاق "محتوى فعلي" مع الـ`Intent` بعد أن تحدّد شكله عبر Action/Data/Category — فمثلاً إجراء إرسال بريد يحدد أن العملية "إرسال"، لكن نص الرسالة نفسه ينتقل عبر `Extras`.
+
+أهميتها أنها تُذكّرنا أن Action/Data/Category هي "معايير التوجيه" بينما Extras هي "المحتوى الفعلي" غير المستخدم في المطابقة كما ذُكر سابقاً في الفقرة 24.
+
+يرتبط هذا مباشرة بمثال `putExtra(Intent.EXTRA_TEXT, textMessage)` الذي رأيناه مسبقاً في بداية المحاضرة عند شرح Intent Filters، وهذه الفقرة توضّحه بالتفصيل.
+
+تشبيه يومي: مثل ظرف بريدي (Extras) يحمل الرسالة الفعلية، بينما العنوان على الظرف (Action/Data) يحدد فقط إلى أين يذهب؛
+
+مثال عملي: إرسال بريد إلكتروني يحتاج موضوعاً ونصاً كإضافات منفصلة.
 
 **لماذا؟** لأن فصل "معايير التوجيه" عن "المحتوى الفعلي" يسمح للنظام بمطابقة الـ Intent بسرعة دون الحاجة لفحص كل البيانات المرفقة الثقيلة.
 
@@ -1081,13 +1541,28 @@ startActivity(Intent.createChooser(emailIntent, "Choose an email client"))
 ### 30. Flags
 
 #### النص الأصلي يقول (English):
-> Flags function as metadata for the intent and are used to control how the Android system launches and manages an activity. Example: The flags may instruct the Android system which task the activity should belong to and how to treat it after it's launched (whether it belongs in the list of recent activities). Some common flags: FLAG_ACTIVITY_NO_HISTORY, FLAG_DEBUG_LOG_RESOLUTION. You can specify flags using setFlags() or addFlags() methods.
+> Flags function as metadata for the intent and are used to control how the Android system launches and manages an activity.
+> Example: The flags may instruct the Android system which task the activity should belong to and how to treat it after it's launched (whether it belongs in the list of recent activities).
+> Some common flags: FLAG_ACTIVITY_NO_HISTORY, FLAG_DEBUG_LOG_RESOLUTION.
+> You can specify flags using setFlags() or addFlags() methods.
 
 #### الترجمة الحرفية:
-> تعمل الأعلام (Flags) كبيانات وصفية (metadata) للـ`Intent` وتُستخدم للتحكم بكيفية إطلاق نظام أندرويد وإدارته لنشاط ما. مثال: قد توجّه الأعلام نظام أندرويد أي مهمة (task) يجب أن ينتمي إليها النشاط وكيف يُعامَل بعد إطلاقه (سواء ينتمي لقائمة الأنشطة الأخيرة أم لا). بعض الأعلام الشائعة: `FLAG_ACTIVITY_NO_HISTORY` (إذا فُعِّل، لا يُحفظ النشاط في المكدس الخلفي؛ بمجرد مغادرة المستخدم له، ينتهي النشاط)، `FLAG_DEBUG_LOG_RESOLUTION` (تُستخدم للتصحيح؛ عند تفعيلها تُطبع رسائل سجل أثناء تحليل هذا الـ`Intent` لتوضيح ما وُجد لبناء قائمة الحل النهائية). يمكنك تحديد الأعلام باستخدام دوال `setFlags()` أو `addFlags()`.
+> تعمل الأعلام (Flags) كبيانات وصفية (metadata) للـ`Intent` وتُستخدم للتحكم بكيفية إطلاق نظام أندرويد وإدارته لنشاط ما.
+> مثال: قد توجّه الأعلام نظام أندرويد أي مهمة (task) يجب أن ينتمي إليها النشاط وكيف يُعامَل بعد إطلاقه (سواء ينتمي لقائمة الأنشطة الأخيرة أم لا).
+> بعض الأعلام الشائعة: `FLAG_ACTIVITY_NO_HISTORY` (إذا فُعِّل، لا يُحفظ النشاط في المكدس الخلفي؛ بمجرد مغادرة المستخدم له، ينتهي النشاط)، `FLAG_DEBUG_LOG_RESOLUTION` (تُستخدم للتصحيح؛
+> عند تفعيلها تُطبع رسائل سجل أثناء تحليل هذا الـ`Intent` لتوضيح ما وُجد لبناء قائمة الحل النهائية).
+> يمكنك تحديد الأعلام باستخدام دوال `setFlags()` أو `addFlags()`.
 
 #### الشرح المبسّط:
-`Flags` هي آخر عنصر في بناء الـ`Intent`، وهي بيانات وصفية "تشغيلية" (وليست محتوى ولا معيار مطابقة) تخبر النظام كيف يتعامل مع النشاط بعد إطلاقه، مثل هل يبقى في سجل التنقل (back stack) أم لا. أهميتها في حالات خاصة مثل شاشات تسجيل الدخول التي لا نريد أن يعود المستخدم إليها بالضغط على زر الرجوع بعد نجاح الدخول. يرتبط هذا مباشرة بالفقرة 24 كإكمال أخير للعنصر السادس من عناصر بناء الـ`Intent`. تشبيه يومي: مثل تعليمات خاصة على طرد بريدي "لا تُعِد هذا الطرد لصندوق البريد بعد التسليم" (NO_HISTORY)؛ مثال عملي: بعد نجاح تسجيل الدخول، استخدام `FLAG_ACTIVITY_NO_HISTORY` على نشاط تسجيل الدخول يمنع المستخدم من العودة إليه بزر الرجوع.
+`Flags` هي آخر عنصر في بناء الـ`Intent`، وهي بيانات وصفية "تشغيلية" (وليست محتوى ولا معيار مطابقة) تخبر النظام كيف يتعامل مع النشاط بعد إطلاقه، مثل هل يبقى في سجل التنقل (back stack) أم لا.
+
+أهميتها في حالات خاصة مثل شاشات تسجيل الدخول التي لا نريد أن يعود المستخدم إليها بالضغط على زر الرجوع بعد نجاح الدخول.
+
+يرتبط هذا مباشرة بالفقرة 24 كإكمال أخير للعنصر السادس من عناصر بناء الـ`Intent`.
+
+تشبيه يومي: مثل تعليمات خاصة على طرد بريدي "لا تُعِد هذا الطرد لصندوق البريد بعد التسليم" (NO_HISTORY)؛
+
+مثال عملي: بعد نجاح تسجيل الدخول، استخدام `FLAG_ACTIVITY_NO_HISTORY` على نشاط تسجيل الدخول يمنع المستخدم من العودة إليه بزر الرجوع.
 
 **لماذا؟** لأن بعض الشاشات (كصفحات تسجيل الدخول أو splash screens) يجب ألا تظهر مجدداً عند الضغط على زر الرجوع، والأعلام هي الآلية للتحكم في هذا السلوك.
 
@@ -1130,13 +1605,29 @@ val newInt = Intent(Intent.ACTION_SEND).apply {
 ### 31. استقبال Implicit Intent — إعلان الفلاتر
 
 #### النص الأصلي يقول (English):
-> To advertise which implicit intents your app can receive, declare one or more intent filters for each of your app components with an <intent-filter> element in your manifest file. The system delivers an implicit intent to your app component only if the intent can pass through one of your intent filters. In each app component that includes an <intent-filter> element, explicitly set a value for android:exported. An app component should declare separate filters for each unique job it can do. Inside the <intent-filter>, you can specify the type of intents to accept using one or more of these three elements: <action>, <data>, <category>.
+> To advertise which implicit intents your app can receive, declare one or more intent filters for each of your app components with an <intent-filter> element in your manifest file.
+> The system delivers an implicit intent to your app component only if the intent can pass through one of your intent filters.
+> In each app component that includes an <intent-filter> element, explicitly set a value for android:exported.
+> An app component should declare separate filters for each unique job it can do.
+> Inside the <intent-filter>, you can specify the type of intents to accept using one or more of these three elements: <action>, <data>, <category>.
 
 #### الترجمة الحرفية:
-> للإعلان عن الـ`Intents` الضمنية التي يمكن لتطبيقك استقبالها، أعلن فلتر أو أكثر لكل مكوّن من مكوّنات تطبيقك باستخدام عنصر `<intent-filter>` في ملف manifest. يسلّم النظام Intent ضمنياً لمكوّن تطبيقك فقط إذا كان الـ`Intent` يستطيع المرور عبر أحد فلاتره. في كل مكوّن تطبيق يتضمن عنصر `<intent-filter>`، عيّن قيمة صريحة لخاصية `android:exported`. يجب على مكوّن التطبيق إعلان فلاتر منفصلة لكل مهمة فريدة يستطيع تنفيذها. داخل `<intent-filter>`، يمكنك تحديد نوع الـ`Intents` المقبولة باستخدام واحد أو أكثر من هذه العناصر الثلاثة: `<action>`، `<data>`، `<category>`.
+> للإعلان عن الـ`Intents` الضمنية التي يمكن لتطبيقك استقبالها، أعلن فلتر أو أكثر لكل مكوّن من مكوّنات تطبيقك باستخدام عنصر `<intent-filter>` في ملف manifest.
+> يسلّم النظام Intent ضمنياً لمكوّن تطبيقك فقط إذا كان الـ`Intent` يستطيع المرور عبر أحد فلاتره.
+> في كل مكوّن تطبيق يتضمن عنصر `<intent-filter>`، عيّن قيمة صريحة لخاصية `android:exported`.
+> يجب على مكوّن التطبيق إعلان فلاتر منفصلة لكل مهمة فريدة يستطيع تنفيذها.
+> داخل `<intent-filter>`، يمكنك تحديد نوع الـ`Intents` المقبولة باستخدام واحد أو أكثر من هذه العناصر الثلاثة: `<action>`، `<data>`، `<category>`.
 
 #### الشرح المبسّط:
-هذه الفقرة تعيد نفس مفهوم Intent Filters المشروح في بداية المحاضرة لكن من "زاوية الاستقبال" وليس الإرسال، وتضيف تفصيلاً جديداً مهماً وهو ضرورة تحديد `android:exported` صراحة لكل مكوّن له فلتر، لأسباب أمنية حديثة في أندرويد. القاعدة العملية المهمة هنا هي "فلتر منفصل لكل مهمة" — فلا يجب دمج مهام مختلفة تماماً (كاستقبال نص واستقبال صورة) في فلتر واحد، بل فلاتر متعددة لكل نشاط. يرتبط هذا مباشرة بموضوع "Declare intent filters" من بداية المحاضرة كإعادة وتوسيع له بعد أن تعلمنا تفاصيل بناء الـ Intent. تشبيه يومي: مثل موظف استقبال في شركة له لوحة معلنة بوضوح "أستقبل: طلبات الدعم الفني فقط" (فلتر محدد) بدل قبول أي طلب عشوائي؛ مثال عملي: نشاط مشاركة يحتاج فلتراً منفصلاً لاستقبال النصوص وفلتراً آخر لاستقبال الصور.
+هذه الفقرة تعيد نفس مفهوم Intent Filters المشروح في بداية المحاضرة لكن من "زاوية الاستقبال" وليس الإرسال، وتضيف تفصيلاً جديداً مهماً وهو ضرورة تحديد `android:exported` صراحة لكل مكوّن له فلتر، لأسباب أمنية حديثة في أندرويد.
+
+القاعدة العملية المهمة هنا هي "فلتر منفصل لكل مهمة" — فلا يجب دمج مهام مختلفة تماماً (كاستقبال نص واستقبال صورة) في فلتر واحد، بل فلاتر متعددة لكل نشاط.
+
+يرتبط هذا مباشرة بموضوع "Declare intent filters" من بداية المحاضرة كإعادة وتوسيع له بعد أن تعلمنا تفاصيل بناء الـ Intent.
+
+تشبيه يومي: مثل موظف استقبال في شركة له لوحة معلنة بوضوح "أستقبل: طلبات الدعم الفني فقط" (فلتر محدد) بدل قبول أي طلب عشوائي؛
+
+مثال عملي: نشاط مشاركة يحتاج فلتراً منفصلاً لاستقبال النصوص وفلتراً آخر لاستقبال الصور.
 
 **لماذا؟** لأن تحديد `android:exported` صراحة يمنع الوصول العرضي غير المقصود من تطبيقات خارجية لمكوّنات لم يُقصد جعلها عامة.
 
@@ -1145,13 +1636,37 @@ val newInt = Intent(Intent.ACTION_SEND).apply {
 ### 32. مثال كامل على فلاتر تطبيق مشاركة اجتماعي
 
 #### النص الأصلي يقول (English):
-> Example filters from the manifest file of a social-sharing app: MainActivity handles ACTION_MAIN with CATEGORY_LAUNCHER. ShareActivity handles SEND actions with text data, and also handles SEND and SEND_MULTIPLE with media data (panorama, image, video MIME types). The first activity, MainActivity, is the app's main entry: The ACTION_MAIN action indicates this is the main entry point and does not expect any intent data. The CATEGORY_LAUNCHER category indicates that this activity's icon should be placed in the system's app launcher. These two must be paired together in order for the activity to appear in the app launcher. The second activity, ShareActivity, is designed to handle sharing content. It can be launched from within the app, or from another app via an implicit intent that matches its intent filters.
+> Example filters from the manifest file of a social-sharing app: MainActivity handles ACTION_MAIN with CATEGORY_LAUNCHER.
+> ShareActivity handles SEND actions with text data, and also handles SEND and SEND_MULTIPLE with media data (panorama, image, video MIME types).
+> The first activity, MainActivity, is the app's main entry: The ACTION_MAIN action indicates this is the main entry point and does not expect any intent data.
+> The CATEGORY_LAUNCHER category indicates that this activity's icon should be placed in the system's app launcher.
+> These two must be paired together in order for the activity to appear in the app launcher.
+> The second activity, ShareActivity, is designed to handle sharing content.
+> It can be launched from within the app, or from another app via an implicit intent that matches its intent filters.
 
 #### الترجمة الحرفية:
-> أمثلة فلاتر من ملف manifest لتطبيق مشاركة اجتماعي: `MainActivity` تعالج `ACTION_MAIN` مع `CATEGORY_LAUNCHER`. `ShareActivity` تعالج إجراءات `SEND` ببيانات نصية، وتعالج أيضاً `SEND` و`SEND_MULTIPLE` ببيانات وسائط (بانوراما، صورة، فيديو). النشاط الأول، `MainActivity`، هو نقطة الدخول الرئيسية للتطبيق: إجراء `ACTION_MAIN` يشير إلى أن هذه نقطة الدخول الرئيسية ولا يتوقع أي بيانات Intent. فئة `CATEGORY_LAUNCHER` تشير إلى أن أيقونة هذا النشاط يجب أن توضع في مشغّل التطبيقات الخاص بالنظام. يجب اقتران هاتين معاً كي يظهر النشاط في مشغّل التطبيقات. النشاط الثاني، `ShareActivity`، مصمَّم لمعالجة مشاركة المحتوى. يمكن إطلاقه من داخل التطبيق، أو من تطبيق آخر عبر Intent ضمني يطابق فلاتره.
+> أمثلة فلاتر من ملف manifest لتطبيق مشاركة اجتماعي: `MainActivity` تعالج `ACTION_MAIN` مع `CATEGORY_LAUNCHER`.
+> `ShareActivity` تعالج إجراءات `SEND` ببيانات نصية، وتعالج أيضاً `SEND` و`SEND_MULTIPLE` ببيانات وسائط (بانوراما، صورة، فيديو).
+> النشاط الأول، `MainActivity`، هو نقطة الدخول الرئيسية للتطبيق: إجراء `ACTION_MAIN` يشير إلى أن هذه نقطة الدخول الرئيسية ولا يتوقع أي بيانات Intent.
+> فئة `CATEGORY_LAUNCHER` تشير إلى أن أيقونة هذا النشاط يجب أن توضع في مشغّل التطبيقات الخاص بالنظام.
+> يجب اقتران هاتين معاً كي يظهر النشاط في مشغّل التطبيقات.
+> النشاط الثاني، `ShareActivity`، مصمَّم لمعالجة مشاركة المحتوى.
+> يمكن إطلاقه من داخل التطبيق، أو من تطبيق آخر عبر Intent ضمني يطابق فلاتره.
 
 #### الشرح المبسّط:
-هذا مثال متكامل يجمع كل ما تعلمناه: نشاط واحد (`MainActivity`) مسؤول عن كونه نقطة الدخول فقط (يحتاج زوج `ACTION_MAIN` + `CATEGORY_LAUNCHER` معاً بالضبط)، ونشاط آخر (`ShareActivity`) له فلترين منفصلين لمهمتين مختلفتين (نص، ووسائط) تماشياً مع قاعدة "فلتر منفصل لكل مهمة" المذكورة في الفقرة السابقة. أهمية هذا المثال أنه يوضح عملياً كيف يمكن لنشاط واحد أن يمتلك أكثر من `intent-filter` في نفس الوقت لخدمة أكثر من سيناريو استخدام. يربط هذا كل الأفكار السابقة (Manifest, Action, Category, Data) في سياق واحد واقعي. تشبيه يومي: مثل موظف استقبال شركة له لافتتان منفصلتان: واحدة "الدخول الرئيسي هنا" وأخرى "قسم الشكاوى والمقترحات هنا"، كل لافتة لمهمة مختلفة تماماً؛ مثال عملي: زر "مشاركة" في تطبيق معرض صور يستدعي `ShareActivity` في هذا التطبيق الاجتماعي مباشرة عبر فلتر الوسائط.
+هذا مثال متكامل يجمع كل ما تعلمناه:
+
+نشاط واحد (`MainActivity`) مسؤول عن كونه نقطة الدخول فقط (يحتاج زوج `ACTION_MAIN` + `CATEGORY_LAUNCHER` معاً بالضبط)،
+
+ونشاط آخر (`ShareActivity`) له فلترين منفصلين لمهمتين مختلفتين (نص، ووسائط) تماشياً مع قاعدة "فلتر منفصل لكل مهمة" المذكورة في الفقرة السابقة.
+
+أهمية هذا المثال أنه يوضح عملياً كيف يمكن لنشاط واحد أن يمتلك أكثر من `intent-filter` في نفس الوقت لخدمة أكثر من سيناريو استخدام.
+
+يربط هذا كل الأفكار السابقة (Manifest, Action, Category, Data) في سياق واحد واقعي.
+
+تشبيه يومي: مثل موظف استقبال شركة له لافتتان منفصلتان: واحدة "الدخول الرئيسي هنا" وأخرى "قسم الشكاوى والمقترحات هنا"، كل لافتة لمهمة مختلفة تماماً؛
+
+مثال عملي: زر "مشاركة" في تطبيق معرض صور يستدعي `ShareActivity` في هذا التطبيق الاجتماعي مباشرة عبر فلتر الوسائط.
 
 **لماذا؟** لأن دمج زوج `ACTION_MAIN`/`CATEGORY_LAUNCHER` تحديداً هو الشرط الوحيد الذي يجعل النظام يعرض أيقونة تطبيقك في قائمة التطبيقات الرئيسية.
 
@@ -1214,7 +1729,13 @@ val newInt = Intent(Intent.ACTION_SEND).apply {
 > عندما يستقبل النظام Intent ضمنياً لبدء نشاط، يبحث عن أفضل نشاط لهذا الـ`Intent` عن طريق مقارنته بفلاتر الـ`Intent` بناءً على ثلاثة جوانب: الإجراء (Action)، البيانات (Data، سواء URI أو نوع البيانات)، الفئة (Category).
 
 #### الشرح المبسّط:
-هذه الفقرة تربط كل شيء معاً — الآن نعرف أن عملية "تحليل الـ Intent" (Intent Resolution) تعتمد بالضبط على العناصر الثلاثة الأولى من العناصر الأربعة الأساسية المذكورة في الفقرة 24 (باستثناء Component name لأنه غير موجود أصلاً في Intent ضمني). أهمية هذه المقدمة أنها تمهّد لثلاث فقرات تفصيلية قادمة، كل واحدة تشرح "اختبار" مطابقة منفصل لكل عنصر من الثلاثة. يرتبط هذا مباشرة بمفهوم Implicit Intent المشروح في الفقرة 23 كتفصيل تقني لكيفية عمل "البحث والمطابقة" الذي ذُكر هناك بشكل عام. تشبيه يومي: مثل نظام توظيف آلي يفحص طلب توظيف عبر ثلاثة معايير بالضبط (المسمى الوظيفي، نوع الملف المرفق، والفئة العمرية) قبل قبول المرشح؛ مثال عملي سيأتي في الفقرات التالية عبر أمثلة أفعال وبيانات وفئات محددة.
+هذه الفقرة تربط كل شيء معاً — الآن نعرف أن عملية "تحليل الـ Intent" (Intent Resolution) تعتمد بالضبط على العناصر الثلاثة الأولى من العناصر الأربعة الأساسية المذكورة في الفقرة 24 (باستثناء Component name لأنه غير موجود أصلاً في Intent ضمني).
+
+أهمية هذه المقدمة أنها تمهّد لثلاث فقرات تفصيلية قادمة، كل واحدة تشرح "اختبار" مطابقة منفصل لكل عنصر من الثلاثة.
+
+يرتبط هذا مباشرة بمفهوم Implicit Intent المشروح في الفقرة 23 كتفصيل تقني لكيفية عمل "البحث والمطابقة" الذي ذُكر هناك بشكل عام.
+
+تشبيه يومي: مثل نظام توظيف آلي يفحص طلب توظيف عبر ثلاثة معايير بالضبط (المسمى الوظيفي، نوع الملف المرفق، والفئة العمرية) قبل قبول المرشح؛ مثال عملي سيأتي في الفقرات التالية عبر أمثلة أفعال وبيانات وفئات محددة.
 
 **لماذا؟** لأن تقسيم عملية المطابقة لثلاثة اختبارات منفصلة يجعلها منهجية وقابلة للتنبؤ بدقة بدل أن تكون عشوائية.
 
@@ -1223,13 +1744,25 @@ val newInt = Intent(Intent.ACTION_SEND).apply {
 ### 34. اختبار الـ Action
 
 #### النص الأصلي يقول (English):
-> To specify accepted intent actions, an intent filter can declare zero or more <action> elements. To pass this filter, the action specified in the Intent must match one of the actions listed in the filter. If the filter does not list any actions, there is nothing for an intent to match, so all intents fail the test. If an Intent does not specify an action, it passes the test as long as the filter contains at least one action.
+> To specify accepted intent actions, an intent filter can declare zero or more <action> elements.
+> To pass this filter, the action specified in the Intent must match one of the actions listed in the filter.
+> If the filter does not list any actions, there is nothing for an intent to match, so all intents fail the test.
+> If an Intent does not specify an action, it passes the test as long as the filter contains at least one action.
 
 #### الترجمة الحرفية:
-> لتحديد الإجراءات المقبولة، يمكن لفلتر Intent إعلان صفر أو أكثر من عناصر `<action>`. لاجتياز هذا الفلتر، يجب أن يطابق الإجراء المحدد في الـ`Intent` أحد الإجراءات المذكورة في الفلتر. إذا لم يذكر الفلتر أي إجراءات، فلا يوجد ما يطابقه أي Intent، لذلك تفشل كل الـ`Intents` هذا الاختبار. إذا لم يحدد Intent إجراءً، فإنه يجتاز الاختبار طالما يحتوي الفلتر على إجراء واحد على الأقل.
+> لتحديد الإجراءات المقبولة، يمكن لفلتر Intent إعلان صفر أو أكثر من عناصر `<action>`.
+> لاجتياز هذا الفلتر، يجب أن يطابق الإجراء المحدد في الـ`Intent` أحد الإجراءات المذكورة في الفلتر.
+> إذا لم يذكر الفلتر أي إجراءات، فلا يوجد ما يطابقه أي Intent، لذلك تفشل كل الـ`Intents` هذا الاختبار.
+> إذا لم يحدد Intent إجراءً، فإنه يجتاز الاختبار طالما يحتوي الفلتر على إجراء واحد على الأقل.
 
 #### الشرح المبسّط:
-اختبار الـ Action له قاعدة واضحة: يكفي تطابق واحد فقط بين إجراء الـ`Intent` وأي إجراء مذكور في قائمة الفلتر (وليس تطابقاً كاملاً للقائمة)، لكن فلتراً بلا أي `<action>` مذكور يرفض كل شيء تلقائياً لأنه لا يوجد أساس للمقارنة. الحالة الاستثنائية المهمة هنا هي: Intent بلا إجراء محدد إطلاقاً ينجح تلقائياً في هذا الاختبار طالما الفلتر يحتوي إجراءً واحداً على الأقل، وهذا سلوك قد يبدو غريباً لكنه منطقي لأن غياب الشرط لا يمكن أن يُخالف شرطاً موجوداً. يرتبط هذا مباشرة بمثال `ExampleActivity` من بداية المحاضرة حيث كان يحتوي `<action android:name="android.intent.action.SEND" />` وحيد. تشبيه يومي: مثل اختبار توظيف يقبل أي مرشح يمتلك واحدة على الأقل من المهارات المطلوبة في القائمة، لكن يرفض تلقائياً كل المرشحين إذا كانت قائمة المهارات المطلوبة فارغة أصلاً؛ مثال عملي أدناه بجدول تتبع.
+اختبار الـ Action له قاعدة واضحة: يكفي تطابق واحد فقط بين إجراء الـ`Intent` وأي إجراء مذكور في قائمة الفلتر (وليس تطابقاً كاملاً للقائمة)، لكن فلتراً بلا أي `<action>` مذكور يرفض كل شيء تلقائياً لأنه لا يوجد أساس للمقارنة.
+
+الحالة الاستثنائية المهمة هنا هي: Intent بلا إجراء محدد إطلاقاً ينجح تلقائياً في هذا الاختبار طالما الفلتر يحتوي إجراءً واحداً على الأقل، وهذا سلوك قد يبدو غريباً لكنه منطقي لأن غياب الشرط لا يمكن أن يُخالف شرطاً موجوداً.
+
+يرتبط هذا مباشرة بمثال `ExampleActivity` من بداية المحاضرة حيث كان يحتوي `<action android:name="android.intent.action.SEND" />` وحيد.
+
+تشبيه يومي: مثل اختبار توظيف يقبل أي مرشح يمتلك واحدة على الأقل من المهارات المطلوبة في القائمة، لكن يرفض تلقائياً كل المرشحين إذا كانت قائمة المهارات المطلوبة فارغة أصلاً؛ مثال عملي أدناه بجدول تتبع.
 
 **لماذا؟** لأن اشتراط "تطابق واحد فقط" (وليس كل القائمة) يمنح مرونة لكي يعالج نشاط واحد عدة أنواع إجراءات مشابهة عبر فلتر واحد.
 
@@ -1250,13 +1783,25 @@ val newInt = Intent(Intent.ACTION_SEND).apply {
 ### 35. اختبار الـ Category
 
 #### النص الأصلي يقول (English):
-> To specify accepted intent categories, an intent filter can declare zero or more <category> elements. For an intent to pass the category test, every category in the Intent must match a category in the filter. The reverse is not necessary—the intent filter may declare more categories than are specified in the Intent and the Intent still passes. Therefore, an intent with no categories always passes this test, regardless of what categories are declared in the filter.
+> To specify accepted intent categories, an intent filter can declare zero or more <category> elements.
+> For an intent to pass the category test, every category in the Intent must match a category in the filter.
+> The reverse is not necessary—the intent filter may declare more categories than are specified in the Intent and the Intent still passes.
+> Therefore, an intent with no categories always passes this test, regardless of what categories are declared in the filter.
 
 #### الترجمة الحرفية:
-> لتحديد فئات Intent المقبولة، يمكن لفلتر Intent إعلان صفر أو أكثر من عناصر `<category>`. لكي يجتاز Intent اختبار الفئة، يجب أن تطابق كل فئة في الـ`Intent` فئة موجودة في الفلتر. العكس ليس ضرورياً — قد يُعلن فلتر الـ`Intent` فئات أكثر مما هو محدد في الـ`Intent` ويظل الـ`Intent` يجتاز الاختبار. لذلك، Intent بدون أي فئات يجتاز هذا الاختبار دائماً، بغض النظر عن الفئات المُعلنة في الفلتر.
+> لتحديد فئات Intent المقبولة، يمكن لفلتر Intent إعلان صفر أو أكثر من عناصر `<category>`.
+> لكي يجتاز Intent اختبار الفئة، يجب أن تطابق كل فئة في الـ`Intent` فئة موجودة في الفلتر.
+> العكس ليس ضرورياً — قد يُعلن فلتر الـ`Intent` فئات أكثر مما هو محدد في الـ`Intent` ويظل الـ`Intent` يجتاز الاختبار.
+> لذلك، Intent بدون أي فئات يجتاز هذا الاختبار دائماً، بغض النظر عن الفئات المُعلنة في الفلتر.
 
 #### الشرح المبسّط:
-هذا الاختبار عكس منطق اختبار الـ Action تماماً: هنا يجب أن تكون كل فئات الـ`Intent` موجودة ضمن فئات الفلتر (وليس تطابقاً واحداً فقط)، بينما الفلتر يمكن أن يحتوي فئات إضافية زائدة دون أن يضر ذلك. هذا يفسر لماذا `CATEGORY_DEFAULT` مهمة جداً عملياً: لأن `startActivity()` تضيفها تلقائياً لكل Intent صادر، فأي نشاط يريد استقبال Intents ضمنية عادية يجب أن يعلن `CATEGORY_DEFAULT` في فلتره وإلا سيفشل هذا الاختبار تحديداً. يرتبط هذا مباشرة بالفقرة 28 حول Category العامة، ويطبّق نفس المفهوم في سياق المطابقة. تشبيه يومي: مثل اشتراط أن كل الشهادات التي يقدمها المرشح (فئات الـ Intent) يجب أن تكون معترفاً بها من الشركة (فئات الفلتر)، لكن يمكن للشركة قبول شهادات أخرى إضافية لا يملكها المرشح دون مشكلة؛ مثال عملي في جدول التتبع التالي.
+هذا الاختبار عكس منطق اختبار الـ Action تماماً: هنا يجب أن تكون كل فئات الـ`Intent` موجودة ضمن فئات الفلتر (وليس تطابقاً واحداً فقط)، بينما الفلتر يمكن أن يحتوي فئات إضافية زائدة دون أن يضر ذلك.
+
+هذا يفسر لماذا `CATEGORY_DEFAULT` مهمة جداً عملياً: لأن `startActivity()` تضيفها تلقائياً لكل Intent صادر، فأي نشاط يريد استقبال Intents ضمنية عادية يجب أن يعلن `CATEGORY_DEFAULT` في فلتره وإلا سيفشل هذا الاختبار تحديداً.
+
+يرتبط هذا مباشرة بالفقرة 28 حول Category العامة، ويطبّق نفس المفهوم في سياق المطابقة.
+
+تشبيه يومي: مثل اشتراط أن كل الشهادات التي يقدمها المرشح (فئات الـ Intent) يجب أن تكون معترفاً بها من الشركة (فئات الفلتر)، لكن يمكن للشركة قبول شهادات أخرى إضافية لا يملكها المرشح دون مشكلة؛ مثال عملي في جدول التتبع التالي.
 
 **لماذا؟** لأن هذا المنطق (كل فئات Intent ⊆ فئات الفلتر) يضمن أن النشاط "يعِد" فعلياً بدعم كل ما يطلبه المُرسِل، لا أقل.
 
@@ -1277,13 +1822,35 @@ val newInt = Intent(Intent.ACTION_SEND).apply {
 ### 36. اختبار الـ Data — البنية
 
 #### النص الأصلي يقول (English):
-> To specify accepted intent data, an intent filter can declare zero or more <data> elements. Each <data> element can specify a URI structure and a data type (MIME media type). Each part of the URI is a separate attribute: scheme, host, port, and path: <scheme>://<host>:<port>/<path>. Example: content://com.example.project:200/folder/subfolder/etc. In this URI, the scheme is content, the host is com.example.project, the port is 200, and the path is folder/subfolder/etc. Each of these attributes is optional in a <data> element, but there are linear dependencies: If a scheme is not specified, the host is ignored. If a host is not specified, the port is ignored. If both the scheme and host are not specified, the path is ignored.
+> To specify accepted intent data, an intent filter can declare zero or more <data> elements.
+> Each <data> element can specify a URI structure and a data type (MIME media type).
+> Each part of the URI is a separate attribute: scheme, host, port, and path: <scheme>://<host>:<port>/<path>.
+> Example: content://com.example.project:200/folder/subfolder/etc.
+> In this URI, the scheme is content, the host is com.example.project, the port is 200, and the path is folder/subfolder/etc.
+> Each of these attributes is optional in a <data> element, but there are linear dependencies: If a scheme is not specified, the host is ignored.
+> If a host is not specified, the port is ignored.
+> If both the scheme and host are not specified, the path is ignored.
 
 #### الترجمة الحرفية:
-> لتحديد بيانات Intent المقبولة، يمكن لفلتر Intent إعلان صفر أو أكثر من عناصر `<data>`. يمكن لكل عنصر `<data>` تحديد بنية URI ونوع بيانات (نوع MIME). كل جزء من الـ URI هو خاصية منفصلة: النظام (scheme)، المضيف (host)، المنفذ (port)، والمسار (path): `<scheme>://<host>:<port>/<path>`. مثال: `content://com.example.project:200/folder/subfolder/etc`. في هذا الـ URI، النظام هو `content`، المضيف هو `com.example.project`، المنفذ هو `200`، والمسار هو `folder/subfolder/etc`. كل من هذه الخصائص اختيارية في عنصر `<data>`، لكن هناك تبعيات خطية: إذا لم يُحدَّد النظام (scheme)، يُتجاهل المضيف (host). إذا لم يُحدَّد المضيف، يُتجاهل المنفذ (port). إذا لم يُحدَّد كل من النظام والمضيف، يُتجاهل المسار (path).
+> لتحديد بيانات Intent المقبولة، يمكن لفلتر Intent إعلان صفر أو أكثر من عناصر `<data>`.
+> يمكن لكل عنصر `<data>` تحديد بنية URI ونوع بيانات (نوع MIME).
+> كل جزء من الـ URI هو خاصية منفصلة: النظام (scheme)، المضيف (host)، المنفذ (port)، والمسار (path): `<scheme>://<host>:<port>/<path>`.
+> مثال: `content://com.example.project:200/folder/subfolder/etc`.
+> في هذا الـ URI، النظام هو `content`، المضيف هو `com.example.project`، المنفذ هو `200`، والمسار هو `folder/subfolder/etc`.
+> كل من هذه الخصائص اختيارية في عنصر `<data>`، لكن هناك تبعيات خطية: إذا لم يُحدَّد النظام (scheme)، يُتجاهل المضيف (host).
+> إذا لم يُحدَّد المضيف، يُتجاهل المنفذ (port).
+> إذا لم يُحدَّد كل من النظام والمضيف، يُتجاهل المسار (path).
 
 #### الشرح المبسّط:
-اختبار الـ Data هو الأعقد بين الثلاثة لأنه يتحقق من جزئين مختلفين معاً (نوع MIME وبنية URI)، وبنية URI نفسها مقسّمة لأربعة أجزاء هرمية مترابطة (scheme → host → port → path) بحيث كل جزء يعتمد وجوده على الجزء الذي قبله. أهمية هذه "التبعيات الخطية" أنها تمنع فلتراً غير منطقياً مثل تحديد port بدون host، لأن ذلك لا معنى له في بنية URI حقيقية أصلاً. يرتبط هذا مباشرة بموضوع Data من الفقرة 27 حيث تعلّمنا كيف نبني URI ونوع MIME من جهة الإرسال، وهذه الفقرة تشرح كيف يُفكَّك ويُقارَن من جهة الاستقبال. تشبيه يومي: مثل عنوان بريدي كامل (دولة → مدينة → حي → شارع) لا يمكن تحديد "الشارع" بدون معرفة "الحي" أولاً؛ مثال عملي: في URI `content://com.example.project:200/folder/subfolder/etc`، لو حُذف الـ scheme فسيُتجاهل المضيف بالكامل تلقائياً حتى لو كُتب.
+اختبار الـ Data هو الأعقد بين الثلاثة لأنه يتحقق من جزئين مختلفين معاً (نوع MIME وبنية URI)، وبنية URI نفسها مقسّمة لأربعة أجزاء هرمية مترابطة (scheme → host → port → path) بحيث كل جزء يعتمد وجوده على الجزء الذي قبله.
+
+أهمية هذه "التبعيات الخطية" أنها تمنع فلتراً غير منطقياً مثل تحديد port بدون host، لأن ذلك لا معنى له في بنية URI حقيقية أصلاً.
+
+يرتبط هذا مباشرة بموضوع Data من الفقرة 27 حيث تعلّمنا كيف نبني URI ونوع MIME من جهة الإرسال، وهذه الفقرة تشرح كيف يُفكَّك ويُقارَن من جهة الاستقبال.
+
+تشبيه يومي: مثل عنوان بريدي كامل (دولة → مدينة → حي → شارع) لا يمكن تحديد "الشارع" بدون معرفة "الحي" أولاً؛
+
+مثال عملي: في URI `content://com.example.project:200/folder/subfolder/etc`، لو حُذف الـ scheme فسيُتجاهل المضيف بالكامل تلقائياً حتى لو كُتب.
 
 **لماذا؟** لأن هذا الترتيب الهرمي يعكس طبيعة URI الحقيقية نفسها؛ لا معنى لمنفذ (port) بدون خادم (host) يستضيفه أصلاً.
 
