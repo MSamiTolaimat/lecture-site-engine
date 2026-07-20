@@ -1,0 +1,556 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPREHENSIVE SUBJECT BRIEF: Database Systems (DBMS) — Full Course
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version: "2.0"
+subject_type: "comprehensive_course"  # Not single_lecture — entire subject
+
+# ─── Subject Identity ─────────────────────────────────────────────────────────
+subject:
+  id: "dbms-complete"
+  name_ar: "أنظمة إدارة قواعد البيانات"
+  name_en: "Database Management Systems (DBMS)"
+  course_code: "DBMS-2"
+  course_title: "Database Systems II"
+  level: "4th Year"
+  institution: "Computer Science Department"
+  instructor: "Dr. Abdo Darbooli"
+  academic_year: "2022-2023"
+  credits: 6
+  total_lectures: 21
+  
+  tagline: "فهم عميق لعمارة أنظمة إدارة البيانات من التخزين إلى التحسين إلى التعافي"
+
+# ─── Locale & Terminology ─────────────────────────────────────────────────────
+locale:
+  language: ar
+  direction: rtl
+  terms_in_backticks: true
+  inline_code_comments: english
+  extra_explanation_tag: "(شرح زيادة للفهم)"
+  not_in_lecture_tag: "(غير مشروحة في المحاضرة)"
+
+# ─── Course Structure: 5 Core Modules ──────────────────────────────────────────
+core_modules:
+
+  - module_id: "architecture"
+    module_number: 1
+    title_ar: "عمارة DBMS والمحركات"
+    title_en: "DBMS Architecture & Engines"
+    lectures_count: 4
+    lecture_range: "L1-L4"
+    description: "فهم كيفية تقسيم نظام إدارة قواعد البيانات إلى مكونات وكيفية تفاعلها"
+    learning_outcomes:
+      - "فهم الطبقات المختلفة في DBMS (Logical, Physical, Implementation)"
+      - "معرفة مسؤوليات Storage Manager و Query Processor و Transaction Manager"
+      - "فهم Pipeline معالجة الاستعلام من الإدخال إلى الإخراج"
+      - "فهم دور Buffer Manager و File Manager في الأداء"
+    prerequisites: []
+    topics:
+      - "DBMS Overview & Layers"
+      - "Storage Manager (Buffer, File, Authorization)"
+      - "Query Processor (Parser, Compiler, Optimizer, Evaluator)"
+      - "Transaction Manager & Concurrency Control Basics"
+    key_concepts:
+      - "Architecture Layers"
+      - "Component Interactions"
+      - "Query Processing Pipeline"
+      - "Storage Hierarchy"
+
+  - module_id: "relational_model"
+    module_number: 2
+    title_ar: "النموذج العلائقي والتطبيع"
+    title_en: "Relational Model & Advanced Normalization"
+    lectures_count: 4
+    lecture_range: "L5-L8"
+    description: "فهم كيفية تنظيم البيانات بشكل منطقي وفعّال باستخدام النموذج العلائقي"
+    learning_outcomes:
+      - "إتقان عمليات الجبر العلائقي (σ, π, ⨝, ×, ∪, −, ρ)"
+      - "فهم الفرق بين SQL والجبر العلائقي"
+      - "تطبيع قاعدة البيانات إلى أشكال مختلفة (1NF → BCNF)"
+      - "فهم القيود والتكامل"
+    prerequisites: ["basic_database_concepts"]
+    topics:
+      - "Relational Algebra Operators"
+      - "SQL Query Language"
+      - "Database Normalization (1NF, 2NF, 3NF, BCNF)"
+      - "Integrity Constraints (Domain, Key, Referential, General)"
+    key_concepts:
+      - "Relations & Tuples"
+      - "Relational Algebra Operations"
+      - "Functional Dependencies"
+      - "Normalization Forms"
+    algebra_operators:
+      - name_ar: "الاختيار"
+        name_en: "Selection"
+        symbol: "σ"
+        description: "تصفية الصفوف بناءً على شرط"
+      - name_ar: "الإسقاط"
+        name_en: "Projection"
+        symbol: "π"
+        description: "اختيار أعمدة محددة"
+      - name_ar: "الربط"
+        name_en: "Join"
+        symbol: "⨝"
+        description: "ربط جدولين بناءً على شرط"
+      - name_ar: "الضرب الديكارتي"
+        name_en: "Cartesian Product"
+        symbol: "×"
+        description: "دمج كل صف من الجدول الأول مع كل صف من الثاني"
+      - name_ar: "الاتحاد"
+        name_en: "Union"
+        symbol: "∪"
+        description: "دمج نتائج استعلامين"
+      - name_ar: "الفرق"
+        name_en: "Set Difference"
+        symbol: "−"
+        description: "إزالة الصفوف المشتركة"
+      - name_ar: "إعادة التسمية"
+        name_en: "Rename"
+        symbol: "ρ"
+        description: "تغيير اسم الجدول أو الأعمدة"
+      - name_ar: "الربط النصفي"
+        name_en: "Semi-Join"
+        symbol: "▷◁"
+        description: "ربط مع الاحتفاظ بأعمدة الجدول الأول فقط"
+      - name_ar: "الربط المعاكس"
+        name_en: "Anti-Join"
+        symbol: "▶◁"
+        description: "تصفية بناءً على عدم وجود تطابق"
+
+  - module_id: "physical_storage"
+    module_number: 3
+    title_ar: "التخزين المادي والفهرسة"
+    title_en: "Physical Storage & File Indexing"
+    lectures_count: 4
+    lecture_range: "L9-L12"
+    description: "فهم كيفية تخزين البيانات فعلياً على الأقراص وتسريع الوصول إليها"
+    learning_outcomes:
+      - "فهم مقاييس الأداء للأقراص (Seek Time, Rotational Delay, Transfer Time)"
+      - "معرفة تنظيمات الملفات المختلفة وفوائد كل واحدة"
+      - "فهم أنواع الفهارس والاستخدامات"
+      - "اختيار الفهرس المناسب لتسريع الاستعلامات"
+    prerequisites: ["architecture"]
+    topics:
+      - "Disk Storage & Hardware Metrics"
+      - "File Organization (Heap, Sorted, Hashed)"
+      - "Indexing Structures (Primary, Clustering, Secondary)"
+      - "B-Trees & Multi-level Indices"
+      - "Blocking Factor & Record Allocation"
+    key_concepts:
+      - "I/O Cost"
+      - "Access Methods"
+      - "Index Selection"
+      - "Space-Time Trade-off"
+    hardware_metrics:
+      - seek_time: "الوقت اللازم لتحريك رأس القراءة إلى الأسطوانة المطلوبة"
+      - rotational_delay: "الوقت اللازم لدوران الأسطوانة حتى نصل للبيانات"
+      - block_transfer_time: "الوقت اللازم لنقل كتلة من البيانات إلى الذاكرة"
+    file_organizations:
+      - heap_files: "ملفات غير مرتبة — أسرع للإدراج، أبطأ للبحث"
+      - sorted_files: "ملفات مرتبة — أسرع للبحث، أبطأ للإدراج"
+      - hashed_files: "ملفات مجزأة — سريعة للبحث المباشر"
+      - overflow_chaining: "التعامل مع التصادمات في الملفات المجزأة"
+    index_types:
+      - primary_index: "فهرس على المفتاح الأساسي — فهرس واحد فقط لكل جدول"
+      - clustering_index: "فهرس على حقل غير مفتاح — يرتب الملف"
+      - secondary_index: "فهرس إضافي — يمكن وجود عدة فهارس"
+
+  - module_id: "query_optimization"
+    module_number: 4
+    title_ar: "معالجة وتحسين الاستعلامات"
+    title_en: "Query Processing & Optimization"
+    lectures_count: 5
+    lecture_range: "L13-L17"
+    description: "فهم كيفية تحسين الاستعلامات لتعمل بسرعة أكبر باستخدام قواعس وتكاليف"
+    learning_outcomes:
+      - "فهم Pipeline معالجة الاستعلام من التحليل إلى التنفيذ"
+      - "إتقان قواعس التحسين الاستكشافية (Selection/Projection Pushing)"
+      - "فهم التحسين بناءً على التكلفة (Cost-Based Optimization)"
+      - "اختيار خطة تنفيذ فعّالة"
+      - "فهم تحسين الاستعلامات المتداخلة والآراء"
+    prerequisites: ["relational_model", "physical_storage"]
+    topics:
+      - "Query Processing Pipeline"
+      - "Query Trees & Transformation Rules"
+      - "Heuristics-Based Optimization"
+      - "Cost-Based Optimization"
+      - "View Merging & Nested Subquery Optimization"
+      - "Materialized Views & Incremental Maintenance"
+    key_concepts:
+      - "Query Tree"
+      - "Transformation Rules"
+      - "Access Path"
+      - "Cardinality Estimation"
+      - "Join Order"
+    heuristic_rules:
+      - "Push Selection down the tree (reduce data early)"
+      - "Push Projection down the tree (reduce columns early)"
+      - "Reorder Joins (put most restrictive first)"
+      - "Use Indexes when available"
+      - "Avoid Cartesian Product"
+    cost_estimation:
+      - "Catalog Statistics (table sizes, column distributions)"
+      - "Attribute Histograms"
+      - "Join Selectivity Factors"
+      - "I/O Cost Model"
+
+  - module_id: "concurrency_and_recovery"
+    module_number: 5
+    title_ar: "المعاملات والتزامن والمرونة"
+    title_en: "Transaction, Concurrency & Fault Tolerance"
+    lectures_count: 4
+    lecture_range: "L18-L21"
+    description: "فهم كيفية التعامل مع عمليات متعددة بنفس الوقت بأمان وضمان استعادة البيانات"
+    learning_outcomes:
+      - "فهم خصائص ACID وأهميتها"
+      - "معرفة الشذوذ التي قد تحدث عند التزامن"
+      - "إتقان بروتوكولات التحكم في التزامن (2PL, MVCC)"
+      - "فهم الجمود (Deadlock) وطرق تجنبه"
+      - "إتقان تقنيات التعافي من الأعطال"
+    prerequisites: ["architecture", "physical_storage"]
+    topics:
+      - "Transaction Fundamentals (ACID)"
+      - "Concurrency Anomalies"
+      - "Concurrency Control Protocols"
+      - "Deadlock Detection & Prevention"
+      - "Recovery Techniques"
+      - "Advanced Topics (MVCC, Snapshot Isolation, Buffer Policies)"
+    key_concepts:
+      - "Atomicity"
+      - "Consistency"
+      - "Isolation"
+      - "Durability"
+      - "Serializability"
+      - "Locking"
+      - "Timestamps"
+    anomalies:
+      - lost_update: "فقدان تحديث عندما تؤدي عمليتان تحديث متزامنتان"
+      - dirty_read: "قراءة بيانات تم تحديثها لكن لم تُؤكد بعد"
+      - unrepeatable_read: "قراءة نفس البيانات مرتين تعطي نتائج مختلفة"
+      - phantom_read: "ظهور صفوف جديدة في استعلام متكرر"
+      - incorrect_summary: "خطأ في حساب الإجماليات عند التحديثات المتزامنة"
+    acid_properties:
+      - atomicity: "كل عملية تتم بالكامل أو لا تتم على الإطلاق"
+      - consistency: "الانتقال من حالة صحيحة إلى حالة صحيحة أخرى"
+      - isolation: "العمليات المتزامنة لا تتداخل"
+      - durability: "النتائج المؤكدة لا تُفقد حتى عند الأعطال"
+    locking_protocols:
+      - basic_2pl: "Acquire locks قبل استخدام البيانات، Release بعد الانتهاء"
+      - strict_2pl: "عدم Release أي Exclusive locks حتى نهاية العملية"
+      - rigorous_2pl: "عدم Release أي locks حتى نهاية العملية"
+      - conservative_2pl: "Acquire كل الـ locks قبل البدء"
+      - mvcc: "استخدام نسخ مختلفة للبيانات لقراء مختلفين"
+      - snapshot_isolation: "كل عملية ترى snapshot من البيانات عند البداية"
+    recovery_paradigms:
+      - deferred_update: "الكتابة للـ log فقط، تطبيق البيانات عند الإلتزام"
+      - immediate_update: "كتابة البيانات فوراً مع الـ log"
+      - shadow_paging: "الاحتفاظ بنسخة قديمة من الصفحات"
+      - checkpoints: "نقاط حفظ دورية لتقليل وقت التعافي"
+
+# ─── Professor's Teaching Style (من المحاضرة) ──────────────────────────────
+professor_style:
+  explanation_method: "presentation_based"  # يستخدم Slides مع أمثلة حية
+  example_database: "company_database"  # يستخدم قاعدة بيانات Company طوال المادة
+  example_database_schema:
+    - "EMPLOYEE (Ssn, Fname, Lname, Salary, Dno)"
+    - "DEPARTMENT (Dno, Dname, Mgr_ssn, Mgr_start_date)"
+    - "PROJECT (Pnumber, Pname, Plocation, Dnum)"
+    - "WORKS_ON (Essn, Pno, Hours)"
+    - "DEPENDENT (Essn, Dependent_name, Sex, Bdate, Relationship)"
+  
+  pedagogical_approach:
+    - "Visual-first: يبدأ برسومات وأشكال قبل النصوص"
+    - "Example-driven: يشرح المفاهيم من خلال أمثلة حقيقية"
+    - "Progressive complexity: من البسيط للمعقد"
+    - "Step-by-step transformation: يبدي التحويلات خطوة بخطوة"
+    - "Comparison-based: يقارن بين طرق مختلفة"
+    - "Problem-solution: يعرض مشكلة ثم يحلها"
+  
+  visualization_heavy: true
+  uses_diagrams: true
+  uses_trees: true
+  uses_flowcharts: true
+  uses_tables_for_comparison: true
+  uses_step_by_step_examples: true
+  uses_before_after_comparison: true
+  
+  lecture_structure:
+    - "عنوان المحاضرة والأهداف"
+    - "ربط مع المحاضرات السابقة"
+    - "المفهوم الأساسي (1-2 جملة)"
+    - "الرسم التوضيحي / المخطط"
+    - "مثال عملي بالتفصيل"
+    - "خطوات التحويل / التطبيق"
+    - "المقارنة مع الطرق الأخرى"
+    - "ملخص سريع"
+    - "الأخطاء الشائعة"
+
+# ─── Content Ordering Rules (كيف يرتب الدكتور الأفكار) ─────────────────────
+content_ordering:
+  default_approach: "diagram-first-then-prose"  # الرسم أولاً، ثم النص
+  
+  module_specific_ordering:
+    
+    architecture:
+      type: "prose-first"
+      rationale: "تحتاج لفهم الأساسيات قبل الرسومات"
+      section_order:
+        - "مقدمة المفهوم"
+        - "الطبقات / المكونات"
+        - "التفاعلات بينها"
+        - "مثال توضيحي"
+    
+    relational_model:
+      type: "mixed"
+      rationale: "تجمع بين الرسوم (المخططات) والنصوص والرموز"
+      section_order:
+        - "تعريف العملية (رسم)"
+        - "شرح الرسم (نص)"
+        - "الرموز والصيغة الجبرية"
+        - "مثال عملي"
+        - "مقارنة مع عمليات أخرى"
+    
+    physical_storage:
+      type: "diagram-first"
+      rationale: "التصور المادي مهم جداً لفهم الأداء"
+      section_order:
+        - "المخطط / الهيكل (رسم)"
+        - "جداول توضيحية"
+        - "شرح الأداء"
+        - "أمثلة أرقام"
+        - "مقارنة الخيارات"
+    
+    query_optimization:
+      type: "diagram-first"
+      rationale: "Query trees هي الأساس — يجب رؤيتها قبل الشرح"
+      section_order:
+        - "الشجرة الأولية (رسم)"
+        - "القاعدة المطبقة (نص)"
+        - "الشجرة بعد التطبيق (رسم)"
+        - "شرح الفرق (نص)"
+        - "فائدة التحسين (نص)"
+    
+    concurrency_and_recovery:
+      type: "scenario-first"
+      rationale: "يبدأ بسيناريو مشكلة ثم يحلها"
+      section_order:
+        - "السيناريو / المشكلة"
+        - "ما الذي يحدث (رسم أو جدول)"
+        - "الحل / الآلية (نص)"
+        - "خطوات التطبيق"
+        - "أمثلة لحالات مختلفة"
+
+# ─── Module Dependencies & Prerequisites ────────────────────────────────────
+module_prerequisites:
+  architecture:
+    requires: []
+    optional: []
+    should_know: ["basic_database_concepts"]
+  
+  relational_model:
+    requires: ["architecture"]
+    optional: []
+    should_know: ["set_theory", "logic"]
+  
+  physical_storage:
+    requires: ["architecture", "relational_model"]
+    optional: []
+    should_know: ["computer_architecture", "file_systems"]
+  
+  query_optimization:
+    requires: ["relational_model", "physical_storage"]
+    optional: ["cost_models"]
+    should_know: ["performance_analysis"]
+  
+  concurrency_and_recovery:
+    requires: ["architecture", "physical_storage"]
+    optional: ["query_optimization"]
+    should_know: ["file_systems", "distributed_systems"]
+
+# ─── Enabled Features ─────────────────────────────────────────────────────────
+features:
+  diagrams:
+    enabled: true
+    types: [flowchart, tree, graph, table]
+    comment: "الدكتور يستخدم رسومات بكثافة عالية"
+  
+  algorithms:
+    enabled: true
+    comment: "خطوات التحسين والتعافي"
+  
+  tables:
+    enabled: true
+    comment: "جداول المقارنة شائعة جداً"
+  
+  code:
+    enabled: true
+    languages: [sql, pseudocode, relational_algebra]
+    comment: "SQL والجبر العلائقي والشبه كود"
+  
+  analogy:
+    enabled: true
+    min_per_lecture: 2
+    comment: "تشبيهات من الحياة اليومية مهمة"
+  
+  trade_off:
+    enabled: true
+    comment: "مقارنات المزايا والعيوب"
+  
+  before_after:
+    enabled: true
+    comment: "قبل التحسين وبعده شائع جداً"
+  
+  trace:
+    enabled: true
+    comment: "تتبع خطوات التنفيذ خطوة بخطوة"
+  
+  callouts:
+    enabled: true
+    types: [important, warning, note]
+  
+  think_prompt:
+    enabled: true
+    min_per_lecture: 2
+    comment: "أسئلة لتفعيل الفهم"
+
+# ─── Lecture Progression ──────────────────────────────────────────────────────
+lecture_progression:
+  - lecture_num: 1
+    module: "architecture"
+    title: "DBMS Overview & Architecture"
+    position: "first_lecture"
+    special: "no_prerequisites_needed"
+  
+  - lecture_num: 2
+    module: "architecture"
+    title: "Storage Management"
+    position: "foundational"
+    builds_on: "L1"
+  
+  - lecture_num: 3
+    module: "architecture"
+    title: "Query Processor"
+    position: "foundational"
+    builds_on: "L1, L2"
+  
+  - lecture_num: 4
+    module: "architecture"
+    title: "Transaction Management Basics"
+    position: "foundational"
+    builds_on: "L1, L2, L3"
+  
+  - lecture_num: 5
+    module: "relational_model"
+    title: "Relational Algebra"
+    position: "core"
+    builds_on: "L1, L2, L3, L4"
+    note: "يجب إتقان فهم العمارة أولاً"
+  
+  # ... والمحاضرات الأخرى
+
+# ─── Pedagogy Flags ──────────────────────────────────────────────────────────
+pedagogy:
+  cover_every_line: true
+  explain_why_not_just_what: true
+  daily_analogy: true
+  practical_examples: true
+  follow_lecture_order: true
+  allow_combining_topics: false
+  beginner_to_advanced: true
+  depth_level: "comprehensive"
+  
+  teaching_principles:
+    - "لا تتجاهل أي معلومة من المحاضرة"
+    - "اشرح لماذا، ليس فقط ماذا"
+    - "استخدم أمثلة من قاعدة Company"
+    - "قارن دائماً بين الخيارات المختلفة"
+    - "بدّل بين الرسوم والنصوص"
+    - "اتبع ترتيب الدكتور بالضبط"
+    - "ركز على الأداء والمقايضات"
+    - "استخدم تشبيهات يومية كثيرة"
+
+# ─── Coverage Tracking ────────────────────────────────────────────────────────
+coverage_tracking:
+  enabled: true
+  require_metadata: true
+  acceptable_coverage_threshold: 90
+  note: "كل معلومة من المحاضرة يجب أن تُشرح أو توضح أسباب عدم شرحها"
+
+# ─── Original Text Display ────────────────────────────────────────────────────
+original_text_display:
+  enabled: true
+  format: "collapsible"
+  show_coverage_badge: true
+  location: "after_explanation"
+  note: "النص الأصلي من الـ slides يجب أن يكون collapsible في كل قسم"
+
+# ─── Output Structure ─────────────────────────────────────────────────────────
+output:
+  parts:
+    summary:
+      enabled: true
+      heading: "الجزء الأول: ملخص منظم (اقرأ قبل المحاضرة!)"
+    
+    detail:
+      enabled: true
+      heading: "الجزء الثاني: الشرح التفصيلي"
+      numbered_sections: true
+    
+    mcq:
+      enabled: true
+      heading: "الجزء الثالث: أسئلة اختيار من متعدد"
+      count: 16
+      difficulty: [medium, hard]
+    
+    qa_cards:
+      enabled: true
+      heading: "الجزء الرابع: بطاقات سؤال وجواب"
+      count_min: 12
+    
+    cheat_sheet:
+      enabled: true
+      heading: "الجزء الخامس: ورقة المراجعة السريعة"
+  
+  validation_footer: true
+  checklist_items:
+    - "✅ غطّيت كل معلومة من المحاضرة (coverage ≥90%)"
+    - "✅ الملخص واضح ويشرح الأهداف والمتطلبات"
+    - "✅ كل قسم يبدأ بـ 'الربط مع السابق' و'الفكرة الأساسية'"
+    - "✅ الأقسام مرقّمة هرمياً"
+    - "✅ كل مصطلح إنجليزي بين backticks"
+    - "✅ الرسوم والمخططات مع شرح نصي"
+    - "✅ النص الأصلي في <details> مع @coverage"
+    - "✅ أمثلة عملية من قاعدة Company"
+    - "✅ ≥16 MCQ مع تعليل كامل"
+    - "✅ ≥12 بطاقة Q&A"
+    - "✅ Cheat Sheet يحتوي جداول ومقارنات"
+
+# ─── Unique Characteristics of This Subject ───────────────────────────────────
+unique_characteristics:
+  - "Cumulative: كل محاضرة تبني على السابقات"
+  - "System-level: يجب فهم كيفية التفاعل بين المكونات"
+  - "Performance-focused: كل قرار يؤثر على الأداء"
+  - "Trade-off heavy: لا حل واحد — دائماً مقايضات"
+  - "Visual-heavy: الرسومات والمخططات أساسية للفهم"
+  - "Integrated: المواضيع متداخلة جداً"
+  - "Practical: كل مفهوم له تطبيق عملي"
+
+# ─── Notes for AI Processing ──────────────────────────────────────────────────
+processing_notes: |
+  - هذا الملف يعرّف المادة **ككل** وليس محاضرة واحدة
+  - عند معالجة أي محاضرة، استخدم هذا الملف لفهم:
+    * موقع المحاضرة في الهيكل الكبير
+    * المتطلبات السابقة الضرورية
+    * كيفية ربطها مع المحاضرات الأخرى
+    * أسلوب التدريس المتوقع
+    * مستوى التفصيل المناسب
+  
+  - الدكتور يستخدم أسلوب موحد في جميع المحاضرات:
+    * يبدأ برسم/مخطط
+    * يشرح المخطط
+    * يعطي أمثلة عملية
+    * يقارن مع بدائل
+    * يختم بملخص وأخطاء شائعة
+  
+  - استخدم قاعدة Company كمثال موحد طوال كل المادة

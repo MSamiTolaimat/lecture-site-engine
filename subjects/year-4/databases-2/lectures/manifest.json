@@ -1,0 +1,37 @@
+{
+  "settings": {
+    "subjectName": "أنظمة إدارة قواعد البيانات",
+    "subjectNameEn": "Database Management Systems (DBMS)",
+    "year": "2025-2026",
+    "academicYear": 4,
+    "theme": "amber-default",
+    "enabledLectures":true,
+    "hubTag": "مادة حملة",
+    "department": "تصميم"
+  },
+  "title": "أنظمة إدارة قواعد البيانات — Database Management Systems (DBMS)",
+  "subtitle": "دليل دراسي تفاعلي",
+  "files": [
+    {
+      "path": "par1-sec1.md",
+      "num": 1,
+      "icon": "📌",
+      "matIcon": "school",
+      "badge": "المحاضرة ١ — جزء ١"
+    }
+  ],
+  "lectureIcons": [
+    "📌",
+    "📖",
+    "💻",
+    "🎯",
+    "📝"
+  ],
+  "lectureMatIcons": [
+    "school",
+    "menu_book",
+    "code",
+    "quiz",
+    "description"
+  ]
+}
