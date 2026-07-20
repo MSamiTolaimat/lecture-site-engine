@@ -1311,12 +1311,24 @@ function jumpToSummary() {
   }
   if (!item) return;
 
-  const part = item.toc?.parts?.find(p =>
-    p.type === 'summary' && !/checklist|قائمة فحص|قائمة المراجعة/i.test(p.title),
-  ) || item.toc?.parts?.find(p => p.type === 'summary' && /ملخص/i.test(p.title));
+  const isQuickSummary = (title) => /سريع|قبل البدء|checklist|قائمة فحص|قائمة المراجعة/i.test(title || '');
+  const isComprehensive = (title) => /شامل|Alternative Complete|قراءة بديلة/i.test(title || '');
 
-  const targetId = part?.id
-    || document.querySelector('#content .section-block[data-part-type="summary"]')?.id;
+  const tocParts = item.toc?.parts || [];
+  const part = tocParts.find(p => p.type === 'summary' && isComprehensive(p.title))
+    || tocParts.find(p => p.type === 'summary' && /ملخص/i.test(p.title || '') && !isQuickSummary(p.title))
+    || tocParts.find(p => p.type === 'summary' && !isQuickSummary(p.title));
+
+  let targetId = part?.id || null;
+  if (!targetId) {
+    const nodes = [...document.querySelectorAll('#content .section-block[data-part-type="summary"]')];
+    const byTitle = (pred) => nodes.find(el => pred(el.querySelector('h3')?.textContent || ''));
+    targetId = byTitle(isComprehensive)?.id
+      || byTitle(t => /ملخص/i.test(t) && !isQuickSummary(t))?.id
+      || byTitle(t => !isQuickSummary(t))?.id
+      || nodes.at(-1)?.id
+      || null;
+  }
   if (!targetId) return;
 
   const hash = `#${targetId}`;
