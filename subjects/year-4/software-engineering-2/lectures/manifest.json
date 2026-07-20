@@ -12,13 +12,19 @@
   "subtitle": "دليل دراسي تفاعلي",
   "files": [
     {
+      "path": "par1.md",
+      "num": 1,
+      "icon": "📌",
+      "matIcon": "school",
+      "badge": "المحاضرة ١"
+    },
+    {
       "path": "par4.md",
       "num": 4,
       "icon": "📌",
       "matIcon": "school",
       "badge": "المحاضرة ٤"
     },
-  
     {
       "path": "par14.md",
       "num": 14,
