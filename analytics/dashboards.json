@@ -1,0 +1,110 @@
+{
+  "name": "Study Analytics",
+  "description": "Lecture-site engagement: subjects, lectures, scroll depth, focus time, hub funnel",
+  "insights": [
+    {
+      "id": "study-overview-pageviews",
+      "name": "Content views by subject",
+      "description": "content_viewed events broken down by subject",
+      "insight": {
+        "kind": "TrendsQuery",
+        "series": [{ "kind": "EventsNode", "event": "content_viewed", "name": "content_viewed" }],
+        "interval": "day",
+        "breakdownFilter": { "breakdowns": [{ "property": "subject", "type": "event" }] },
+        "dateRange": { "date_from": "-30d" }
+      }
+    },
+    {
+      "id": "study-overview-by-type",
+      "name": "Views by content type",
+      "description": "lecture vs dawrat vs note vs home",
+      "insight": {
+        "kind": "TrendsQuery",
+        "series": [{ "kind": "EventsNode", "event": "content_viewed", "name": "content_viewed" }],
+        "interval": "day",
+        "breakdownFilter": { "breakdowns": [{ "property": "content_type", "type": "event" }] },
+        "dateRange": { "date_from": "-30d" }
+      }
+    },
+    {
+      "id": "lecture-engagement-sessions",
+      "name": "Lecture sessions (study_session_end)",
+      "description": "Sessions ending on lecture content",
+      "insight": {
+        "kind": "TrendsQuery",
+        "series": [
+          {
+            "kind": "EventsNode",
+            "event": "study_session_end",
+            "name": "study_session_end",
+            "properties": [
+              { "key": "content_type", "value": ["lecture"], "operator": "exact", "type": "event" }
+            ]
+          }
+        ],
+        "interval": "day",
+        "breakdownFilter": { "breakdowns": [{ "property": "content_id", "type": "event" }] },
+        "dateRange": { "date_from": "-30d" }
+      }
+    },
+    {
+      "id": "scroll-milestones",
+      "name": "Scroll depth milestones",
+      "description": "scroll_milestone by milestone_pct",
+      "insight": {
+        "kind": "TrendsQuery",
+        "series": [{ "kind": "EventsNode", "event": "scroll_milestone", "name": "scroll_milestone" }],
+        "interval": "day",
+        "breakdownFilter": { "breakdowns": [{ "property": "milestone_pct", "type": "event" }] },
+        "dateRange": { "date_from": "-30d" }
+      }
+    },
+    {
+      "id": "focus-milestones",
+      "name": "Focus time milestones",
+      "description": "1 / 5 / 15 minute focus thresholds",
+      "insight": {
+        "kind": "TrendsQuery",
+        "series": [{ "kind": "EventsNode", "event": "focus_milestone", "name": "focus_milestone" }],
+        "interval": "day",
+        "breakdownFilter": { "breakdowns": [{ "property": "focus_minutes", "type": "event" }] },
+        "dateRange": { "date_from": "-30d" }
+      }
+    },
+    {
+      "id": "dawrat-vs-lectures",
+      "name": "DAWRAT vs lectures vs notes",
+      "description": "study_session_end by content_type",
+      "insight": {
+        "kind": "TrendsQuery",
+        "series": [{ "kind": "EventsNode", "event": "study_session_end", "name": "study_session_end" }],
+        "interval": "day",
+        "breakdownFilter": { "breakdowns": [{ "property": "content_type", "type": "event" }] },
+        "dateRange": { "date_from": "-30d" }
+      }
+    },
+    {
+      "id": "hub-pageviews",
+      "name": "Hub pageviews",
+      "description": "hub_pageview over time",
+      "insight": {
+        "kind": "TrendsQuery",
+        "series": [{ "kind": "EventsNode", "event": "hub_pageview", "name": "hub_pageview" }],
+        "interval": "day",
+        "dateRange": { "date_from": "-30d" }
+      }
+    },
+    {
+      "id": "hub-subject-clicks",
+      "name": "Hub subject clicks",
+      "description": "hub_subject_click by subject_id",
+      "insight": {
+        "kind": "TrendsQuery",
+        "series": [{ "kind": "EventsNode", "event": "hub_subject_click", "name": "hub_subject_click" }],
+        "interval": "day",
+        "breakdownFilter": { "breakdowns": [{ "property": "subject_id", "type": "event" }] },
+        "dateRange": { "date_from": "-30d" }
+      }
+    }
+  ]
+}
