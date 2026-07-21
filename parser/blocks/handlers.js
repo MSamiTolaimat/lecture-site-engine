@@ -139,14 +139,22 @@ export function createDefaultBlockHandlers() {
       test: (ctx) => {
         if (!/^#### /.test(ctx.line)) return false;
         const heading = ctx.line.replace(/^#### /, '').trim();
-        return (ctx.config.callouts || []).some(c => c.re.test(heading));
+        if (!(ctx.config.callouts || []).some(c => c.re.test(heading))) return false;
+        // Title + table: keep as mini-heading + table, not a callout box with raw markdown.
+        let j = ctx.i + 1;
+        while (j < ctx.lines.length && !ctx.lines[j].trim()) j++;
+        if (j < ctx.lines.length && isTableStart(ctx.lines, j)) return false;
+        return true;
       },
       parse: (ctx) => {
         const heading = ctx.line.replace(/^#### /, '').trim();
         const callout = ctx.config.callouts.find(c => c.re.test(heading));
+        const inline = heading.replace(callout.re, '').replace(/^:\s*/, '').trim();
         const content = collectUntilHeading(ctx.lines, ctx.i + 1);
+        let text = content.text;
+        if (inline) text = inline + (text ? `\n\n${text}` : '');
         return {
-          block: { type: 'callout', cls: callout.cls, label: callout.label, content: content.text },
+          block: { type: 'callout', cls: callout.cls, label: callout.label, content: text },
           nextIndex: content.nextIndex,
         };
       },
@@ -585,6 +593,7 @@ export function createDefaultBlockHandlers() {
           || /^\*\*المكتبات المطلوبة/.test(t)
           || /^\*\*الناتج المتوقع/.test(t)
           || /^\*\*⚠️ ملاحظة هامة/.test(t)
+          || /^\*\*ملاحظة(?:\s+مهمة)?[^*]*\*\*:?\s*/.test(t)
           || /^\*\*الفهم الخاطئ/.test(t)
           || /^\*\*لماذا\?\*\*/.test(t);
       },
@@ -639,6 +648,22 @@ export function createDefaultBlockHandlers() {
             content = t.replace(/^\*\*⚠️ ملاحظة هامة[^*]*\*\*:?\s*/, '').trim();
           }
           return { block: { type: 'callout', cls: 'callout-important', label: '⚠️ ملاحظة هامة', content }, nextIndex: i };
+        }
+        if (/^\*\*ملاحظة(?:\s+مهمة)?[^*]*\*\*:?\s*/.test(t)) {
+          let content = t.replace(/^\*\*ملاحظة(?:\s+مهمة)?[^*]*\*\*:?\s*/, '').trim();
+          i = ctx.i + 1;
+          if (!content) {
+            while (i < ctx.lines.length && !ctx.lines[i].trim()) i++;
+            const body = [];
+            while (i < ctx.lines.length) {
+              const line = ctx.lines[i].trim();
+              if (!line || /^#{2,4} /.test(line) || /^---+$/.test(line) || isStructural(ctx.lines[i])) break;
+              body.push(line);
+              i++;
+            }
+            content = body.join('\n').trim();
+          }
+          return { block: { type: 'callout', cls: 'callout-note', label: 'ملاحظة', content }, nextIndex: i };
         }
         if (/^\*\*الفهم الخاطئ/.test(t)) {
           const wrong = t.replace(/^\*\*الفهم الخاطئ الشائع ❌:\*\*\s*/, '');

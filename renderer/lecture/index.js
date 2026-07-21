@@ -129,9 +129,9 @@ export function renderLecture(lecture, accent, icon, refs, deps) {
     : { codeRef: refs };
   const { codeRef, companionRef, companionOf, badge } = linkRefs;
 
-  // Find and extract the summary part
+  // End-of-lecture summary only — keep intro summaries (e.g. «ملخص سريع قبل البدء») in place (see app.js isQuickSummary)
   const summaryPartIdx = lecture.parts.findIndex(p =>
-    p.type === 'summary' && !/checklist|قائمة فحص|قائمة المراجعة/i.test(p.title || ''),
+    p.type === 'summary' && !/checklist|قائمة فحص|قائمة المراجعة|سريع|قبل البدء/i.test(p.title || ''),
   );
   const summaryPart = summaryPartIdx >= 0 ? lecture.parts[summaryPartIdx] : null;
 
