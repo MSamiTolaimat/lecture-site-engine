@@ -101,6 +101,9 @@ export function clarityEventNameFor(event, props = {}) {
   if (event === 'study_session_end') return `${type}_session_end`;
   if (event === 'focus_milestone') return `${type}_focus_${props.focus_minutes}min`;
   if (event === 'hub_pageview' || event === 'hub_subject_click') return event;
+  if (event === '$pageview' || event === 'content_viewed') return null;
+  // UX events (mcq, search, exam, …) — same name in Clarity
+  if (typeof event === 'string' && event && !event.startsWith('$')) return event;
   return null;
 }
 
@@ -156,6 +159,14 @@ function mirrorToClarity(event, props = {}) {
     'year',
   ];
   for (const key of tagKeys) {
+    if (props[key] != null && props[key] !== '') claritySet(key, props[key]);
+  }
+  // Booleans / numbers commonly used on UX events
+  for (const key of [
+    'is_correct', 'completed', 'has_results', 'enabled', 'is_subsection',
+    'query_len', 'result_count', 'question_count', 'correct_count', 'wrong_count',
+    'percent', 'elapsed_seconds', 'subject_percent', 'rank',
+  ]) {
     if (props[key] != null && props[key] !== '') claritySet(key, props[key]);
   }
   if (props.page) clarityCall('set', 'page', String(props.page));
@@ -527,4 +538,167 @@ export function trackLectureContentReady() {
 export function updateAnalyticsContext(patch) {
   context = { ...(context || { subjectName: '', storagePrefix: 'study-guide' }), ...patch };
   registerSuperProps();
+}
+
+/** Props for the current study context (active session or home). */
+export function getActiveContextProps() {
+  if (activeSession) return activeSession.baseProps();
+  return currentBase(virtualPath('home'), 'home', 'home');
+}
+
+/**
+ * Fire a UX event with full study context merged in.
+ * @param {string} event
+ * @param {Record<string, unknown>} [extra]
+ */
+export function trackUxEvent(event, extra = {}) {
+  capture(event, { ...getActiveContextProps(), ...extra });
+}
+
+/**
+ * @param {{ qid?: string, isCorrect: boolean, source?: string, pickedKey?: string, cardId?: string }} detail
+ */
+export function trackMcqAnswered(detail) {
+  trackUxEvent('mcq_answered', {
+    qid: detail.qid || detail.cardId || '',
+    is_correct: !!detail.isCorrect,
+    source: detail.source || 'lecture',
+    picked_key: detail.pickedKey || '',
+  });
+}
+
+/** Practice exam view opened (setup / mistakes bank). */
+export function trackExamModeOpened(mode = 'exam') {
+  endActiveSession();
+  const page = virtualPath(`exam/${mode}`);
+  const props = currentBase(page, 'exam', mode);
+  capture('$pageview', props);
+  capture('content_viewed', props);
+  capture('exam_mode_opened', { ...props, exam_mode: mode });
+}
+
+/**
+ * @param {{ mode: string, questionCount: number, lectureCount: number }} info
+ */
+export function trackExamStarted(info) {
+  trackUxEvent('exam_started', {
+    content_type: 'exam',
+    content_id: info.mode || 'exam',
+    exam_mode: info.mode || 'exam',
+    question_count: Number(info.questionCount) || 0,
+    lecture_count: Number(info.lectureCount) || 0,
+  });
+}
+
+/**
+ * @param {{
+ *   mode: string,
+ *   total: number,
+ *   correctCount: number,
+ *   wrongCount: number,
+ *   unansweredCount: number,
+ *   percent: number,
+ *   elapsedSeconds: number,
+ * }} info
+ */
+export function trackExamFinished(info) {
+  trackUxEvent('exam_finished', {
+    content_type: 'exam',
+    content_id: info.mode || 'exam',
+    exam_mode: info.mode || 'exam',
+    question_count: Number(info.total) || 0,
+    correct_count: Number(info.correctCount) || 0,
+    wrong_count: Number(info.wrongCount) || 0,
+    unanswered_count: Number(info.unansweredCount) || 0,
+    percent: Number(info.percent) || 0,
+    elapsed_seconds: Number(info.elapsedSeconds) || 0,
+  });
+}
+
+/**
+ * @param {{ lectureId: string, completed: boolean, source?: string, subjectPercent?: number }} info
+ */
+export function trackLectureProgressToggled(info) {
+  trackUxEvent('lecture_progress_toggled', {
+    lecture: info.lectureId,
+    content_id: info.lectureId,
+    content_type: 'lecture',
+    completed: !!info.completed,
+    source: info.source || 'unknown',
+    subject_percent: Number(info.subjectPercent) || 0,
+  });
+}
+
+/**
+ * @param {{ queryLen: number, resultCount: number }} info
+ */
+export function trackSearchPerformed(info) {
+  const resultCount = Number(info.resultCount) || 0;
+  trackUxEvent('search_performed', {
+    query_len: Number(info.queryLen) || 0,
+    result_count: resultCount,
+    has_results: resultCount > 0,
+  });
+}
+
+/**
+ * @param {{ lecId: string, entryId?: string, entryKind?: string, rank?: number, queryLen?: number }} info
+ */
+export function trackSearchResultClicked(info) {
+  trackUxEvent('search_result_clicked', {
+    lec_id: info.lecId || '',
+    entry_id: info.entryId || '',
+    entry_kind: info.entryKind || '',
+    rank: Number(info.rank) || 0,
+    query_len: Number(info.queryLen) || 0,
+  });
+}
+
+/** @param {{ trigger?: string }} [info] */
+export function trackSearchOpened(info = {}) {
+  trackUxEvent('search_opened', { trigger: info.trigger || 'unknown' });
+}
+
+/**
+ * @param {{ targetId: string, partType?: string, isSubsection?: boolean }} info
+ */
+export function trackTocNavigated(info) {
+  trackUxEvent('toc_navigated', {
+    target_id: info.targetId || '',
+    part_type: info.partType || '',
+    is_subsection: !!info.isSubsection,
+  });
+}
+
+/** @param {{ targetId?: string, lectureId?: string, trigger?: string }} info */
+export function trackJumpToSummary(info) {
+  trackUxEvent('jump_to_summary', {
+    target_id: info.targetId || '',
+    lecture: info.lectureId || '',
+    trigger: info.trigger || 'button',
+  });
+}
+
+/** @param {{ enabled: boolean, source?: string }} info */
+export function trackExpandOriginalToggled(info) {
+  trackUxEvent('expand_original_toggled', {
+    enabled: !!info.enabled,
+    source: info.source || 'toolbar',
+  });
+}
+
+/** @param {{ theme: string }} info */
+export function trackThemeChanged(info) {
+  trackUxEvent('theme_changed', { theme: info.theme === 'light' ? 'light' : 'dark' });
+}
+
+/**
+ * @param {{ failureKind: string, contentType?: string, message?: string }} info
+ */
+export function trackContentLoadFailed(info) {
+  trackUxEvent('content_load_failed', {
+    failure_kind: info.failureKind || 'unknown',
+    content_type: info.contentType || getActiveContextProps().content_type,
+    message: String(info.message || '').slice(0, 120),
+  });
 }

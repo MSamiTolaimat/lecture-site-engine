@@ -31,15 +31,35 @@ Clarity project ID `xim6tigbcd` stays hardcoded (same as before) — no secret n
 
 ## What is tracked
 
+### Engagement (sessions)
+
 | Event (PostHog) | Clarity event | When | Key properties / tags |
 |-----------------|---------------|------|------------------------|
-| `$pageview` / `content_viewed` | tags only (`page`, …) | Home, lecture, DAWRAT, note open | `subject`, `page`, `content_type`, `content_id` |
+| `$pageview` / `content_viewed` | tags only (`page`, …) | Home, lecture, DAWRAT, note, exam open | `subject`, `page`, `content_type`, `content_id` |
 | `scroll_milestone` | `scroll_25` … `scroll_100` | Scroll depth | above + `milestone_pct` |
 | `study_idle` | `{type}_idle` | 2 min without activity | above + `idle_after_seconds` |
 | `study_session_end` | `{type}_session_end` | Leave content | above + `active_seconds`, `max_scroll_pct` |
 | `focus_milestone` | `{type}_focus_1min` / `_5min` / `_15min` | Focus thresholds | above + `focus_minutes` |
 | `hub_pageview` | `hub_pageview` | Hub index load | `site_env`, `page` |
 | `hub_subject_click` | `hub_subject_click` | Subject card click | `subject_id`, `year` |
+
+### Learning UX
+
+| Event | When | Key properties |
+|-------|------|----------------|
+| `mcq_answered` | Pick an MCQ option (lecture or practice exam) | `qid`, `is_correct`, `source` (`lecture`\|`exam`), `picked_key` |
+| `exam_mode_opened` | Open practice exam / mistakes bank | `exam_mode` |
+| `exam_started` | Practice exam questions shown | `exam_mode`, `question_count`, `lecture_count` |
+| `exam_finished` | Finish practice exam | `percent`, `correct_count`, `wrong_count`, `elapsed_seconds` |
+| `lecture_progress_toggled` | Mark lecture complete / incomplete | `lecture`, `completed`, `source`, `subject_percent` |
+| `search_performed` | Search query (debounced) | `query_len`, `result_count`, `has_results` (no raw query text) |
+| `search_result_clicked` | Click a search hit | `lec_id`, `entry_id`, `entry_kind`, `rank` |
+| `search_opened` | Open search via navbar / shortcut | `trigger` |
+| `toc_navigated` | TOC / sidebar jump | `target_id`, `part_type`, `is_subsection` |
+| `jump_to_summary` | Jump to summary button | `target_id`, `lecture`, `trigger` |
+| `expand_original_toggled` | Expand original text mode | `enabled`, `source` |
+| `theme_changed` | Dark / light toggle | `theme` |
+| `content_load_failed` | Lecture / search / exam load error | `failure_kind`, `message` (truncated) |
 
 Super properties (PostHog, subject pages): `subject`, `storage_prefix`, `site_env`
 (`production` / `sandbox` / `local`).
