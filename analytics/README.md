@@ -1,5 +1,7 @@
 # Study-site analytics (PostHog + Clarity)
 
+**دليل فريق التحليل (بالعربي):** [`TEAM-GUIDE.md`](TEAM-GUIDE.md) — كيف تحلل، شو تشوف بالريبو، كيف تضيف تتبع، وشو المخرج النهائي.
+
 **Microsoft Clarity** stays for heatmaps and session recordings.
 **PostHog Cloud (EU)** is added so every study event carries full context
 (`subject`, `page`, `content_type`, `active_seconds`, …) as **event properties**
