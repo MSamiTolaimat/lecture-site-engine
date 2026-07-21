@@ -162,11 +162,15 @@ export function renderLecture(lecture, accent, icon, refs, deps) {
   // Add "بديل سريع" button if summary exists
   if (summaryPart) {
     const summaryId = `${lecture.id}-p${summaryPartIdx + 1}`;
-    html += `<div class="flex justify-center mb-md">
+    html += `<div class="flex justify-center mb-sm">
       <a href="#${esc(summaryId)}" data-jump-summary class="inline-flex items-center gap-sm px-lg py-md bg-secondary text-on-secondary rounded-full font-label-md font-bold hover:opacity-90 transition-opacity">
         ${ms('speed', false, 'text-lg')} بديل سريع في حال ما كنت ملحق
       </a>
     </div>`;
+    html += `<label class="expand-original-hint-toggle mb-md" title="يعرض النص الأصلي في بداية كل فقرة بدون صندوق قابل للطي">
+      <input type="checkbox" data-expand-original-checkbox aria-label="فعلني في حال تريد النص الأصلي يقول في بداية الفقرة بدون slidedown">
+      <span>فعلني في حال تريد "النص الأصلي يقول" في بداية الفقرة بدون slidedown</span>
+    </label>`;
   }
 
   html += `</section>`;

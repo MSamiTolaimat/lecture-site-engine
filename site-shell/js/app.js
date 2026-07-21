@@ -1300,6 +1300,7 @@ function mountLectureHtml(item, html) {
   buildSidebar(item.toc);
   updateSidebarProgressTarget();
   updateSidebarProgressFill();
+  bindExpandOriginalInlineToggle(document.getElementById('content'));
   initScrollAnimations(document.getElementById('content'));
   revealLectureDetailSections(document.getElementById('content'));
   applyExpandOriginal(localStorage.getItem(STORAGE_EXPAND_ORIGINAL) === '1');
@@ -1553,6 +1554,22 @@ function applyExpandOriginal(enabled) {
 
   const btn = document.getElementById('expandOriginalBtn');
   if (btn) btn.setAttribute('aria-pressed', String(!!enabled));
+  root.querySelectorAll('[data-expand-original-checkbox]').forEach((input) => {
+    input.checked = !!enabled;
+  });
+}
+
+function bindExpandOriginalInlineToggle(root = document.getElementById('content')) {
+  if (!root) return;
+  root.querySelectorAll('[data-expand-original-checkbox]').forEach((input) => {
+    if (input.dataset.bound === '1') return;
+    input.dataset.bound = '1';
+    input.addEventListener('change', () => {
+      const next = !!input.checked;
+      localStorage.setItem(STORAGE_EXPAND_ORIGINAL, next ? '1' : '0');
+      applyExpandOriginal(next);
+    });
+  });
 }
 
 function initExpandOriginalToggle() {
