@@ -57,7 +57,7 @@ export function calloutHtml(cls, label, content) {
     },
   };
   const m = map[cls] || map['callout-note'];
-  return `<div class="${m.wrap} p-lg rounded-xl flex items-start gap-lg mb-lg box-animate box-hover">
+  return `<div class="${cls} ${m.wrap} p-lg rounded-xl flex items-start gap-lg mb-lg box-animate box-hover">
     ${ms(m.icon, m.filled, 'text-3xl shrink-0')}
     <div class="flex-1">
       <h5 class="font-headline-sm text-headline-sm mb-xs">${esc(label)}</h5>
