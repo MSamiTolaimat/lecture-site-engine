@@ -1075,14 +1075,19 @@ function refreshLectureVisibility(root = document.getElementById('content')) {
   });
 }
 
+/** Highlights the active TOC link. When the active element is a subsection, also gives its parent
+ * part link a lighter "is-parent-active" tint so both the section and the exact point stay visible. */
 function setActiveNavLink(activeEl) {
   const href = activeEl?.getAttribute('href');
+  const parentHref = activeEl?.dataset.parentHref || href;
   document.querySelectorAll('.toc-nav-link').forEach(a => {
-    a.classList.remove('bg-primary-container', 'text-on-primary-container', 'border-primary', 'font-bold');
+    a.classList.remove('bg-primary-container', 'text-on-primary-container', 'border-primary', 'font-bold', 'is-parent-active');
     a.classList.add('text-on-surface-variant');
     if (href && a.getAttribute('href') === href) {
       a.classList.add('bg-primary-container', 'text-on-primary-container', 'border-primary', 'font-bold');
       a.classList.remove('text-on-surface-variant');
+    } else if (parentHref && a.getAttribute('href') === parentHref) {
+      a.classList.add('is-parent-active');
     }
   });
 }
@@ -1107,11 +1112,13 @@ function buildSidebar(toc) {
       .replace(/^الجزء[^:]+:\s*/, '')
       .replace(/^📌\s*/, '');
 
+    const partHref = `#${part.id}`;
+
     containers.forEach(container => {
       const link = document.createElement('a');
-      link.href = `#${part.id}`;
-      link.className = 'toc-nav-link flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high p-md transition-all mx-md mb-xs font-label-md text-label-md rounded-l-lg border-r-4 border-transparent';
-      link.innerHTML = `<span class="line-clamp-2">${esc(partLabel)}</span>`;
+      link.href = partHref;
+      link.className = 'toc-nav-link flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high p-md transition-all mx-md mb-xs font-label-md text-label-md rounded-l-lg border-r-4 border-transparent';
+      link.innerHTML = `<span>${esc(partLabel)}</span>`;
       link.dataset.partType = part.type;
       container.appendChild(link);
       if (container === containers[0]) allLinks.push({ el: link, target: null });
@@ -1121,9 +1128,10 @@ function buildSidebar(toc) {
         const subId = `${part.id}-${sub.id}`;
         const indent = sub.level >= 5 ? 'mr-2xl' : sub.level >= 4 ? 'mr-xl' : 'mr-lg';
         subLink.href = `#${subId}`;
+        subLink.dataset.parentHref = partHref;
         subLink.className = `toc-nav-link flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high py-xs px-md transition-all ${indent} mb-xs font-label-md text-label-md rounded-l-lg border-r-4 border-transparent opacity-80`;
         const subLabel = sub.text.replace(/^\d+(?:\.\d+)*\.?\s*/, '');
-        subLink.innerHTML = `${ms('chevron_left', false, 'text-sm shrink-0')}<span class="line-clamp-2 text-xs leading-snug">${formatSubsectionLabel(subLabel)}</span>`;
+        subLink.innerHTML = `${ms('chevron_left', false, 'text-sm shrink-0')}<span class="text-xs leading-snug">${formatSubsectionLabel(subLabel)}</span>`;
         container.appendChild(subLink);
         if (container === containers[0]) allLinks.push({ el: subLink, target: null });
       });
@@ -1180,29 +1188,40 @@ function buildSidebar(toc) {
   });
 }
 
-/** Finds the "ملخص" (summary) part's DOM element for the item currently on screen — the point where the sidebar progress rail should read 100%. */
+/** Part types that represent practice/reference material rather than linear reading content — once one
+ * of these starts, the student is no longer "reading through the explanation". */
+const NON_READING_PART_TYPES = new Set(['mcq', 'qa', 'debug', 'trace', 'design', 'theory', 'exercise', 'cheat', 'reference']);
+
+/** Finds the DOM element marking the end of the reading content — the point where the sidebar progress
+ * bar should read 100%. Defined as the start of the FIRST practice/reference-type part (MCQ, Q&A cards,
+ * cheat sheet, etc.). This intentionally does NOT depend on part titles or on 'detail'/'summary' typing:
+ * those vary between lecture templates (a subject's "شرح تفصيلي" wording, or whether a closing "ملخص
+ * شامل" section even exists, differs from one batch of lectures to another and kept breaking this for
+ * newer content). The practice-type keywords (MCQ, Q&A cards, cheat sheet, exercises...) are matched by
+ * fixed, explicit patterns everywhere in the parser regardless of subject, so anchoring on the first one
+ * of those is the only boundary that holds across every lecture template. */
 function findSummaryPartEl() {
   const toc = currentReviewIndex >= 0
     ? appState.reviewItems[currentReviewIndex]?.toc
     : appState.items[currentLectureIndex]?.toc;
-  if (!toc) return null;
-  const part = toc.parts?.find(p =>
-    p.type === 'summary' && !/checklist|قائمة فحص|قائمة المراجعة/i.test(p.title),
-  ) || toc.parts?.find(p => p.type === 'summary' && /ملخص/i.test(p.title));
+  const parts = toc?.parts || [];
+  const part = parts.find(p => NON_READING_PART_TYPES.has(p.type));
   if (!part) return null;
   return document.getElementById(part.id);
 }
 
 function updateSidebarProgressTarget() {
   progressEndEl = findSummaryPartEl();
+  updateLectureNavArrows();
 }
 
-/** Updates the thin edge rail in the sidebar to reflect how far the student has scrolled through the lecture body (stops at the start of the summary part, if present). */
+/** Updates the horizontal progress bar(s) in the sidebar/mobile drawer to reflect how far the student has
+ * scrolled through the lecture body (stops at the start of the closing summary part, if present). */
 function updateSidebarProgressFill() {
-  const fill = document.getElementById('sidebarProgressFill');
-  const dot = document.getElementById('sidebarProgressDot');
   const content = document.getElementById('content');
-  if (!fill || !dot || !content || currentView !== 'lecture') return;
+  const fills = [document.getElementById('sidebarProgressFill'), document.getElementById('mobileProgressFill')].filter(Boolean);
+  const pcts = [document.getElementById('sidebarProgressPct'), document.getElementById('mobileProgressPct')].filter(Boolean);
+  if (!fills.length || !content || currentView !== 'lecture') return;
 
   const contentTop = content.getBoundingClientRect().top + window.scrollY;
   const endTop = progressEndEl
@@ -1210,9 +1229,37 @@ function updateSidebarProgressFill() {
     : contentTop + content.offsetHeight;
   const span = Math.max(1, endTop - contentTop);
   const frac = Math.min(1, Math.max(0, (window.scrollY + SCROLL_OFFSET_PX - contentTop) / span));
+  const pct = Math.round(frac * 100);
 
-  fill.style.height = `${frac * 100}%`;
-  dot.style.top = `${(1 - frac) * 100}%`;
+  fills.forEach(fill => { fill.style.width = `${pct}%`; });
+  pcts.forEach(el => { el.textContent = `${pct}%`; });
+}
+
+/** Enables/disables the prev/next lecture arrows in the sidebar course header based on position
+ * within appState.items (the same order lectures appear in the manifest). */
+function updateLectureNavArrows() {
+  const atFirst = currentReviewIndex >= 0 || currentLectureIndex <= 0;
+  const atLast = currentReviewIndex >= 0 || currentLectureIndex < 0 || currentLectureIndex >= appState.items.length - 1;
+  [document.getElementById('sidebarPrevLectureBtn'), document.getElementById('mobilePrevLectureBtn')]
+    .filter(Boolean).forEach(btn => { btn.disabled = atFirst; });
+  [document.getElementById('sidebarNextLectureBtn'), document.getElementById('mobileNextLectureBtn')]
+    .filter(Boolean).forEach(btn => { btn.disabled = atLast; });
+}
+
+/** Navigates to the previous/next lecture (by manifest order) via the normal hash router — same path as
+ * clicking a lecture card on the hub. No-op past the first/last lecture or while in review mode. */
+function goToAdjacentLecture(delta) {
+  if (currentReviewIndex >= 0 || currentLectureIndex < 0) return;
+  const stub = appState.items[currentLectureIndex + delta];
+  if (!stub) return;
+  location.hash = stub.lec.id;
+}
+
+function initSidebarLectureNav() {
+  [document.getElementById('sidebarPrevLectureBtn'), document.getElementById('mobilePrevLectureBtn')]
+    .filter(Boolean).forEach(btn => btn.addEventListener('click', () => goToAdjacentLecture(-1)));
+  [document.getElementById('sidebarNextLectureBtn'), document.getElementById('mobileNextLectureBtn')]
+    .filter(Boolean).forEach(btn => btn.addEventListener('click', () => goToAdjacentLecture(1)));
 }
 
 function initSidebarProgress() {
@@ -1952,6 +1999,7 @@ async function init() {
   initLectureCompletionButtons();
   initSidebarToggle();
   initSidebarProgress();
+  initSidebarLectureNav();
   if (LECTURE_NOTES_ENABLED) initLectureNotes();
   initMobileStudyUi();
   initSearch();
