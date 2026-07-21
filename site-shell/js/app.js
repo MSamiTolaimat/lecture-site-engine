@@ -18,6 +18,16 @@ import {
   trackNoteView,
   trackLectureContentReady,
   updateAnalyticsContext,
+  trackMcqAnswered,
+  trackLectureProgressToggled,
+  trackSearchPerformed,
+  trackSearchResultClicked,
+  trackSearchOpened,
+  trackTocNavigated,
+  trackJumpToSummary,
+  trackExpandOriginalToggled,
+  trackThemeChanged,
+  trackContentLoadFailed,
 } from './analytics.js';
 import { initLaserPointer } from './laser-pointer.js';
 import { createProgressTracker, lectureIdFromPath, resolveSubjectKeyFromPath } from './progress_tracker.js';
@@ -701,16 +711,31 @@ function setLectureCompletedByIndex(idx, completed) {
   if (!item || !appState.progressTracker) return;
   const lectureId = lectureStableId(item, idx);
   appState.progressTracker.setLectureCompleted(lectureId, completed);
+  const progress = appState.progressTracker.getSubjectProgress(subjectLectureIds());
+  trackLectureProgressToggled({
+    lectureId,
+    completed: !!completed,
+    source: 'programmatic',
+    subjectPercent: progress.percent,
+  });
   renderSubjectProgressTracker();
   renderHomeGrid();
   syncLectureCompletionButtons(currentLectureIndex);
 }
 
-function toggleLectureCompletedByIndex(idx) {
+function toggleLectureCompletedByIndex(idx, source = 'unknown') {
   const item = appState.items[idx];
   if (!item || !appState.progressTracker) return;
   const lectureId = lectureStableId(item, idx);
   appState.progressTracker.toggleLectureCompleted(lectureId);
+  const completed = appState.progressTracker.isLectureCompleted(lectureId);
+  const progress = appState.progressTracker.getSubjectProgress(subjectLectureIds());
+  trackLectureProgressToggled({
+    lectureId,
+    completed,
+    source,
+    subjectPercent: progress.percent,
+  });
   renderSubjectProgressTracker();
   renderHomeGrid();
   syncLectureCompletionButtons(currentLectureIndex);
@@ -755,7 +780,7 @@ function initLectureCompletionButtons() {
     btn.addEventListener('click', () => {
       const idx = Number(btn.dataset.lectureIndex);
       if (!Number.isInteger(idx) || idx < 0) return;
-      toggleLectureCompletedByIndex(idx);
+      toggleLectureCompletedByIndex(idx, id === 'sidebarCompleteBtn' ? 'sidebar' : 'mobile');
     });
   });
 }
@@ -780,6 +805,7 @@ function initTheme() {
     const isDark = !document.documentElement.classList.contains("dark");
     applyDarkMode(isDark);
     localStorage.setItem(STORAGE_THEME, isDark ? 'dark' : 'light');
+    trackThemeChanged({ theme: isDark ? 'dark' : 'light' });
     refreshDiagrams();
     refreshMermaid(document.getElementById('content') || document);
   });
@@ -1007,7 +1033,7 @@ function renderHomeGrid() {
       event.stopPropagation();
       const idx = Number(btn.dataset.toggleCompleteIndex);
       if (!Number.isInteger(idx) || idx < 0) return;
-      toggleLectureCompletedByIndex(idx);
+      toggleLectureCompletedByIndex(idx, 'home_card');
     });
   });
 }
@@ -1171,6 +1197,15 @@ function buildSidebar(toc) {
       e.preventDefault();
       const anchorId = anchorIdFromHash(link.hash);
       if (!anchorId) return;
+      const partType = link.dataset.partType
+        || target?.getAttribute('data-part-type')
+        || '';
+      trackTocNavigated({
+        targetId: anchorId,
+        partType,
+        isSubsection: link.classList.contains('toc-nav-link--sub')
+          || !!link.closest('.toc-subsections'),
+      });
       if (location.hash !== `#${anchorId}`) location.hash = anchorId;
       else scrollToAnchor(anchorId);
       setActiveNavLink(link);
@@ -1383,6 +1418,11 @@ async function loadLectureView(idx, hashPart) {
   try {
     item = await ensureLectureLoaded(idx);
   } catch (err) {
+    trackContentLoadFailed({
+      failureKind: 'lecture_json',
+      contentType: 'lecture',
+      message: err?.message || 'lecture load failed',
+    });
     document.getElementById('content').innerHTML = `
       <div class="py-2xl text-center text-error">
         <p class="mb-md">⚠️ ${esc(err.message)}</p>
@@ -1467,6 +1507,9 @@ function jumpToSummary() {
       || null;
   }
   if (!targetId) return;
+
+  const lectureId = item.lec?.id || lectureStableId(item, currentLectureIndex);
+  trackJumpToSummary({ targetId, lectureId, trigger: 'button' });
 
   const hash = `#${targetId}`;
   if (location.hash === hash) scrollToAnchor(targetId);
@@ -1626,6 +1669,7 @@ function bindExpandOriginalInlineToggle(root = document.getElementById('content'
       const next = !!input.checked;
       localStorage.setItem(STORAGE_EXPAND_ORIGINAL, next ? '1' : '0');
       applyExpandOriginal(next);
+      trackExpandOriginalToggled({ enabled: next, source: 'inline' });
     });
   });
 }
@@ -1640,6 +1684,7 @@ function initExpandOriginalToggle() {
     const next = btn.getAttribute('aria-pressed') !== 'true';
     localStorage.setItem(STORAGE_EXPAND_ORIGINAL, next ? '1' : '0');
     applyExpandOriginal(next);
+    trackExpandOriginalToggled({ enabled: next, source: 'toolbar' });
   });
 }
 
@@ -1872,6 +1917,11 @@ function initSearch() {
     search(q, 15).then(matches => {
       if (input.value.trim() !== q.trim()) return; // stale response
 
+      trackSearchPerformed({
+        queryLen: q.trim().length,
+        resultCount: matches.length,
+      });
+
       if (!matches.length) {
         results.innerHTML = `<div class="p-lg text-center text-on-surface-variant font-label-md">لا نتائج لـ "${esc(q)}"</div>`;
         results.classList.remove('hidden');
@@ -1881,10 +1931,12 @@ function initSearch() {
 
       const seen = new Set();
       let html = '';
+      let rank = 0;
       for (const { entry } of matches) {
         const key = entry.id;
         if (seen.has(key)) continue;
         seen.add(key);
+        rank += 1;
 
         const icon = entry.kind === 'lecture' ? 'description'
           : entry.kind === 'part' ? 'chapter'
@@ -1902,6 +1954,8 @@ function initSearch() {
           <button type="button" class="search-result-item flex items-start gap-md w-full text-right px-lg py-md hover:bg-surface-container-high transition-all border-b border-outline-variant last:border-b-0 cursor-pointer"
             data-lec-id="${escAttr(entry.lecId)}"
             data-anchor="${escAttr(entry.id)}"
+            data-entry-kind="${escAttr(entry.kind || '')}"
+            data-rank="${rank}"
             role="option"
             aria-label="${escAttr(label)}">
             <span class="material-symbols-outlined text-primary shrink-0 mt-xs" aria-hidden="true">${icon}</span>
@@ -1922,6 +1976,13 @@ function initSearch() {
         btn.addEventListener('click', () => {
           const lecId = btn.dataset.lecId;
           const anchor = btn.dataset.anchor;
+          trackSearchResultClicked({
+            lecId,
+            entryId: anchor,
+            entryKind: btn.dataset.entryKind || '',
+            rank: Number(btn.dataset.rank) || 0,
+            queryLen: q.trim().length,
+          });
           closeSearchResults();
           input.value = '';
           clearBtn?.classList.add('hidden');
@@ -1930,6 +1991,11 @@ function initSearch() {
       });
     }).catch(err => {
       console.warn('Search error:', err);
+      trackContentLoadFailed({
+        failureKind: 'search_index',
+        contentType: 'home',
+        message: err?.message || 'search failed',
+      });
     });
   }
 
@@ -1967,6 +2033,7 @@ function initSearch() {
 
   // Navbar search button
   document.getElementById('navbarSearchBtn')?.addEventListener('click', () => {
+    trackSearchOpened({ trigger: 'navbar' });
     if (currentView !== 'home') goToSubjectHome();
     setTimeout(() => {
       input.focus();
@@ -1978,6 +2045,7 @@ function initSearch() {
   document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'F') {
       e.preventDefault();
+      trackSearchOpened({ trigger: 'shortcut' });
       if (currentView !== 'home') goToSubjectHome();
       setTimeout(() => {
         input.focus();
@@ -1991,6 +2059,9 @@ async function init() {
   initTheme();
   initLaserPointer();
   initInteractivity();
+  window.addEventListener('study:mcq-answered', (e) => {
+    trackMcqAnswered(e.detail || {});
+  });
   initScrollFab();
   initJumpSummary();
   bindJumpSummaryClicks();

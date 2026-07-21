@@ -29,6 +29,19 @@ const TRACKED_EVENTS = [
   'hub_pageview',
   'hub_subject_click',
   '$pageview',
+  'mcq_answered',
+  'exam_mode_opened',
+  'exam_started',
+  'exam_finished',
+  'lecture_progress_toggled',
+  'search_performed',
+  'search_result_clicked',
+  'search_opened',
+  'toc_navigated',
+  'jump_to_summary',
+  'expand_original_toggled',
+  'theme_changed',
+  'content_load_failed',
 ];
 
 function parseArgs(argv) {
@@ -139,7 +152,15 @@ LIMIT 50000
 
 async function runNamedQueries() {
   const queriesDir = path.join(ROOT, 'analytics/queries');
-  const names = ['top-lectures', 'engagement-by-subject', 'scroll-funnel', 'dawrat-vs-lectures'];
+  const names = [
+    'top-lectures',
+    'engagement-by-subject',
+    'scroll-funnel',
+    'dawrat-vs-lectures',
+    'mcq-accuracy',
+    'search-findability',
+    'exam-outcomes',
+  ];
   /** @type {Record<string, unknown>} */
   const out = {};
   for (const name of names) {

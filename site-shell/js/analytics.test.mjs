@@ -85,5 +85,8 @@ assert(
 );
 assert(clarityEventNameFor('content_viewed', lec) === null, 'pageviews are tags-only on Clarity');
 assert(clarityEventNameFor('hub_pageview', {}) === 'hub_pageview', 'hub pageview clarity event');
+assert(clarityEventNameFor('mcq_answered', { is_correct: true }) === 'mcq_answered', 'ux events pass through');
+assert(clarityEventNameFor('search_performed', {}) === 'search_performed', 'search event name');
+assert(clarityEventNameFor('exam_finished', { exam_mode: 'exam' }) === 'exam_finished', 'exam finished name');
 
 console.log('analytics.test.mjs: ok');

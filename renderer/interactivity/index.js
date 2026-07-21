@@ -57,6 +57,21 @@ export function pickMCQ(btn) {
   if (explain) explain.classList.remove('hidden');
   card.dataset.locked = '1';
   updateMCQProgress(card.closest('.section-block'));
+
+  try {
+    const inExam = !!card.closest('#examRoot') || !!card.dataset.examQid;
+    window.dispatchEvent(new CustomEvent('study:mcq-answered', {
+      detail: {
+        isCorrect: isOk,
+        pickedKey: picked,
+        cardId: card.id || '',
+        qid: card.dataset.examQid || card.dataset.qid || card.id || '',
+        source: inExam ? 'exam' : 'lecture',
+      },
+    }));
+  } catch {
+    /* ignore analytics bridge errors */
+  }
 }
 
 export function updateMCQProgress(section) {
