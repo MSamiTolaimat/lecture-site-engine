@@ -32,6 +32,7 @@ const STORAGE_THEME = `${GUIDE_CONFIG.storagePrefix || 'study-guide'}-theme`;
 const STORAGE_LAST_LECTURE = `${GUIDE_CONFIG.storagePrefix || 'study-guide'}-last-lecture`;
 const STORAGE_LECTURE_WIDTH = `${GUIDE_CONFIG.storagePrefix || 'study-guide'}-lecture-width`;
 const STORAGE_NOTES_PREFIX = `${GUIDE_CONFIG.storagePrefix || 'study-guide'}-notes`;
+const STORAGE_EXPAND_ORIGINAL = `${GUIDE_CONFIG.storagePrefix || 'study-guide'}-expand-original`;
 const LECTURE_WIDTH_OPTIONS = [
   { value: '50', label: '50%', body: '50%' },
   { value: '70', label: '70%', body: '70%' },
@@ -810,6 +811,7 @@ function showView(name) {
   document.getElementById('backToHomeBtn')?.classList.toggle('hidden', name === 'home');
   document.getElementById('backToHubBtn')?.classList.toggle('hidden', name !== 'home');
   document.getElementById('lectureWidthControl')?.classList.toggle('hidden', name !== 'lecture');
+  document.getElementById('expandOriginalBtn')?.classList.toggle('hidden', name !== 'lecture');
   document.getElementById('lectureNotesBtn')?.classList.toggle('hidden', !LECTURE_NOTES_ENABLED || name !== 'lecture');
   document.getElementById('mobileStudyBar')?.classList.toggle('hidden', name !== 'lecture');
   document.documentElement.classList.toggle('is-lecture-view', name === 'lecture');
@@ -1300,6 +1302,7 @@ function mountLectureHtml(item, html) {
   updateSidebarProgressFill();
   initScrollAnimations(document.getElementById('content'));
   revealLectureDetailSections(document.getElementById('content'));
+  applyExpandOriginal(localStorage.getItem(STORAGE_EXPAND_ORIGINAL) === '1');
   requestAnimationFrame(() => {
     revealLectureDetailSections(document.getElementById('content'));
     refreshLectureVisibility(document.getElementById('content'));
@@ -1500,6 +1503,69 @@ function closeLectureWidthMenu() {
   const btn = document.getElementById('lectureWidthBtn');
   menu?.classList.add('hidden');
   btn?.setAttribute('aria-expanded', 'false');
+}
+
+function isMainTopicHeading(el) {
+  return el?.matches?.('div.flex.anchor-target')
+    && el.querySelector(':scope > .w-10.h-10')
+    && el.querySelector(':scope > h4.font-headline-md');
+}
+
+function findTopicHeading(el) {
+  let node = el.previousElementSibling;
+  while (node) {
+    if (isMainTopicHeading(node)) return node;
+    node = node.previousElementSibling;
+  }
+  return null;
+}
+
+function ensureOrigMarker(el) {
+  if (!el._origMarker) {
+    el._origMarker = document.createComment('orig-text-pos');
+    el.parentNode.insertBefore(el._origMarker, el);
+  }
+}
+
+function restoreOrigPosition(el) {
+  const marker = el._origMarker;
+  if (marker?.parentNode) marker.parentNode.insertBefore(el, marker.nextSibling);
+}
+
+function applyExpandOriginal(enabled) {
+  const root = document.getElementById('content');
+  if (!root) return;
+  root.classList.toggle('expand-original-mode', enabled);
+
+  root.querySelectorAll('.original-text-collapsible').forEach(el => {
+    if (enabled) {
+      ensureOrigMarker(el);
+      const topic = findTopicHeading(el);
+      if (topic && el.previousElementSibling !== topic) {
+        topic.parentNode.insertBefore(el, topic.nextElementSibling);
+      }
+      el.setAttribute('open', '');
+    } else {
+      restoreOrigPosition(el);
+      el.removeAttribute('open');
+    }
+  });
+
+  const btn = document.getElementById('expandOriginalBtn');
+  if (btn) btn.setAttribute('aria-pressed', String(!!enabled));
+}
+
+function initExpandOriginalToggle() {
+  const btn = document.getElementById('expandOriginalBtn');
+  if (!btn || btn.dataset.bound === '1') return;
+  btn.dataset.bound = '1';
+  const saved = localStorage.getItem(STORAGE_EXPAND_ORIGINAL) === '1';
+  applyExpandOriginal(saved);
+  btn.addEventListener('click', () => {
+    const next = btn.getAttribute('aria-pressed') !== 'true';
+    localStorage.setItem(STORAGE_EXPAND_ORIGINAL, next ? '1' : '0');
+    applyExpandOriginal(next);
+  });
 }
 
 function initLectureWidthToggle() {
@@ -1854,6 +1920,7 @@ async function init() {
   initJumpSummary();
   bindJumpSummaryClicks();
   initLectureWidthToggle();
+  initExpandOriginalToggle();
   initLectureCompletionButtons();
   initSidebarToggle();
   initSidebarProgress();

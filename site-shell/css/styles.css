@@ -2290,19 +2290,23 @@ html.is-lecture-view .site-navbar__actions {
   gap: 0.125rem;
 }
 
-.site-navbar__toggle.is-active {
+.site-navbar__toggle.is-active,
+.site-navbar__toggle[aria-pressed="true"] {
   background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface-variant));
 }
 
-.site-navbar__toggle.is-active .material-symbols-outlined {
+.site-navbar__toggle.is-active .material-symbols-outlined,
+.site-navbar__toggle[aria-pressed="true"] .material-symbols-outlined {
   color: var(--color-primary);
 }
 
-.dark .site-navbar__toggle.is-active {
+.dark .site-navbar__toggle.is-active,
+.dark .site-navbar__toggle[aria-pressed="true"] {
   background: color-mix(in srgb, var(--color-primary) 24%, var(--dm-elevated-2));
 }
 
-.dark .site-navbar__toggle.is-active .material-symbols-outlined {
+.dark .site-navbar__toggle.is-active .material-symbols-outlined,
+.dark .site-navbar__toggle[aria-pressed="true"] .material-symbols-outlined {
   color: var(--color-inverse-primary, #f8fafc);
 }
 
@@ -2537,6 +2541,47 @@ body.laser-pointer-enabled button {
 
 .dark .source-quote__body p {
   color: var(--dm-text);
+}
+
+/* Original text at top of topic (toggle mode) */
+#content.expand-original-mode .original-text-collapsible {
+  border-right: 3px solid var(--color-secondary);
+  background: color-mix(in srgb, var(--color-secondary-fixed) 30%, var(--color-surface-container-lowest));
+}
+
+#content.expand-original-mode .original-text-collapsible summary {
+  pointer-events: none;
+  cursor: default;
+  padding: 0.5rem 0.875rem;
+  border-bottom: 1px dashed color-mix(in srgb, var(--color-secondary) 18%, transparent);
+}
+
+#content.expand-original-mode .original-text-collapsible summary .acc-chevron {
+  display: none;
+}
+
+#content.expand-original-mode .original-text-collapsible summary .acc-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+}
+
+#content.expand-original-mode .original-text-collapsible .acc-body {
+  border-top: none;
+  padding-top: 0.875rem;
+}
+
+.dark #content.expand-original-mode .original-text-collapsible {
+  border-right-color: var(--color-secondary-accent);
+  background: color-mix(in srgb, var(--color-secondary) 8%, var(--dm-elevated));
+}
+
+.dark #content.expand-original-mode .original-text-collapsible summary {
+  border-bottom-color: color-mix(in srgb, var(--color-secondary-accent) 15%, transparent);
+}
+
+.dark #content.expand-original-mode .original-text-collapsible summary .acc-title {
+  color: var(--color-secondary-accent);
 }
 
 /* ── Numbered code snippets ── */
