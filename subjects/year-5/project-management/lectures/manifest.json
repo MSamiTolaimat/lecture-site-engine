@@ -5,6 +5,7 @@
     "year": "2025-2026",
     "academicYear": 5,
     "theme": "amber-default",
+    "enbaledLectures":true,
     "department": "القسم النظري والعملي"
   },
   "title": "إدارة المشاريع — Project Management",
