@@ -8,69 +8,195 @@
 
 ### 1. تعريف المشروع (Project)
 
-#### النص الأصلي يقول:
-> A project is defined as a temporary endeavor to create a distinct product, service or result. المشروع يجب أن يملك هدفاً واضحاً (target)، وهذا الهدف هو أهم جزء لأنه يحدد كيفية قياس نجاح أو فشل المشروع.
+#### 📍 أين نحن الآن؟
+هذه أول نقطة في أول محاضرة — قبل أي شيء آخر في المادة، لازم نتفق على تعريف دقيق لكلمة `Project` نفسها، لأن كل المفاهيم اللاحقة (الموارد، أصحاب المصلحة، دورة الحياة...) مبنية على هذا التعريف.
 
-#### الشرح المبسّط:
-تخيّل أنك تخطط لحفل زفاف. هذا "الحفل" هو `project` — له بداية ونهاية محددتين (وليس نشاطاً مستمراً إلى الأبد)، وله هدف واضح: إنجاح الحفل في يوم معيّن. أي عمل يستمر بلا نهاية محددة (مثل تشغيل خط إنتاج مصنع يومياً) **ليس** مشروعاً، بل عملية تشغيلية.
+#### ⬅️ الربط مع السابق
+لا يوجد موضوع سابق — هذه نقطة البداية المطلقة في المادة.
 
-**لماذا؟** لأن كلمة `temporary` هي الفارق الجوهري بين `project` و`operation`. بدون تاريخ نهاية وهدف محدد (`target`)، لا يمكن أبداً قياس النجاح أو الفشل — وهذا يجعل `target` أهم عنصر في أي مشروع كما تنص المحاضرة.
+#### 💡 الفكرة الأساسية
+**`Project` هو مسعى `مؤقت` (temporary) — له بداية ونهاية محددتين — لإنتاج منتج أو خدمة أو نتيجة مميزة (distinct)، وهذا يفرّقه جوهرياً عن أي نشاط تشغيلي مستمر بلا نهاية.**
+
+#### 📖 الشرح
+تخيّل أنك تخطط لحفل زفاف. هذا "الحفل" هو `project` — له بداية ونهاية محددتين (وليس نشاطاً مستمراً إلى الأبد)، وله هدف واضح: إنجاح الحفل في يوم معيّن. أي عمل يستمر بلا نهاية محددة (مثل تشغيل خط إنتاج مصنع يومياً) **ليس** مشروعاً، بل عملية تشغيلية (`operation`).
+
+كلمة `temporary` هي الفارق الجوهري بين `project` و`operation`. لكن الجزء الثاني من التعريف لا يقل أهمية: المشروع يجب أن يملك `target` (هدفاً) واضحاً منذ البداية. لماذا؟ لأن بدون تاريخ نهاية *وهدف محدد* معاً، لا يمكن أبداً قياس نجاح المشروع أو فشله بشكل موضوعي — وهذا بالضبط ما يجعل `target` **أهم عنصر منفرد** في أي مشروع، كما تنص المحاضرة صراحة.
 
 💡 **التشبيه:** بناء منزل هو `project` (له تاريخ تسليم ومواصفات محددة)، أما تنظيف المنزل أسبوعياً فهو `operation` متكررة بلا هدف نهائي واحد.
 **وجه الشبه:** تاريخ التسليم في بناء المنزل = `temporary` في تعريف المشروع.
 
+#### 🎯 الملخص السريع
+- `Project` = مسعى `temporary` (له بداية ونهاية) + هدف واضح (`distinct product/service/result`)
+- عكسه هو `Operation`: نشاط مستمر بلا نهاية محددة
+- `target` هو أهم عنصر في التعريف لأنه معيار قياس النجاح/الفشل
+
+#### 📚 التطبيق
+بما أن `target` هو أهم عنصر، الفقرة القادمة (1.1) تشرح كيف يختلف **نوع** هذا الهدف حسب طبيعة المشروع، وكيف يغيّر ذلك طريقة إدارته بالكامل.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> A project is defined as a temporary endeavor to create a distinct product, service or result. المشروع يجب أن يملك هدفاً واضحاً (target)، وهذا الهدف هو أهم جزء لأنه يحدد كيفية قياس نجاح أو فشل المشروع.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: تعريف `temporary`، تعريف `distinct product/service/result`، وأهمية `target` كمعيار قياس النجاح.
+- ℹ️ إضافة من الدليل: تشبيه حفل الزفاف وتشبيه بناء المنزل (ليست في المحاضرة الأصلية).
+
+</details>
+
 ### 1.1. تأثير نوع الهدف على الإدارة
 
-#### النص الأصلي يقول:
-> The type of the project target defines how we need to manage the project. إذا كان الهدف منتجاً يجب أن يطابق مواصفات العميل. أما في القطاع الإنساني، فالهدف يُقاس بعدد الأشخاص أو العائلات التي تمت مساعدتها، مثل خدمة قانونية لمساعدة الناس في أوراق الزواج والطلاق، أو مساعدة `IDPs` (النازحين داخلياً) وتُقاس بعدد العائلات.
+#### 📍 أين نحن الآن؟
+بعد ما عرفنا أن `target` هو أهم عنصر في المشروع، السؤال الطبيعي التالي: هل كل الأهداف تُدار بنفس الطريقة؟ الجواب لا — ونوع الهدف نفسه هو ما يحدد أسلوب الإدارة.
 
-#### الشرح المبسّط:
-معيار النجاح يتغيّر حسب طبيعة المشروع. شركة تصنّع هواتف تقيس نجاحها بعدد الأجهزة المطابقة للمواصفات المباعة، بينما منظمة إغاثة تقيس نجاحها بعدد العائلات التي وصلتها المساعدة — وليس بالربح المادي.
+#### ⬅️ الربط مع السابق
+امتداد مباشر لقسم 1: بما أن `target` هو أهم جزء في تعريف المشروع، هذا القسم يوضّح أن **نوع** هذا الهدف يغيّر طريقة إدارة المشروع بالكامل.
 
-**لماذا؟** لأن `success metric` (مقياس النجاح) يجب أن يعكس الغرض الحقيقي من العمل، وليس رقماً موحّداً لكل المنظمات.
+#### 💡 الفكرة الأساسية
+**نوع هدف المشروع (`the type of the project target`) هو الذي يحدد كيف يجب أن نديره — فمعيار "النجاح" ليس رقماً ثابتاً، بل يعتمد على طبيعة المشروع نفسه.**
+
+#### 📖 الشرح
+المحاضرة تعطي مثالين متقابلين تماماً لتوضيح هذه الفكرة. الحالة الأولى: إذا كان هدف المشروع **منتجاً** (`product`)، فمعيار النجاح واضح ومباشر — يجب أن يطابق المنتج **مواصفات العميل** (`client's specs`) بدقة. مثال: شركة تصنّع هواتف تقيس نجاحها بعدد الأجهزة المطابقة للمواصفات المتفق عليها والمباعة فعلياً.
+
+الحالة الثانية مختلفة جذرياً: في **القطاع الإنساني** (`humanitarian sector`)، لا يوجد "منتج" يُقاس بالمواصفات، بل يُقاس الهدف **بعدد الأشخاص أو العائلات** الذين تمت مساعدتهم فعلياً. المحاضرة تعطي مثالين محددين على هذا:
+- **خدمة قانونية** تساعد الناس في إنجاز أوراق الزواج والطلاق (`marriage and divorce papers`) — النجاح هنا يُقاس بعدد الحالات المُنجَزة، لا بالربح.
+- **مساعدة `IDPs`** (النازحين داخلياً — `Internally Displaced Persons`)، حيث يُقاس النجاح **بعدد العائلات** التي وصلتها المساعدة تحديداً، وليس بأي مقياس مالي.
+
+فمنظمة إغاثة تقيس نجاحها بعدد العائلات التي وصلتها المساعدة — وليس بالربح المادي أبداً، بعكس الشركة المصنّعة التي مرجعها الوحيد هو مطابقة مواصفات العميل.
+
+**لماذا هذا مهم؟** لأن `success metric` (مقياس النجاح) يجب أن يعكس **الغرض الحقيقي** من المشروع، لا رقماً موحّداً يُطبَّق على كل المنظمات بنفس الطريقة. مدير مشروع يحاول قياس نجاح خدمة قانونية إنسانية بمعيار "الربح" أو "عدد الوحدات المباعة" يرتكب خطأ إدارياً جوهرياً منذ البداية.
 
 **ملاحظة (شرح المحاضرة نفسه):** كلمة `organization` في هذه المادة تشمل أي جهة عامة أو خاصة أو `NGO` أو حكومية تستفيد من المشروع أو تنفذه.
+
+#### 🎯 الملخص السريع
+- هدف = منتج (`product`) ← النجاح يُقاس بمطابقة مواصفات العميل
+- هدف = إنساني (`humanitarian`) ← النجاح يُقاس بعدد الأشخاص/العائلات المستفيدة (مثال: خدمة أوراق الزواج/الطلاق، مساعدة `IDPs`)
+- لا يوجد معيار نجاح واحد يناسب كل المشاريع — `organization` هنا تشمل أي جهة عامة/خاصة/NGO/حكومية
+
+#### 📚 التطبيق
+هذا المبدأ (اختلاف معيار النجاح حسب نوع الهدف) سيظهر مرة أخرى في قسم 5 (نتائج المشروع: `Tangible` مقابل `Intangible`) وقسم 3 (`Stakeholders` مقابل `Clients`) — فكرة أن أطرافاً مختلفة تقيس النجاح بمقاييس مختلفة هي خيط يمتد عبر المحاضرة كاملة.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> The type of the project target defines how we need to manage the project. إذا كان الهدف منتجاً يجب أن يطابق مواصفات العميل. أما في القطاع الإنساني، فالهدف يُقاس بعدد الأشخاص أو العائلات التي تمت مساعدتها، مثل خدمة قانونية لمساعدة الناس في أوراق الزواج والطلاق، أو مساعدة `IDPs` (النازحين داخلياً) وتُقاس بعدد العائلات.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: حالة المنتج (مطابقة مواصفات العميل)، وحالة القطاع الإنساني بمثاليها الاثنين (الخدمة القانونية، ومساعدة `IDPs`)، وتعريف `organization` كما ورد بالمحاضرة.
+- ℹ️ إضافة من الدليل: ربط هذا المبدأ بالأقسام اللاحقة (5 و3) في "📚 التطبيق" (ليس في المحاضرة الأصلية).
+
+</details>
 
 ---
 
 ### 2. مكونات المشروع (Components of Project)
 
-#### النص الأصلي يقول:
+#### 📍 أين نحن الآن؟
+بعد ما عرفنا `Project` وفهمنا أن `target` هو أهم عنصر فيه، ننتقل الآن لرؤية الصورة الكاملة: من ماذا يتكوّن أي مشروع بالضبط؟
+
+#### ⬅️ الربط مع السابق
+هذا القسم يبني مباشرة على قسم 1 و1.1: `Target` كان أول ما شرحناه، وهو الآن أول عنصر من أربعة عناصر متكاملة.
+
+#### 💡 الفكرة الأساسية
+**أي مشروع يتكوّن من أربعة مكونات لا غنى عنها: `Target/Goal`، `Resources`، `Stakeholders`، و`Clients/Customers`.**
+
+#### 📖 الشرح
+أي مشروع = **هدف** (`Target`) تسعى لتحقيقه + **موارد** (`Resources`) تستخدمها للوصول له + **أطراف مهتمة** بنتيجته (`Stakeholders`) + **من سيستفيد فعلياً من المنتج** (`Clients/Customers`). هذه أربعة أبعاد لا غنى عنها: بدون هدف لا تعرف إلى أين تذهب، وبدون موارد لا تستطيع التحرك، وبدون معرفة من يهتم بالنتيجة (`stakeholders`) ومن سيستخدمها (`clients`) لن تدير التوقعات بشكل صحيح.
+
+#### 🎯 الملخص السريع
+- المكونات الأربعة: `Target (Goal)`, `Resources`, `Stakeholders`, `Clients/Customers`
+- كل عنصر يجيب على سؤال مختلف: ماذا نريد؟ بماذا ننجزه؟ من يهتم؟ من يستفيد؟
+
+#### 📚 التطبيق
+الأقسام القادمة (2.1، 2.2، 3، 4) تشرح كل عنصر من هذه الأربعة على حدة بالتفصيل، بدءاً بالهدف.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
 > A Project has multiple components: 1. Target (Goal) 2. Resources 3. Stakeholders 4. Clients/Customers
 
-#### الشرح المبسّط:
-أي مشروع = **هدف** تسعى لتحقيقه + **موارد** تستخدمها للوصول له + **أطراف مهتمة** بنتيجته (`Stakeholders`) + **من سيستفيد فعلياً من المنتج** (`Clients`).
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: المكونات الأربعة كما وردت بالترتيب.
 
-**لماذا؟** لأنها أربعة أبعاد لا غنى عنها: بدون هدف لا تعرف إلى أين تذهب، وبدون موارد لا تستطيع التحرك، وبدون معرفة من يهتم بالنتيجة (`stakeholders`) ومن سيستخدمها (`clients`) لن تدير التوقعات بشكل صحيح.
+</details>
 
 ### 2.1. الهدف (Target/Goal)
 
-#### النص الأصلي يقول:
-> The target can be: 1. A unique full or partial product 2. A unique service 3. A master's/PhD thesis or patent 4. Mix of the above
+#### 📍 أين نحن الآن؟
+أول عنصر من المكونات الأربعة — نعمّق فهمنا لـ`Target` بعد أن عرفنا أنه أهم عنصر في المشروع.
 
-#### الشرح المبسّط:
-الهدف ليس بالضرورة "شيئاً مادياً" — فرسالة الماجستير أو براءة الاختراع هي أهداف مشروع بحثي بحد ذاتها.
+#### ⬅️ الربط مع السابق
+امتداد مباشر لقسم 1 و2: هنا نوضّح **أشكال** الهدف الممكنة تحديداً.
+
+#### 💡 الفكرة الأساسية
+**الهدف ليس بالضرورة "منتجاً مادياً" — يمكن أن يكون منتجاً كاملاً أو جزئياً، خدمة، رسالة بحثية، أو مزيجاً من هذه الأشكال.**
+
+#### 📖 الشرح
+حسب المحاضرة، يمكن أن يكون `target` أحد أربعة أشكال: `1)` منتج فريد كامل أو جزئي (`a unique full or partial product`)، `2)` خدمة فريدة (`a unique service`)، `3)` رسالة ماجستير أو دكتوراه أو براءة اختراع (`a master's/PhD thesis or patent`)، أو `4)` مزيج من هذه الأشكال (`mix of the above`). الهدف ليس بالضرورة "شيئاً مادياً" — فرسالة الماجستير أو براءة الاختراع هي أهداف مشروع بحثي بحد ذاتها، تماماً كما أن مشروعاً بحثياً بمخرجات متعددة (منتج جزئي + ورقة بحثية مثلاً) هو مزيج من هذه الأشكال.
 
 💡 **التشبيه:** الهدف مثل وجهة الرحلة في `GPS` — قد تكون مدينة كاملة (منتج كامل) أو مجرد محطة وسيطة (منتج جزئي).
 **وجه الشبه:** الوجهة النهائية في `GPS` = `Target` في المشروع.
 
+#### 🎯 الملخص السريع
+- أشكال الهدف الأربعة: منتج كامل/جزئي، خدمة، رسالة بحثية/براءة اختراع، أو مزيج منها
+- الهدف لا يشترط أن يكون منتجاً مادياً ملموساً
+
+#### 📚 التطبيق
+بعد فهم "ماذا" يمكن أن يكون الهدف، القسم القادم (2.2) يشرح "بماذا" ننجز هذا الهدف — أي الموارد.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> The target can be: 1. A unique full or partial product 2. A unique service 3. A master's/PhD thesis or patent 4. Mix of the above
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: الأشكال الأربعة للهدف كما وردت.
+- ℹ️ إضافة من الدليل: تشبيه GPS (ليس في المحاضرة الأصلية).
+
+</details>
+
 ### 2.2. الموارد (Resources)
 
-#### النص الأصلي يقول:
+#### 📍 أين نحن الآن؟
+ثاني عنصر من المكونات الأربعة — بعد "ماذا نريد؟" (الهدف)، السؤال التالي: "بماذا سننجز هذا الهدف؟"
+
+#### ⬅️ الربط مع السابق
+بعد أن حددنا شكل الهدف في 2.1، هذا القسم يفتح الباب للأدوات العملية اللازمة لتحقيقه.
+
+#### 💡 الفكرة الأساسية
+**لإنجاز أي مشروع نحتاج أربعة أنواع من الموارد: مالية (`Financial`)، مواد (`Material`)، أشخاص (`People`)، وجدول زمني (`Time Table`).**
+
+#### 📖 الشرح
+الموارد الأربعة هي "وقود" المشروع: المال (`Financial Resources`)، المواد الخاصة (`Special Materials`)، الأشخاص (`People`)، والجدول الزمني لتنفيذ المشروع (`Time table for project execution`). أي نقص في أحدها يهدد إتمام المشروع بالكامل، بغض النظر عن مدى قوة الموارد الأخرى.
+
+#### 🎯 الملخص السريع
+- الموارد الأربعة: `Financial Resources`, `Special Materials`, `People`, `Time Table`
+- الأقسام الفرعية التالية (2.2.1 إلى 2.2.6) تشرح كل نوع بالتفصيل
+
+#### 📚 التطبيق
+سنبدأ بالمورد الأكثر تعقيداً — الموارد المالية — لأنها الأكثر عرضة للانحراف عن الخطة.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
 > In order to work on a project, we need: 1. Financial Resources 2. Special Materials 3. People 4. Time table for project execution
 
-#### الشرح المبسّط:
-الموارد الأربعة هي "وقود" المشروع: المال، المواد، الأشخاص، والوقت. أي نقص في أحدها يهدد إتمام المشروع.
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: الأنواع الأربعة للموارد كما وردت.
+
+</details>
 
 #### 2.2.1. الموارد المالية (Financial Resources)
 
-#### النص الأصلي يقول:
-> The budget represents the expected cost of the project. The cost is the actual money spent on project. Budget Balance: cost === budget. Budget Surplus: cost < budget. Budget Deficit: cost > budget. Having surplus is best case scenario, while deficit is the worst case, as for balance, it is considered to be the norm.
+#### 📖 الشرح
+`Budget` هو ما **خططت** لإنفاقه (`the expected cost`)، و`Cost` هو ما **أنفقته فعلياً** (`the actual money spent`). العلاقة بينهما ثلاث حالات: إذا تساويا (`cost === budget`) فهذا `Balance`، وهو الوضع الطبيعي المتوقع (`considered to be the norm`) — وليس `Surplus`. إذا أنفقت أقل من المخطط (`cost < budget`) فهذا `Surplus` — أفضل سيناريو ممكن (`best case scenario`). إذا أنفقت أكثر من المخطط (`cost > budget`) فهذا `Deficit` — أسوأ حالة (`worst case`).
 
-#### الشرح المبسّط:
-`Budget` هو ما **خططت** لإنفاقه، و`Cost` هو ما **أنفقته فعلياً**. إذا تساويا فهذا هو الوضع الطبيعي المتوقع (`Balance`). إذا أنفقت أقل فهذا `Surplus` (أفضل حالة). إذا أنفقت أكثر فهذا `Deficit` (أسوأ حالة).
-
-**لماذا؟** لأن الانحراف السالب (`Deficit`) يعني تجاوز الموارد المتاحة فعلاً، وهذا قد يوقف المشروع بالكامل، بينما الانحراف الموجب (`Surplus`) هو مجرد كفاءة إضافية.
+**لماذا؟** لأن الانحراف السالب (`Deficit`) يعني تجاوز الموارد المتاحة فعلاً، وهذا قد يوقف المشروع بالكامل، بينما الانحراف الموجب (`Surplus`) هو مجرد كفاءة إضافية لا يهدد استمرارية المشروع.
 
 💡 **التشبيه:** الميزانية مثل خطة مصروف الشهر، والتكلفة هي ما أنفقته فعلياً في نهاية الشهر.
 **وجه الشبه:** تجاوز مصروفك المخطط له = `Budget Deficit`.
@@ -83,71 +209,107 @@
 | العيوب | قد يعني ميزانية مبالغ فيها أصلاً | تهديد مباشر لاستمرارية المشروع، عقوبات، سمعة سيئة |
 | متى تختاره | ليست خياراً بل نتيجة تخطيط جيد | يجب تجنبه دوماً |
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> The budget represents the expected cost of the project. The cost is the actual money spent on project. Budget Balance: cost === budget. Budget Surplus: cost < budget. Budget Deficit: cost > budget. Having surplus is best case scenario, while deficit is the worst case, as for balance, it is considered to be the norm.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: تعريف `Budget` و`Cost`، والحالات الثلاث (`Balance`/`Surplus`/`Deficit`) مع أيها الأفضل والأسوأ والطبيعي.
+
+</details>
+
 #### 2.2.2. أسباب حدوث العجز المالي (Budget Deficit)
 
-#### النص الأصلي يقول:
-> Why might we be in a budget deficit? Poor planning, change in material prices, big change in economic climate (exchange rate, laws, sanctions), accidents due to lack of safety procedures, unexpected discoveries during execution, inspections indicating non-compliance causing redo.
-
-#### الشرح المبسّط:
-العجز غالباً ليس بسبب واحد بل تراكم مخاطر: تخطيط ضعيف من البداية، تقلبات اقتصادية خارجة عن السيطرة، حوادث سلامة، أو اكتشافات غير متوقعة أثناء التنفيذ (كصخر غير متوقع أثناء الحفر).
+#### 📖 الشرح
+العجز غالباً ليس بسبب واحد بل تراكم مخاطر متعددة الأنواع: تخطيط ضعيف (`poor planning`)، تغيّر في أسعار المواد (`change in material prices`)، تغيّر كبير بالمناخ الاقتصادي كسعر الصرف والقوانين والعقوبات (`exchange rate, laws, sanctions`)، حوادث بسبب نقص إجراءات السلامة (`accidents due to lack of safety procedures`)، اكتشافات غير متوقعة أثناء التنفيذ (`unexpected discoveries during execution` — كصخر غير متوقع أثناء الحفر)، أو نتائج تفتيش تكشف عدم مطابقة تستوجب إعادة العمل (`inspections indicating non-compliance causing redo`).
 
 🤔 **تفعيل الفهم:** لو أن دولة فرضت رسوماً جمركية جديدة على مادة أساسية لمشروعك في منتصف التنفيذ، أي فئة من أسباب العجز تنطبق هنا؟
 **لماذا هذا مهم؟** لأن التمييز بين الأسباب (داخلية كسوء التخطيط، أم خارجية كالقوانين) يحدد هل كان يمكن تجنّب العجز أصلاً أم لا.
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Why might we be in a budget deficit? Poor planning, change in material prices, big change in economic climate (exchange rate, laws, sanctions), accidents due to lack of safety procedures, unexpected discoveries during execution, inspections indicating non-compliance causing redo.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: كل الأسباب الستة كما وردت.
+
+</details>
+
 #### 2.2.3. أمثلة واقعية على العجز المالي
 
-#### النص الأصلي يقول:
-> The Channel Tunnel: budget 5.5B GBP, actual cost 9.5B GBP due to unexpected soil type. 1976 Montreal Olympiad: budget 300M CAD, cost 1.5B CAD due to strikes, material price rise, bad weather. F-35 Lightning Program: cost reached 1.7T$ (88% deficit) and 10 years late, mostly due to how the US approves and finances defense contracts.
-
-#### الشرح المبسّط:
+#### 📖 الشرح
 | المشروع | الميزانية | التكلفة الفعلية | السبب الرئيسي |
 | --- | --- | --- | --- |
 | نفق المانش (Channel Tunnel) | 5.5B GBP | 9.5B GBP | نوع تربة غير متوقع |
 | أولمبياد مونتريال 1976 | 300M CAD | 1.5B CAD | إضرابات عمال، ارتفاع أسعار مواد، طقس سيء |
-| مقاتلة F-35 | — | 1.7T\$ (عجز 88%) | آلية تمويل عقود الدفاع الأمريكية |
+| مقاتلة F-35 | — | 1.7T\$ (عجز 88%) | آلية تمويل عقود الدفاع الأمريكية، وتأخر 10 سنوات |
 
 #### نقطة مهمة ⚠️:
 > لاحظ أن آخر مثال (F-35) خارج نطاق المادة كما ذكرت المحاضرة نفسها، لكنه يوضح أن العجز أحياناً يكون **بنيوياً** (نظام تمويل) وليس فقط نتيجة سوء تخطيط.
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> The Channel Tunnel: budget 5.5B GBP, actual cost 9.5B GBP due to unexpected soil type. 1976 Montreal Olympiad: budget 300M CAD, cost 1.5B CAD due to strikes, material price rise, bad weather. F-35 Lightning Program: cost reached 1.7T$ (88% deficit) and 10 years late, mostly due to how the US approves and finances defense contracts.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: الأمثلة الثلاثة بأرقامها وأسبابها.
+
+</details>
+
 #### 2.2.4. المواد (Material)
 
-#### النص الأصلي يقول:
-> Material includes construction material, switching boards, servers, network infrastructure, furniture. Prices fluctuate due to economic conditions, political climate, or legislation. One of the biggest challenges is ensuring availability of materials within local market; otherwise we import, driving up costs since per-unit import cost is higher than bulk.
+#### 📖 الشرح
+المواد تشمل مواد البناء (`construction material`)، لوحات التحويل الكهربائي (`switching boards`)، الخوادم (`servers`)، البنية التحتية للشبكات (`network infrastructure`)، والأثاث (`furniture`). تتقلب أسعارها بسبب الظروف الاقتصادية، المناخ السياسي، أو التشريعات (`economic conditions, political climate, or legislation`). أحد أكبر التحديات هو ضمان توفر المواد بالسوق المحلي؛ وإلا نضطر للاستيراد، مما يرفع التكاليف لأن تكلفة استيراد الوحدة الواحدة أعلى من الاستيراد بالجملة (`per-unit import cost is higher than bulk`).
 
-#### الشرح المبسّط:
-لو لم تجد الأسمنت محلياً واضطررت لاستيراده قطعة بقطعة بدلاً من شحنة كاملة، فسعر الوحدة سيرتفع كثيراً — وهذا بالضبط ما تعنيه المحاضرة بـ"استيراد الوحدة الواحدة أغلى من الاستيراد بالجملة".
+لو لم تجد الأسمنت محلياً واضطررت لاستيراده قطعة بقطعة بدلاً من شحنة كاملة، فسعر الوحدة سيرتفع كثيراً — وهذا بالضبط ما تعنيه المحاضرة.
 
 **لماذا؟** لأن تكاليف الشحن والجمارك تُقسّم على كمية أقل، فيرتفع نصيب الوحدة الواحدة من هذه التكاليف الثابتة.
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Material includes construction material, switching boards, servers, network infrastructure, furniture. Prices fluctuate due to economic conditions, political climate, or legislation. One of the biggest challenges is ensuring availability of materials within local market; otherwise we import, driving up costs since per-unit import cost is higher than bulk.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: أنواع المواد، أسباب تقلب الأسعار، وسبب ارتفاع تكلفة الاستيراد الفردي.
+
+</details>
+
 #### 2.2.5. الأشخاص (People)
 
-#### النص الأصلي يقول:
+#### 📖 الشرح
+هم الأشخاص الذين ينفذون المشروع فعلياً (`the people executing the project`). وجود أكثر من شخص في غرفة واحدة يعني عادة احتمال نشوء خلاف، لذلك حل النزاعات (`conflict resolution`) هو مهمة أساسية لمدير المشروع. أحياناً يستمر الفريق كما هو، وأحياناً تحتاج لإعادة توزيعه (`shuffle teams`)، وأحياناً تضطر للاستغناء عن أحدهم (`fire someone`). والشرط الأساسي (`A MAJOR requirement`) هو توزيع المهام حسب الخبرة والمعرفة — لا يمكن تكليف قسم تقني بمهام هندسة مدنية، ولا طبيب بما يفعله مزارع (`you cannot assign IT to civil engineering duties, a medical doctor cannot do what a farmer does`).
+
+**لماذا؟** لأن توزيع المهام بلا مراعاة للخبرة يضمن الفشل حتى قبل البدء.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
 > They are the people executing the project. Having more than one person in a room will generally cause conflict, so conflict resolution is a main duty of a project manager. Sometimes teams continue together, sometimes you need to shuffle teams, sometimes you have to fire someone. A MAJOR requirement is to divide tasks based on experience and knowledge — you cannot assign IT to civil engineering duties, a medical doctor cannot do what a farmer does.
 
-#### الشرح المبسّط:
-وجود أكثر من شخص يعني احتمال نشوء خلاف، ومهمة مدير المشروع الأساسية هنا هي حل هذه الخلافات — أحياناً بفصل الأطراف المتنازعة عن بعض، وأحياناً (في أسوأ الحالات) بالاستغناء عن أحدهم.
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: النزاعات وحلها، الخيارات الثلاثة (استمرار/إعادة توزيع/فصل)، وشرط توزيع المهام حسب الخبرة.
 
-**لماذا؟** لأن توزيع المهام بلا مراعاة للخبرة (مثل تكليف مهندس مدني بمهام تقنية معلوماتية) يضمن الفشل حتى قبل البدء.
+</details>
 
 #### 2.2.6. الجدول الزمني (Time Table)
 
-#### النص الأصلي يقول:
-> Every project has a time limit: a start date and finish date. There is usually a liability clause: bonuses for finishing early within specs, financial penalties for finishing late or outside specs.
+#### 📖 الشرح
+كل مشروع له حد زمني: تاريخ بداية وتاريخ نهاية (`a start date and finish date`). وعادة يوجد بند مسؤولية (`liability clause`): مكافآت للإنجاز المبكر ضمن المواصفات (`bonuses for finishing early within specs`)، وعقوبات مالية للتأخير أو الخروج عن المواصفات (`financial penalties for finishing late or outside specs`) — ما يجعل الجدول الزمني ملزماً مالياً وليس مجرد تنظيم داخلي.
 
-#### الشرح المبسّط:
-العقود غالباً تتضمن بنداً يكافئ الإنجاز المبكر (`bonus`) ويعاقب التأخير (`penalty`) — وهذا يجعل الجدول الزمني ملزماً مالياً وليس مجرد تنظيم داخلي.
+الحد الزمني لا يعني بالضرورة "قصيراً" (`Time limit doesn't mean short`): سد الممرات الثلاثة في الصين — أكبر سد بالعالم — بدأ عام 1994 وانتهى 2012، بطول جسم 2.3 كيلومتر، وفي 2015 زادوا ارتفاعه لأنه يخزّن ماءً أكثر من المتوقع. هذا يثبت أن مدة 18 سنة كاملة لا تُخرج المشروع من كونه "مؤقتاً" (`temporary`)، طالما له بداية ونهاية محددتين.
 
-#### النص الأصلي يقول:
-> Time limit doesn't mean short: The 3 Gorges Dam in China — the largest dam in the world, started 1994 finished 2012, 2.3KM body length. In 2015 they increased the dam's height because it stores more water than expected.
+وأخيراً، نقول إن المشروع "انتهى" (`we say we finished the project`) في واحدة من ست حالات فقط: `1)` تحقق الهدف (`goal achieved`) — نجاح تام. `2)` هدف غير قابل للتحقيق (`unattainable target`) — مثال: محاولة الهند منافسة تايوان في تصنيع الشرائح خلال التسعينيات وفشلها. `3)` زوال الحاجة للمشروع (`the need for the project no longer exists`). `4)` انتهاء الالتزام المالي (`end of financial commitment`). `5)` فقدان الموارد البشرية أو المادية (`human/physical resources no longer available`) — مثال: تأخر مصانع `TSMC` الأمريكية بسبب ندرة المهندسين المهرة، من 2024 إلى 2025/2027-2028. `6)` أسباب قانونية (`legal reasons`) — كالتعدي على أرض أو مخالفة براءة اختراع أو قانون.
 
-#### الشرح المبسّط:
-مشروع سد الممرات الثلاثة استغرق 18 سنة (1994–2012) — دليل أن `temporary` في تعريف المشروع لا تعني بالضرورة "قصير المدة"، بل فقط أن له نهاية محددة.
-
-#### النص الأصلي يقول:
-> We say we finished the project when: 1) goal achieved 2) unattainable target — e.g. India competing with Taiwan in chip manufacturing in the 1990s but failed 3) the need for the project no longer exists 4) end of financial commitment 5) human/physical resources no longer available — e.g. TSMC's US plants delayed due to scarcity of skilled engineers, pushed from 2024 to 2025/2027-2028 6) legal reasons — encroaching on land, violating patents or laws.
-
-#### الشرح المبسّط:
-"انتهاء المشروع" له 6 حالات، وليست كلها "نجاحاً". فالحالات 2 و3 و4 و5 و6 هي في الواقع أشكال من الفشل أو التوقف القسري.
+"انتهاء المشروع" له 6 حالات إذن، وليست كلها "نجاحاً" — فالحالات 2 و3 و4 و5 و6 هي في الواقع أشكال من الفشل أو التوقف القسري، وليست نتيجة إيجابية.
 
 ⚙️ **الخطوات / الخوارزمية: حالات إنهاء المشروع**
 
@@ -165,29 +327,73 @@
 #### نقاط التنفيذ:
 - الحالات 3–6 يمكن أن تكون **مؤقتة** وليست نهائية — يمكن تمويل جديد، حل قانوني، مصادر مواد جديدة، أو تعيينات جديدة، لكن بتكلفة مالية أعلى دوماً (تأخر الدخل، غرامات، أسعار استيراد أعلى، رواتب توظيف جديد أعلى).
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Every project has a time limit: a start date and finish date. There is usually a liability clause: bonuses for finishing early within specs, financial penalties for finishing late or outside specs.
+>
+> Time limit doesn't mean short: The 3 Gorges Dam in China — the largest dam in the world, started 1994 finished 2012, 2.3KM body length. In 2015 they increased the dam's height because it stores more water than expected.
+>
+> We say we finished the project when: 1) goal achieved 2) unattainable target — e.g. India competing with Taiwan in chip manufacturing in the 1990s but failed 3) the need for the project no longer exists 4) end of financial commitment 5) human/physical resources no longer available — e.g. TSMC's US plants delayed due to scarcity of skilled engineers, pushed from 2024 to 2025/2027-2028 6) legal reasons — encroaching on land, violating patents or laws.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: بند المسؤولية، مثال سد الممرات الثلاثة، والحالات الست لإنهاء المشروع.
+
+</details>
+
 ---
 
 ### 3. أصحاب المصلحة (Stakeholders)
 
-#### النص الأصلي يقول:
-> Stakeholders are individuals, groups or organizations interested in the goal of the project — broader than clients. Example: publicly traded company → shareholders (board of directors). Public company funded by government → tax payers (who are also clients). NGO → benefactors. In software: customers, employees, investors, regulatory bodies, end-users.
+#### 📍 أين نحن الآن؟
+ثالث عنصر من مكونات المشروع الأربعة (قسم 2) — بعد الهدف والموارد، الآن: من يهتم بنتيجة هذا المشروع؟
 
-#### الشرح المبسّط:
-`Stakeholder` مصطلح **أوسع** من `Client`. فأي شخص أو جهة "لها مصلحة" في نتيجة المشروع — سواء استفادت مباشرة أم لا — تُعتبر `stakeholder`.
+#### ⬅️ الربط مع السابق
+امتداد مباشر لقسم 2: `Stakeholders` هو ثالث عنصر من العناصر الأربعة المذكورة هناك.
+
+#### 💡 الفكرة الأساسية
+**`Stakeholder` هو أي فرد أو مجموعة أو منظمة لها مصلحة في هدف المشروع — وهو مصطلح أوسع بكثير من `Client`.**
+
+#### 📖 الشرح
+`Stakeholder` مصطلح **أوسع** من `Client`. فأي شخص أو جهة "لها مصلحة" في نتيجة المشروع — سواء استفادت مباشرة أم لا — تُعتبر `stakeholder`. المحاضرة تعطي أمثلة محددة حسب نوع المنظمة: شركة مساهمة عامة (`publicly traded company`) → `stakeholders` هم المساهمون ممثَّلين بمجلس الإدارة (`shareholders / board of directors`). شركة عامة ممولة من الحكومة (`public company funded by government`) → `stakeholders` هم دافعو الضرائب (`tax payers`)، وهؤلاء أيضاً `clients` في نفس الوقت. منظمة غير حكومية (`NGO`) → `stakeholders` هم الجهات المانحة (`benefactors`). أما في مجال البرمجيات تحديداً، فـ`stakeholders` تشمل: العملاء، الموظفين، المستثمرين، الجهات التنظيمية، والمستخدمين النهائيين (`customers, employees, investors, regulatory bodies, end-users`).
 
 💡 **التشبيه:** لو بنيت مطعماً، فالمستثمر الذي موّل المشروع `stakeholder` حتى لو لم يأكل فيه أبداً.
 **وجه الشبه:** المستثمر الممول = `Stakeholder` بدون أن يكون `Client`.
 
+#### 🎯 الملخص السريع
+- `Stakeholder` = أي طرف له مصلحة، مباشرة أو غير مباشرة
+- أمثلة حسب نوع المنظمة: مساهمون (شركة عامة)، دافعو ضرائب (شركة حكومية)، جهات مانحة (NGO)
+
+#### 📚 التطبيق
+القسم القادم (4) يشرح `Clients` كفئة فرعية أضيق من `Stakeholders` — الفرق بينهما نقطة امتحانية مهمة جداً.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Stakeholders are individuals, groups or organizations interested in the goal of the project — broader than clients. Example: publicly traded company → shareholders (board of directors). Public company funded by government → tax payers (who are also clients). NGO → benefactors. In software: customers, employees, investors, regulatory bodies, end-users.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: التعريف وكل الأمثلة الأربعة (شركة عامة، شركة حكومية، NGO، البرمجيات).
+
+</details>
+
 ### 4. العملاء (Clients/Customers)
 
-#### النص الأصلي يقول:
-> Clients are individuals or organizations that purchase or utilize a specific product or service. Unlike a random "customer" with a one-time transaction, a client has a direct, ongoing relationship, often via a contract or professional partnership.
+#### 📍 أين نحن الآن؟
+رابع وآخر عنصر من مكونات المشروع — والأهم هنا هو التفريق الدقيق بينه وبين `Stakeholders` الذي شرحناه للتو.
 
-#### الشرح المبسّط:
-كل `client` هو نوع خاص من `stakeholder`، لكن ليس كل `stakeholder` عميلاً. العميل تربطه علاقة تعاقدية مستمرة، بينما `stakeholder` قد يكون مجرد طرف متأثر أو مهتم بالنتيجة.
+#### ⬅️ الربط مع السابق
+هذا القسم امتداد مباشر لقسم 3: نفس فكرة "من يهتم بالمشروع؟" لكن بفئة أضيق وأكثر تحديداً.
 
-#### النص الأصلي يقول (جدول المقارنة الأصلي):
-> Scope: Clients = subset focused on product/service | Stakeholders = umbrella term. Primary Focus: Clients = quality/utility/value | Stakeholders = financial returns, ROI, strategic alignment. Relationship: Clients = transactional | Stakeholders = varying influence (passive investors to active users). Interests: Clients = satisfaction-driven | Stakeholders = diverse, sometimes conflicting.
+#### 💡 الفكرة الأساسية
+**`Client` هو فئة فرعية من `Stakeholder`: فرد أو منظمة تشتري أو تستخدم منتجاً أو خدمة محددة، بعلاقة مباشرة ومستمرة — وليس مجرد "زبون" بمعاملة واحدة.**
+
+#### 📖 الشرح
+`Clients` هم أفراد أو منظمات تشتري أو تستخدم منتجاً أو خدمة محددة (`purchase or utilize a specific product or service`). بخلاف "الزبون" العادي (`customer`) صاحب المعاملة الواحدة العابرة، فإن `Client` تربطه علاقة مباشرة ومستمرة، غالباً عبر عقد أو شراكة مهنية (`a direct, ongoing relationship, often via a contract or professional partnership`). فكل `client` هو نوع خاص من `stakeholder`، لكن ليس كل `stakeholder` عميلاً.
+
+جدول المقارنة الأصلي في المحاضرة يوضّح الفرق بدقة عبر أربعة معايير: النطاق (`Scope`) — `Clients` فئة فرعية تركّز على المنتج/الخدمة، بينما `Stakeholders` مصطلح شامل. التركيز الأساسي (`Primary Focus`) — `Clients` يهمهم الجودة والمنفعة والقيمة، بينما `Stakeholders` يهمهم العائد المالي (`ROI`) والتوافق الاستراتيجي. طبيعة العلاقة (`Relationship`) — `Clients` علاقة تبادلية/تعاقدية، بينما `Stakeholders` تأثيرهم متفاوت من مستثمر سلبي إلى مستخدم فعّال. الاهتمامات (`Interests`) — `Clients` مدفوعون بالرضا، بينما اهتمامات `Stakeholders` متنوعة وأحياناً متعارضة.
 
 **جدول مقارنة: Clients مقابل Stakeholders**
 
@@ -198,15 +404,42 @@
 | طبيعة العلاقة | تعاقدية/تبادلية | تتفاوت من مستثمر سلبي إلى مستخدم فعّال |
 | الاهتمامات | الرضا وحل المشكلة | متنوعة، وأحياناً متعارضة |
 
+#### 🎯 الملخص السريع
+- `Client` = فئة فرعية من `Stakeholder` بعلاقة تعاقدية مستمرة
+- الفرق عن `Customer` العادي: العلاقة مستمرة، وليست معاملة واحدة عابرة
+- المعايير الأربعة للمقارنة: النطاق، التركيز، العلاقة، الاهتمامات
+
+#### 📚 التطبيق
+بعد فهم المكونات الأربعة كاملة (الهدف، الموارد، أصحاب المصلحة، العملاء)، القسم القادم (5) يشرح ما هي "نتائج" المشروع التي تهم هذه الأطراف جميعاً.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Clients are individuals or organizations that purchase or utilize a specific product or service. Unlike a random "customer" with a one-time transaction, a client has a direct, ongoing relationship, often via a contract or professional partnership.
+>
+> جدول المقارنة الأصلي: Scope: Clients = subset focused on product/service | Stakeholders = umbrella term. Primary Focus: Clients = quality/utility/value | Stakeholders = financial returns, ROI, strategic alignment. Relationship: Clients = transactional | Stakeholders = varying influence (passive investors to active users). Interests: Clients = satisfaction-driven | Stakeholders = diverse, sometimes conflicting.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: التعريف وجدول المقارنة الرباعي كاملاً.
+
+</details>
+
 ---
 
 ### 5. نتائج المشروع (Results of Project)
 
-#### النص الأصلي يقول:
-> Tangible Results: Financial Profit, Shares for shareholders, New tools, Market share. Intangible Results: Good reputation, Spreading the trademark, General benefit.
+#### 📍 أين نحن الآن؟
+أنهينا الآن مكونات المشروع الأربعة كاملة. السؤال التالي الطبيعي: ما الذي "ينتجه" المشروع فعلياً في النهاية؟
 
-#### الشرح المبسّط:
-النتائج نوعان: **ملموسة** (`Tangible`) يمكن قياسها بالأرقام مباشرة (ربح، أسهم، أدوات جديدة، حصة سوقية)، و**غير ملموسة** (`Intangible`) لا تُقاس مباشرة لكنها ذات قيمة استراتيجية (سمعة، انتشار العلامة التجارية، نفع عام).
+#### ⬅️ الربط مع السابق
+هذا القسم يربط مباشرة بقسم 1.1: هناك رأينا أن معيار النجاح يختلف حسب نوع الهدف (منتج مقابل قطاع إنساني)؛ هنا نصنّف **نوعي** النتائج التي قد يحققها أي مشروع.
+
+#### 💡 الفكرة الأساسية
+**نتائج أي مشروع نوعان: ملموسة (`Tangible`) تُقاس بالأرقام مباشرة، وغير ملموسة (`Intangible`) ذات قيمة استراتيجية لا تُقاس مباشرة.**
+
+#### 📖 الشرح
+النتائج الملموسة (`Tangible Results`) تشمل: الربح المالي (`Financial Profit`)، الأسهم للمساهمين (`Shares for shareholders`)، الأدوات الجديدة (`New tools`)، والحصة السوقية (`Market share`). أما النتائج غير الملموسة (`Intangible Results`) فتشمل: السمعة الجيدة (`Good reputation`)، انتشار العلامة التجارية (`Spreading the trademark`)، والنفع العام (`General benefit`).
 
 **جدول: أنواع نتائج المشروع**
 
@@ -215,15 +448,41 @@
 | Tangible (ملموسة) | ربح مالي، أسهم للمساهمين، أدوات جديدة، حصة سوقية |
 | Intangible (غير ملموسة) | سمعة جيدة، انتشار العلامة التجارية، نفع عام |
 
+#### 🎯 الملخص السريع
+- `Tangible` = تُقاس بالأرقام مباشرة (ربح، أسهم، أدوات، حصة سوقية)
+- `Intangible` = قيمة استراتيجية غير مباشرة (سمعة، علامة تجارية، نفع عام)
+
+#### 📚 التطبيق
+بعد فهم المكونات والنتائج، ننتقل الآن لمفهوم أشمل: `Project Management` نفسها — كيف نُدير هذه العناصر معاً لتحقيق هذه النتائج.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Tangible Results: Financial Profit, Shares for shareholders, New tools, Market share. Intangible Results: Good reputation, Spreading the trademark, General benefit.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: كل الأمثلة الأربعة للنوعين.
+
+</details>
+
 ---
 
 ### 6. إدارة المشاريع (Project Management) — التعريف
 
-#### النص الأصلي يقول:
-> Definition 1: Project Management is the application of knowledge, skills, tools, and techniques to project activities to meet the project requirements and goals. Definition 2: management of resources to achieve desired results within shortest time, lowest cost, highest quality. Any change in one side of the triangle will affect other parts.
+#### 📍 أين نحن الآن؟
+بعد فهم مكونات المشروع ونتائجه، نصل الآن لصلب المادة: ما هي `Project Management` نفسها، وكيف نقيس نجاحها؟
 
-#### الشرح المبسّط:
-هذا هو مفهوم **مثلث الحديد** (`Iron Triangle`): `Scope`/`Quality` في المنتصف (أو أحد الأضلاع حسب النسخة)، وأضلاعه `Cost`، `Time`، `Quality`. لا يمكنك تحسين ضلع واحد دون التأثير على الآخرين.
+#### ⬅️ الربط مع السابق
+هذا القسم يبني على كل ما سبق (المكونات، النتائج) ليقدّم الإطار الذي يربطها جميعاً: `Iron Triangle`.
+
+#### 💡 الفكرة الأساسية
+**`Project Management` هي إدارة الموارد لتحقيق النتائج المرجوة بأقصر وقت وأقل تكلفة وأعلى جودة ممكنة — وأي تغيير في أحد هذه الأضلاع الثلاثة يؤثر حتماً على الباقي (`Iron Triangle`).**
+
+#### 📖 الشرح
+المحاضرة تعطي تعريفين متكاملين. التعريف الأول: `Project Management` هي تطبيق المعرفة والمهارات والأدوات والتقنيات على أنشطة المشروع لتلبية متطلباته وأهدافه (`the application of knowledge, skills, tools, and techniques to project activities to meet the project requirements and goals`). التعريف الثاني أعمق عملياً: إدارة الموارد لتحقيق النتائج المرجوة ضمن أقصر وقت، أقل تكلفة، وأعلى جودة (`management of resources to achieve desired results within shortest time, lowest cost, highest quality`).
+
+هذا هو مفهوم **مثلث الحديد** (`Iron Triangle`): أضلاعه `Cost`، `Time`، `Quality`. القاعدة الذهبية: أي تغيير في ضلع واحد من المثلث يؤثر حتماً على الأضلاع الأخرى (`Any change in one side of the triangle will affect other parts`). لا يمكنك تحسين ضلع واحد دون التأثير على الآخرين.
 
 **لماذا؟** لأن الموارد محدودة دوماً؛ فتسريع الجدول الزمني (`Time`) يحتاج مالاً إضافياً (`Cost`) أو تضحية بالجودة (`Quality`)، وهكذا.
 
@@ -238,18 +497,46 @@
 | العيوب | تكلفة أعلى أو جودة أقل | تنفيذ أبطأ أو جودة أقل |
 | متى تختاره | عند وجود حافز مالي كبير للتسليم المبكر أو ضغط سوقي | عند محدودية التمويل وعدم إلحاح الوقت |
 
+#### 🎯 الملخص السريع
+- تعريفان: تطبيق المعرفة/الأدوات على أنشطة المشروع، وإدارة الموارد ضمن `Iron Triangle`
+- أضلاع المثلث: `Cost`, `Time`, `Quality` — تغيير أي ضلع يؤثر على الباقي
+
+#### 📚 التطبيق
+الأقسام الفرعية القادمة (6.1، 6.2) توضّح النتائج العملية لتطبيق هذا المفهوم بشكل جيد أو سيئ.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Definition 1: Project Management is the application of knowledge, skills, tools, and techniques to project activities to meet the project requirements and goals. Definition 2: management of resources to achieve desired results within shortest time, lowest cost, highest quality. Any change in one side of the triangle will affect other parts.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: التعريفان، ومفهوم Iron Triangle والقاعدة الذهبية له.
+
+</details>
+
 #### 6.1. فوائد الإدارة الناجحة للمشاريع
 
-#### النص الأصلي يقول:
+#### 📖 الشرح
+الإدارة الناجحة للمشروع تمكّن المنظمة من: تحقيق الأهداف التجارية، إرضاء توقعات أصحاب المصلحة، زيادة القابلية للتنبؤ، تعزيز فرص النجاح، تسليم المنتج الصحيح بالوقت الصحيح، حل المشاكل بفعالية، الاستجابة للمخاطر بتوقيت مناسب، تحسين استثمار الموارد، تحديد ومعالجة وإنهاء المشاريع الفاشلة، إدارة القيود، وإدارة التغييرات بتوقيت مناسب (`achieve business objectives, satisfy stakeholder expectations, increase predictability, enhance success chances, deliver right product at right time, solve problems effectively, respond to risks timely, optimize resource investment, identify/address/terminate failing projects, manage constraints, manage changes timely`).
+
+هذه قائمة من 11 فائدة، وأهمها عملياً: **زيادة القابلية للتنبؤ** (`predictability`) — أي أن الإدارة الجيدة لا تضمن النجاح المطلق، لكنها تجعل النتائج **متوقعة** وقابلة للتخطيط بدلاً من عشوائية.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
 > Successful Project Management enables: achieve business objectives, satisfy stakeholder expectations, increase predictability, enhance success chances, deliver right product at right time, solve problems effectively, respond to risks timely, optimize resource investment, identify/address/terminate failing projects, manage constraints, manage changes timely.
 
-#### الشرح المبسّط:
-هذه قائمة من 11 فائدة، وأهمها عملياً: **زيادة القابلية للتنبؤ** (`predictability`) — أي أن الإدارة الجيدة لا تضمن النجاح المطلق، لكنها تجعل النتائج **متوقعة** وقابلة للتخطيط بدلاً من عشوائية.
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: كل الفوائد الـ11 مذكورة نصاً.
+
+</details>
 
 #### 6.2. نتائج الإدارة السيئة للمشاريع
 
-#### النص الأصلي يقول:
-> Consequences of Poor Project Management: Missed Deadlines, Budget Overruns, Poor Quality, Project Rework, Scope Creep, Reputational Damage, Stakeholder Dissatisfaction, Failed Objectives.
+#### 📖 الشرح
+الإدارة السيئة للمشروع تنتج ثمانية عواقب مباشرة: مواعيد فائتة (`Missed Deadlines`)، تجاوز الميزانية (`Budget Overruns`)، جودة ضعيفة (`Poor Quality`)، إعادة عمل (`Project Rework`)، توسّع غير مخطط بالمتطلبات (`Scope Creep`)، ضرر بالسمعة (`Reputational Damage`)، عدم رضا أصحاب المصلحة (`Stakeholder Dissatisfaction`)، وفشل الأهداف (`Failed Objectives`).
 
 **جدول: نتائج الإدارة السيئة**
 
@@ -267,29 +554,73 @@
 #### الفهم الخاطئ الشائع ❌: "Scope Creep" هو مجرد تغيير بسيط في المتطلبات لا يستحق القلق.
 #### الفهم الصحيح ✅: "Scope Creep" هو توسّع **غير مخطط وغير متحكم به**، ويُعد من أخطر أسباب تجاوز الميزانية والوقت لأنه يحدث تدريجياً دون موافقة رسمية واضحة.
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Consequences of Poor Project Management: Missed Deadlines, Budget Overruns, Poor Quality, Project Rework, Scope Creep, Reputational Damage, Stakeholder Dissatisfaction, Failed Objectives.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: كل العواقب الثمانية.
+
+</details>
+
 ---
 
 ### 7. أهمية إدارة المشاريع (Importance of Project Management)
 
-#### النص الأصلي يقول:
-> Importance stems from the importance of projects themselves, as projects are the primary method through which value is generated for the organization. Managers must handle smaller budgets, shorter timelines, limited resources, and rapid technological change. Successful project management allows the organization to: link project outcomes to business objectives, compete effectively, ensure sustainability, respond to changes in business environment.
+#### 📍 أين نحن الآن؟
+بعد فهم "ماذا تعني" إدارة المشاريع ونتائج تطبيقها جيداً أو سيئاً، السؤال التالي: لماذا هي مهمة أصلاً على مستوى المنظمة؟
 
-#### الشرح المبسّط:
-المنظمات اليوم تعمل في بيئة "ديناميكية سريعة التغير" (`dynamic environment`)، وإدارة المشاريع هي الأداة التي تربط بين تنفيذ المشروع اليومي وبين الأهداف الاستراتيجية الكبرى للمنظمة (البقاء، المنافسة، الربح).
+#### ⬅️ الربط مع السابق
+يربط مباشرة بقسم 6.1: القابلية للتنبؤ وباقي الفوائد المذكورة هناك هي التي تجعل هذه الأهمية ملموسة على مستوى استراتيجي.
+
+#### 💡 الفكرة الأساسية
+**أهمية إدارة المشاريع نابعة من أهمية المشاريع نفسها، لأنها الطريقة الأساسية التي تُنتج بها المنظمة القيمة.**
+
+#### 📖 الشرح
+الأهمية تنبع من أهمية المشاريع نفسها، كونها الطريقة الأساسية التي تُولَّد بها القيمة للمنظمة (`projects are the primary method through which value is generated for the organization`). يجب على المدراء اليوم التعامل مع ميزانيات أصغر، جداول زمنية أقصر، موارد محدودة، وتغيّر تقني سريع (`smaller budgets, shorter timelines, limited resources, and rapid technological change`). الإدارة الناجحة للمشروع تتيح للمنظمة: ربط نتائج المشروع بالأهداف التجارية، المنافسة بفعالية، ضمان الاستدامة، والاستجابة للتغيرات في بيئة الأعمال (`link project outcomes to business objectives, compete effectively, ensure sustainability, respond to changes in business environment`).
+
+المنظمات اليوم تعمل في بيئة "ديناميكية سريعة التغير" (`dynamic environment`)، وإدارة المشاريع هي الأداة التي تربط بين تنفيذ المشروع اليومي وبين الأهداف الاستراتيجية الكبرى للمنظمة.
 
 **لماذا؟** لأنه بدون هذا الربط، قد تنجح المشاريع الفردية تقنياً لكنها تفشل في خدمة الهدف الأكبر للمنظمة.
+
+#### 🎯 الملخص السريع
+- المشاريع = الطريقة الأساسية لتوليد القيمة بأي منظمة
+- تحديات اليوم: ميزانيات أصغر، جداول أقصر، موارد محدودة، تغيّر تقني سريع
+- الإدارة الناجحة تربط تنفيذ المشروع اليومي بالأهداف الاستراتيجية
+
+#### 📚 التطبيق
+الآن ننتقل من "لماذا" إلى "كيف" — القسم القادم (8) يشرح المراحل الثابتة التي يمر بها أي مشروع.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Importance stems from the importance of projects themselves, as projects are the primary method through which value is generated for the organization. Managers must handle smaller budgets, shorter timelines, limited resources, and rapid technological change. Successful project management allows the organization to: link project outcomes to business objectives, compete effectively, ensure sustainability, respond to changes in business environment.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: مصدر الأهمية، التحديات الأربعة، والفوائد الأربعة للمنظمة.
+
+</details>
 
 ---
 
 ### 8. دورة حياة المشروع (Project Life Cycle)
 
-#### النص الأصلي يقول:
-> Project Life Cycle is the series of phases a project passes through from initiation until final objectives. These phases exist regardless of methodology used (Waterfall or Agile). Steps: 1. Initiation — goals defined by communicating with client. 2. Planning — timeline established, costs estimated, tools identified; most critical step. 3. Execution — project fully implemented per schedule and budget. 4. Closing — project finalized, quality testing performed, final deliverable handed to client.
+#### 📍 أين نحن الآن؟
+بعد فهم أهمية إدارة المشاريع نظرياً، ننتقل الآن للإطار العملي الذي يصف "كيف" يسير أي مشروع من بدايته لنهايته.
 
-#### الشرح المبسّط:
-أربع مراحل ثابتة تمر بها **كل** المشاريع بغض النظر عن المنهجية المستخدمة: البداية (`Start`)، التخطيط (`Plan`)، التنفيذ (`Execute`)، والإنهاء (`Finish`).
+#### ⬅️ الربط مع السابق
+يبني على قسم 6 و7: `Iron Triangle` يصف "بماذا نقيس"، وهذا القسم يصف "بأي ترتيب زمني نعمل".
 
-**لماذا؟** لأن هذه المراحل تصف "منطق" أي عمل منظم (تحديد الهدف → التحضير → التنفيذ → التسليم)، وهي مستقلة عن الأسلوب التقني المستخدم لاحقاً (`Waterfall` مقابل `Agile` مثلاً).
+#### 💡 الفكرة الأساسية
+**كل مشروع، بغض النظر عن المنهجية المستخدمة، يمر بأربع مراحل ثابتة: `Initiation`، `Planning`، `Execution`، و`Closing`.**
+
+#### 📖 الشرح
+`Project Life Cycle` هي سلسلة المراحل التي يمر بها أي مشروع من بدايته حتى تحقيق أهدافه النهائية (`the series of phases a project passes through from initiation until final objectives`)، وهذه المراحل موجودة بغض النظر عن المنهجية المستخدمة — سواء `Waterfall` أو `Agile` (`These phases exist regardless of methodology used`). الخطوات: `1) Initiation` — تحديد الأهداف عبر التواصل مع العميل (`goals defined by communicating with client`). `2) Planning` — وضع الجدول الزمني، تقدير التكاليف، وتحديد الأدوات؛ وهي **أهم خطوة على الإطلاق** (`most critical step`). `3) Execution` — تنفيذ المشروع بالكامل حسب الجدول والميزانية (`project fully implemented per schedule and budget`). `4) Closing` — إنهاء المشروع، إجراء اختبار الجودة، وتسليم المُخرَج النهائي للعميل (`project finalized, quality testing performed, final deliverable handed to client`).
+
+هذه المراحل تصف "منطق" أي عمل منظم (تحديد الهدف → التحضير → التنفيذ → التسليم)، وهي مستقلة عن الأسلوب التقني المستخدم لاحقاً.
 
 #### مهم للامتحان ⚠️:
 > التخطيط (`Planning`) هو **أهم خطوة** حسب نص المحاضرة صراحة — لأن التنفيذ بأكمله يعتمد عليه.
@@ -308,28 +639,46 @@
 #### نقاط التنفيذ:
 - هذه المراحل الأربع **ثابتة دوماً** بينما المنهجية (`Waterfall`, `Agile`, ...) هي فقط طريقة تنفيذ التفاصيل داخل هذه المراحل.
 
+#### 🎯 الملخص السريع
+- المراحل الأربع: `Initiation → Planning → Execution → Closing`
+- `Planning` هي الأهم لأن كل ما بعدها يعتمد عليها
+- المراحل ثابتة بغض النظر عن منهجية التطوير (`Waterfall`/`Agile`/...)
+
+#### 📚 التطبيق
+القسم القادم (9) يشرح من يدير هذه المراحل الأربع فعلياً: `Project Manager`.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Project Life Cycle is the series of phases a project passes through from initiation until final objectives. These phases exist regardless of methodology used (Waterfall or Agile). Steps: 1. Initiation — goals defined by communicating with client. 2. Planning — timeline established, costs estimated, tools identified; most critical step. 3. Execution — project fully implemented per schedule and budget. 4. Closing — project finalized, quality testing performed, final deliverable handed to client.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: التعريف والمراحل الأربع كاملة.
+
+</details>
+
 ---
 
 ### 9. مدير المشروع (Project Manager)
 
-#### النص الأصلي يقول:
-> Formal Definition: The Project Manager is responsible for applying project management methodology to achieve results within available resources and constraints. Informal Definition: A person who is fully convinced that nine women can deliver a fully-grown baby in a single month. This is derived from Resource Management — the PM must manage resources within imposed constraints (quality, cost, time) satisfying both stakeholders and client. It has become "common practice" to increase headcount to speed execution, but like human pregnancy this does not always achieve desired speed.
+#### 📍 أين نحن الآن؟
+بعد فهم مراحل دورة حياة المشروع، السؤال الطبيعي: من يقود هذه المراحل فعلياً، وما التحديات التي يواجهها؟
 
-#### الشرح المبسّط:
-التعريف الفكاهي هنا (تسع نساء لا يمكنهن إنجاب طفل في شهر واحد بمجرد جمعهن!) هو إشارة مباشرة إلى مفهوم **"الشهر-الرجل" (Mythical Man-Month)** الشهير في هندسة البرمجيات: إضافة أشخاص لمشروع متأخر لا يسرّعه بالضرورة، بل قد يزيده تأخيراً.
+#### ⬅️ الربط مع السابق
+يربط مباشرة بقسم 8: `Project Manager` هو من يدير الانتقال بين مراحل `Initiation → Planning → Execution → Closing`.
+
+#### 💡 الفكرة الأساسية
+**مدير المشروع مسؤول عن تطبيق منهجية إدارة المشروع لتحقيق النتائج ضمن الموارد والقيود المتاحة — ومهمته الأساسية هي إدارة الموارد، وليس فقط إضافة المزيد منها لتسريع الإنجاز.**
+
+#### 📖 الشرح
+التعريف الرسمي: مدير المشروع مسؤول عن تطبيق منهجية إدارة المشروع لتحقيق النتائج ضمن الموارد والقيود المتاحة (`applying project management methodology to achieve results within available resources and constraints`). أما التعريف غير الرسمي فهو فكاهي جداً: شخص مقتنع تماماً أن تسع نساء يمكنهن إنجاب طفل كامل النمو خلال شهر واحد فقط لو جُمعن معاً (`A person who is fully convinced that nine women can deliver a fully-grown baby in a single month`)! هذا التعريف الفكاهي هو إشارة مباشرة إلى مفهوم **"الشهر-الرجل" (Mythical Man-Month)** الشهير في هندسة البرمجيات: إضافة أشخاص لمشروع متأخر لا يسرّعه بالضرورة، بل قد يزيده تأخيراً.
 
 **لماذا؟** لأن بعض المهام لا يمكن تجزئتها زمنياً (كالحمل)، وإضافة أشخاص جدد تتطلب وقتاً للتنسيق والتدريب يُبطئ الفريق مؤقتاً.
 
-#### النص الأصلي يقول:
-> The manager's primary task is to manage resources for best possible execution. If execution is slow and there is financial surplus, the manager may add more people. This increase has limits; after a certain threshold, performance collapses and speed decreases. The primary reason for this collapse is that majority of time shifts toward managing teams and resolving conflicts rather than execution.
+المهمة الأساسية للمدير هي إدارة الموارد لتحقيق أفضل تنفيذ ممكن (`manage resources for best possible execution`). إذا كان التنفيذ بطيئاً وهناك فائض مالي، قد يضيف المدير المزيد من الأشخاص، لكن هذه الزيادة لها حدود؛ بعد عتبة معينة، ينهار الأداء وتنخفض السرعة (`after a certain threshold, performance collapses and speed decreases`). السبب الرئيسي لهذا الانهيار هو أن معظم الوقت يتحول نحو إدارة الفرق وحل النزاعات بدل التنفيذ (`majority of time shifts toward managing teams and resolving conflicts rather than execution`).
 
-#### الشرح المبسّط:
-الرسم البياني في المحاضرة يوضح علاقة "السرعة" (`Speed`) بعدد الأشخاص (`Number of People`): السرعة ترتفع في البداية مع زيادة الأشخاص، لكن بعد نقطة معينة (حوالي 20 شخصاً في الرسم التوضيحي) تبدأ السرعة بالانخفاض رغم استمرار زيادة العدد.
-
-**لماذا؟** لأن الوقت الذي كان يُصرف على التنفيذ الفعلي يتحول تدريجياً إلى وقت لإدارة الفريق وحل النزاعات بين الأفراد والأقسام.
-
-#### النص الأصلي يقول:
-> The Breaking Point varies based on project scale: developing a massive game like Cyberpunk 2077 supports/requires a large number of programmers, while developing a simple WordPress site doesn't require such headcount. The Manager's Role is to avoid reaching this breaking point.
+الرسم البياني في المحاضرة يوضح علاقة "السرعة" (`Speed`) بعدد الأشخاص (`Number of People`): السرعة ترتفع في البداية مع زيادة الأشخاص، لكن بعد نقطة معينة (حوالي 20 شخصاً في الرسم التوضيحي) تبدأ السرعة بالانخفاض رغم استمرار زيادة العدد. وهذه النقطة، `Breaking Point`، تختلف حسب حجم المشروع: تطوير لعبة ضخمة كـ`Cyberpunk 2077` يدعم/يتطلب عدداً كبيراً من المبرمجين، بينما تطوير موقع `WordPress` بسيط لا يحتاج هذا العدد من الأفراد (`developing a massive game like Cyberpunk 2077 supports/requires a large number of programmers, while developing a simple WordPress site doesn't require such headcount`). دور المدير هو تجنّب الوصول لهذه النقطة أصلاً (`The Manager's Role is to avoid reaching this breaking point`).
 
 ⚖️ **المقايضة: زيادة عدد أفراد الفريق**
 
@@ -339,35 +688,92 @@
 | العيوب | تكلفة تنسيق أعلى، نزاعات أكثر، قد تنخفض السرعة الكلية | سعة إنتاجية محدودة لا تناسب المشاريع الضخمة |
 | متى تختاره | مشاريع ضخمة معقدة (مثل لعبة AAA) قبل الوصول لنقطة الانهيار | مشاريع بسيطة محدودة النطاق (مثل موقع WordPress) |
 
+#### 🎯 الملخص السريع
+- التعريف الرسمي: تطبيق منهجية إدارة المشروع ضمن الموارد والقيود المتاحة
+- التعريف الفكاهي يشير لمفهوم `Mythical Man-Month`: إضافة أشخاص لا تضمن التسريع
+- `Breaking Point`: نقطة تنهار بعدها الإنتاجية، وتختلف حسب حجم المشروع
+
+#### 📚 التطبيق
+القسم الفرعي القادم (9.1) يفصّل مهام المدير اليومية تحديداً.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Formal Definition: The Project Manager is responsible for applying project management methodology to achieve results within available resources and constraints. Informal Definition: A person who is fully convinced that nine women can deliver a fully-grown baby in a single month. This is derived from Resource Management — the PM must manage resources within imposed constraints (quality, cost, time) satisfying both stakeholders and client. It has become "common practice" to increase headcount to speed execution, but like human pregnancy this does not always achieve desired speed.
+>
+> The manager's primary task is to manage resources for best possible execution. If execution is slow and there is financial surplus, the manager may add more people. This increase has limits; after a certain threshold, performance collapses and speed decreases. The primary reason for this collapse is that majority of time shifts toward managing teams and resolving conflicts rather than execution.
+>
+> The Breaking Point varies based on project scale: developing a massive game like Cyberpunk 2077 supports/requires a large number of programmers, while developing a simple WordPress site doesn't require such headcount. The Manager's Role is to avoid reaching this breaking point.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: التعريفان الرسمي والفكاهي، آلية انهيار الأداء، ومفهوم Breaking Point.
+
+</details>
+
 #### 9.1. مهام مدير المشروع
 
-#### النص الأصلي يقول:
-> As a PM you must: analyze the project idea and extract objectives, establish the schedule, develop the budget, conduct economic feasibility study, monitor execution, resolve conflicts, address shortages in materials/labor. Project management is fundamentally tied to interpersonal skills, not just technologies and tools.
+#### 📖 الشرح
+كمدير مشروع، عليك: تحليل فكرة المشروع واستخراج الأهداف، وضع الجدول الزمني، تطوير الميزانية، إجراء دراسة جدوى اقتصادية، مراقبة التنفيذ، حل النزاعات، ومعالجة النقص بالمواد أو العمالة (`analyze the project idea and extract objectives, establish the schedule, develop the budget, conduct economic feasibility study, monitor execution, resolve conflicts, address shortages in materials/labor`). والجملة الأهم في هذه القائمة: إدارة المشاريع مرتبطة جوهرياً بالمهارات الشخصية، وليس فقط بالتقنيات والأدوات (`Project management is fundamentally tied to interpersonal skills, not just technologies and tools`).
 
-#### الشرح المبسّط:
 القائمة تنتهي بجملة مفصلية: إدارة المشاريع مرتبطة **بالمهارات الشخصية (Interpersonal Skills)** أكثر من ارتباطها بالأدوات التقنية — وهذا يربط مباشرة بسبب "انهيار الأداء" الذي شرحناه في القسم السابق (النزاعات البشرية هي السبب الأول، وليس نقص التقنية).
 
 #### 🤔 تفعيل الفهم (اسأل نفسك):
 > **سؤال:** إذا كان لديك فريق من 15 شخصاً يعمل بكفاءة، وفريق آخر يعمل على نفس نوع المشروع لكنه متأخر جداً، فهل الحل الصحيح دوماً هو "أضف المزيد من الأشخاص للفريق المتأخر"؟
 > **لماذا هذا مهم؟** لأن الإجابة الصحيحة تعتمد على "نقطة الانهيار" (`Breaking Point`) الخاصة بهذا المشروع تحديداً — وليست قاعدة عامة صالحة لكل الحالات.
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> As a PM you must: analyze the project idea and extract objectives, establish the schedule, develop the budget, conduct economic feasibility study, monitor execution, resolve conflicts, address shortages in materials/labor. Project management is fundamentally tied to interpersonal skills, not just technologies and tools.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: كل المهام السبعة، والجملة الختامية عن Interpersonal Skills.
+
+</details>
+
 ---
 
 ### 10. العلاقة مع تطوير البرمجيات (Relationship with Software Development)
 
-#### النص الأصلي يقول:
-> In software engineering, models: Waterfall, Spiral, Iterative, Agile. They represent the life cycle of the project — they are NOT project management, they are a PART of project management.
+#### 📍 أين نحن الآن؟
+هذه آخر نقطة رئيسية بالمحاضرة — تربط كل ما تعلمناه عن إدارة المشاريع بمجال تطوير البرمجيات تحديداً.
 
-#### الشرح المبسّط:
-هذه نقطة جوهرية غالباً ما تُخلط: نماذج التطوير (`Waterfall`, `Agile`, ...) هي **أدوات تنفيذية** ضمن مرحلة `Execution` من دورة حياة المشروع، وليست بديلاً عن إدارة المشروع ككل (التي تشمل أيضاً الميزانية، أصحاب المصلحة، الموارد البشرية... إلخ).
+#### ⬅️ الربط مع السابق
+يربط بقسم 8 تحديداً: نماذج التطوير هنا تقع **داخل** مرحلة `Execution` من `Project Life Cycle`، وليست بديلاً عنها.
+
+#### 💡 الفكرة الأساسية
+**نماذج التطوير مثل `Waterfall` و`Agile` ليست إدارة مشروع بحد ذاتها — بل هي جزء واحد فقط منها، يمثّل دورة حياة المشروع التقنية تحديداً.**
+
+#### 📖 الشرح
+في هندسة البرمجيات، النماذج (`Waterfall, Spiral, Iterative, Agile`) تمثّل دورة حياة المشروع — وهي **ليست** إدارة مشروع، بل **جزء** من إدارة المشروع (`They represent the life cycle of the project — they are NOT project management, they are a PART of project management`). هذه نقطة جوهرية غالباً ما تُخلط: نماذج التطوير هي **أدوات تنفيذية** ضمن مرحلة `Execution` من دورة حياة المشروع، وليست بديلاً عن إدارة المشروع ككل (التي تشمل أيضاً الميزانية، أصحاب المصلحة، الموارد البشرية... إلخ).
 
 #### الفهم الخاطئ الشائع ❌: "Agile" هي طريقة لإدارة المشروع بالكامل.
 #### الفهم الصحيح ✅: "Agile" (مثل باقي النماذج) هي **جزء واحد فقط** من إدارة المشروع، تحديداً ضمن مرحلة `Execution` في دورة الحياة.
 
+#### 🎯 الملخص السريع
+- نماذج التطوير `Waterfall/Spiral/Iterative/Agile` = جزء تنفيذي واحد من إدارة المشروع، وليست بديلاً عنها
+- تقع تحديداً ضمن مرحلة `Execution` من `Project Life Cycle`
+
+#### 📚 التطبيق
+الأقسام الفرعية القادمة (10.1 إلى 10.4) تشرح كل نموذج من هذه النماذج الأربعة بالتفصيل.
+
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> In software engineering, models: Waterfall, Spiral, Iterative, Agile. They represent the life cycle of the project — they are NOT project management, they are a PART of project management.
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل.
+
+</details>
+
 #### 10.1. نموذج Waterfall
 
-#### النص الأصلي يقول:
-> Waterfall: Requirements → Analysis → Design → Coding → Testing → Deployment → Maintenance
+#### 📖 الشرح
+`Waterfall`: متطلبات ← تحليل ← تصميم ← برمجة ← اختبار ← نشر ← صيانة (`Requirements → Analysis → Design → Coding → Testing → Deployment → Maintenance`).
 
 ⚙️ **الخطوات / الخوارزمية: Waterfall Model**
 
@@ -384,10 +790,21 @@
 #### نقاط التنفيذ:
 - كل مرحلة تبدأ بعد اكتمال التي قبلها بالكامل — لا رجوع للخلف بسهولة، لذلك يناسب المشاريع ذات المتطلبات الثابتة وغير المتغيرة.
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Waterfall: Requirements → Analysis → Design → Coding → Testing → Deployment → Maintenance
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: تسلسل المراحل السبع كما وردت.
+
+</details>
+
 #### 10.2. نموذج Spiral
 
-#### النص الأصلي يقول:
-> Spiral: 1. Identify Objectives 2. Risk Analysis 3. Product Development 4. Evaluation (يتكرر في حلقات متتالية تتوسع)
+#### 📖 الشرح
+`Spiral`: `1)` تحديد الأهداف (`Identify Objectives`) `2)` تحليل المخاطر (`Risk Analysis`) `3)` تطوير المنتج (`Product Development`) `4)` التقييم (`Evaluation`) — ويتكرر هذا التسلسل في حلقات متتالية تتوسع تدريجياً (شكل حلزوني).
 
 ⚙️ **الخطوات / الخوارزمية: Spiral Model**
 
@@ -401,10 +818,21 @@
 #### نقاط التنفيذ:
 - يُعاد تنفيذ الحلقة الكاملة عدة مرات، وكل حلقة "أوسع" من سابقتها (شكل حلزوني) — يناسب المشاريع عالية المخاطر.
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Spiral: 1. Identify Objectives 2. Risk Analysis 3. Product Development 4. Evaluation (يتكرر في حلقات متتالية تتوسع)
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: الخطوات الأربع وطبيعة التكرار الحلزوني.
+
+</details>
+
 #### 10.3. نموذج Iterative
 
-#### النص الأصلي يقول:
-> Iterative: Initial planning → (Planning → Requirements → Analysis & Design → Implementation → Testing → Evaluation) تتكرر → Deployment
+#### 📖 الشرح
+`Iterative`: تخطيط أولي (`Initial planning`) يليه تكرار الحلقة (تخطيط ← متطلبات ← تحليل وتصميم ← تنفيذ ← اختبار ← تقييم) عدة مرات، وينتهي بالنشر النهائي (`Deployment`) بعد اكتمال الدورات.
 
 ⚙️ **الخطوات / الخوارزمية: Iterative Model**
 
@@ -422,10 +850,21 @@
 #### نقاط التنفيذ:
 - الفرق عن `Spiral` أن `Iterative` يركّز على تكرار **التنفيذ والتقييم** أكثر من التركيز الصريح على تحليل المخاطر في كل دورة.
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Iterative: Initial planning → (Planning → Requirements → Analysis & Design → Implementation → Testing → Evaluation) تتكرر → Deployment
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل.
+
+</details>
+
 #### 10.4. نموذج Agile
 
-#### النص الأصلي يقول:
-> Agile: 1. Plan 2. Design 3. Develop 4. Test 5. Deploy 6. Review (دورة مستمرة)
+#### 📖 الشرح
+`Agile`: `1)` تخطيط (`Plan`) `2)` تصميم (`Design`) `3)` تطوير (`Develop`) `4)` اختبار (`Test`) `5)` نشر (`Deploy`) `6)` مراجعة (`Review`) — دورة مستمرة تتكرر باستمرار.
 
 ⚙️ **الخطوات / الخوارزمية: Agile Methodology**
 
@@ -449,12 +888,46 @@
 | العيوب | صعوبة التعديل بعد البدء، اكتشاف المشاكل متأخراً | يحتاج تواصلاً مستمراً، أصعب في التقدير الزمني الكلي مسبقاً |
 | متى تختاره | متطلبات ثابتة وواضحة منذ البداية (مثل عقود حكومية صارمة) | متطلبات متغيرة أو غير مؤكدة بالكامل (مثل منتجات ناشئة) |
 
+#### 📄 النص الأصلي من المحاضرة
+<details>
+<summary>عرض النص الأصلي (coverage: 100%)</summary>
+
+> Agile: 1. Plan 2. Design 3. Develop 4. Test 5. Deploy 6. Review (دورة مستمرة)
+
+**ملاحظة على التغطية:**
+- ✓ تم شرح بالكامل: الخطوات الست ومقارنة Waterfall/Agile.
+
+</details>
+
 ---
 
 ### الأفكار الرئيسية الشاملة
 
 1. **جدول المحتويات الكامل للمحاضرة** يؤكد أن الترتيب المنطقي هو: تعريف المشروع ← مكوناته ← نتائجه ← إدارة المشاريع ← أهميتها ← دورة الحياة ← مدير المشروع ← علاقتها بالبرمجيات.
 2. **"Now what?" (خاتمة المحاضرة):** أعلنت المحاضرة عن المواضيع القادمة: `Time Management in Project`, `Budgeting`, `DevOps` (`Git`, `Docker`, `CI/CD`), `Agile` — وهذا يعني أن هذه المواضيع **لم تُشرح بعد** وستُغطى في محاضرات لاحقة، لذلك لا تظهر أكواد `Git`/`Docker` فعلية في هذه المحاضرة تحديداً.
+
+---
+## ملخص بديل — قراءة سردية متصلة (Alternative Complete Reading)
+
+> هذا مسار قراءة **بديل ومتساوٍ تماماً** لتفاصيل الجزء الأول أعلاه — ليس نسخة مختصرة، بل نفس المحتوى بأسلوب سردي متصل، يصلح للمراجعة قبل الامتحان بدون الرجوع للتفاصيل. (الجزء الذي يليه — "ملخص منظم" — هو مرجع بالجداول لمن يريد بحثاً سريعاً عن مصطلح؛ هذا القسم مختلف: قصة واحدة مترابطة.)
+
+هذه المحاضرة تجاوب على سؤال بسيط: إيش هو `Project` بالضبط، وإيش يعني أنك "تديره" بنجاح؟ التعريف الأساسي إنه `temporary endeavor` — مسعى مؤقت له بداية ونهاية محددتين، هدفه إنتاج منتج أو خدمة أو نتيجة مميزة (`distinct product, service or result`). كلمة `temporary` هي الفيصل: أي عمل يستمر بلا نهاية محددة، مثل تشغيل خط إنتاج مصنع يومياً، هو `operation` وليس `project`. لكن `temporary` ما تعني "قصير" أبداً — سد الممرات الثلاثة في الصين استغرق 18 سنة كاملة (1994-2012) وزادوا ارتفاعه لاحقاً سنة 2015، ومع ذلك يبقى `project` لأن له بداية ونهاية محددتين بوضوح. والجزء الأهم في التعريف هو `target` (الهدف): بدونه لا يمكن أبداً قياس نجاح المشروع أو فشله، وهذا يخليه أهم عنصر منفرد في أي مشروع. والمهم كمان إن نوع الهدف نفسه يغيّر طريقة الإدارة: لو الهدف منتج، النجاح يُقاس بمطابقة مواصفات العميل، أما في القطاع الإنساني (زي خدمة قانونية تساعد الناس بأوراق الزواج والطلاق، أو مساعدة `IDPs` النازحين داخلياً) فالنجاح يُقاس بعدد الأشخاص أو العائلات المستفيدة، مو بالربح المادي أبداً.
+
+أي مشروع يتكوّن من أربعة مكونات لا غنى عنها: `Target` (الهدف، وممكن يكون منتجاً كاملاً أو جزئياً، خدمة، رسالة ماجستير أو دكتوراه، أو براءة اختراع)، `Resources` (الموارد)، `Stakeholders` (أصحاب المصلحة)، و`Clients/Customers` (العملاء). والموارد نفسها أربعة أنواع: مالية (`Financial`)، مواد (`Material`)، أشخاص (`People`)، وجدول زمني (`Time Table`) — ونقص أي واحد منها يهدد المشروع بالكامل. الجزء المالي فيه ثلاث حالات لازم تفرّق بينها: `Budget` هو ما خططت لإنفاقه، و`Cost` هو ما أنفقته فعلياً. لو تساويا فهذا `Balance` (الوضع الطبيعي المتوقع)، لو أنفقت أقل فهذا `Surplus` (أفضل حالة)، ولو أنفقت أكثر فهذا `Deficit` (أسوأ حالة، وليس `Balance` هو السيء زي ما ممكن يُفهم بالخطأ). أسباب العجز المالي متنوعة: تخطيط ضعيف، تقلب أسعار المواد، تغيّر كبير بالمناخ الاقتصادي (سعر الصرف، القوانين، العقوبات)، حوادث بسبب نقص إجراءات السلامة، اكتشافات غير متوقعة أثناء التنفيذ، أو نتائج تفتيش تكشف عدم مطابقة تستوجب إعادة العمل. وفيه أمثلة حقيقية موثّقة: نفق المانش (ميزانية 5.5 مليار جنيه إسترليني، تكلفة فعلية 9.5 مليار بسبب نوع تربة غير متوقع)، أولمبياد مونتريال 1976 (ميزانية 300 مليون دولار كندي، تكلفة 1.5 مليار بسبب إضرابات وارتفاع أسعار وطقس سيء)، ومقاتلة F-35 (تجاوزت الميزانية بنسبة 88% وتأخرت 10 سنوات، بسبب آلية تمويل عقود الدفاع الأمريكية نفسها — مثال خارج نطاق المادة لكنه يوضح أن العجز أحياناً يكون بنيوياً وليس فقط سوء تخطيط). أما المواد فتحديها الأكبر توفرها بالسوق المحلي؛ إذا لم تتوفر تضطر للاستيراد قطعة بقطعة بدل شحنة كاملة، وسعر الوحدة المستوردة فردياً أغلى دوماً من الاستيراد بالجملة. والأشخاص هم مصدر التحدي الأكبر: وجود أكثر من شخص بغرفة واحدة يعني احتمال نشوء خلاف، وحل هذه الخلافات هو مهمة مدير المشروع الأساسية — أحياناً بإعادة توزيع الفريق، وأحياناً (في أسوأ الحالات) بالاستغناء عن أحدهم. ومن الشروط الأساسية توزيع المهام حسب الخبرة: لا يمكن تكليف مهندس تقني بمهام هندسة مدنية، ولا طبيب بما يفعله مزارع. أما الجدول الزمني فعادة يتضمن بند مكافأة للإنجاز المبكر وعقوبة مالية للتأخير، ما يجعله ملزماً مالياً وليس مجرد تنظيم داخلي.
+
+المشروع ينتهي بواحدة من ست حالات، وحالة واحدة فقط منها هي نجاح حقيقي: تحقق الهدف بالكامل. الخمس الباقية أشكال من الفشل أو التوقف القسري: هدف غير قابل للتحقيق (مثال الهند ومحاولتها منافسة تايوان بصناعة الشرائح في التسعينيات وفشلها)، زوال الحاجة للمشروع، انتهاء الالتزام المالي، فقدان الموارد البشرية أو المادية (مثال مصانع TSMC الأمريكية التي تأخرت من 2024 إلى 2025-2027/2028 بسبب ندرة المهندسين المهرة)، وأسباب قانونية كالتعدي على أرض أو مخالفة براءة اختراع أو قانون. والمهم إن الحالات من الثالثة للسادسة يمكن أن تكون مؤقتة وليست نهائية — يمكن حلها بتمويل جديد أو حل قانوني أو مصادر بديلة، لكن دائماً بتكلفة إضافية.
+
+الآن لنفرّق بين مصطلحين يُخلط بينهما كثيراً: `Stakeholders` و`Clients`. `Stakeholder` مصطلح أوسع بكثير — أي فرد أو جهة "لها مصلحة" في نتيجة المشروع، سواء استفادت مباشرة أم لا، تُعتبر `stakeholder`. مثال: مستثمر موّل بناء مطعم هو `stakeholder` حتى لو لم يأكل فيه أبداً أصلاً. أما `Client` فهو فئة فرعية أضيق: من يشتري أو يستخدم المنتج بعلاقة تعاقدية مستمرة، عادة عبر عقد أو شراكة مهنية، بخلاف "الزبون" العابر ذي المعاملة الواحدة. فكل `Client` هو `Stakeholder`، لكن العكس غير صحيح أبداً. والمقارنة الكاملة بينهما تشمل النطاق (فئة فرعية مقابل مصطلح شامل)، التركيز (جودة/قيمة المنتج مقابل العائد المالي والتوافق الاستراتيجي)، طبيعة العلاقة (تعاقدية مقابل متفاوتة من مستثمر سلبي لمستخدم فعّال)، والاهتمامات (الرضا مقابل اهتمامات متنوعة وأحياناً متعارضة). ونتائج أي مشروع نوعان أيضاً: `Tangible` (ملموسة، تُقاس بالأرقام مباشرة — ربح، أسهم، أدوات جديدة، حصة سوقية) و`Intangible` (غير ملموسة لكن استراتيجية القيمة — سمعة، انتشار علامة تجارية، نفع عام).
+
+بعد ما فهمنا مكونات المشروع، ننتقل لـ`Project Management` نفسها. تعريفها الأول: تطبيق المعرفة والمهارات والأدوات والتقنيات على أنشطة المشروع لتحقيق متطلباته وأهدافه. تعريفها الثاني أعمق: إدارة الموارد لتحقيق النتائج المرجوة بأقصر وقت، أقل تكلفة، وأعلى جودة ممكنة — وهذا هو `Iron Triangle` (مثلث الحديد): `Cost`، `Time`، `Quality`. القاعدة الذهبية هنا: أي تغيير في ضلع واحد من هذا المثلث يؤثر حتماً على الأضلاع الأخرى، لأن الموارد محدودة دوماً — تسريع الجدول الزمني يحتاج مالاً إضافياً أو تضحية بالجودة. الإدارة الناجحة للمشروع تمكّن المنظمة من تحقيق أهدافها التجارية، إرضاء توقعات أصحاب المصلحة، زيادة القابلية للتنبؤ (وهذه أهم فائدة عملياً — الإدارة الجيدة لا تضمن النجاح المطلق، لكنها تجعل النتائج متوقعة بدل عشوائية)، تسليم المنتج الصحيح بالوقت الصحيح، حل المشاكل بفعالية، والاستجابة للمخاطر بتوقيت مناسب. أما الإدارة السيئة فتؤدي إلى مواعيد فائتة، تجاوز الميزانية، جودة ضعيفة، إعادة عمل، وأخطرها `Scope Creep` — التوسع غير المخطط وغير المتحكم به في متطلبات المشروع، والذي يحدث تدريجياً دون موافقة رسمية واضحة، فيتحول لأحد أخطر أسباب تجاوز الوقت والميزانية بالضبط لأنه لا يبدو كخطر واضح من البداية.
+
+وإدارة المشاريع مهمة أصلاً لأن المشاريع هي الطريقة الأساسية التي تُنتج بها المنظمات القيمة. اليوم تعمل المنظمات في بيئة ديناميكية سريعة التغير، بميزانيات أصغر وجداول أقصر وموارد محدودة وتغيّر تقني سريع، وإدارة المشاريع هي الأداة التي تربط التنفيذ اليومي بالأهداف الاستراتيجية الكبرى — البقاء، المنافسة، الاستدامة. وكل مشروع، بغض النظر عن منهجيته، يمر بأربع مراحل ثابتة تُعرف بـ`Project Life Cycle`: البداية (`Initiation` — تحديد الأهداف عبر التواصل مع العميل)، التخطيط (`Planning` — وضع الجدول الزمني وتقدير التكلفة وتحديد الأدوات، وهي **أهم خطوة على الإطلاق** حسب نص المحاضرة صراحة لأن التنفيذ بأكمله يعتمد عليها)، التنفيذ (`Execution` — تنفيذ المشروع فعلياً حسب الجدول والميزانية)، والإنهاء (`Closing` — اختبار الجودة وتسليم المُخرَج النهائي للعميل).
+
+مين يدير كل هذا؟ `Project Manager`، والتعريف الفكاهي له بالمحاضرة لطيف جداً: شخص مقتنع تماماً أن تسع نساء يقدرن يولّدن طفلاً كامل النمو خلال شهر واحد فقط لو جمعتهن! هذي إشارة مباشرة لمفهوم "الشهر-الرجل" الأسطوري (`Mythical Man-Month`) الشهير بهندسة البرمجيات: إضافة أشخاص لمشروع متأخر لا يسرّعه بالضرورة، وأحياناً يزيده تأخيراً، لأن بعض المهام لا يمكن تجزئتها زمنياً، وإضافة أشخاص جدد يتطلب وقت تنسيق وتدريب يُبطئ الفريق مؤقتاً. مهمة المدير الأساسية إدارة الموارد لأفضل تنفيذ ممكن؛ لو التنفيذ بطيء وفيه فائض مالي، ممكن يضيف أشخاصاً، لكن هذه الزيادة لها حدود — بعد نقطة معينة (اسمها `Breaking Point`، وتختلف حسب حجم المشروع؛ لعبة ضخمة زي Cyberpunk 2077 تحتاج فريقاً كبيراً بعكس موقع WordPress بسيط) تنهار الإنتاجية وتنخفض السرعة، لأن معظم الوقت يتحول من التنفيذ الفعلي لإدارة الفريق وحل النزاعات بين الأفراد والأقسام. ومهام المدير باختصار: تحليل فكرة المشروع واستخراج أهدافه، وضع الجدول الزمني، تطوير الميزانية، إجراء دراسة جدوى اقتصادية، مراقبة التنفيذ، حل النزاعات، ومعالجة نقص المواد أو العمالة — والجملة الأهم في كل هذا: إدارة المشاريع مرتبطة بالمهارات الشخصية (`Interpersonal Skills`) أكثر بكثير من ارتباطها بالأدوات التقنية، وهذا يفسّر مباشرة سبب "انهيار الأداء" اللي شرحناه للتو: النزاعات البشرية هي السبب الأول، وليس نقص التقنية.
+
+آخر نقطة جوهرية بالمحاضرة توضّح علاقة إدارة المشاريع بتطوير البرمجيات تحديداً، وهي نقطة يُخطئ فيها كثيرون: نماذج التطوير زي `Waterfall`، `Spiral`، `Iterative`، و`Agile` **ليست** إدارة مشروع بحد ذاتها، بل هي **جزء واحد فقط** منها، تحديداً ضمن مرحلة `Execution` من دورة الحياة. `Waterfall` خطي تماماً: متطلبات ← تحليل ← تصميم ← برمجة ← اختبار ← نشر ← صيانة، وكل مرحلة تبدأ بعد اكتمال التي قبلها كاملة، فيناسب المشاريع ذات المتطلبات الثابتة. `Spiral` يكرر أربع خطوات (تحديد الأهداف، تحليل المخاطر، تطوير المنتج، التقييم) في حلقات متتالية تتوسع تدريجياً، ويناسب المشاريع عالية المخاطر. `Iterative` قريب من `Spiral` لكنه يركّز على تكرار التنفيذ والتقييم أكثر من التحليل الصريح للمخاطر. و`Agile` دورة قصيرة مستمرة (تخطيط، تصميم، تطوير، اختبار، نشر، مراجعة) تناسب أكثر المشاريع سريعة التغيّر في المتطلبات. والفرق الجوهري بين `Waterfall` و`Agile`: الأول يعطي وضوحاً كاملاً من البداية لكنه صعب التعديل، بينما الثاني مرن جداً لكنه يحتاج تواصلاً مستمراً وصعب التقدير الزمني الكلي مسبقاً.
+
+والخيط الذي يربط المحاضرة كلها: كل شيء يبدأ من تعريف دقيق للمشروع وهدفه، يمرّ بمكوناته الأربعة ونتائجه، يصل لإدارته عبر مثلث القيود الثلاثة، ثم دورة حياته الثابتة ومديره الذي يوازن بين الموارد والأشخاص، وينتهي بفهم أن أدوات التطوير التقنية (Waterfall/Agile وغيرها) هي مجرد جزء تنفيذي داخل هذا الإطار الأشمل — وليست بديلاً عنه أبداً. هذا الأساس ستُبنى عليه المواضيع القادمة مباشرة: إدارة الوقت بالمشروع، الميزنة، DevOps (`Git`, `Docker`, `CI/CD`)، و`Agile` بتفصيل أعمق.
 
 ---
 ## الجزء الثاني: ملخص منظم
